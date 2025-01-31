@@ -1,0 +1,10 @@
+{
+    "name": "core/robot-module",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Robot\\Core\\": "lib/"
+        }
+    }
+}
