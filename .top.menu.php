@@ -1,0 +1,46 @@
+<?php
+$aMenuLinks = Array(
+	Array(
+		"Программа", 
+		SITE_DIR."program/",
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Регистрация",
+        SITE_DIR."register/",
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Документы",
+        SITE_DIR."documents/",
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Архив",
+        SITE_DIR."arkhiv/",
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Подготовка к проведению соревнований",
+        SITE_DIR."prepare-competition/",
+		Array(), 
+		Array(), 
+		"" 
+	),
+    Array(
+        "Контакты",
+        SITE_DIR."contacts/",
+        Array(),
+        Array(),
+        ""
+    )
+);
+?>
