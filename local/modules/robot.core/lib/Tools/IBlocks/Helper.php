@@ -1,0 +1,61 @@
+<?php
+
+namespace Robot\Core\Tools\IBlocks;
+
+use Bitrix\Iblock\IblockTable;
+use Bitrix\Main\SystemException;
+use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\LoaderException;
+use Robot\Core\Tools\Modules\Manager;
+
+Loc::loadMessages(__FILE__);
+
+/**
+ * Вспомогательный класс для взаимодействия с ИБ
+ */
+class Helper implements IHelper
+{
+    /** @var string[] Модули участвующие в работе класса */
+    protected const MODULES_CODES = [
+        "iblock"
+    ];
+    protected const CacheTypeRequest = [
+        'ttl' => 3600,
+        'cache_joins' => true
+    ];
+
+    /**
+     * @param string $code
+     * @return int|bool
+     */
+    public static function getIblock(string $code): int|bool
+    {
+        try {
+            Manager::requireModules(static::MODULES_CODES);
+            if (empty($code)) {
+                throw new SystemException(Loc::getMessage("ROBOT_CORE_EMPTY_CODE"));
+            }
+            $result = IblockTable::getRow(static::prepareRequestParams($code));
+            if (empty($result)) {
+                return false;
+            }
+            return $result["ID"];
+        } catch (SystemException|LoaderException $exception) {
+            AddMessage2Log($exception->getMessage(), "robot.core");
+            return false;
+        }
+    }
+
+    /**
+     * @param string $code
+     * @return array
+     */
+    protected static function prepareRequestParams(string $code): array
+    {
+        return [
+            "select" => ["ID"],
+            "filter" => ["CODE" => $code],
+            "cache" => static::CacheTypeRequest
+        ];
+    }
+}

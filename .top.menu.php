@@ -1,18 +1,19 @@
 <?php
+Bitrix\Main\Loader::requireModule('robot.core');
 $aMenuLinks = Array(
 	Array(
 		"Программа", 
 		SITE_DIR."program/",
 		Array(), 
-		Array(), 
-		"" 
+		Array(),
+        "Robot\\Core\\Views\\EventsView::showProgram()"
 	),
 	Array(
 		"Регистрация",
         SITE_DIR."register/",
 		Array(), 
-		Array(), 
-		"" 
+		Array(),
+        "Robot\\Core\\Views\\EventsView::showRegistration()"
 	),
 	Array(
 		"Документы",

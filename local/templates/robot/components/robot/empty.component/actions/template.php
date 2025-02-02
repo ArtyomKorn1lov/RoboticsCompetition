@@ -1,0 +1,44 @@
+<?php
+if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
+/** @var array $arParams */
+/** @var array $arResult */
+/** @global CMain $APPLICATION */
+/** @global CUser $USER */
+/** @global CDatabase $DB */
+/** @var CBitrixComponentTemplate $this */
+/** @var string $templateName */
+/** @var string $templateFile */
+/** @var string $templateFolder */
+/** @var string $componentPath */
+/** @var CBitrixComponent $component */
+$this->setFrameMode(true);
+
+use Bitrix\Main\Localization\Loc;
+use Robot\Core\DTO\Action;
+
+Loc::loadMessages(__FILE__);
+
+if (empty($arResult["ITEMS"])) {
+    ShowError(Loc::getMessage("COMPONENT_ITEMS_EMPTY_ERROR"));
+    return;
+}
+
+?>
+
+<div>
+    <h2><?= Loc::getMessage("COMPONENT_TITLE") ?></h2>
+    <?php
+    /** @var Action $item */
+    foreach ($arResult["ITEMS"] as $item) { ?>
+        <div id="<?= $item->id ?>">
+            <h3>
+                <?= $item->name ?>
+            </h3>
+            <?php if (!empty($item->description)) { ?>
+                <p>
+                    <?= $item->description ?>
+                </p>
+            <?php } ?>
+        </div>
+    <?php } ?>
+</div>

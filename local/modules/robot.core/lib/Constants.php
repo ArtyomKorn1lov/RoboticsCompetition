@@ -2,9 +2,23 @@
 
 namespace Robot\Core;
 
+/**
+ * Константы
+ */
 class Constants
 {
+    /** @var string Код ИБ События */
+    public const CONTENT_IBLOCK_TYPE = "content";
+
+    /** @var string Код ИБ События */
     public const EVENTS_IBLOCK_CODE = "events";
 
+    /** @var string Код ИБ Мероприятия */
     public const ACTIONS_IBLOCK_CODE = "actions";
+
+    /** @var string Код ИБ Мероприятия */
+    public const PARTNERS_IBLOCK_CODE = "partners";
+
+    /** @var string Url страницы регистрации */
+    public const REGISTRATION_URL = SITE_DIR."registration/";
 }
