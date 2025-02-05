@@ -74,7 +74,7 @@ class EventsView implements IEventsView
     }
 
     /**
-     * @return array<Action>|bool
+     * @return Action[]|bool
      */
     public static function getEventActions(): array|bool
     {
