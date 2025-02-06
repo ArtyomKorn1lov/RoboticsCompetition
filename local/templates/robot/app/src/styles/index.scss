@@ -1,1 +1,8 @@
-@use "test.scss";
+// Подключение базовых стилей
+@import "./vars/index.scss";
+@import "./fonts.scss";
+@import "./general.scss";
+@import "./typography.scss";
+@import "./animation.scss";
+// Подключение стилей-компонентов
+//@import "./components/ui/index.scss";

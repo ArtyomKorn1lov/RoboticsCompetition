@@ -1,0 +1,14 @@
+// Наследуемые стили
+%headerDefaultOptions {
+  font-weight: $textBold;
+  line-height: $leadingTited;
+  color: $colorHeader;
+}
+
+
+%textDefaultOptions {
+  font-size: $textRegular;
+  font-weight: $textDefault;
+  line-height: $leadingTited;
+  color: $colorPrimaryText;
+}

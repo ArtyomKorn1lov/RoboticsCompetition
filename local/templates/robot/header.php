@@ -1,5 +1,5 @@
-<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
-<?
+<?php if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
+<?php
 IncludeTemplateLangFile(__FILE__);
 
 global $APPLICATION;
@@ -8,6 +8,17 @@ if (!Bitrix\Main\Loader::includeModule('robot.core')) {
     ShowError('Ошибка! Не подключен модуль ядра сайта.');
     die();
 }
+
+use Robot\Core\Tools\Modules\Manager;
+use Bitrix\Main\UI\Extension;
+
+$flag = Manager::includeFrontendPlugins();
+
+file_put_contents($_SERVER["DOCUMENT_ROOT"] . "/log.txt", var_export($flag, true));
+
+Extension::load([
+	"robot_frontend"
+]);
 ?>
 <!doctype html>
 <html lang="ru">

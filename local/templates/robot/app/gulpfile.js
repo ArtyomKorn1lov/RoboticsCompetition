@@ -2,8 +2,6 @@ import gulp from 'gulp';
 const { src, dest, watch, series } = gulp;
 
 import { deleteAsync } from 'del';
-import syncServer from 'browser-sync';
-const sync = syncServer.create();
 import flatten from 'gulp-flatten';
 
 import * as dartSass from 'sass';
@@ -13,6 +11,8 @@ import autoprefixer from 'gulp-autoprefixer';
 import minify from 'gulp-clean-css';
 import sourcemaps from 'gulp-sourcemaps';
 import concat from 'gulp-concat';
+import postcss from "gulp-postcss";
+import postcssScss from 'postcss-scss';
 
 import babel from 'gulp-babel';
 import terser from 'gulp-terser';
@@ -23,6 +23,7 @@ import svgmin from 'gulp-svgmin';
 
 const scss = () => {
 	return src('src/styles/index.scss')
+		.pipe(postcss([], { parser: postcssScss }))
 		.pipe(sourcemaps.init())
 		.pipe(autoprefixer())
 		.pipe(sass().on('error', sass.logError))
@@ -71,6 +72,10 @@ const icons = () => {
 		.pipe(dest('dist/assets/icons'));
 };
 
+export const fonts = () => {
+	return gulp.src('src/assets/fonts/**/*.*')
+		.pipe(dest('dist/assets/fonts'));
+};
 
 const serve = () => {
 	watch(['src/styles/**/**.scss'], scss);
@@ -79,7 +84,7 @@ const serve = () => {
 	watch(['src/assets/icons/*'], icons);
 }
 
-const build = series([clear, scss, js, images, icons]);
-const dev = series([clear, scss, js, images, icons, serve]);
+const build = series([clear, scss, js, images, icons, fonts]);
+const dev = series([clear, scss, js, images, icons, fonts, serve]);
 
 export { build, dev };
