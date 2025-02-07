@@ -1,0 +1,10 @@
+.b-header {
+
+  &__wrap {
+
+    @include screen(sml) {
+      padding-left: $m20;
+      padding-right: $m20;
+    }
+  }
+}

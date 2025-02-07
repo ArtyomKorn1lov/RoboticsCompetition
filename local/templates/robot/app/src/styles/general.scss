@@ -7,6 +7,7 @@ body {
   font-family: 'Golos Text', sans-serif;
   font-size: $textNormal;
   font-weight: $textNormal;
+  color: $colorPrimaryText;
   background-color: $colorWhite;
   position: relative;
 }
@@ -14,6 +15,28 @@ body {
 .mainContainer {
   @include flex(column);
   height: 100vh;
+}
+
+.b-main {
+  @include flex(column);
+  flex-grow: 1;
+
+  &_centered {
+    max-width: 1290px;
+    padding-left: $m32;
+    padding-right: $m32;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include screen(sml) {
+      padding-left: $m20;
+      padding-right: $m20;
+    }
+  }
+}
+
+ul, li {
+  list-style: none;
 }
 
 /*

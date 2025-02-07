@@ -1,0 +1,83 @@
+.b-header {
+  @include flex(false, false, center);
+  flex-shrink: 0;
+
+  &__wrap {
+    @include flex(false, center, space-between);
+    gap: $m15;
+    width: $full;
+    max-width: 1290px;
+    padding: $m8 $m32;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__site {
+    @include flex(false, center);
+    gap: 15px;
+  }
+
+  &__logo {
+    @extend %imgDefaultStyles;
+
+    &-wrap {
+      max-width: $m80;
+      aspect-ratio: 80/73;
+    }
+  }
+
+  &__title {
+    font-size: $textRegular;
+    color: $colorHover;
+    text-transform: uppercase;
+    max-width: 209px;
+  }
+
+  &__controls {
+    @include flex(false, center);
+    gap: $m80;
+  }
+
+  &__lang {
+    @include flex(false, center);
+    gap: $m5;
+    border-radius: $rounded15;
+    border: 1px solid $colorBG;
+    font-weight: $textBold;
+    color: $colorHover;
+    padding: $m10 $m15;
+
+    &-icon {
+      flex-shrink: 0;
+      width: $m25;
+      height: $m25;
+
+      svg {
+        width: $m25;
+        height: $m25;
+      }
+    }
+
+    &:hover,
+    &:active {
+      color: $colorPrimary;
+      background-color: $colorBG;
+    }
+  }
+
+  &__menu {
+    @include flex(false, center);
+    gap: $m25;
+
+    &-link {
+      font-weight: $textSemiBold;
+      color: $colorHeader;
+
+      &:hover,
+      &:active,
+      &_active {
+        color: $colorPrimary;
+      }
+    }
+  }
+}

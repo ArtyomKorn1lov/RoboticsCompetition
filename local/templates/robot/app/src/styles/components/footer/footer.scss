@@ -1,0 +1,99 @@
+.b-footer {
+  @include flex(false, false, center);
+  flex-shrink: 0;
+  background-color: $colorHeader;
+  border-top-left-radius: $rounded30;
+  border-top-right-radius: $rounded30;
+  color: $colorWhite;
+
+  span, p, a {
+    color: $colorWhite;
+  }
+
+  &__wrap {
+    @include flex(false, center, space-between);
+    gap: $m15;
+    width: $full;
+    max-width: 1290px;
+    padding: $m40 $m32;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__logo {
+    @include flex(false, center);
+    gap: $m10;
+
+    &-wrap {
+      max-width: $m80;
+      aspect-ratio: 80/73;
+    }
+
+    &-icon {
+      @extend %imgDefaultStyles;
+    }
+  }
+
+  &__title {
+    font-weight: $textBold;
+    text-transform: uppercase;
+
+    &-wrap {
+      @include flex(column);
+      gap: $m10;
+      max-width: 209px;
+    }
+  }
+
+  &__copyright {
+    font-size: $textTiny;
+  }
+
+  &__contact {
+    @include flex(column);
+    gap: $m15;
+    max-width: 360px;
+
+    &-icon {
+      width: 24px;
+      height: 24px;
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      &_social {
+        fill: $colorWhite;
+        margin-left: $m5;
+        width: $m35;
+        height: $m35;
+
+        svg {
+          width: $m35;
+          height: $m35;
+        }
+
+        &:hover,
+        &:active {
+          fill: $colorBG;
+        }
+      }
+    }
+
+    &-item {
+      @include flex(false, center);
+      gap: $m10;
+      font-weight: $textSemiBold;
+      font-size: $textNormal;
+
+      &_link {
+
+        &:hover,
+        &:active {
+          color: $colorSecondary;
+        }
+      }
+    }
+  }
+}

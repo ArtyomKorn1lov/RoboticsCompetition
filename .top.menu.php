@@ -1,6 +1,13 @@
 <?php
 Bitrix\Main\Loader::requireModule('robot.core');
 $aMenuLinks = Array(
+    Array(
+        "Главная",
+        SITE_DIR,
+        Array(),
+        Array(),
+        ""
+    ),
 	Array(
 		"Программа", 
 		SITE_DIR."program/",
@@ -30,7 +37,7 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Подготовка к проведению соревнований",
+		"О соревнованиях",
         SITE_DIR."prepare-competition/",
 		Array(), 
 		Array(), 

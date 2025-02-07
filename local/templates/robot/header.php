@@ -31,41 +31,52 @@ Extension::load([
     <title><?php $APPLICATION->ShowTitle()?></title>
 </head>
 <body>
-<header>
-    <div id="panel"><?php $APPLICATION->ShowPanel(); ?></div>
 
-    <!-- Логотип -->
-    <a href="<?=SITE_DIR?>">
-        <img width="150" src="<?=SITE_DIR?>local/templates/robot/app/img/logo.webp" alt="logo">
-    </a>
-    <!-- !Логотип -->
+<div class="mainContainer">
+<div id="panel"><?php $APPLICATION->ShowPanel(); ?></div>
 
-    <!-- Название сайта -->
-    <h1>
-        Соревнования робототехники в ПГТУ
-    </h1>
-    <!-- !Название сайта -->
+<header class="b-header">
 
-    <!-- Главное меню -->
-    <?php $APPLICATION->IncludeComponent(
-    "bitrix:menu",
-    ".default",
-    array(
-		"ROOT_MENU_TYPE" => "top",
-		"MAX_LEVEL" => "1",
-		"CHILD_MENU_TYPE" => "top",
-		"USE_EXT" => "Y",
-		"DELAY" => "N",
-		"ALLOW_MULTI_SELECT" => "Y",
-		"MENU_CACHE_TYPE" => "N",
-		"MENU_CACHE_TIME" => "3600",
-		"MENU_CACHE_USE_GROUPS" => "Y",
-		"MENU_CACHE_GET_VARS" => ""
-	    )
-    );?>
-    <!-- !Главное меню -->
+    <div class="b-header__wrap">
+
+        <div class="b-header__site">
+            <a href="<?=SITE_DIR?>" class="b-header__logo-wrap">
+                <img class="b-header__logo" src="<?=SITE_DIR?>local/templates/robot/app/img/logo.svg" alt="Соревнования по робототехнике в ПГТУ">
+            </a>
+
+            <h1 class="b-header__title">
+                Соревнования по робототехнике в ПГТУ
+            </h1>
+        </div>
+
+        <div class="b-header__controls">
+        <?php $APPLICATION->IncludeComponent("bitrix:menu", "main", array(
+	        "ROOT_MENU_TYPE" => "top",
+		    "MAX_LEVEL" => "1",
+		    "CHILD_MENU_TYPE" => "top",
+		    "USE_EXT" => "Y",
+		    "DELAY" => "N",
+		    "ALLOW_MULTI_SELECT" => "Y",
+		    "MENU_CACHE_TYPE" => "N",
+		    "MENU_CACHE_TIME" => "3600",
+		    "MENU_CACHE_USE_GROUPS" => "Y",
+		    "MENU_CACHE_GET_VARS" => "",
+	    ),
+	    false
+        );?>
+
+            <a href="javascript:void(0)" class="b-header__lang">
+                <span class="b-header__lang-icon">
+                    <svg>
+                        <use xlink:href="/local/templates/robot/app/dist/assets/icons/sprite.svg#flag_russia"></use>
+                    </svg>
+                </span>
+                RU
+            </a>
+        </div>
+    </div>
 </header>
-<main>
+<main class="b-main b-main_centered">
 
     <?php if ($APPLICATION->GetCurPage(false) !== "/") { ?>
         <h1>

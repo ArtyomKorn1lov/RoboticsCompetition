@@ -2,44 +2,74 @@
     IncludeTemplateLangFile(__FILE__);
 ?>
 </main>
-<footer>
+<footer class="b-footer">
 
-    <!-- Логотип в футере -->
-    <a href="<?=SITE_DIR?>">
-        <img width="150" src="<?=SITE_DIR?>local/templates/robot/app/img/logo.webp" alt="logo">
-    </a>
-    <!-- !Логотип в футере -->
+    <div class="b-footer__wrap">
+        <div class="b-footer__logo">
+            <a class="b-footer__logo-wrap" href="<?=SITE_DIR?>">
+                <img class="b-footer__logo-icon" src="<?=SITE_DIR?>local/templates/robot/app/img/logo_footer.svg" alt="Соревнования по робототехнике в ПГТУ">
+            </a>
+            <div class="b-footer__title-wrap">
+                <div class="b-footer__title">
+                    Соревнования по робототехнике в ПГТУ
+                </div>
+                <?php $APPLICATION->IncludeComponent(
+                    "bitrix:main.include",
+                    "custom_wrapper",
+                    array(
+                        "CUSTOM_WRAPPER_START" => '<span class="b-footer__copyright">',
+                        "CUSTOM_WRAPPER_END" => '</span>',
+                        "AREA_FILE_SHOW" => "file",
+                        "PATH" => SITE_DIR."include/copyright.php",
+                        "AREA_FILE_RECURSIVE" => "Y",
+                        "COMPONENT_TEMPLATE" => ".default",
+                        "EDIT_TEMPLATE" => "standard.php"
+                    ),
+                    false
+                ); ?>
+            </div>
+        </div>
 
-    <!-- Контактная информация в футере -->
-    <ul>
-        <li>
-            <a href="tel:+79999999999">8 (999) 999-99-99</a>
-            <a href="tel:+79999999999">8 (999) 999-99-99</a>
-        </li>
-        <li>
-            424000, Республика Марий Эл, г. Йошкар-Ола, пл. Ленина, дом 3.
-        </li>
-        <li>
-            <a href="#">Мы в телеграмм!</a>
-        </li>
-    </ul>
-    <!-- !Контактная информация в футере -->
+        <div class="b-footer__contact">
+            <a href="mailto:competation@mail.com" class="b-footer__contact-item b-footer__contact-item_link">
+                <span class="b-footer__contact-icon">
+                    <svg>
+                        <use xlink:href="/local/templates/robot/app/dist/assets/icons/sprite.svg#mail_footer"></use>
+                    </svg>
+                </span>
+                competation@mail.com
+            </a>
+            <a href="tel:+79876543210" class="b-footer__contact-item b-footer__contact-item_link">
+                <span class="b-footer__contact-icon">
+                    <svg>
+                        <use xlink:href="/local/templates/robot/app/dist/assets/icons/sprite.svg#phone_footer"></use>
+                    </svg>
+                </span>
+                +7 (987) 654-32-10
+            </a>
+        </div>
 
-    <!-- Копирайт -->
-    <?php $APPLICATION->IncludeComponent(
-        "bitrix:main.include",
-        ".default",
-        array(
-            "AREA_FILE_SHOW" => "file",
-            "PATH" => SITE_DIR."include/copyright.php",
-            "AREA_FILE_RECURSIVE" => "Y",
-            "COMPONENT_TEMPLATE" => ".default",
-            "EDIT_TEMPLATE" => "standard.php"
-        ),
-        false
-    ); ?>
-    <!-- !Копирайт -->
+        <div class="b-footer__contact">
+            <div class="b-footer__contact-item">
+                <span class="b-footer__contact-icon">
+                    <svg>
+                        <use xlink:href="/local/templates/robot/app/dist/assets/icons/sprite.svg#address_footer"></use>
+                    </svg>
+                </span>
+                Республика Марий Эл, г. Йошкар-Ола, площадь имени В.И. Ленина, 3
+            </div>
+            <div class="b-footer__contact-item">
+                Соц сети:
+                <a href="#" class="b-footer__contact-icon b-footer__contact-icon_social">
+                    <svg>
+                        <use xlink:href="/local/templates/robot/app/dist/assets/icons/sprite.svg#telegram_footer"></use>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
 
 </footer>
+</div>
 </body>
 </html>

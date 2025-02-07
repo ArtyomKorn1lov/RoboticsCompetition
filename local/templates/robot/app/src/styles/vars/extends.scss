@@ -12,3 +12,9 @@
   line-height: $leadingTited;
   color: $colorPrimaryText;
 }
+
+%imgDefaultStyles {
+  width: $full;
+  height: $full;
+  object-fit: cover;
+}
