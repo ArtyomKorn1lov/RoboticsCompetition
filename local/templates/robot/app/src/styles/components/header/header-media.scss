@@ -1,96 +1,71 @@
-.b-header {
+@include screen(lgl) {
+  .b-header {
 
-  &__wrap {
+    &__menu {
+      display: none;
+    }
 
-    @include screen(sml) {
+    &__controls {
+      gap: $m30;
+    }
+
+    &__burger {
+      display: flex;
+    }
+  }
+}
+
+@include screen(sml) {
+  .b-header {
+
+    &__wrap {
       padding-top: $m8;
       padding-bottom: $m20;
     }
-  }
 
-  &__site {
-
-    @include screen(sml) {
+    &__site {
       gap: $m8;
     }
-  }
 
-  &__logo {
+    &__logo {
 
-    &-wrap {
-
-      @include screen(sml) {
+      &-wrap {
         max-width: 32px;
         aspect-ratio: 32/30;
       }
     }
-  }
 
-  &__title {
-
-    @include screen(sml) {
+    &__title {
       font-size: $textTinyLittle;
       max-width: 122px;
     }
-  }
 
-  &__menu {
-
-    @include screen(lgl) {
-      display: none;
-    }
-  }
-
-  &__controls {
-
-    @include screen(lgl) {
-        gap: $m30;
-    }
-
-    @include screen(sml) {
+    &__controls {
       gap: $m10;
     }
-  }
 
-  &__lang {
-
-    @include screen(sml) {
+    &__lang {
       border-radius: $rounded10;
       padding: $m10;
       font-size: $textTiny;
-    }
 
-    &-icon {
-
-      @include screen(sml) {
+      &-icon {
         flex-shrink: 0;
         width: $m15;
         height: $m15;
-      }
 
-      svg {
-        @include screen(sml) {
+        svg {
           width: $m15;
           height: $m15;
         }
       }
     }
-  }
 
-  &__burger {
-
-    @include screen(lgl) {
-      display: flex;
-    }
-
-    @include screen(sml) {
+    &__burger {
       width: $m35;
       height: $m35;
-    }
 
-    svg {
-
-      @include screen(sml) {
+      svg {
         width: $m15;
         height: $m15;
       }
