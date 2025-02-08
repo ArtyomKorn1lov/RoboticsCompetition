@@ -1,0 +1,32 @@
+.b-action {
+
+  &__title {
+    margin-bottom: $m40;
+    max-width: 850px;
+  }
+
+  &__section {
+    @include grid(3, false, 30px);
+  }
+
+  &__item {
+    @include flex(column);
+    gap: $m15;
+    padding: $m30;
+    background-color: $colorBG2;
+    border: 1px solid $colorBG;
+    border-radius: $rounded25;
+  }
+
+  &__name {
+    font-size: $textBase;
+    font-weight: $textBold;
+    color: $colorHeader;
+  }
+
+  &__description {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: $textRegular;
+  }
+}

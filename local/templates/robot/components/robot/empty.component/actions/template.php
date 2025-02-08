@@ -25,20 +25,24 @@ if (empty($arResult["ITEMS"])) {
 
 ?>
 
-<div>
-    <h2><?= Loc::getMessage("COMPONENT_TITLE") ?></h2>
-    <?php
-    /** @var Action $item */
-    foreach ($arResult["ITEMS"] as $item) { ?>
-        <div id="<?= $item->id ?>">
-            <h3>
-                <?= $item->name ?>
-            </h3>
-            <?php if (!empty($item->description)) { ?>
-                <p>
-                    <?= $item->description ?>
-                </p>
-            <?php } ?>
-        </div>
-    <?php } ?>
+<div class="b-section b-section_pb b-action">
+    <h2 class="b-action__title">
+        <?= Loc::getMessage("COMPONENT_TITLE") ?>
+    </h2>
+    <div class="b-action__section">
+        <?php
+        /** @var Action $item */
+        foreach ($arResult["ITEMS"] as $item) { ?>
+            <div class="b-action__item" id="<?= $item->id ?>">
+                <span class="b-action__name">
+                    <?= $item->name ?>
+                </span>
+                <?php if (!empty($item->description)) { ?>
+                    <p class="b-action__description">
+                        <?= $item->description ?>
+                    </p>
+                <?php } ?>
+            </div>
+        <?php } ?>
+    </div>
 </div>

@@ -1,0 +1,30 @@
+@include screen(lg) {
+  .b-action {
+
+    &__section {
+      @include grid(2);
+    }
+  }
+}
+
+@include screen(md) {
+  .b-action {
+
+    &__title {
+      margin-bottom: $m20;
+    }
+
+    &__section {
+      @include grid(1, false, 20px);
+    }
+
+    &__item {
+      padding: $m25 $m20;
+      border-radius: $rounded20;
+    }
+
+    &__name {
+      font-size: $textNormal;
+    }
+  }
+}
