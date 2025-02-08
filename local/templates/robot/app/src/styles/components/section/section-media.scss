@@ -1,0 +1,26 @@
+@include screen(lg) {
+  .b-section {
+
+    &_last {
+      margin-bottom: $m45;
+    }
+  }
+}
+
+@include screen(sml) {
+  .b-section {
+
+    &_pb-full {
+      padding-top: $m70;
+      padding-bottom: $m70;
+    }
+
+    &_pt {
+      padding-top: $m70;
+    }
+
+    &_pb {
+      padding-bottom: $m70;
+    }
+  }
+}

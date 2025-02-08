@@ -2,6 +2,7 @@
 
   &_primary {
     @extend %btnDefaultOptions;
+    text-transform: uppercase;
   }
 
   &_secondary {

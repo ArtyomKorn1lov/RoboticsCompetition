@@ -20,9 +20,8 @@
 
 %btnDefaultOptions {
   @include flex(false, center, center);
-  height: $m55;
-  padding: $m35 18px;
-  border-radius: $rounded20;
+  padding: 18px $m35;
+  border-radius: $rounded30;
   background-color: $colorPrimary;
   color: $colorWhite;
   font-weight: $textBold;
@@ -30,6 +29,11 @@
   &:hover,
   &:active {
     background-color: $colorHover;
+    color: $colorWhite;
+  }
+
+  @include screen(sml) {
+    padding: 13px $m25;
   }
 }
 

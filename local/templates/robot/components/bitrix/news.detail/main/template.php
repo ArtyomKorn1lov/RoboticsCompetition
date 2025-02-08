@@ -21,22 +21,32 @@ $showActiveRegistration = !empty($arResult["DISPLAY_PROPERTIES"]["ACTIVE_REGISTR
     && $arResult["DISPLAY_PROPERTIES"]["ACTIVE_REGISTRATION"]["DISPLAY_VALUE"] === "Y";
 ?>
 
-<div>
-    <?php if (!empty($arResult["DETAIL_PICTURE"]["SRC"])) { ?>
-        <div>
-            <img src="<?= $arResult["DETAIL_PICTURE"]["SRC"] ?>" alt="<?= $arResult["NAME"] ?>">
+<div class="b-section b-section_pb">
+    <div class="b-event">
+        <div class="b-event__section">
+            <time class="b-event__timeline">
+                <?= $arResult["DISPLAY_PROPERTIES"]["EVENT_DATES"]["DISPLAY_VALUE"] ?>
+            </time>
+            <h1 class="b-event__title">
+                <?= $arResult["NAME"] ?>
+            </h1>
+            <?php if (!empty($arResult["DETAIL_TEXT"])) { ?>
+                <div class="b-event__description">
+                    <?= $arResult["DETAIL_TEXT"] ?>
+                </div>
+            <?php } ?>
+            <?php if ($showActiveRegistration) { ?>
+                <a class="b-button b-button_primary b-event__button" href="<?= Constants::REGISTRATION_URL ?>">
+                    <?= Loc::getMessage("EVENT_PARTICIPATE_BTN") ?>
+                </a>
+            <?php } ?>
         </div>
-    <?php } ?>
-    <h3><?= $arResult["NAME"] ?></h3>
-    <p><?= $arResult["DISPLAY_PROPERTIES"]["EVENT_DATES"]["DISPLAY_VALUE"] ?></p>
-    <?php if (!empty($arResult["DETAIL_TEXT"])) { ?>
-        <p>
-            <?= $arResult["DETAIL_TEXT"] ?>
-        </p>
-    <?php } ?>
-    <?php if ($showActiveRegistration) { ?>
-        <a href="<?=Constants::REGISTRATION_URL?>">
-            <?=Loc::getMessage("EVENT_PARTICIPATE_BTN")?>
-        </a>
-    <?php } ?>
+        <?php if (!empty($arResult["DETAIL_PICTURE"]["SRC"])) { ?>
+            <picture class="b-event__img-wrap">
+                <source class="b-event__img" media="(max-width: 560px)" srcset="/local/templates/robot/app/img/main_event_1024.webp" />
+                <source class="b-event__img" media="(max-width: 1024px)" srcset="/local/templates/robot/app/img/main_event_1024.webp" />
+                <img class="b-event__img" src="<?= $arResult["DETAIL_PICTURE"]["SRC"] ?>" alt="<?= $arResult["NAME"] ?>">
+            </picture>
+        <?php } ?>
+    </div>
 </div>

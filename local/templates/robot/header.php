@@ -84,7 +84,7 @@ Extension::load([
 </header>
 <main class="b-main b-main_centered">
 
-    <?php if ($APPLICATION->GetCurPage(false) !== "/") { ?>
+    <?php if ($APPLICATION->GetCurPage(false) !== SITE_DIR) { ?>
         <h1>
             <?php $APPLICATION->ShowTitle(false) ?>
         </h1>

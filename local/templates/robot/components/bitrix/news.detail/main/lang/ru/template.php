@@ -1,2 +1,2 @@
 <?php
-$MESS["EVENT_PARTICIPATE_BTN"] = "Участвовать";
+$MESS["EVENT_PARTICIPATE_BTN"] = "Регистрация";
