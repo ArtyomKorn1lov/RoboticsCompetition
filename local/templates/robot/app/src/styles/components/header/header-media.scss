@@ -3,8 +3,97 @@
   &__wrap {
 
     @include screen(sml) {
-      padding-left: $m20;
-      padding-right: $m20;
+      padding-top: $m8;
+      padding-bottom: $m20;
+    }
+  }
+
+  &__site {
+
+    @include screen(sml) {
+      gap: $m8;
+    }
+  }
+
+  &__logo {
+
+    &-wrap {
+
+      @include screen(sml) {
+        max-width: 32px;
+        aspect-ratio: 32/30;
+      }
+    }
+  }
+
+  &__title {
+
+    @include screen(sml) {
+      font-size: $textTinyLittle;
+      max-width: 122px;
+    }
+  }
+
+  &__menu {
+
+    @include screen(lgl) {
+      display: none;
+    }
+  }
+
+  &__controls {
+
+    @include screen(lgl) {
+        gap: $m30;
+    }
+
+    @include screen(sml) {
+      gap: $m10;
+    }
+  }
+
+  &__lang {
+
+    @include screen(sml) {
+      border-radius: $rounded10;
+      padding: $m10;
+      font-size: $textTiny;
+    }
+
+    &-icon {
+
+      @include screen(sml) {
+        flex-shrink: 0;
+        width: $m15;
+        height: $m15;
+      }
+
+      svg {
+        @include screen(sml) {
+          width: $m15;
+          height: $m15;
+        }
+      }
+    }
+  }
+
+  &__burger {
+
+    @include screen(lgl) {
+      display: flex;
+    }
+
+    @include screen(sml) {
+      width: $m35;
+      height: $m35;
+    }
+
+    svg {
+
+      @include screen(sml) {
+        width: $m15;
+        height: $m15;
+      }
     }
   }
 }

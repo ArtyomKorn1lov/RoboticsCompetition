@@ -33,8 +33,12 @@
 }
 
 @mixin screen($size) {
-  @if $size == lg {
+  @if $size == lgl {
+    @media (max-width: $lgl) { @content; }
+  } @else if $size == lg {
     @media (max-width: $lg) { @content; }
+  } @else if $size == lgs {
+    @media (max-width: $lgs) { @content; }
   } @else if $size == md {
     @media (max-width: $md) { @content; }
   } @else if $size == sml {

@@ -37,7 +37,9 @@
                         <use xlink:href="/local/templates/robot/app/dist/assets/icons/sprite.svg#mail_footer"></use>
                     </svg>
                 </span>
-                competation@mail.com
+                <span class="b-footer__contact-label">
+                    competation@mail.com
+                </span>
             </a>
             <a href="tel:+79876543210" class="b-footer__contact-item b-footer__contact-item_link">
                 <span class="b-footer__contact-icon">
@@ -45,7 +47,9 @@
                         <use xlink:href="/local/templates/robot/app/dist/assets/icons/sprite.svg#phone_footer"></use>
                     </svg>
                 </span>
-                +7 (987) 654-32-10
+                <span class="b-footer__contact-label">
+                    +7 (987) 654-32-10
+                </span>
             </a>
         </div>
 
@@ -56,10 +60,14 @@
                         <use xlink:href="/local/templates/robot/app/dist/assets/icons/sprite.svg#address_footer"></use>
                     </svg>
                 </span>
-                Республика Марий Эл, г. Йошкар-Ола, площадь имени В.И. Ленина, 3
+                <span class="b-footer__contact-label b-footer__contact-label_description">
+                    Республика Марий Эл, г. Йошкар-Ола, площадь имени В.И. Ленина, 3
+                </span>
             </div>
-            <div class="b-footer__contact-item">
-                Соц сети:
+            <div class="b-footer__contact-item b-footer__contact-item_social">
+                <span class="b-footer__contact-label b-footer__contact-label_social">
+                    Соц сети:
+                </span>
                 <a href="#" class="b-footer__contact-icon b-footer__contact-icon_social">
                     <svg>
                         <use xlink:href="/local/templates/robot/app/dist/assets/icons/sprite.svg#telegram_footer"></use>

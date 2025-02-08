@@ -1,0 +1,99 @@
+.b-footer {
+
+  &__wrap {
+
+    @include screen(lgs) {
+      flex-direction: column;
+    }
+
+    @include screen(sml) {
+      padding-top: $m35;
+      padding-bottom: $m35;
+    }
+  }
+
+  &__logo {
+
+    @include screen(xs) {
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: $m10;
+      max-width: 250px;
+    }
+
+    &-wrap {
+
+      @include screen(sml) {
+        max-width: $m60;
+        aspect-ratio: 60/56;
+      }
+    }
+  }
+
+  &__title {
+
+    @include screen(sml) {
+      font-size: $textTiny;
+    }
+
+    &-wrap {
+
+      @include screen(lgs) {
+        max-width: none;
+      }
+    }
+  }
+
+  &__copyright {
+
+    @include screen(sml) {
+      font-size: $textTinyLittle;
+    }
+  }
+
+  &__contact {
+
+    @include screen(lgs) {
+      max-width: none;
+    }
+
+    &-icon {
+
+      @include screen(sml) {
+        width: $m20;
+        height: $m20;
+      }
+
+      svg {
+        @include screen(sml) {
+          width: $m20;
+          height: $m20;
+        }
+      }
+
+      &_social {
+
+        @include screen(sml) {
+          width: $m30;
+          height: $m30;
+        }
+
+        svg {
+
+          @include screen(sml) {
+            width: $m30;
+            height: $m30;
+          }
+        }
+      }
+    }
+
+    &-label {
+
+      @include screen(sml) {
+        font-size: $textRegular;
+        margin-top: 0;
+      }
+    }
+  }
+}

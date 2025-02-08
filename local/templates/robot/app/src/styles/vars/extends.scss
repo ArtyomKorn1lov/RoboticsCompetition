@@ -5,7 +5,6 @@
   color: $colorHeader;
 }
 
-
 %textDefaultOptions {
   font-size: $textRegular;
   font-weight: $textDefault;
@@ -17,4 +16,29 @@
   width: $full;
   height: $full;
   object-fit: cover;
+}
+
+%btnDefaultOptions {
+  @include flex(false, center, center);
+  height: $m55;
+  padding: $m35 18px;
+  border-radius: $rounded20;
+  background-color: $colorPrimary;
+  color: $colorWhite;
+  font-weight: $textBold;
+
+  &:hover,
+  &:active {
+    background-color: $colorHover;
+  }
+}
+
+%paddingYPageOptions {
+  padding-left: $m32;
+  padding-right: $m32;
+
+  @media (max-width: $sml) {
+    padding-left: $m20;
+    padding-right: $m20;
+  }
 }

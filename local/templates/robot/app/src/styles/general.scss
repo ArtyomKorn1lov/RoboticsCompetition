@@ -22,16 +22,10 @@ body {
   flex-grow: 1;
 
   &_centered {
+    @extend %paddingYPageOptions;
     max-width: 1290px;
-    padding-left: $m32;
-    padding-right: $m32;
     margin-left: auto;
     margin-right: auto;
-
-    @include screen(sml) {
-      padding-left: $m20;
-      padding-right: $m20;
-    }
   }
 }
 

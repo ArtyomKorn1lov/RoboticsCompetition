@@ -1,0 +1,20 @@
+.b-button {
+
+  &_primary {
+    @extend %btnDefaultOptions;
+  }
+
+  &_secondary {
+    @extend %btnDefaultOptions;
+  }
+
+  &_disabled {
+    opacity: 0.6;
+    cursor: none;
+
+    &:hover,
+    &:active {
+      background-color: $colorPrimary;
+    }
+  }
+}

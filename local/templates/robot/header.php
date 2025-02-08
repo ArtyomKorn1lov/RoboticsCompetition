@@ -50,20 +50,20 @@ Extension::load([
         </div>
 
         <div class="b-header__controls">
-        <?php $APPLICATION->IncludeComponent("bitrix:menu", "main", array(
-	        "ROOT_MENU_TYPE" => "top",
-		    "MAX_LEVEL" => "1",
-		    "CHILD_MENU_TYPE" => "top",
-		    "USE_EXT" => "Y",
-		    "DELAY" => "N",
-		    "ALLOW_MULTI_SELECT" => "Y",
-		    "MENU_CACHE_TYPE" => "N",
-		    "MENU_CACHE_TIME" => "3600",
-		    "MENU_CACHE_USE_GROUPS" => "Y",
-		    "MENU_CACHE_GET_VARS" => "",
-	    ),
-	    false
-        );?>
+            <?php $APPLICATION->IncludeComponent("bitrix:menu", "main", array(
+	            "ROOT_MENU_TYPE" => "top",
+		        "MAX_LEVEL" => "1",
+		        "CHILD_MENU_TYPE" => "top",
+		        "USE_EXT" => "Y",
+		        "DELAY" => "N",
+		        "ALLOW_MULTI_SELECT" => "Y",
+		        "MENU_CACHE_TYPE" => "N",
+		        "MENU_CACHE_TIME" => "3600",
+		        "MENU_CACHE_USE_GROUPS" => "Y",
+		        "MENU_CACHE_GET_VARS" => "",
+	        ),
+	        false
+            );?>
 
             <a href="javascript:void(0)" class="b-header__lang">
                 <span class="b-header__lang-icon">
@@ -72,6 +72,12 @@ Extension::load([
                     </svg>
                 </span>
                 RU
+            </a>
+
+            <a href="javascript:void(0)" class="b-button b-button_primary b-header__burger">
+                <svg>
+                    <use xlink:href="/local/templates/robot/app/dist/assets/icons/sprite.svg#burger"></use>
+                </svg>
             </a>
         </div>
     </div>
