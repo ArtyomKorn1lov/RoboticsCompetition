@@ -69,30 +69,35 @@ $APPLICATION->IncludeComponent(
 );?>
 
 <!-- TODO Сделать множественную включаемую область -->
-<h2>Организаторы</h2>
-<?php $APPLICATION->IncludeComponent(
-	"bitrix:main.include",
-	".default",
-	array(
-		"AREA_FILE_SHOW" => "file",
-		"PATH" => SITE_DIR."include/partners/index_description.php",
-		"AREA_FILE_RECURSIVE" => "Y",
-		"COMPONENT_TEMPLATE" => ".default",
-		"EDIT_TEMPLATE" => "standard.php"
-	),
-	false
-); ?>
-<?php $APPLICATION->IncludeComponent(
-	"bitrix:main.include",
-	".default",
-	array(
-		"AREA_FILE_SHOW" => "file",
-		"PATH" => SITE_DIR."include/partners/index.php",
-		"AREA_FILE_RECURSIVE" => "Y",
-		"COMPONENT_TEMPLATE" => ".default",
-		"EDIT_TEMPLATE" => "standard.php"
-	),
-	false
-); ?>
+<div class="b-section b-section_pb b-section_last b-partners">
+    <h2 class="b-section__title b-partners__title">Организаторы</h2>
+    <?php $APPLICATION->IncludeComponent(
+        "bitrix:main.include",
+        "custom_wrapper",
+        array(
+            "CUSTOM_WRAPPER_START" => '<div class="b-partners__description">',
+            "CUSTOM_WRAPPER_END" => '</div>',
+            "AREA_FILE_SHOW" => "file",
+            "PATH" => SITE_DIR."include/partners/index_description.php",
+            "AREA_FILE_RECURSIVE" => "Y",
+            "COMPONENT_TEMPLATE" => ".default",
+            "EDIT_TEMPLATE" => "standard.php"
+        ),
+        false
+    ); ?>
+    <?php $APPLICATION->IncludeComponent(
+        "bitrix:main.include",
+        ".default",
+        array(
+            "AREA_FILE_SHOW" => "file",
+            "PATH" => SITE_DIR."include/partners/index.php",
+            "AREA_FILE_RECURSIVE" => "Y",
+            "COMPONENT_TEMPLATE" => ".default",
+            "EDIT_TEMPLATE" => "standard.php"
+        ),
+        false
+    ); ?>
+</div>
+
 <?php
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

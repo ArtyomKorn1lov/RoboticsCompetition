@@ -22,7 +22,7 @@ $APPLICATION->IncludeComponent(
         "DISPLAY_PICTURE" => "Y",
         "DISPLAY_PREVIEW_TEXT" => "Y",
         "DISPLAY_TOP_PAGER" => "N",
-        "FIELD_CODE" => array("DETAIL_PICTURE"),
+        "FIELD_CODE" => array("PREVIEW_PICTURE", "DETAIL_PICTURE"),
         "FILTER_NAME" => "",
         "HIDE_LINK_WHEN_NO_DETAIL" => "N",
         "IBLOCK_ID" => Robot\Core\Constants::PARTNERS_IBLOCK_CODE,

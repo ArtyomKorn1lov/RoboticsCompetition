@@ -21,7 +21,7 @@ if (empty($arResult["ITEMS"])) {
     return;
 }
 ?>
-<div>
+<div class="b-partners__list">
     <?php foreach ($arResult["ITEMS"] as $arItem) { ?>
         <?php
         $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
@@ -30,21 +30,22 @@ if (empty($arResult["ITEMS"])) {
         ?>
         <?php if ($link) { ?>
             <a
+                class="b-partners__item"
                 id="<?= $this->GetEditAreaId($arItem['ID']); ?>"
                 href="<?= $link ?>"
                 title="<?= $arItem["NAME"] ?>"
                 target="_blank"
-                style="margin-right: 30px;"
+                style="--background-partner: url('<?= $arItem["DETAIL_PICTURE"]["SRC"] ?>');
+                       --background-partner-active: url('<?= $arItem["PREVIEW_PICTURE"]["SRC"] ?? $arItem["DETAIL_PICTURE"]["SRC"] ?>');"
             >
         <?php } else { ?>
-            <div id="<?= $this->GetEditAreaId($arItem['ID']); ?>">
+            <div
+                class="b-partners__item"
+                id="<?= $this->GetEditAreaId($arItem['ID']); ?>"
+                style="--background-partner: url('<?= $arItem["DETAIL_PICTURE"]["SRC"] ?>');
+                       --background-partner-active: url('<?= $arItem["PREVIEW_PICTURE"]["SRC"] ?? $arItem["DETAIL_PICTURE"]["SRC"] ?>');"
+            >
         <?php } ?>
-                <img
-                    width="300"
-                    src="<?= $arItem["DETAIL_PICTURE"]["SRC"] ?>"
-                    alt="<?= $arItem["DETAIL_PICTURE"]["ALT"] ?>"
-                    title="<?= $arItem["DETAIL_PICTURE"]["TITLE"] ?>"
-                >
         <?php if ($link) { ?>
             </a>
         <?php } else { ?>

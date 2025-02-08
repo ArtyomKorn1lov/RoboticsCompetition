@@ -26,7 +26,7 @@ if (empty($arResult["ITEMS"])) {
 ?>
 
 <div class="b-section b-section_pb b-action">
-    <h2 class="b-action__title">
+    <h2 class="b-section__title b-action__title">
         <?= Loc::getMessage("COMPONENT_TITLE") ?>
     </h2>
     <div class="b-action__section">
@@ -38,9 +38,9 @@ if (empty($arResult["ITEMS"])) {
                     <?= $item->name ?>
                 </span>
                 <?php if (!empty($item->description)) { ?>
-                    <p class="b-action__description">
+                    <div class="b-action__description">
                         <?= $item->description ?>
-                    </p>
+                    </div>
                 <?php } ?>
             </div>
         <?php } ?>

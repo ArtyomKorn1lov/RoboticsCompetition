@@ -2,7 +2,6 @@
 
   &__title {
     margin-bottom: $m40;
-    max-width: 850px;
   }
 
   &__section {
@@ -25,8 +24,6 @@
   }
 
   &__description {
-    margin-top: 0;
-    margin-bottom: 0;
     font-size: $textRegular;
   }
 }
