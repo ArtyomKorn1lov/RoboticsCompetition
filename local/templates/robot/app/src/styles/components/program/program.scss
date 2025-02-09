@@ -1,0 +1,19 @@
+.b-program {
+  @include flex(column);
+  gap: $m30;
+
+  &__nav {
+    @include flex(false, center);
+    gap: $m10;
+  }
+
+  &__list {
+    @include flex(column);
+    display: none;
+    gap: $m15;
+
+    &_active {
+      display: flex;
+    }
+  }
+}

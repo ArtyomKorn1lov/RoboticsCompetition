@@ -30,6 +30,7 @@ file_put_contents($_SERVER["DOCUMENT_ROOT"]."/log.txt", var_export([$settingHead
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="<?=SITE_TEMPLATE_PATH?>/plugins/jquery.js"></script>
     <?php $APPLICATION->ShowHead();?>
     <title><?php $APPLICATION->ShowTitle()?></title>
 </head>
@@ -89,7 +90,7 @@ file_put_contents($_SERVER["DOCUMENT_ROOT"]."/log.txt", var_export([$settingHead
 <main class="b-main b-main_centered">
 
     <?php if ($APPLICATION->GetCurPage(false) !== SITE_DIR) { ?>
-        <h1>
+        <h1 class="b-section__title b-section__title_pb_30-full">
             <?php $APPLICATION->ShowTitle(false) ?>
         </h1>
     <?php } ?>

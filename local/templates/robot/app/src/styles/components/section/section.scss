@@ -15,5 +15,10 @@
 
   &__title {
     max-width: 850px;
+
+    &_pb_30-full {
+      padding-top: $m30;
+      padding-bottom: $m30;
+    }
   }
 }

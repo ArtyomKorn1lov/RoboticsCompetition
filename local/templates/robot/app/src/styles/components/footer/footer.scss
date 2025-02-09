@@ -13,9 +13,9 @@
   &__wrap {
     @include flex(false, false, space-between);
     @extend %paddingYPageOptions;
+    @extend %pageContainerOptions;
     gap: $m15;
     width: $full;
-    max-width: 1290px;
     padding-top: $m40;
     padding-bottom: $m40;
     margin-left: auto;

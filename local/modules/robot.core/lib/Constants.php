@@ -21,4 +21,7 @@ class Constants
 
     /** @var string Url страницы регистрации */
     public const REGISTRATION_URL = SITE_DIR."register/";
+
+    /** @var string Формат pdf файла, который выдаёт компонент news.list */
+    public const PDF_FORMAT_NEWS_LIST = "application/pdf";
 }

@@ -1,12 +1,14 @@
 .b-button {
+  @extend %btnDefaultOptions;
 
   &_primary {
-    @extend %btnDefaultOptions;
     text-transform: uppercase;
   }
 
-  &_secondary {
-    @extend %btnDefaultOptions;
+  &_small {
+    padding: 5px $m15;
+    font-size: $textRegular;
+    border-radius: $rounded15;
   }
 
   &_disabled {

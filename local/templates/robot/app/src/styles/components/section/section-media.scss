@@ -2,7 +2,7 @@
   .b-section {
 
     &_last {
-      margin-bottom: $m45;
+      padding-bottom: $m45;
     }
   }
 }
@@ -21,6 +21,13 @@
 
     &_pb {
       padding-bottom: $m70;
+    }
+
+    &__title {
+
+      &_pb_30-full {
+        padding-bottom: $m20;
+      }
     }
   }
 }

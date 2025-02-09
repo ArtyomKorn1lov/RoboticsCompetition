@@ -23,7 +23,7 @@ body {
 
   &_centered {
     @extend %paddingYPageOptions;
-    max-width: 1290px;
+    @extend %pageContainerOptions;
     margin-left: auto;
     margin-right: auto;
   }
@@ -31,6 +31,11 @@ body {
 
 ul, li {
   list-style: none;
+}
+
+.svg_document {
+  width: 32px;
+  height: 32px;
 }
 
 /*

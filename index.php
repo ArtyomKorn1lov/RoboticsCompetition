@@ -1,6 +1,6 @@
 <?php
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetTitle("Главная страница сайта");
+$APPLICATION->SetTitle("Главная");
 ?>
 <?php
 $APPLICATION->IncludeComponent(
