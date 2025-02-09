@@ -26,9 +26,9 @@ class Event
     public static function mapActiveEventResponseToModel(array $response): ActiveEvent
     {
         return new ActiveEvent(
-            $response["ID"],
-            new DateTime($response["PROPERTY_EXPIRATION_DATE_VALUE"]),
-            static::compareStringFlagToBool($response["PROPERTY_ACTIVE_REGISTRATION_VALUE"])
+            id: $response["ID"],
+            expirationDate: new DateTime($response["PROPERTY_EXPIRATION_DATE_VALUE"]),
+            isRegister: static::compareStringFlagToBool($response["PROPERTY_ACTIVE_REGISTRATION_VALUE"])
         );
     }
 }

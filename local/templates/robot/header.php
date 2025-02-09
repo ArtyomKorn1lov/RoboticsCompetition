@@ -12,13 +12,16 @@ if (!Bitrix\Main\Loader::includeModule('robot.core')) {
 use Robot\Core\Tools\Modules\Manager;
 use Bitrix\Main\UI\Extension;
 
-$flag = Manager::includeFrontendPlugins();
-
-file_put_contents($_SERVER["DOCUMENT_ROOT"] . "/log.txt", var_export($flag, true));
+Manager::includeFrontendPlugins();
 
 Extension::load([
 	"robot_frontend"
 ]);
+
+use Robot\Core\Views\SiteSettings\SiteSettingsView;
+$settingHeaderObj = SiteSettingsView::getSettingsHeader();
+$settingsFooterObj = SiteSettingsView::getSettingsFooter();
+file_put_contents($_SERVER["DOCUMENT_ROOT"]."/log.txt", var_export([$settingHeaderObj, $settingsFooterObj], true));
 ?>
 <!doctype html>
 <html lang="ru">
@@ -39,15 +42,16 @@ Extension::load([
 
     <div class="b-header__wrap">
 
-        <div class="b-header__site">
-            <a href="<?=SITE_DIR?>" class="b-header__logo-wrap">
-                <img class="b-header__logo" src="<?=SITE_DIR?>local/templates/robot/app/img/logo.svg" alt="Соревнования по робототехнике в ПГТУ">
-            </a>
-
-            <h1 class="b-header__title">
-                Соревнования по робототехнике в ПГТУ
-            </h1>
-        </div>
+        <?php
+        $APPLICATION->IncludeComponent(
+        "robot:empty.component",
+        "header_name",
+            Array(
+                "CACHE_TIME" => "36000000",
+                "CACHE_TYPE" => "A",
+                "MODULES_CODES" => array("robot.core","")
+            )
+        );?>
 
         <div class="b-header__controls">
             <?php $APPLICATION->IncludeComponent("bitrix:menu", "main", array(

@@ -106,4 +106,30 @@ class SiteSettingsTable extends DataManager
             new Length(null, 255),
         );
     }
+
+    /**
+     * @return string[]
+     */
+    public static function getHeaderSelectedFields(): array
+    {
+        return [
+            "SITE_NAME",
+            "LOGO"
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getFooterSelectedFields(): array
+    {
+        return [
+            "SITE_NAME",
+            "EMAIL",
+            "PHONE",
+            "ADDRESS",
+            "SOCIAL_NETWORKS",
+            "LOGO_FOOTER"
+        ];
+    }
 }

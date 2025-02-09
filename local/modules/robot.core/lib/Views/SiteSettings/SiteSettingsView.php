@@ -2,15 +2,40 @@
 
 namespace Robot\Core\Views\SiteSettings;
 
-use Robot\Core\DTO\SiteSettings;
+use Bitrix\Main\SystemException;
+use Robot\Core\DTO\SiteSettingsFooter;
+use Robot\Core\DTO\SiteSettingsHeader;
+use Robot\Core\Services\SiteSettings\SiteSettingsManager;
 
 class SiteSettingsView
 {
-    public static function getWidgetHeader(): SiteSettings
+    /**
+     * @return SiteSettingsHeader|bool
+     */
+    public static function getSettingsHeader(): SiteSettingsHeader|bool
     {
+        try {
+            // TODO заменить через сервис-локатор
+            $siteSettingsManager = new SiteSettingsManager();
+            return $siteSettingsManager->getSettingsHeader();
+        } catch (SystemException $exception) {
+            AddMessage2Log($exception->getMessage());
+            return false;
+        }
     }
 
-    public static function getWidgetFooter(): SiteSettings
+    /**
+     * @return SiteSettingsFooter|bool
+     */
+    public static function getSettingsFooter(): SiteSettingsFooter|bool
     {
+        try {
+            // TODO заменить через сервис-локатор
+            $siteSettingsManager = new SiteSettingsManager();
+            return $siteSettingsManager->getSettingsFooter();
+        } catch (SystemException $exception) {
+            AddMessage2Log($exception->getMessage());
+            return false;
+        }
     }
 }

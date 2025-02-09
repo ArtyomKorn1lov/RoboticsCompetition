@@ -109,7 +109,7 @@ class robot_core extends CModule
                 "PHONE" => '8 (999) 999-99-99, +7 (800) 999-91-92',
                 "ADDRESS" => "Республика Марий Эл, г. Йошкар-Ола, площадь имени В.И. Ленина, 3",
                 "SOCIAL_NETWORKS" => [
-                    "tg" => "tg://resolve?domain=/",
+                    "telegram_footer" => "tg://resolve?domain=/",
                 ],
                 "LOGO" => $logo,
                 "LOGO_FOOTER" => $logoFooter,

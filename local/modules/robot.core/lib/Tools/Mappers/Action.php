@@ -15,9 +15,9 @@ class Action
         $items = [];
         foreach ($response as $item) {
             $items[] = new ActionModel(
-                $item["ID"],
-                $item["NAME"],
-                $item["DETAIL_TEXT"] ?? ""
+                id: $item["ID"],
+                name: $item["NAME"],
+                description: $item["DETAIL_TEXT"] ?? ""
             );
         }
 

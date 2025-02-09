@@ -20,5 +20,5 @@ class Constants
     public const PARTNERS_IBLOCK_CODE = "partners";
 
     /** @var string Url страницы регистрации */
-    public const REGISTRATION_URL = SITE_DIR."registration/";
+    public const REGISTRATION_URL = SITE_DIR."register/";
 }
