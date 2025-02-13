@@ -43,6 +43,15 @@ const js = () => {
 		.pipe(dest('dist/js'));
 }
 
+const plugins = () => {
+	return src('src/plugins/**/*.js')
+		.pipe(sourcemaps.init())
+		.pipe(babel())
+		.pipe(terser())
+		.pipe(sourcemaps.write('.'))
+		.pipe(dest('dist/plugins'));
+}
+
 const clear = () => {
 	return deleteAsync('dist');
 }
@@ -84,7 +93,7 @@ const serve = () => {
 	watch(['src/assets/icons/*'], icons);
 }
 
-const build = series([clear, scss, js, images, icons, fonts]);
-const dev = series([clear, scss, js, images, icons, fonts, serve]);
+const build = series([clear, scss, js, images, icons, fonts, plugins]);
+const dev = series([clear, scss, js, images, icons, fonts, plugins, serve]);
 
 export { build, dev };

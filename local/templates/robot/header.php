@@ -21,7 +21,6 @@ Extension::load([
 use Robot\Core\Views\SiteSettings\SiteSettingsView;
 $settingHeaderObj = SiteSettingsView::getSettingsHeader();
 $settingsFooterObj = SiteSettingsView::getSettingsFooter();
-file_put_contents($_SERVER["DOCUMENT_ROOT"]."/log.txt", var_export([$settingHeaderObj, $settingsFooterObj], true));
 ?>
 <!doctype html>
 <html lang="ru">
@@ -30,7 +29,6 @@ file_put_contents($_SERVER["DOCUMENT_ROOT"]."/log.txt", var_export([$settingHead
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="<?=SITE_TEMPLATE_PATH?>/plugins/jquery.js"></script>
     <?php $APPLICATION->ShowHead();?>
     <title><?php $APPLICATION->ShowTitle()?></title>
 </head>

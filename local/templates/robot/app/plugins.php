@@ -17,6 +17,11 @@ $extentions = [
         "css" => $distPath . "css/style.min.css",
         "rel" => [],
         "use" => CJSCore::USE_PUBLIC,
+    ],
+    "jquery" => [
+        "js" => $distPath . "js/jquery.js",
+        "rel" => [],
+        "use" => CJSCore::USE_PUBLIC,
     ]
 ];
 
