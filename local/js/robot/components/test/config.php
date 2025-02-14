@@ -6,6 +6,7 @@ return [
     'js' => './dist/script.bundle.js',
     'rel' => [
         'robot.core',
+        'robot.ui',
         'robot.components.test-card'
     ],
     'skip_core' => true,

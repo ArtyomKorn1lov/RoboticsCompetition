@@ -6,8 +6,8 @@ const postcssPresetEnv = require('postcss-preset-env');
 const DEFAULT_GLOBALS = {
     vue: 'RobotCore.vue',
     axios: 'RobotCore.axios',
-    'element-plus': 'RobotCore.ElPlus',
-    VueTheMask: 'RobotCore.VueTheMask',
+    'element-plus': 'RobotUI.ElPlus',
+    VueTheMask: 'RobotUI.VueTheMask',
 }
 
 module.exports = (env, argv) => {
@@ -42,8 +42,8 @@ module.exports = (env, argv) => {
             filename: 'script.bundle.js',
             clean: true,
             library: {
-                name: 'RobotTestCard',
-                type: 'umd',
+                name: 'TestCard',
+                type: 'assign-properties',
                 export: 'default',
             }
         },

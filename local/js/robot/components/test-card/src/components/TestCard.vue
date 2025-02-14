@@ -1,7 +1,9 @@
 <template>
-  <el-button type="danger">
-    Тестовая кнопка карточки!
-  </el-button>
+  <div>
+    <el-button type="danger">
+      Тестовая кнопка карточки!
+    </el-button>
+  </div>
 </template>
 
 <script setup>

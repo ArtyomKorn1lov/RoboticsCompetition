@@ -2,7 +2,6 @@ const path = require('path');
 const {VueLoaderPlugin} = require("vue-loader");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const postcssPresetEnv = require('postcss-preset-env');
-const ElementPlus = require("unplugin-element-plus/webpack");
 
 module.exports = (env, argv) => {
     const mode = argv.mode ?? "production";
@@ -37,14 +36,13 @@ module.exports = (env, argv) => {
             clean: true,
             library: {
                 name: 'RobotCore',
-                type: 'umd',
+                type: 'assign-properties',
                 export: 'default',
             },
         },
         plugins: [
             new VueLoaderPlugin(),
-            new MiniCssExtractPlugin({ filename: 'styles.bundle.css' }),
-            ElementPlus()
+            new MiniCssExtractPlugin({ filename: 'styles.bundle.css' })
         ],
         resolve: {
             extensions: ['.js', '.vue', '.css', '.scss']

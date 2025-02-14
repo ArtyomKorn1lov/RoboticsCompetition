@@ -8,9 +8,8 @@
 
 <script setup>
 import { ElButton } from 'element-plus';
-import TestCard from 'TestCard';
+import TestCard from "TestCard";
 
-console.log('TestCard', TestCard);
 </script>
 <style scoped>
   .red {
