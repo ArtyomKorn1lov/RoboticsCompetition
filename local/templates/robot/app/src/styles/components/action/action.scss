@@ -9,12 +9,8 @@
   }
 
   &__item {
-    @include flex(column);
-    gap: $m15;
+    @extend %simpleCardOptions;
     padding: $m30;
-    background-color: $colorBG2;
-    border: 1px solid $colorBG;
-    border-radius: $rounded25;
   }
 
   &__name {

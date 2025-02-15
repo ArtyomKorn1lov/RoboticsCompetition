@@ -1,0 +1,21 @@
+.b-tabs {
+  @include flex(false, center);
+  gap: $m15;
+
+  &__item {
+    border: 1px solid $colorPrimary;
+    border-radius: $rounded30;
+    font-weight: $textSemiBold;
+    padding: $m10 $m15;
+    color: $colorPrimary;
+    text-align: center;
+
+    &:hover,
+    &:active,
+    &_active {
+      background-color: $colorSecondary;
+      color: $colorWhite;
+      border-color: $colorSecondary;
+    }
+  }
+}

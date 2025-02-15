@@ -42,7 +42,7 @@
   padding-left: $m32;
   padding-right: $m32;
 
-  @media (max-width: $sml) {
+  @include screen(sml) {
     padding-left: $m20;
     padding-right: $m20;
   }
@@ -52,4 +52,17 @@
   width: $full;
   box-sizing: border-box;
   max-width: 1354px;
+}
+
+%simpleCardOptions {
+  @include flex(column);
+  padding: $m25 $m30;
+  background-color: $colorBG2;
+  border: 1px solid $colorBG;
+  border-radius: $rounded25;
+
+  @include screen(md) {
+    padding: $m25 $m20;
+    border-radius: $rounded20;
+  }
 }

@@ -11,6 +11,8 @@ $curDir = SITE_TEMPLATE_PATH ."/app/";
 
 $distPath = $curDir . 'dist/';
 
+$pluguinsPath = $distPath . 'plugins/';
+
 $extentions = [
     "robot_frontend" => [
         "js" => $distPath . "js/main.min.js",
@@ -19,7 +21,7 @@ $extentions = [
         "use" => CJSCore::USE_PUBLIC,
     ],
     "jquery" => [
-        "js" => $distPath . "js/jquery.js",
+        "js" => $pluguinsPath . "jquery/jquery.js",
         "rel" => [],
         "use" => CJSCore::USE_PUBLIC,
     ]

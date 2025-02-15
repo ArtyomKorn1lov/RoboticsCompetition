@@ -75,8 +75,8 @@ $APPLICATION->IncludeComponent(
         "bitrix:main.include",
         "custom_wrapper",
         array(
-            "CUSTOM_WRAPPER_START" => '<div class="b-partners__description">',
-            "CUSTOM_WRAPPER_END" => '</div>',
+            "CUSTOM_WRAPPER_START" => '<p class="b-section__description">',
+            "CUSTOM_WRAPPER_END" => '</p>',
             "AREA_FILE_SHOW" => "file",
             "PATH" => SITE_DIR."include/partners/index_description.php",
             "AREA_FILE_RECURSIVE" => "Y",

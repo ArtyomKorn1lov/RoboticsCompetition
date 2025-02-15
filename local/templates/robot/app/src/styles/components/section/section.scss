@@ -13,12 +13,25 @@
     padding-bottom: 120px;
   }
 
+  &__top {
+    padding-bottom: $m25;
+  }
+
   &__title {
     max-width: 850px;
 
     &_pb_30-full {
       padding-top: $m30;
       padding-bottom: $m30;
+    }
+  }
+
+  &__description {
+    margin-bottom: $m25;
+    max-width: 850px;
+
+    &_mb-35 {
+      margin-bottom: $m35;
     }
   }
 }

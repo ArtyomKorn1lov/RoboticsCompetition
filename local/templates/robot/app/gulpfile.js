@@ -94,6 +94,13 @@ const serve = () => {
 }
 
 const build = series([clear, scss, js, images, icons, fonts, plugins]);
-const dev = series([clear, scss, js, images, icons, fonts, plugins, serve]);
 
-export { build, dev };
+const stylesBuild = series([scss]);
+
+const scriptsBuild = series([js]);
+
+const iconsBuild = series([icons, images]);
+
+const dev = series([scss, js, images, icons, serve]);
+
+export { build, stylesBuild, scriptsBuild, iconsBuild, dev };

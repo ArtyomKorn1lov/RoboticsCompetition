@@ -18,11 +18,6 @@
       @include grid(1, false, 20px);
     }
 
-    &__item {
-      padding: $m25 $m20;
-      border-radius: $rounded20;
-    }
-
     &__name {
       font-size: $textNormal;
     }

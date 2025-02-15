@@ -27,6 +27,13 @@ body {
     margin-left: auto;
     margin-right: auto;
   }
+
+  &__title {
+    text-transform: uppercase;
+    color: $colorHover;
+    padding-top: $m25;
+    padding-bottom: $m15;
+  }
 }
 
 ul, li {

@@ -2,18 +2,41 @@
   @include flex(column);
   gap: $m30;
 
-  &__nav {
-    @include flex(false, center);
-    gap: $m10;
-  }
-
+  // TODO убрать потом активное состояние, фронт переедет на vue или в соответсвующий компонент
   &__list {
     @include flex(column);
     display: none;
-    gap: $m15;
+    gap: $m25;
 
     &_active {
       display: flex;
     }
+  }
+
+  &__item {
+    @extend %simpleCardOptions;
+    @include flex(row, center, space-between);
+    gap: $m25;
+  }
+
+  &__left {
+    @include flex(false, center);
+    gap: $m30;
+  }
+
+  &__time {
+    padding: $m8 $m10;
+    border-radius: $rounded10;
+    background-color: $colorPrimary;
+    font-size: $textNormal;
+    font-weight: $textBold;
+    color: $colorWhite;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  &__right {
+    font-weight: $textBold;
+    flex-shrink: 0;
   }
 }

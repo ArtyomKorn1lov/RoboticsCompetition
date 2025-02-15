@@ -4,12 +4,6 @@
     margin-bottom: $m30;
   }
 
-  &__description {
-    font-size: $textRegular;
-    margin-bottom: $m25;
-    max-width: 850px;
-  }
-
   &__list {
     @include grid(4, false, $m30);
   }

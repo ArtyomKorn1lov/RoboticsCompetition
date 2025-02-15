@@ -6,6 +6,9 @@
   "type": "module",
   "scripts": {
     "build": "gulp build",
+    "styles": "gulp stylesBuild",
+    "scripts": "gulp scriptsBuild",
+    "icons": "gulp iconsBuild",
     "dev": "gulp dev"
   },
   "engines": {

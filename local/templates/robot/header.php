@@ -15,12 +15,10 @@ use Bitrix\Main\UI\Extension;
 Manager::includeFrontendPlugins();
 
 Extension::load([
-	"robot_frontend"
+	"robot_frontend",
+	"jquery"
 ]);
 
-use Robot\Core\Views\SiteSettings\SiteSettingsView;
-$settingHeaderObj = SiteSettingsView::getSettingsHeader();
-$settingsFooterObj = SiteSettingsView::getSettingsFooter();
 ?>
 <!doctype html>
 <html lang="ru">
@@ -88,7 +86,7 @@ $settingsFooterObj = SiteSettingsView::getSettingsFooter();
 <main class="b-main b-main_centered">
 
     <?php if ($APPLICATION->GetCurPage(false) !== SITE_DIR) { ?>
-        <h1 class="b-section__title b-section__title_pb_30-full">
+        <h1 class="b-main__title">
             <?php $APPLICATION->ShowTitle(false) ?>
         </h1>
     <?php } ?>
