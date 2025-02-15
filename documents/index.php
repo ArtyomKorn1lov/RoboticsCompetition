@@ -3,6 +3,12 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Документы");
 ?>
 
+<div class="b-section">
+	<p class="b-section__description b-section__description_mb-25">
+		Все документы относящиеся к соревнованиям по робототехнике в ПГТУ
+	</p>
+</div>
+
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"documents",

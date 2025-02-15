@@ -1,0 +1,38 @@
+.b-docs {
+  @include grid(2, false);
+  column-gap: $m30;
+  row-gap: $m25;
+
+  &__icon {
+    @include flex(false, center, center);
+    fill: $colorWhite;
+    width: $m40;
+    height: $m40;
+    background-color: $colorPrimary;
+    border-radius: $rounded10;
+
+    svg {
+      width: $m15;
+      height: 18px;
+    }
+  }
+
+  &__item {
+    @include flex(false, center);
+    gap: $m15;
+    font-size: $textNormal;
+    font-weight: $textBold;
+    color: $colorPrimary;
+
+    &:hover,
+    &:active {
+
+      .b-docs {
+
+        &__icon {
+          background-color: $colorSecondary;
+        }
+      }
+    }
+  }
+}
