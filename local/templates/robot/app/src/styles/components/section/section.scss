@@ -13,8 +13,16 @@
     padding-bottom: 120px;
   }
 
+  &_pb_half {
+    padding-bottom: $m70;
+  }
+
   &__top {
     padding-bottom: $m25;
+
+    &_pt_15 {
+      padding-top: $m15;
+    }
   }
 
   &__title {
@@ -34,8 +42,34 @@
       margin-bottom: $m35;
     }
 
+    &_mb-30 {
+      margin-bottom: $m30;
+    }
+
     &_mb-15 {
       margin-bottom: $m15;
+    }
+
+    &_text-normal {
+      font-size: $textNormal;
+      max-width: none;
+    }
+  }
+
+  &__article {
+
+    p, span, a, li {
+      font-size: $textNormal;
+    }
+
+    li {
+
+      &:before {
+        content: "·";
+        margin-left: $m5;
+        margin-right: $m5;
+        font-size: $textBase;
+      }
     }
   }
 }

@@ -67,3 +67,18 @@
     border-radius: $rounded20;
   }
 }
+
+%arrowRightIconOptions {
+  @include flex(false, center, center);
+  flex-shrink: 0;
+  background-color: $colorPrimary;
+  border-radius: $roundedFull;
+  width: $m50;
+  height: $m50;
+  fill: $colorWhite;
+
+  svg {
+    width: $m20;
+    height: 18px;
+  }
+}

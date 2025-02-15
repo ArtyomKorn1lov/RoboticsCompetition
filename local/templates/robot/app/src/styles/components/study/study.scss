@@ -1,0 +1,43 @@
+.b-study {
+  @include flex(column);
+  gap: $m25;
+
+  &__item {
+    @extend %simpleCardOptions;
+    position: relative;
+    padding-right: 120px;
+
+    &:hover,
+    &:active {
+
+      .b-study {
+
+        &__name {
+          color: $colorHover;
+        }
+
+        &__icon {
+          background-color: $colorHover;
+        }
+      }
+    }
+  }
+
+  &__icon {
+    @extend %arrowRightIconOptions;
+    position: absolute;
+    bottom: $m25;
+    right: $m40;
+  }
+
+  &__name {
+    color: $colorPrimary;
+    text-transform: uppercase;
+  }
+
+  &__description {
+    font-size: $textNormal;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
