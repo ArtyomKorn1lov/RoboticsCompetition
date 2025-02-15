@@ -11,13 +11,13 @@ $APPLICATION->SetTitle("Архив");
 
 <div class="b-section b-section_pb b-section_last b-archive">
     <div class="b-section__top">
-        <h2 class="h5 b-section__title b-archive__year">
+        <h2 class="h5 b-section__title b-archive__subtitle">
             2024 год
         </h2>
     </div>
 
     <div class="b-archive__list">
-        <a href="#" class="b-archive__item">
+        <a href="/archive/detail.php" class="b-archive__item">
             <div class="b-archive__left">
                 <span class="h6 b-archive__name">
                     Фотографии с фестиваля
@@ -30,7 +30,7 @@ $APPLICATION->SetTitle("Архив");
                 <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right") ?>
             </span>
         </a>
-        <a href="#" class="b-archive__item">
+        <a href="/archive/detail.php" class="b-archive__item">
             <div class="b-archive__left">
                 <span class="h6 b-archive__name">
                     Трансляция с фестиваля
@@ -43,7 +43,7 @@ $APPLICATION->SetTitle("Архив");
                 <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right") ?>
             </span>
         </a>
-        <a href="#" class="b-archive__item">
+        <a href="/archive/detail.php" class="b-archive__item">
             <div class="b-archive__left">
                 <span class="h6 b-archive__name">
                     Фото с олимпиады
@@ -56,7 +56,7 @@ $APPLICATION->SetTitle("Архив");
                 <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right") ?>
             </span>
         </a>
-        <a href="#" class="b-archive__item">
+        <a href="/archive/detail.php" class="b-archive__item">
             <div class="b-archive__left">
                 <span class="h6 b-archive__name">
                     Фотографии с фестиваля
@@ -69,7 +69,7 @@ $APPLICATION->SetTitle("Архив");
                 <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right") ?>
             </span>
         </a>
-        <a href="#" class="b-archive__item">
+        <a href="/archive/detail.php" class="b-archive__item">
             <div class="b-archive__left">
                 <span class="h6 b-archive__name">
                     Трансляция с фестиваля
@@ -85,13 +85,13 @@ $APPLICATION->SetTitle("Архив");
     </div>
 
     <div class="b-section__top">
-        <h2 class="h5 b-section__title b-archive__year">
+        <h2 class="h5 b-section__title b-archive__subtitle">
             2023 год
         </h2>
     </div>
 
     <div class="b-archive__list">
-        <a href="#" class="b-archive__item">
+        <a href="/archive/detail.php" class="b-archive__item">
             <div class="b-archive__left">
                 <span class="h6 b-archive__name">
                     Фотографии с фестиваля
@@ -104,7 +104,7 @@ $APPLICATION->SetTitle("Архив");
                 <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right") ?>
             </span>
         </a>
-        <a href="#" class="b-archive__item">
+        <a href="/archive/detail.php" class="b-archive__item">
             <div class="b-archive__left">
                 <span class="h6 b-archive__name">
                     Трансляция с фестиваля
@@ -117,7 +117,7 @@ $APPLICATION->SetTitle("Архив");
                 <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right") ?>
             </span>
         </a>
-        <a href="#" class="b-archive__item">
+        <a href="/archive/detail.php" class="b-archive__item">
             <div class="b-archive__left">
                 <span class="h6 b-archive__name">
                     Фото с олимпиады
@@ -130,7 +130,7 @@ $APPLICATION->SetTitle("Архив");
                 <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right") ?>
             </span>
         </a>
-        <a href="#" class="b-archive__item">
+        <a href="/archive/detail.php" class="b-archive__item">
             <div class="b-archive__left">
                 <span class="h6 b-archive__name">
                     Фотографии с фестиваля
@@ -146,13 +146,13 @@ $APPLICATION->SetTitle("Архив");
     </div>
 
     <div class="b-section__top">
-        <h2 class="h5 b-section__title b-archive__year">
+        <h2 class="h5 b-section__title b-archive__subtitle">
             2022 год
         </h2>
     </div>
 
     <div class="b-archive__list">
-        <a href="#" class="b-archive__item">
+        <a href="/archive/detail.php" class="b-archive__item">
             <div class="b-archive__left">
                 <span class="h6 b-archive__name">
                     Фотографии с фестиваля
@@ -165,7 +165,7 @@ $APPLICATION->SetTitle("Архив");
                 <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right") ?>
             </span>
         </a>
-        <a href="#" class="b-archive__item">
+        <a href="/archive/detail.php" class="b-archive__item">
             <div class="b-archive__left">
                 <span class="h6 b-archive__name">
                     Трансляция с фестиваля
@@ -178,7 +178,7 @@ $APPLICATION->SetTitle("Архив");
                 <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right") ?>
             </span>
         </a>
-        <a href="#" class="b-archive__item">
+        <a href="/archive/detail.php" class="b-archive__item">
             <div class="b-archive__left">
                 <span class="h6 b-archive__name">
                     Фото с олимпиады
