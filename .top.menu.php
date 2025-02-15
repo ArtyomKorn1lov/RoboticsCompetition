@@ -31,7 +31,7 @@ $aMenuLinks = Array(
 	),
 	Array(
 		"Архив",
-        SITE_DIR."arkhiv/",
+        SITE_DIR."archive/",
 		Array(), 
 		Array(), 
 		"" 

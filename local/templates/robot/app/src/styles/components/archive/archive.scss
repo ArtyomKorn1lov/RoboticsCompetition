@@ -1,0 +1,55 @@
+.b-archive {
+
+  &__year {
+      color: $colorHover;
+  }
+
+  &__list {
+    @include grid(3, false, $m30);
+    margin-bottom: $m35;
+  }
+
+  &__item {
+    @extend %simpleCardOptions;
+    @include flex(row, center);
+    gap: $m15;
+    padding: $m30;
+
+    &:hover,
+    &:active {
+
+      .b-archive {
+
+        &__icon {
+          background-color: $colorHover;
+        }
+      }
+    }
+  }
+
+  &__left {
+    @include flex(column);
+    gap: $m15;
+    width: $full;
+  }
+
+  &__description {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  &__icon {
+    @include flex(false, center, center);
+    flex-shrink: 0;
+    background-color: $colorPrimary;
+    border-radius: $roundedFull;
+    width: $m50;
+    height: $m50;
+    fill: $colorWhite;
+
+    svg {
+      width: $m20;
+      height: 18px;
+    }
+  }
+}
