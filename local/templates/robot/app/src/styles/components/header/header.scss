@@ -77,9 +77,12 @@
       color: $colorHeader;
 
       &:hover,
-      &:active,
-      &_active {
+      &:active {
         color: $colorSecondary;
+      }
+
+      &_active {
+        color: $colorHover;
       }
     }
   }

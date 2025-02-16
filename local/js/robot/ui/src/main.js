@@ -1,8 +1,34 @@
 import VueTheMask from 'vue-the-mask';
-import { ElButton } from "element-plus";
+import {
+    ElForm,
+    ElFormItem,
+    ElCol,
+    ElRow,
+    ElInput,
+    ElCheckbox,
+    ElCheckboxGroup,
+    ElSelect,
+    ElOption,
+    ElUpload,
+    ElIcon,
+    ElButton,
+    ElMessage,
+} from 'element-plus';
 
 const ElPlus = {
-    ElButton
+    ElForm,
+    ElFormItem,
+    ElCol,
+    ElRow,
+    ElInput,
+    ElCheckbox,
+    ElCheckboxGroup,
+    ElSelect,
+    ElOption,
+    ElUpload,
+    ElIcon,
+    ElButton,
+    ElMessage,
 }
 
 export default { ElPlus, VueTheMask }

@@ -39,6 +39,7 @@
   &__title {
     font-weight: $textBold;
     text-transform: uppercase;
+    color: $colorWhite;
 
     &-wrap {
       @include flex(column);

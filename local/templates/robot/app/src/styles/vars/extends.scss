@@ -26,6 +26,12 @@
   background-color: $colorPrimary;
   color: $colorWhite;
   font-weight: $textBold;
+  height: $full;
+
+  span {
+    color: $colorWhite;
+    font-weight: $textBold;
+  }
 
   &:hover,
   &:active {

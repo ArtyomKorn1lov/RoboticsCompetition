@@ -1,4 +1,5 @@
-.b-button {
+.b-button,
+.el-button.b-button {
   @extend %btnDefaultOptions;
 
   &_primary {

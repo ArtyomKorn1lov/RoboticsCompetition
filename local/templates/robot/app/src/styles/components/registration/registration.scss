@@ -1,0 +1,24 @@
+.b-registration {
+  @include flex(false, false, space-between);
+  gap: $m30;
+
+  &__banner {
+    @extend %imgDefaultStyles;
+
+    &-wrap {
+      overflow: hidden;
+      aspect-ratio: 740/715;
+      width: $full;
+      height: $full;
+      border-radius: $rounded30;
+      border: 1px solid $colorLight;
+      background-color: $colorBG;
+    }
+  }
+
+  &__form {
+    flex-shrink: 0;
+    width: $full;
+    max-width: 520px;
+  }
+}

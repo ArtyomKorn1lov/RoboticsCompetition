@@ -25,7 +25,6 @@ class SiteSettings
      */
     public static function mapSiteSettingsFooterResponseToModel(array $response): SiteSettingsFooter
     {
-        file_put_contents($_SERVER["DOCUMENT_ROOT"] . "/log.txt", var_export($response, true));
         return new SiteSettingsFooter(
             siteName: $response["SITE_NAME"],
             logoFooter: (int)$response["LOGO_FOOTER"],
