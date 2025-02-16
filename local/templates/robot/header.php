@@ -85,8 +85,4 @@ Extension::load([
 </header>
 <main class="b-main b-main_centered">
 
-    <?php if ($APPLICATION->GetCurPage(false) !== SITE_DIR) { ?>
-        <h1 class="b-main__title">
-            <?php $APPLICATION->ShowTitle(false) ?>
-        </h1>
-    <?php } ?>
+    <?php Robot\Core\Tools\Template\Helper::showTitle() ?>

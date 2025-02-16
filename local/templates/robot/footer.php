@@ -2,6 +2,8 @@
     IncludeTemplateLangFile(__FILE__);
 
 global $APPLICATION;
+
+Robot\Core\Tools\Template\Helper::initTitle("b-main__title");
 ?>
 </main>
 <footer class="b-footer">

@@ -1,0 +1,75 @@
+.b-contacts {
+  @include flex(false, stretch, space-between);
+  gap: $m30;
+  padding-top: $m25;
+
+  &__left {
+    @include flex(column);
+    width: $full;
+    max-width: 410px;
+  }
+
+  &__title {
+    padding-top: 0;
+    padding-bottom: $m15;
+  }
+
+  &__info {
+    @extend %simpleCardOptions;
+    gap: $m30;
+    height: $full;
+  }
+
+  &__group {
+    @include flex(column);
+    gap: $m10;
+  }
+
+  &__subtitle {
+    font-size: $textNormal;
+    font-weight: $textBold;
+    color: $colorHeader;
+  }
+
+  &__list {
+    @include flex(column);
+    gap: $m5;
+  }
+
+  &__item {
+    color: $colorSecondaryText;
+  }
+
+  &__link {
+    font-weight: $textSemiBold;
+    color: $colorPrimary;
+  }
+
+  &__icon {
+    fill: $colorSecondary;
+    width: $m35;
+    height: $m35;
+
+    svg {
+      width: $m35;
+      height: $m35;
+    }
+
+    &:hover,
+    &:active {
+      fill: $colorHover;
+    }
+  }
+
+  &__map {
+    overflow: hidden;
+    width: $full;
+    aspect-ratio: 850/632;
+    border-radius: $rounded30;
+    background-image: url("/local/templates/robot/app/img/contact_map_empty.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: $colorBG2;
+  }
+}
