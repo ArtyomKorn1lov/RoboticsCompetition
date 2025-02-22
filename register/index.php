@@ -20,7 +20,6 @@ $arJsData = Bitrix\Main\Web\Json::encode($array);
         </div>
     </div>
 </div>
-<div id="<?= $array['templateId'] ?>"></div>
 <script>
     BX.ready(() => {
         BX.Robot.Components.Vue.Registration(<?=$arJsData?>);

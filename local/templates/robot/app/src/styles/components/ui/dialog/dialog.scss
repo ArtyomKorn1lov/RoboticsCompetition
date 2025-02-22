@@ -1,0 +1,62 @@
+.el-overlay {
+
+  &-dialog {
+    background: rgba(0, 32, 74, 0.3);
+  }
+}
+
+.b-dialog {
+
+  &__title {
+    font-weight: $textBold;
+  }
+
+  &__close {
+    @include flex(false, center, center);
+    position: absolute;
+    top: $m15;
+    right: $m15;
+    background-color: $colorBG;
+    fill: $colorPrimary;
+    width: $m35;
+    height: $m35;
+    border-radius: $roundedFull;
+
+    svg {
+      width: 11px;
+      height: 11px;
+    }
+
+    &:hover,
+    &:active {
+      fill: $colorHover;
+    }
+  }
+
+  &.el-dialog {
+    border-radius: $rounded30;
+    padding: $m40 $m30 $m30;
+    width: 100%;
+    max-width: 775px;
+  }
+
+  &__video {
+    width: $full;
+    height: $full;
+  }
+
+  &__img {
+    @extend %imgDefaultStyles;
+
+    &-wrap {
+      aspect-ratio: 715/516;
+      width: $full;
+    }
+  }
+
+  &__video,
+  &__img-wrap {
+    border-radius: $rounded10;
+    overflow: hidden;
+  }
+}

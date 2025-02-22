@@ -55,86 +55,18 @@ $APPLICATION->SetTitle("Подготовка к проведению сорев�
     <div class="b-section__description b-section__description_text-normal b-section__description_mb-30">
         Здравствуйте! Мы начинаем серию видеоуроков, которые помогут подготовиться к участию в фестивале робототехники. Подробно разберем базовые вещи, связанные с программированием микроконтроллеров в Arduino IDE, проектированием 3D-моделей различных деталей. Разберем основы работы с 3D-принтером и станком лазерной резки. Обратим внимание на особенности, связанные с каждым направлением фестиваля – это соревнования мобильных роботов и беспилотных летательных аппаратов и политехническая олимпиада.
     </div>
-    <div class="b-study">
-        <a href="javascript:void(0)" class="b-study__item">
-            <span class="h5 b-study__name">
-                Урок 1. Основы схемотехники
-            </span>
-            <p class="b-study__description">
-                В видео рассмотрено понятие электрического тока, его основные параметры: напряжение, сопротивление, сила тока; связь этих параметров через закон Ома. Далее разобраны основные элементы, которые могут встретиться на электрической схеме: резисторы, конденсаторы, диоды, светодиоды, разъемы, микросхемы. Показано как читать электрические схемы и что общего у электрической схемы и платы устройства. В конце видео показаны основные моменты работы с лабораторным блоком питания и мультиметром.
-            </p>
-            <span class="b-study__icon">
-                <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right"); ?>
-            </span>
-        </a>
-        <a href="javascript:void(0)" class="b-study__item">
-            <span class="h5 b-study__name">
-                Урок 2. Основы пайки и монтажа радиоэлементов
-            </span>
-            <p class="b-study__description">
-                В данном видео показано на примерах как припаять на плату SMD резистор, разъем PLS. А также как припаять разъем на провод.
-            </p>
-            <span class="b-study__icon">
-                <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right"); ?>
-            </span>
-        </a>
-        <a href="javascript:void(0)" class="b-study__item">
-            <span class="h5 b-study__name">
-                Урок 3.1. Основы 3D моделирования и конструирования
-            </span>
-            <p class="b-study__description">
-                В данном видеоуроке показаны основы работы с 3D элементами в САПР Компас-3D. На примере показано как создаются 3D модели деталей, необходимых для сборки мобильного робота. В процессе создания моделей рассматривается работа с эскизами, операции выдавливания, вырезания и элементы вращения.
-            </p>
-            <span class="b-study__icon">
-                <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right"); ?>
-            </span>
-        </a>
-        <a href="javascript:void(0)" class="b-study__item">
-            <span class="h5 b-study__name">
-                Урок 3.2. Сборка в компасе
-            </span>
-            <p class="b-study__description">
-                В данном видеоуроке показано как работать со сборочными единицами в САПР Компас-3D.
-            </p>
-            <span class="b-study__icon">
-                <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right"); ?>
-            </span>
-        </a>
-        <a href="javascript:void(0)" class="b-study__item">
-            <span class="h5 b-study__name">
-                Урок 4. Основы работы с 3D принтером и станком для лазерной резки
-            </span>
-            <p class="b-study__description">
-                В данном видеоуроке показано как подготовить 3D модели для печати на 3D принтере или для станка лазерной резки. Рассмотрен процесс сохранения модели в формате STL. Показана работа с STL моделью в специализированном ПО для 3D-принтера, разобраны основные параметры печати. На примере показано как создать эскиз для станка лазерной резки.
-            </p>
-            <span class="b-study__icon">
-                <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right"); ?>
-            </span>
-        </a>
-        <a href="javascript:void(0)" class="b-study__item">
-            <span class="h5 b-study__name">
-                Урок 5. Программирование микроконтроллеров
-            </span>
-            <p class="b-study__description">
-                В данном видеоуроке показано, как работать с микроконтроллером ESP32, как его программировать в среде Arduino IDE, какие у него есть возможности и в чем заключаются отличия в программировании в сравнении с платами Arduino. Разобрано, что такое ШИМ-сигнал, а также, как работать с аппаратным модулем Bluetooth на ESP32. Сайт Алекса Гайвера: alexgyver.ru Сайт с уроками Ардуино: робототехника18.рф Ссылка для менеджера плат: https://dl.espressif.com/dl/package_esp32_index.json
-            </p>
-            <span class="b-study__icon">
-                <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right"); ?>
-            </span>
-        </a>
-        <a href="javascript:void(0)" class="b-study__item">
-            <span class="h5 b-study__name">
-                Урок 6. Датчики роботов
-            </span>
-            <p class="b-study__description">
-                В данном видеоуроке рассмотрены основные датчики, которые могут использоваться на мобильном роботе для автономного движения. Рассмотрены ультразвуковой и лазерный датчики расстояния, датчик контрастной полосы, датчики угловых перемещений – энкодеры.
-            </p>
-            <span class="b-study__icon">
-                <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right"); ?>
-            </span>
-        </a>
-    </div>
+    <?php
+    $array =["templateId" => "education-videos"];
+    $arJsData = Bitrix\Main\Web\Json::encode($array);
+    ?>
+    <div id="<?=$array["templateId"]?>"></div>
+    <script>
+        BX.ready(() => {
+            BX.Robot.Components.Vue.EducationVideos(<?=$arJsData?>);
+        });
+    </script>
 </div>
 
 <?php
+Bitrix\Main\UI\Extension::load(["robot.components.education-videos"]);
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

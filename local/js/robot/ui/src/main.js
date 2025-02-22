@@ -10,7 +10,8 @@ import {
     ElButton,
     ElMessage,
     ElDatePicker,
-    ElAutocomplete
+    ElAutocomplete,
+    ElDialog,
 } from 'element-plus';
 
 const ElPlus = {
@@ -24,7 +25,8 @@ const ElPlus = {
     ElButton,
     ElMessage,
     ElDatePicker,
-    ElAutocomplete
+    ElAutocomplete,
+    ElDialog,
 }
 
 export default { ElPlus, VueTheMask }
