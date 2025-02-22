@@ -1,0 +1,27 @@
+.b-popper {
+
+  &.el-popper {
+    overflow: hidden;
+    border-radius: $rounded15;
+  }
+
+  .el-popper {
+
+    &__arrow {
+      display: none;
+    }
+  }
+
+  .el-date-picker {
+    --el-datepicker-active-color: #2885FF;
+    --el-datepicker-hover-text-color: #004298;
+  }
+
+  .el-autocomplete-suggestion {
+
+    li {
+      color: $colorSecondaryText;
+      font-size: $textNormal;
+    }
+  }
+}

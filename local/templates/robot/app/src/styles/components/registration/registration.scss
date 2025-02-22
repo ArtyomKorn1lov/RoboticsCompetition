@@ -4,15 +4,16 @@
 
   &__banner {
     @extend %imgDefaultStyles;
+    object-fit: contain;
 
     &-wrap {
       overflow: hidden;
-      aspect-ratio: 740/715;
       width: $full;
-      height: $full;
+      height: auto;
       border-radius: $rounded30;
       border: 1px solid $colorLight;
       background-color: $colorBG;
+      padding: $m70 $m80;
     }
   }
 

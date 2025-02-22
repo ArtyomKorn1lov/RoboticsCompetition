@@ -7,12 +7,10 @@ import {
     ElInput,
     ElCheckbox,
     ElCheckboxGroup,
-    ElSelect,
-    ElOption,
-    ElUpload,
-    ElIcon,
     ElButton,
     ElMessage,
+    ElDatePicker,
+    ElAutocomplete
 } from 'element-plus';
 
 const ElPlus = {
@@ -23,12 +21,10 @@ const ElPlus = {
     ElInput,
     ElCheckbox,
     ElCheckboxGroup,
-    ElSelect,
-    ElOption,
-    ElUpload,
-    ElIcon,
     ElButton,
     ElMessage,
+    ElDatePicker,
+    ElAutocomplete
 }
 
 export default { ElPlus, VueTheMask }

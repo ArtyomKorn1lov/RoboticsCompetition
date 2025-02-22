@@ -1,0 +1,33 @@
+.b-textarea {
+
+  &.el-textarea {
+
+    &.is-disabled {
+
+      .el-textarea {
+
+        &__inner {
+          box-shadow: none;
+          border-color: transparent;
+          color: $colorPrimaryText;
+
+          &::placeholder {
+            color: $colorPrimaryText;
+            font-weight: $textDefault;
+          }
+        }
+      }
+    }
+  }
+
+  .el-textarea {
+
+    &__inner {
+      @extend %inputWrapperOptions;
+      @extend %inputInnerOptions;
+      padding-top: $m15;
+      padding-bottom: $m15;
+      height: auto;
+    }
+  }
+}

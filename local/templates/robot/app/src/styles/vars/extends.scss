@@ -88,3 +88,27 @@
     height: 18px;
   }
 }
+
+%inputWrapperOptions {
+  padding: 0 $m20;
+  background-color: $colorLight;
+  border: 1px solid $colorBG;
+  border-radius: $rounded15;
+  box-shadow: none;
+
+  &.is-focus {
+    border-color: $colorSecondary;
+  }
+}
+
+%inputInnerOptions {
+  height: $m55;
+  font-family: "Golos Text", sans-serif;
+  font-size: $textNormal;
+  color: $colorSecondaryText;
+
+  &::placeholder {
+    color: $colorPrimaryText;
+    font-weight: $textDefault;
+  }
+}

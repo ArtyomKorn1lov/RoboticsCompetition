@@ -1,0 +1,33 @@
+.b-form {
+
+  &__col {
+
+    &.el-col {
+      height: $full;
+    }
+  }
+
+  &__item {
+
+    &.el-form-item {
+      @include flex(column);
+      margin-bottom: $m15;
+    }
+
+    .el-form-item {
+
+      &__label {
+        height: $m30;
+        line-height: $m30;
+      }
+    }
+  }
+
+  &__tooltip {
+    margin-bottom: $m30;
+
+    span {
+      color: $colorSecondaryText;
+    }
+  }
+}
