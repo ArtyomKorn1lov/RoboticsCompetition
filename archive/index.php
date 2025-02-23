@@ -3,11 +3,19 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Архив");
 ?>
 
-<div class="b-section">
-	<p class="b-section__description b-section__description_mb-35">
-        Все документы относящиеся к соревнованиям по робототехнике в ПГТУ
-	</p>
-</div>
+<?php $APPLICATION->IncludeComponent(
+    "bitrix:main.include",
+    "description_page",
+    array(
+        "DESCRIPTION_CLASS" => "b-section__description_mb-35",
+        "AREA_FILE_SHOW" => "page",
+        "AREA_FILE_SUFFIX" => "description",
+        "AREA_FILE_RECURSIVE" => "Y",
+        "COMPONENT_TEMPLATE" => ".default",
+        "EDIT_TEMPLATE" => "standard.php"
+    ),
+    false
+); ?>
 
 <div class="b-section b-section_pb b-section_last b-archive">
     <div class="b-section__top">

@@ -1,7 +1,7 @@
 <?php
 $APPLICATION->IncludeComponent(
     "bitrix:news.list",
-    "video-lessons",
+    "video_lessons",
     Array(
         "ACTIVE_DATE_FORMAT" => "d.m.Y",
         "ADD_SECTIONS_CHAIN" => "Y",
