@@ -24,4 +24,18 @@ class Helper
         }
         return $path;
     }
+
+    /**
+     * @param array $fileValues
+     * @param int $index
+     * @return string|bool
+     */
+    public function getFilePreviewByIndex(array $fileValues, int $index): string|bool
+    {
+        if (isset($fileValues["ID"]) && $index === 0) {
+            return $fileValues["SRC"];
+        }
+
+        return $fileValues[$index]["SRC"] ?? false;
+    }
 }

@@ -4,203 +4,91 @@ $APPLICATION->SetTitle("Архив");
 ?>
 
 <?php $APPLICATION->IncludeComponent(
-    "bitrix:main.include",
-    "description_page",
-    array(
-        "DESCRIPTION_CLASS" => "b-section__description_mb-35",
-        "AREA_FILE_SHOW" => "page",
-        "AREA_FILE_SUFFIX" => "description",
-        "AREA_FILE_RECURSIVE" => "Y",
-        "COMPONENT_TEMPLATE" => ".default",
-        "EDIT_TEMPLATE" => "standard.php"
-    ),
-    false
+	"bitrix:main.include",
+	"description_page",
+	array(
+		"DESCRIPTION_CLASS" => "b-section__description_mb-35",
+		"AREA_FILE_SHOW" => "page",
+		"AREA_FILE_SUFFIX" => "description",
+		"AREA_FILE_RECURSIVE" => "Y",
+		"COMPONENT_TEMPLATE" => ".default",
+		"EDIT_TEMPLATE" => "standard.php"
+	),
+	false
 ); ?>
 
-<div class="b-section b-section_pb b-section_last b-archive">
-    <div class="b-section__top">
-        <h2 class="h5 b-section__title b-archive__subtitle">
-            2024 год
-        </h2>
-    </div>
-
-    <div class="b-archive__list">
-        <a href="/archive/detail.php" class="b-archive__item">
-            <div class="b-archive__left">
-                <span class="h6 b-archive__name">
-                    Фотографии с фестиваля
-                </span>
-                <p class="b-archive__description">
-                    Все фотографии сделанные на мероприятии
-                </p>
-            </div>
-            <span class="b-archive__icon">
-                <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right") ?>
-            </span>
-        </a>
-        <a href="/archive/detail.php" class="b-archive__item">
-            <div class="b-archive__left">
-                <span class="h6 b-archive__name">
-                    Трансляция с фестиваля
-                </span>
-                <p class="b-archive__description">
-                    Трансляция мероприятий
-                </p>
-            </div>
-            <span class="b-archive__icon">
-                <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right") ?>
-            </span>
-        </a>
-        <a href="/archive/detail.php" class="b-archive__item">
-            <div class="b-archive__left">
-                <span class="h6 b-archive__name">
-                    Фото с олимпиады
-                </span>
-                <p class="b-archive__description">
-                    Все фотографии сделанные на мероприятии
-                </p>
-            </div>
-            <span class="b-archive__icon">
-                <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right") ?>
-            </span>
-        </a>
-        <a href="/archive/detail.php" class="b-archive__item">
-            <div class="b-archive__left">
-                <span class="h6 b-archive__name">
-                    Фотографии с фестиваля
-                </span>
-                <p class="b-archive__description">
-                    Все фотографии сделанные на мероприятии
-                </p>
-            </div>
-            <span class="b-archive__icon">
-                <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right") ?>
-            </span>
-        </a>
-        <a href="/archive/detail.php" class="b-archive__item">
-            <div class="b-archive__left">
-                <span class="h6 b-archive__name">
-                    Трансляция с фестиваля
-                </span>
-                <p class="b-archive__description">
-                    Трансляция мероприятий
-                </p>
-            </div>
-            <span class="b-archive__icon">
-                <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right") ?>
-            </span>
-        </a>
-    </div>
-
-    <div class="b-section__top">
-        <h2 class="h5 b-section__title b-archive__subtitle">
-            2023 год
-        </h2>
-    </div>
-
-    <div class="b-archive__list">
-        <a href="/archive/detail.php" class="b-archive__item">
-            <div class="b-archive__left">
-                <span class="h6 b-archive__name">
-                    Фотографии с фестиваля
-                </span>
-                <p class="b-archive__description">
-                    Все фотографии сделанные на мероприятии
-                </p>
-            </div>
-            <span class="b-archive__icon">
-                <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right") ?>
-            </span>
-        </a>
-        <a href="/archive/detail.php" class="b-archive__item">
-            <div class="b-archive__left">
-                <span class="h6 b-archive__name">
-                    Трансляция с фестиваля
-                </span>
-                <p class="b-archive__description">
-                    Трансляция мероприятий
-                </p>
-            </div>
-            <span class="b-archive__icon">
-                <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right") ?>
-            </span>
-        </a>
-        <a href="/archive/detail.php" class="b-archive__item">
-            <div class="b-archive__left">
-                <span class="h6 b-archive__name">
-                    Фото с олимпиады
-                </span>
-                <p class="b-archive__description">
-                    Все фотографии сделанные на мероприятии
-                </p>
-            </div>
-            <span class="b-archive__icon">
-                <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right") ?>
-            </span>
-        </a>
-        <a href="/archive/detail.php" class="b-archive__item">
-            <div class="b-archive__left">
-                <span class="h6 b-archive__name">
-                    Фотографии с фестиваля
-                </span>
-                <p class="b-archive__description">
-                    Все фотографии сделанные на мероприятии
-                </p>
-            </div>
-            <span class="b-archive__icon">
-                <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right") ?>
-            </span>
-        </a>
-    </div>
-
-    <div class="b-section__top">
-        <h2 class="h5 b-section__title b-archive__subtitle">
-            2022 год
-        </h2>
-    </div>
-
-    <div class="b-archive__list">
-        <a href="/archive/detail.php" class="b-archive__item">
-            <div class="b-archive__left">
-                <span class="h6 b-archive__name">
-                    Фотографии с фестиваля
-                </span>
-                <p class="b-archive__description">
-                    Все фотографии сделанные на мероприятии
-                </p>
-            </div>
-            <span class="b-archive__icon">
-                <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right") ?>
-            </span>
-        </a>
-        <a href="/archive/detail.php" class="b-archive__item">
-            <div class="b-archive__left">
-                <span class="h6 b-archive__name">
-                    Трансляция с фестиваля
-                </span>
-                <p class="b-archive__description">
-                    Трансляция мероприятий
-                </p>
-            </div>
-            <span class="b-archive__icon">
-                <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right") ?>
-            </span>
-        </a>
-        <a href="/archive/detail.php" class="b-archive__item">
-            <div class="b-archive__left">
-                <span class="h6 b-archive__name">
-                    Фото с олимпиады
-                </span>
-                <p class="b-archive__description">
-                    Все фотографии сделанные на мероприятии
-                </p>
-            </div>
-            <span class="b-archive__icon">
-                <?= Robot\Core\Tools\Template\Helper::getIcon("arrow_right") ?>
-            </span>
-        </a>
-    </div>
-</div>
+<?php $APPLICATION->IncludeComponent(
+	"bitrix:news",
+	"archive",
+	Array(
+		"ADD_ELEMENT_CHAIN" => "N",
+		"ADD_SECTIONS_CHAIN" => "Y",
+		"AJAX_MODE" => "N",
+		"AJAX_OPTION_ADDITIONAL" => "",
+		"AJAX_OPTION_HISTORY" => "N",
+		"AJAX_OPTION_JUMP" => "N",
+		"AJAX_OPTION_STYLE" => "Y",
+		"BROWSER_TITLE" => "-",
+		"CACHE_FILTER" => "N",
+		"CACHE_GROUPS" => "Y",
+		"CACHE_TIME" => "36000000",
+		"CACHE_TYPE" => "A",
+		"CHECK_DATES" => "Y",
+		"DETAIL_ACTIVE_DATE_FORMAT" => "d.m.Y",
+		"DETAIL_DISPLAY_BOTTOM_PAGER" => "Y",
+		"DETAIL_DISPLAY_TOP_PAGER" => "N",
+		"DETAIL_FIELD_CODE" => array("",""),
+		"DETAIL_PAGER_SHOW_ALL" => "Y",
+		"DETAIL_PAGER_TEMPLATE" => "",
+		"DETAIL_PAGER_TITLE" => "Архив",
+		"DETAIL_PROPERTY_CODE" => array("VIDEO_PREVIEW","PHOTO","VIDEO"),
+		"DETAIL_SET_CANONICAL_URL" => "N",
+		"DISPLAY_BOTTOM_PAGER" => "Y",
+		"DISPLAY_DATE" => "Y",
+		"DISPLAY_NAME" => "Y",
+		"DISPLAY_PICTURE" => "Y",
+		"DISPLAY_PREVIEW_TEXT" => "Y",
+		"DISPLAY_TOP_PAGER" => "N",
+		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
+		"IBLOCK_ID" => "8",
+		"IBLOCK_TYPE" => "content",
+		"INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
+		"LIST_ACTIVE_DATE_FORMAT" => "d.m.Y",
+		"LIST_FIELD_CODE" => array("",""),
+		"LIST_PROPERTY_CODE" => array("","",""),
+		"MESSAGE_404" => "",
+		"META_DESCRIPTION" => "-",
+		"META_KEYWORDS" => "-",
+		"NEWS_COUNT" => "100",
+		"PAGER_BASE_LINK_ENABLE" => "N",
+		"PAGER_DESC_NUMBERING" => "N",
+		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+		"PAGER_SHOW_ALL" => "N",
+		"PAGER_SHOW_ALWAYS" => "N",
+		"PAGER_TEMPLATE" => ".default",
+		"PAGER_TITLE" => "Архив",
+		"PREVIEW_TRUNCATE_LEN" => "",
+		"SEF_FOLDER" => "/archive/",
+		"SEF_MODE" => "Y",
+		"SEF_URL_TEMPLATES" => Array("detail"=>"#ELEMENT_CODE#/","news"=>"","section"=>""),
+		"SET_LAST_MODIFIED" => "N",
+		"SET_STATUS_404" => "N",
+		"SET_TITLE" => "Y",
+		"SHOW_404" => "N",
+		"SORT_BY1" => "SORT",
+		"SORT_BY2" => "ID",
+		"SORT_ORDER1" => "ASC",
+		"SORT_ORDER2" => "ASC",
+		"STRICT_SECTION_CHECK" => "N",
+		"USE_CATEGORIES" => "N",
+		"USE_FILTER" => "N",
+		"USE_PERMISSIONS" => "N",
+		"USE_RATING" => "N",
+		"USE_RSS" => "N",
+		"USE_SEARCH" => "N",
+		"USE_SHARE" => "N"
+	)
+); ?>
 
 <?php
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php");
