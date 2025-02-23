@@ -40,6 +40,15 @@
     max-width: 775px;
   }
 
+
+  .el-dialog {
+
+    &__header {
+      padding-bottom: $m25;
+      padding-right: $m40;
+    }
+  }
+
   &__video {
     width: $full;
     height: $full;
@@ -58,5 +67,6 @@
   &__img-wrap {
     border-radius: $rounded10;
     overflow: hidden;
+    box-shadow: 0px 0px 11px 3px rgba(34, 60, 80, 0.53);
   }
 }

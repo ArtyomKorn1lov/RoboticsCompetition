@@ -7,7 +7,7 @@
       align-center
   >
     <template #header="{ close }">
-      <h6 class="b-dialog__title">{{ item.name }}</h6>
+      <h6 v-if="item.name" class="b-dialog__title" v-text="item.name" />
       <a
           href="javascript:void(0)"
           @click="close"

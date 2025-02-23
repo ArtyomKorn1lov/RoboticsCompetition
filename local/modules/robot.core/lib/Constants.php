@@ -24,4 +24,7 @@ class Constants
 
     /** @var string Формат pdf файла, который выдаёт компонент news.list */
     public const PDF_FORMAT_NEWS_LIST = "application/pdf";
+
+    /** @var string Код ИБ Видеоуроки */
+    public const VIDEO_LESSONS_IBLOCK_CODE = "video-lessons";
 }

@@ -9,64 +9,56 @@ $APPLICATION->SetTitle("Подготовка к проведению сорев�
             Требования к оборудованию
         </h4>
     </div>
-    <div class="b-section__article">
-        <h6>
-            ПОЛИТЕХНИЧЕСКАЯ ОЛИМПИАДА
-        </h6>
-        <p>
-            Участники: Команда в составе трех человек, учащихся 7-11 классов школ, учреждений 1 курса среднего профессионального образования. В рамках олимпиады участникам будут предложены задания, для выполнения которых потребуются знания в области электроники, конструирования и программирования; умение обращаться с измерительными инструментами и приборами (линейки, штангенциркули, мультиметр, осциллограф); навыки работы с 3D принтером и ПО: Компас 3D, Autodesk Fusion, Arduino IDE, Visual Studio. Основные направления олимпиады:
-        </p>
-        <ul>
-            <li>3D моделирования, конструирования и 3D печати;</li>
-            <li>электроники, электротехники, пайки радиоэлементов;</li>
-            <li>программирования и разработки алгоритмов.</li>
-        </ul>
-        <br>
-        <h6>
-            СОРЕВНОВАНИЯ
-        </h6>
-        <p>
-            Планируется проведение соревнований мобильных роботов и беспилотных летальных аппаратов, собранных как на базе известных конструкторов, так и имеющих оригинальные конструкции.<br>МОБИЛЬНЫЕ РОБОТЫ
-        </p>
-        <ul>
-            <li>
-                <b>(ЛЛ) Лига LEGO: </b>Бои дистанционно и автономно управляемых мобильных роботов, собранных из конструкторов LEGO. Габаритные размеры робота не более 250х250х250мм, вес не более 1 кг.<br>
-                <b>Участники: </b>Учащиеся 5-9 классов школ, учреждений дополнительного образования.
-            </li>
-            <li>
-                <b>(Л2) Лига 2: </b>Бои автономно управляемых мобильных роботов, собранных из оригинальных деталей собственного изготовления или конструкторов (кроме LEGO или его аналогов). Габаритные размеры робота не более 300х300х300мм, вес не более 2 кг.<br>
-                <b>Участники: </b>Учащиеся 7-11 классов школ, учреждений дополнительного, среднего профессионального и высшего образования, команды предприятий.
-            </li>
-            <li>
-                (ЛБР) Лига Боевых Роботов: Бои дистанционно управляемых мобильных роботов собраных из оригинальных деталей собственного изготовления на уничтожение. Габаритные размеры робота не более 250х250х250мм, вес не более 1,5 кг.<br>
-                <b>Участники: </b>Учащиеся 7-11 классов школ, учреждений дополнительного, среднего профессионального и высшего образования, команды предприятий.
-            </li>
-        </ul>
-        <p>БПЛА</p>
-    </div>
+    <?php $APPLICATION->IncludeComponent(
+        "bitrix:main.include",
+        "custom_wrapper",
+        array(
+            "CUSTOM_WRAPPER_START" => '<div class="b-section__article">',
+            "CUSTOM_WRAPPER_END" => '</div>',
+            "AREA_FILE_SHOW" => "file",
+            "PATH" => SITE_DIR."include/prepare-competition/article.php",
+            "AREA_FILE_RECURSIVE" => "Y",
+            "COMPONENT_TEMPLATE" => ".default",
+            "EDIT_TEMPLATE" => "standard.php"
+        ),
+        false
+    ); ?>
 </div>
 
+<!-- TODO Сделать множественную включаемую область -->
 <div class="b-section b-section_pb b-section_last">
     <div class="b-section__top">
         <h4 class="b-section__title">
             Требования к оборудованию
         </h4>
     </div>
-    <div class="b-section__description b-section__description_text-normal b-section__description_mb-30">
-        Здравствуйте! Мы начинаем серию видеоуроков, которые помогут подготовиться к участию в фестивале робототехники. Подробно разберем базовые вещи, связанные с программированием микроконтроллеров в Arduino IDE, проектированием 3D-моделей различных деталей. Разберем основы работы с 3D-принтером и станком лазерной резки. Обратим внимание на особенности, связанные с каждым направлением фестиваля – это соревнования мобильных роботов и беспилотных летательных аппаратов и политехническая олимпиада.
-    </div>
-    <?php
-    $array =["templateId" => "education-videos"];
-    $arJsData = Bitrix\Main\Web\Json::encode($array);
-    ?>
-    <div id="<?=$array["templateId"]?>"></div>
-    <script>
-        BX.ready(() => {
-            BX.Robot.Components.Vue.EducationVideos(<?=$arJsData?>);
-        });
-    </script>
+    <?php $APPLICATION->IncludeComponent(
+        "bitrix:main.include",
+        "custom_wrapper",
+        array(
+            "CUSTOM_WRAPPER_START" => '<div class="b-section__description b-section__description_text-normal b-section__description_mb-30">',
+            "CUSTOM_WRAPPER_END" => '</div>',
+            "AREA_FILE_SHOW" => "file",
+            "PATH" => SITE_DIR."include/prepare-competition/index_description.php",
+            "AREA_FILE_RECURSIVE" => "Y",
+            "COMPONENT_TEMPLATE" => ".default",
+            "EDIT_TEMPLATE" => "standard.php"
+        ),
+        false
+    ); ?>
+    <?php $APPLICATION->IncludeComponent(
+        "bitrix:main.include",
+        ".default",
+        array(
+            "AREA_FILE_SHOW" => "file",
+            "PATH" => SITE_DIR."include/prepare-competition/index.php",
+            "AREA_FILE_RECURSIVE" => "Y",
+            "COMPONENT_TEMPLATE" => ".default",
+            "EDIT_TEMPLATE" => "standard.php"
+        ),
+        false
+    ); ?>
 </div>
 
 <?php
-Bitrix\Main\UI\Extension::load(["robot.components.education-videos"]);
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
