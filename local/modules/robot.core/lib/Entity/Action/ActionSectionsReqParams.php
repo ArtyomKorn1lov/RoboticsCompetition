@@ -1,6 +1,6 @@
 <?php
 
-namespace Robot\Core\Entity;
+namespace Robot\Core\Entity\Actions;
 
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\Localization\Loc;
@@ -8,9 +8,9 @@ use Bitrix\Main\Localization\Loc;
 Loc::loadMessages(__FILE__);
 
 /**
- * Параметры запроса для получения активного события
-*/
-final class ActiveEventReqParams
+ * Параметры запроса для получения списка id разделов мероприятий активного события
+ */
+final class ActionSectionsReqParams
 {
     /** @var string Тип ИБ */
     private string $iblockType;
@@ -20,13 +20,15 @@ final class ActiveEventReqParams
     private bool $active;
     /** @var string Способ сортировки */
     private string $sort;
+    /** @var int Id события */
+    private int $eventId;
 
-    /** @var string Сортируемое свойство Дата проведения */
-    private const EXPIRATION_DATE_PROP_CODE = "PROPERTY_EXPIRATION_DATE";
+    private const UF_EVENT_ID_CODE = "UF_EVENTS";
 
     /**
      * @param string $iblockType
      * @param int $iblockId
+     * @param int $eventId
      * @param bool $active
      * @param string $sort
      * @throws ArgumentException
@@ -34,6 +36,7 @@ final class ActiveEventReqParams
     public function __construct(
         string $iblockType,
         int $iblockId,
+        int $eventId,
         bool $active = false,
         string $sort = 'DESC'
     )
@@ -43,6 +46,7 @@ final class ActiveEventReqParams
         }
         $this->iblockType = $iblockType;
         $this->iblockId = $iblockId;
+        $this->eventId = $eventId;
         $this->active = $active;
         $this->sort = $sort;
     }
@@ -63,7 +67,8 @@ final class ActiveEventReqParams
         return [
             "IBLOCK_TYPE" => $this->iblockType,
             "IBLOCK_ID" => $this->iblockId,
-            "ACTIVE" => $this->getActiveRequestValue()
+            "ACTIVE" => $this->getActiveRequestValue(),
+            self::UF_EVENT_ID_CODE => $this->eventId
         ];
     }
 
@@ -73,7 +78,7 @@ final class ActiveEventReqParams
     public function getSortValues(): array
     {
         return [
-            self::EXPIRATION_DATE_PROP_CODE => $this->sort
+            "SORT" => $this->sort
         ];
     }
 
@@ -84,8 +89,6 @@ final class ActiveEventReqParams
     {
         return [
             "ID",
-            "PROPERTY_ACTIVE_REGISTRATION",
-            "PROPERTY_EXPIRATION_DATE"
         ];
     }
 }

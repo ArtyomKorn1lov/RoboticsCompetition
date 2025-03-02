@@ -12,6 +12,6 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 
-use Robot\Core\Views\EventsView;
+use Robot\Core\Views\Events\EventsView;
 
 $arResult["ITEMS"] = EventsView::getEventActions();

@@ -1,6 +1,6 @@
 <?php
 
-namespace Robot\Core\DTO;
+namespace Robot\Core\DTO\Event;
 
 use Bitrix\Main\Type\DateTime;
 

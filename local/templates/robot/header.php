@@ -30,7 +30,7 @@ Extension::load([
     <?php $APPLICATION->ShowHead();?>
     <title><?php $APPLICATION->ShowTitle()?></title>
 </head>
-<body>
+<body class="custom-scroll">
 
 <div class="mainContainer">
 <div id="panel"><?php $APPLICATION->ShowPanel(); ?></div>

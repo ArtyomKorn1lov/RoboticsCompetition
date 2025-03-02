@@ -1,6 +1,6 @@
 <?php
 
-namespace Robot\Core\DTO;
+namespace Robot\Core\DTO\Action;
 
 final class Action
 {

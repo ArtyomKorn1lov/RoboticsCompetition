@@ -16,7 +16,7 @@ $this->setFrameMode(true);
 if (empty($arResult["SETTINGS"])) {
     return;
 }
-/** @var Robot\Core\DTO\SiteSettingsHeader $siteSettings */
+/** @var Robot\Core\DTO\SiteSettings\SiteSettingsHeader $siteSettings */
 $siteSettings = $arResult["SETTINGS"];
 ?>
 

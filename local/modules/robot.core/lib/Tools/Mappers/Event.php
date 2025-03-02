@@ -5,7 +5,7 @@ namespace Robot\Core\Tools\Mappers;
 use Bitrix\Main\ObjectException;
 use Bitrix\Main\Type\DateTime;
 
-use Robot\Core\DTO\ActiveEvent;
+use Robot\Core\DTO\Event\ActiveEvent;
 
 class Event
 {

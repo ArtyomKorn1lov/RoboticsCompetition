@@ -1,8 +1,8 @@
 <?php
 
-namespace Robot\Core\DTO;
+namespace Robot\Core\DTO\SiteSettings;
 
-class SiteSettingsFooter
+final class SiteSettingsFooter
 {
     public function __construct(
         public string               $siteName,

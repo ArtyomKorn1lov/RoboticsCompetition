@@ -1,14 +1,14 @@
 <?php
 
-namespace Robot\Core\Entity;
+namespace Robot\Core\Entity\Program;
 
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\Localization\Loc;
 
 /**
- * Параметры запроса для получения списка мероприятий по Id разделов
+ * Параметры запроса для получения списка дат события
  */
-class ActionItemsReqParams
+final class TimeLineReqParams
 {
     /** @var string Тип ИБ */
     private string $iblockType;
@@ -18,12 +18,15 @@ class ActionItemsReqParams
     private bool $active;
     /** @var string Способ сортировки */
     private string $sort;
-    /** @var int[] Список Id разделов для фильтрации */
+    /** @var int[] Список id разделов для выборки */
     private array $sectionsIds;
+
+    private const DATE_TIME_PROP_CODE = "PROPERTY_DATE_TIME";
 
     /**
      * @param string $iblockType
      * @param int $iblockId
+     * @param int[] $sectionsIds
      * @param bool $active
      * @param string $sort
      * @throws ArgumentException
@@ -36,7 +39,7 @@ class ActionItemsReqParams
         string $sort = 'DESC'
     )
     {
-        if (empty($iblockType) || empty($iblockId)) {
+        if (empty($iblockType) || empty($iblockId) || empty($sectionsIds)) {
             throw new ArgumentException(Loc::getMessage("ROBOT_CORE_ARGUMENT_EXCEPTION"));
         }
         $this->iblockType = $iblockType;
@@ -73,6 +76,7 @@ class ActionItemsReqParams
     public function getSortValues(): array
     {
         return [
+            self::DATE_TIME_PROP_CODE => $this->sort,
             "SORT" => $this->sort
         ];
     }
@@ -83,9 +87,15 @@ class ActionItemsReqParams
     public function getSelectedFields(): array
     {
         return [
-            "ID",
-            "NAME",
-            "DETAIL_TEXT"
+            self::DATE_TIME_PROP_CODE
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getSamplePropCode(): string
+    {
+        return self::DATE_TIME_PROP_CODE."_VALUE";
     }
 }

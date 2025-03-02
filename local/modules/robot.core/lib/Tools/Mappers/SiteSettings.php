@@ -2,8 +2,8 @@
 
 namespace Robot\Core\Tools\Mappers;
 
-use Robot\Core\DTO\SiteSettingsFooter;
-use Robot\Core\DTO\SiteSettingsHeader;
+use Robot\Core\DTO\SiteSettings\SiteSettingsFooter;
+use Robot\Core\DTO\SiteSettings\SiteSettingsHeader;
 
 class SiteSettings
 {

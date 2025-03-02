@@ -13,14 +13,14 @@ $aMenuLinks = Array(
 		SITE_DIR."program/",
 		Array(), 
 		Array(),
-        "Robot\\Core\\Views\\EventsView::showProgram()"
+        "Robot\\Core\\Views\\Events\\EventsView::showProgram()"
 	),
 	Array(
 		"Регистрация",
         SITE_DIR."register/",
 		Array(), 
 		Array(),
-        "Robot\\Core\\Views\\EventsView::showRegistration()"
+        "Robot\\Core\\Views\\Events\\EventsView::showRegistration()"
 	),
 	Array(
 		"Документы",

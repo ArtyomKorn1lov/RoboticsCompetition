@@ -14,7 +14,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 $this->setFrameMode(true);
 
 use Bitrix\Main\Localization\Loc;
-use Robot\Core\DTO\Action;
+use Robot\Core\DTO\Action\Action;
 
 Loc::loadMessages(__FILE__);
 

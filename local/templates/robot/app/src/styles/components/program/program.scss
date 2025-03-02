@@ -2,15 +2,9 @@
   @include flex(column);
   gap: $m30;
 
-  // TODO убрать потом активное состояние, фронт переедет на vue или в соответсвующий компонент
   &__list {
     @include flex(column);
-    display: none;
     gap: $m25;
-
-    &_active {
-      display: flex;
-    }
   }
 
   &__item {

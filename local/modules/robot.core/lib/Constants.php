@@ -27,4 +27,10 @@ class Constants
 
     /** @var string Код ИБ Видеоуроки */
     public const VIDEO_LESSONS_IBLOCK_CODE = "video-lessons";
+
+    /** @var string Код ИБ Архив */
+    public const ARCHIVE_IBLOCK_CODE = "archive";
+
+    /** @var string Код ИБ Программа */
+    public const PROGRAM_IBLOCK_CODE = "program";
 }

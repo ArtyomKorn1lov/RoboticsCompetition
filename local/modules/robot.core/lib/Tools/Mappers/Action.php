@@ -2,7 +2,7 @@
 
 namespace Robot\Core\Tools\Mappers;
 
-use Robot\Core\DTO\Action as ActionModel;
+use Robot\Core\DTO\Action\Action as ActionModel;
 
 class Action
 {

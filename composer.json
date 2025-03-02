@@ -2,6 +2,11 @@
     "name": "core/robot",
     "type": "project",
     "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Site\\": "local/lib/"
+        }
+    },
     "extra": {
         "installer-paths": {
             "bitrix/modules/{$name}/": ["type:bitrix-module"]

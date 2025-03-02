@@ -3,11 +3,11 @@
 namespace Robot\Core\Views\SiteSettings;
 
 use Bitrix\Main\SystemException;
-use Robot\Core\DTO\SiteSettingsFooter;
-use Robot\Core\DTO\SiteSettingsHeader;
+use Robot\Core\DTO\SiteSettings\SiteSettingsFooter;
+use Robot\Core\DTO\SiteSettings\SiteSettingsHeader;
 use Robot\Core\Services\SiteSettings\SiteSettingsManager;
 
-class SiteSettingsView
+class SiteSettingsView implements ISiteSettingsView
 {
     /**
      * @return SiteSettingsHeader|bool

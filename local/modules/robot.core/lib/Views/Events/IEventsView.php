@@ -1,8 +1,8 @@
 <?php
 
-namespace Robot\Core\Views;
+namespace Robot\Core\Views\Events;
 
-use Robot\Core\DTO\Action;
+use Robot\Core\DTO\Action\Action;
 
 interface IEventsView
 {

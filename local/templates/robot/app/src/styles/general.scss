@@ -40,47 +40,29 @@ ul, li {
   list-style: none;
 }
 
-li {
-
-  &:before {
-    content: "·";
-    margin-left: 4px;
-    margin-right: 4px;
-    font-size: $textRegular;
-  }
-}
-
-.svg_document {
-  width: 32px;
-  height: 32px;
-}
-
-/*
 
 .custom-scroll {
 
   &::-webkit-scrollbar {
-    width: 4px;
+    width: 6px;
   }
 
   &::-webkit-scrollbar-track {
-    border-radius: $rounded4;
+    border-radius: 4px;
   }
 
   &::-webkit-scrollbar-thumb {
-    border-radius: $rounded4;
-    background: $colorLightGrey;
+    border-radius: 4px;
+    background: $colorSecondaryText;
   }
 }
 
 .overflow-y {
   overflow-y: auto;
   margin-right: -10px;
-}
 
-@media (max-width: $md) {
-  .overflow-y {
+  @include screen(md) {
     margin-right: -7px;
     padding-right: 3px;
   }
-}*/
+}

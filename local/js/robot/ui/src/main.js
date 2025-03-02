@@ -1,4 +1,6 @@
 import VueTheMask from 'vue-the-mask';
+import * as Swiper from 'swiper/vue';
+import 'swiper/css';
 import {
     ElForm,
     ElFormItem,
@@ -29,4 +31,4 @@ const ElPlus = {
     ElDialog,
 }
 
-export default { ElPlus, VueTheMask }
+export default { ElPlus, VueTheMask, Swiper }

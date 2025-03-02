@@ -6,9 +6,9 @@ use Bitrix\Main\ArgumentException;
 use Bitrix\Main\Entity\Query;
 use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
-use Robot\Core\Entity\SiteSettingsTable;
+use Robot\Core\Entity\SiteSettings\SiteSettingsTable;
 
-class SiteSettingsRepository
+class SiteSettingsRepository implements ISiteSettingsRepository
 {
     /**
      * @return array

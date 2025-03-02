@@ -2,8 +2,8 @@
 
 namespace Robot\Core\Repositories\Actions;
 
-use Robot\Core\Entity\ActionItemsReqParams;
-use Robot\Core\Entity\ActionSectionsReqParams;
+use Robot\Core\Entity\Action\ActionItemsReqParams;
+use Robot\Core\Entity\Actions\ActionSectionsReqParams;
 
 interface IActionRepository
 {

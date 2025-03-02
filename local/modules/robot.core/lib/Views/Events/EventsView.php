@@ -1,6 +1,6 @@
 <?php
 
-namespace Robot\Core\Views;
+namespace Robot\Core\Views\Events;
 
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\LoaderException;
@@ -11,9 +11,9 @@ use Bitrix\Main\Type\DateTime;
 use CIBlockElement;
 
 use Robot\Core\Constants;
-use Robot\Core\DTO\Action;
-use Robot\Core\DTO\ActiveEvent;
-use Robot\Core\Entity\ActiveEventReqParams;
+use Robot\Core\DTO\Action\Action;
+use Robot\Core\DTO\Event\ActiveEvent;
+use Robot\Core\Entity\Event\ActiveEventReqParams;
 use Robot\Core\Services\Actions\ActionManager;
 use Robot\Core\Tools\IBlocks\Helper;
 use Robot\Core\Tools\Mappers\Event;

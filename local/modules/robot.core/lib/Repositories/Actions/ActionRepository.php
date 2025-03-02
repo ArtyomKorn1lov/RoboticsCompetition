@@ -5,8 +5,8 @@ namespace Robot\Core\Repositories\Actions;
 use CIBlockSection;
 use CIBlockElement;
 
-use Robot\Core\Entity\ActionSectionsReqParams;
-use Robot\Core\Entity\ActionItemsReqParams;
+use Robot\Core\Entity\Actions\ActionSectionsReqParams;
+use Robot\Core\Entity\Action\ActionItemsReqParams;
 
 class ActionRepository implements IActionRepository
 {

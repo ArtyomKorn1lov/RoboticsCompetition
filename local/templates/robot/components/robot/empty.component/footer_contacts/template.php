@@ -22,7 +22,7 @@ if (empty($arResult["SETTINGS"])) {
 
 Loc::loadMessages(__FILE__);
 
-/** @var Robot\Core\DTO\SiteSettingsFooter $siteSettings */
+/** @var Robot\Core\DTO\SiteSettings\SiteSettingsFooter $siteSettings */
 $siteSettings = $arResult["SETTINGS"];
 ?>
 

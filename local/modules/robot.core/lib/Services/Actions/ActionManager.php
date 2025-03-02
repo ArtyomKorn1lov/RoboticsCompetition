@@ -8,9 +8,9 @@ use Bitrix\Main\ArgumentException;
 
 use Robot\Core\Constants;
 use Robot\Core\Repositories\Actions\ActionRepository;
-use Robot\Core\Entity\ActionSectionsReqParams;
+use Robot\Core\Entity\Actions\ActionSectionsReqParams;
 use Robot\Core\Tools\IBlocks\Helper;
-use Robot\Core\Entity\ActionItemsReqParams;
+use Robot\Core\Entity\Action\ActionItemsReqParams;
 use Robot\Core\Tools\Mappers\Action;
 use Robot\Core\DTO\Action as ActionModel;
 

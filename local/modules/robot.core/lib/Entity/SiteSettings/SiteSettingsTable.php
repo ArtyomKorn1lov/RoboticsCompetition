@@ -1,6 +1,6 @@
 <?php
 
-namespace Robot\Core\Entity;
+namespace Robot\Core\Entity\SiteSettings;
 
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\ArgumentTypeException;

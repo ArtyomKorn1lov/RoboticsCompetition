@@ -1,8 +1,7 @@
 .b-tabs {
-  @include flex(false, center);
-  gap: $m15;
 
   &__item {
+    display: block;
     border: 1px solid $colorPrimary;
     border-radius: $rounded30;
     font-weight: $textSemiBold;

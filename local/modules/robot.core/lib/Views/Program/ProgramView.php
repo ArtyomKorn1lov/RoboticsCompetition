@@ -1,0 +1,39 @@
+<?php
+
+namespace Robot\Core\Views\Program;
+
+use Bitrix\Main\ArgumentException;
+use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\ObjectException;
+use Bitrix\Main\SystemException;
+
+use Robot\Core\Services\Program\ProgramManager;
+use Robot\Core\Views\Events\EventsView;
+use Robot\Core\DTO\Program\ProgramItems;
+
+Loc::loadMessages(__FILE__);
+
+class ProgramView implements IProgramView
+{
+
+    /**
+     * @return ProgramItems|bool
+     */
+    public static function getPrograms(): ProgramItems|bool
+    {
+        try {
+            $eventId = EventsView::getActiveEventId();
+            if (!$eventId) {
+                throw new ArgumentException(Loc::getMessage("ROBOT_CORE_PROGRAM_INVALID_EVENT_ID"));
+            }
+
+            // TODO вынести в сервис-локатор
+            $programManager = new ProgramManager();
+
+            return $programManager->getProgram($eventId);
+        } catch (SystemException|ArgumentException|ObjectException $exception) {
+            AddMessage2Log($exception->getMessage(), 'robot.core');
+            return false;
+        }
+    }
+}

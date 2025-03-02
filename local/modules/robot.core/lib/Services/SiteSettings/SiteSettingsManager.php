@@ -6,13 +6,13 @@ use Bitrix\Main\ArgumentException;
 use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
 
-use Robot\Core\DTO\SiteSettingsHeader;
-use Robot\Core\DTO\SiteSettingsFooter;
+use Robot\Core\DTO\SiteSettings\SiteSettingsHeader;
+use Robot\Core\DTO\SiteSettings\SiteSettingsFooter;
 use Robot\Core\Repositories\SiteSettings\SiteSettingsRepository;
 use Robot\Core\Tools\Files\Helper;
 use Robot\Core\Tools\Mappers\SiteSettings;
 
-class SiteSettingsManager
+class SiteSettingsManager implements ISiteSettingsManager
 {
     /**
      * @return SiteSettingsHeader
