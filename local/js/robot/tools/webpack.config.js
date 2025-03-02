@@ -2,14 +2,11 @@ const path = require('path');
 const {VueLoaderPlugin} = require("vue-loader");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const postcssPresetEnv = require('postcss-preset-env');
+const ElementPlus = require("unplugin-element-plus/webpack");
 
 const DEFAULT_GLOBALS = {
     vue: 'RobotCore.vue',
     axios: 'RobotCore.axios',
-    'element-plus': 'RobotUI.ElPlus',
-    VueTheMask: 'RobotUI.VueTheMask',
-    'swiper/vue': 'RobotUI.Swiper',
-    'tools': 'RobotTools'
 }
 
 module.exports = (env, argv) => {
@@ -44,7 +41,7 @@ module.exports = (env, argv) => {
             filename: 'script.bundle.js',
             clean: true,
             library: {
-                name: 'MediaPopup',
+                name: 'RobotTools',
                 type: 'assign-properties',
                 export: 'default',
             }
@@ -53,6 +50,7 @@ module.exports = (env, argv) => {
         plugins: [
             new VueLoaderPlugin(),
             new MiniCssExtractPlugin({ filename: 'styles.bundle.css' }),
+            ElementPlus()
         ],
         resolve: {
             extensions: ['.js', '.vue', '.css', '.scss']

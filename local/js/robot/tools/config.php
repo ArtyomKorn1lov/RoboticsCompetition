@@ -5,9 +5,7 @@ return [
     'css' => './dist/styles.bundle.css',
     'js' => './dist/script.bundle.js',
     'rel' => [
-        'robot.core',
-        'robot.ui',
-        'robot.tools'
+        'robot.core'
     ],
     'skip_core' => true,
 ];

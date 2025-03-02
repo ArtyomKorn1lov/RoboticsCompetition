@@ -15,6 +15,7 @@ use Robot\Core\Entity\Program\TimeLineReqParams;
 use Robot\Core\Repositories\Program\ProgramRepository;
 use Robot\Core\Tools\IBlocks\Helper;
 use Robot\Core\Tools\Mappers\Program;
+use Robot\Core\Views\Events\EventsView;
 
 Loc::loadMessages(__FILE__);
 
@@ -36,14 +37,7 @@ class ProgramManager implements IProgramManager
             // TODO вынести в сервис-локатор
             $programRepository = new ProgramRepository();
 
-            $programSectionEntity = new ProgramSectionsReqParams(
-                Constants::CONTENT_IBLOCK_TYPE,
-                Helper::getIblock(Constants::PROGRAM_IBLOCK_CODE),
-                $eventId,
-                true,
-                "ASC"
-            );
-            [$sectionIds, $sectionName] = $programRepository->getActiveSectionIds($programSectionEntity);
+            [$sectionIds, $sectionName] = $this->getProgramSections($eventId);
             if (empty($sectionIds)) {
                 throw new ArgumentException(Loc::getMessage("ROBOT_CORE_PROGRAM_EMPTY_SECTIONS"));
             }
@@ -89,7 +83,8 @@ class ProgramManager implements IProgramManager
             $programRepository = new ProgramRepository();
 
             if (!$sectionIds) {
-                //TODO код для получения $sectionIds
+                $eventId = EventsView::getActiveEventId();
+                [$sectionIds] = $this->getProgramSections($eventId);
             }
 
             $programListEntity = new ProgramListReqParam(
@@ -107,5 +102,25 @@ class ProgramManager implements IProgramManager
             AddMessage2Log($exception->getMessage(), 'robot.core');
             throw $exception;
         }
+    }
+
+    /**
+     * @param int $eventId
+     * @return array
+     * @throws ArgumentException
+     */
+    protected function getProgramSections(int $eventId): array
+    {
+        // TODO вынести в сервис-локатор
+        $programRepository = new ProgramRepository();
+
+        $programSectionEntity = new ProgramSectionsReqParams(
+            Constants::CONTENT_IBLOCK_TYPE,
+            Helper::getIblock(Constants::PROGRAM_IBLOCK_CODE),
+            $eventId,
+            true,
+            "ASC"
+        );
+        return $programRepository->getActiveSectionIds($programSectionEntity);
     }
 }

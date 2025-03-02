@@ -14,6 +14,7 @@ import {
     ElDatePicker,
     ElAutocomplete,
     ElDialog,
+    ElSkeleton
 } from 'element-plus';
 
 const ElPlus = {
@@ -29,6 +30,7 @@ const ElPlus = {
     ElDatePicker,
     ElAutocomplete,
     ElDialog,
+    ElSkeleton
 }
 
 export default { ElPlus, VueTheMask, Swiper }

@@ -11,3 +11,20 @@ if (
     require_once __DIR__ . '/vendor/autoload.php';
     @define('COMPOSER_INITIALIZED', true);
 }
+
+/**
+ * Неймспейсы контроллеров
+ */
+$controllerNamespaces = [
+    "Program"
+];
+
+/**
+ * Регистрация контроллеров
+ */
+foreach ($controllerNamespaces as $entity) {
+    $controller = '\\Robot\\Core\\Controllers\\' . $entity . '\\' . $entity . 'Controller';
+    if (class_exists('\\Robot\\Core\\Controllers\\' . $entity . '\\' . $entity . 'Controller')) {
+        @class_alias($controller, '\\Robot\\RestControllers\\' . $entity);
+    }
+}

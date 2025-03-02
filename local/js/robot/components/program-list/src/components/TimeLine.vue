@@ -13,6 +13,7 @@
           href="javascript:void(0)"
           class="b-tabs__item"
           :class="{'b-tabs__item_active': index === activeTab}"
+          @click="selectDate(index)"
           v-text="date.dateString"
       />
     </swiper-slide>
@@ -32,4 +33,10 @@ const { dates, activeTab } = defineProps({
     default: 0
   }
 });
+
+const emit = defineEmits(['change-tab']);
+
+const selectDate = (index) => {
+  emit('change-tab', index);
+}
 </script>
