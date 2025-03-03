@@ -16,7 +16,8 @@ if (
  * Неймспейсы контроллеров
  */
 $controllerNamespaces = [
-    "Program"
+    "Program",
+    "Event"
 ];
 
 /**

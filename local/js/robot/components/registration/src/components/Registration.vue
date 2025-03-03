@@ -109,6 +109,8 @@ const countries = [
   {value: 'Российская федерация'},
   {value: 'Республика Таджикистан'},
   {value: 'Республика Узбекистан'},
+  {value: 'Республика Беларусь'},
+  {value: 'Республика Китай'},
 ];
 
 const { formFields } = defineProps({
@@ -132,7 +134,13 @@ const {
     Validators
 );
 
+// TODO получать значения с backend'а
 const querySearchAsync = async (queryString, callback) => {
-  callback(countries);
+  if (queryString) {
+    const selectedCountries = countries.filter((item) => {
+      return item.value.includes(queryString);
+    });
+    callback(selectedCountries);
+  }
 }
 </script>

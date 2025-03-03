@@ -20,6 +20,21 @@
         height: $m30;
         line-height: $m30;
       }
+
+      &__error {
+        color: $colorError;
+      }
+    }
+
+    .el-input__wrapper {
+      box-shadow: none !important;
+    }
+
+    &.is-error {
+
+      .el-input__wrapper {
+        border-color: $colorError;
+      }
     }
   }
 

@@ -151,7 +151,7 @@ export default function useForm(fields, ajaxFunc, validators = {}) {
                 isLoading.value = false;
                 await showMessage(
                     'Успешно',
-                    response?.data,
+                    response?.data?.data,
                     "success",
                     afterSuccess
                 );
@@ -179,8 +179,8 @@ export default function useForm(fields, ajaxFunc, validators = {}) {
                 type: type,
                 closeOnPressEscape: type === "success",
                 closeOnHashChange: type === "success",
-                showConfirmButton: type === "error",
-                confirmButtonClass: "b-btn b-btn_primary b-btn_normal b-btn_full",
+                showConfirmButton: true,
+                confirmButtonClass: "b-button b-button_primary b-button_small",
                 confirmButtonText: 'Ок',
                 callback: callback
             });

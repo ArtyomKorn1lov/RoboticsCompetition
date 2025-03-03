@@ -9,6 +9,9 @@ use Bitrix\Main\Routing\RoutingConfigurator;
 return function (RoutingConfigurator $routes) {
 
 	$routes->prefix('api')->group(function (RoutingConfigurator $routes) {
+
 		$routes->post('program/get-items/', [Robot\Core\Controllers\Program\ProgramController::class, 'getItemsAction']);
+
+        $routes->post('events/register/', [Robot\Core\Controllers\Event\EventController::class, 'registerAction']);
 	});
 };
