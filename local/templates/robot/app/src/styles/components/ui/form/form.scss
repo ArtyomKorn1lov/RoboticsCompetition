@@ -11,7 +11,7 @@
 
     &.el-form-item {
       @include flex(column);
-      margin-bottom: $m15;
+      margin-bottom: $m20;
     }
 
     .el-form-item {
@@ -24,6 +24,7 @@
   }
 
   &__tooltip {
+    margin-top: $m10;
     margin-bottom: $m30;
 
     span {

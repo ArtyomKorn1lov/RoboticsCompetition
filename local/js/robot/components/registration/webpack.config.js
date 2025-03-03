@@ -7,7 +7,9 @@ const DEFAULT_GLOBALS = {
     vue: 'RobotCore.vue',
     axios: 'RobotCore.axios',
     'element-plus': 'RobotUI.ElPlus',
-    VueTheMask: 'RobotUI.VueTheMask'
+    'vue-the-mask': 'RobotUI.VueTheMask',
+    composable: 'RobotComposable',
+    'tools': 'RobotTools'
 }
 
 module.exports = (env, argv) => {

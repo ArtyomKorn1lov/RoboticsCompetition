@@ -2,121 +2,82 @@
   <el-form
       class="b-form"
       label-position="left"
+      ref="formRef"
+      :rules="rules"
+      :model="formData"
+      @submit.prevent.native="onSubmit(formRef)"
   >
     <el-row class="b-form__row">
-      <el-col class="b-form__col">
+      <el-col
+          class="b-form__col"
+          v-for="group in fields.groups"
+          :key="group.code"
+      >
         <el-form-item
+            v-for="field in group.items"
+            :key="field.code"
+            :label="field.title"
+            :prop="field.code"
             class="b-form__item"
-            :label="'ФИО участника*'"
-        >
-          <el-input
-              class="b-input"
-              v-model="name"
-              :placeholder="'ФИО участника*'"
-          >
-          </el-input>
-        </el-form-item>
-        <el-form-item
-            class="b-form__item"
-            :label="'Дата рождения*'"
         >
           <el-date-picker
-              class="b-datepicker"
+              v-if="field.type === 'date'"
               type="date"
-              v-model="date"
-              :placeholder="'Дата рождения*'"
+              v-model="formData[field.code]"
+              :placeholder="field.placeholder"
+              class="b-datepicker"
               popper-class="b-popper"
           />
-        </el-form-item>
-        <el-form-item
-            class="b-form__item"
-            :label="'Страна*'"
-        >
           <el-autocomplete
-              v-model="search"
+              v-else-if="field.type === 'autocomplete'"
+              v-model="formData[field.code]"
               :fetch-suggestions="querySearchAsync"
+              :placeholder="field.placeholder"
               class="b-input"
-              :placeholder="'Страна*'"
               popper-class="b-popper"
-          >
-          </el-autocomplete>
-        </el-form-item>
-        <el-form-item
-            class="b-form__item"
-            :label="'Курс'"
-        >
+          />
           <el-input
+              v-else-if="field.type === 'tel'"
+              v-model="formData[field.code]"
+              :placeholder="field.placeholder"
+              v-mask="'+7(###)-###-##-##'"
               class="b-input"
-              v-model="course"
-              :placeholder="'Курс'"
-          >
-          </el-input>
-        </el-form-item>
-        <el-form-item
-            class="b-form__item"
-            :label="'Шифр и наименование направления подготовки'"
-        >
+          />
           <el-input
-              class="b-input"
-              v-model="barcode"
-              :placeholder="'Шифр и наименование направления подготовки'"
-          >
-          </el-input>
-        </el-form-item>
-        <el-form-item
-            class="b-form__item"
-            :label="'Телефон*'"
-        >
-          <el-input
-              class="b-input"
-              v-model="phone"
-              :placeholder="'Телефон*'"
-          >
-          </el-input>
-        </el-form-item>
-        <el-form-item
-            class="b-form__item"
-            :label="'E-mail*'"
-        >
-          <el-input
-              class="b-input"
-              v-model="email"
-              :placeholder="'E-mail*'"
-          >
-          </el-input>
-        </el-form-item>
-        <el-form-item
-            class="b-form__item"
-            :label="'Комментарий'"
-        >
-          <el-input
-              class="b-textarea"
-              v-model="comment"
-              :placeholder="'Комментарий'"
+              v-else-if="field.type === 'textarea'"
+              v-model="formData[field.code]"
+              :placeholder="field.placeholder"
               :rows="4"
-              type="textarea"
+              :type="field.type"
               resize="none"
+              class="b-textarea"
+          />
+          <el-checkbox-group
+              v-else-if="field.type === 'checkbox'"
+              class="b-checkboxGroup"
+              v-model="formData[field.code]"
           >
-          </el-input>
-        </el-form-item>
-        <el-form-item
-            class="b-form__item"
-        >
-          <el-checkbox-group class="b-checkboxGroup" v-model="checkList">
             <el-checkbox class="b-checkbox" size="large">
-              <span class="b-checkbox__label">
-                Согласие на обработку <a href="#" target="_blank">персональных данных</a>*
-              </span>
+              <span class="b-checkbox__label" v-html="field.label" />
             </el-checkbox>
           </el-checkbox-group>
+          <el-input
+              v-else
+              v-model="formData[field.code]"
+              :placeholder="field.placeholder"
+              class="b-input"
+          />
         </el-form-item>
       </el-col>
+
       <el-col class="b-form__col b-form__col_bottom">
         <div class="b-form__tooltip">
           Обязательные поля обозначены флажком <span>«*»</span>
         </div>
         <el-button
             class="b-button b-button_primary"
+            native-type="submit"
+            :loading="isLoading"
         >
           Регистрация
         </el-button>
@@ -136,26 +97,40 @@ import {
   ElCheckboxGroup,
   ElDatePicker,
   ElButton,
-  ElMessage,
   ElAutocomplete,
 } from 'element-plus';
-import {ref} from 'vue';
+import { reactive, ref } from 'vue';
+import { useForm } from 'composable';
+import Validators from "../validators";
+import { sendRegisterForm } from 'tools';
 
+// TODO получать из запроса
 const countries = [
   {value: 'Российская федерация'},
   {value: 'Республика Таджикистан'},
   {value: 'Республика Узбекистан'},
 ];
 
-const name = ref('');
-const date = ref('');
-const search = ref('');
-const course = ref('');
-const barcode = ref('');
-const phone = ref('');
-const email = ref('');
-const comment = ref('');
-const checkList = ref([]);
+const { formFields } = defineProps({
+  formFields: {
+    type: Object,
+    default: {}
+  }
+});
+
+const formRef = ref();
+const fields = reactive(formFields);
+
+const {
+  formData,
+  isLoading,
+  rules,
+  onSubmit
+} = useForm(
+    fields,
+    sendRegisterForm,
+    Validators
+);
 
 const querySearchAsync = async (queryString, callback) => {
   callback(countries);

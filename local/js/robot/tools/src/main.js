@@ -1,3 +1,3 @@
-import { getProgramItems } from "./api/program";
+import { getProgramItems, sendRegisterForm } from "./api/program";
 
-export default { getProgramItems };
+export default { getProgramItems, sendRegisterForm };

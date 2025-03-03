@@ -9,7 +9,7 @@ use Bitrix\Main\DB\SqlQueryException;
 use Bitrix\Main\IO\Directory;
 
 use Robot\Core\Tools\Modules\Manager;
-use Robot\Core\Entity\SiteSettingsTable;
+use Robot\Core\Entity\SiteSettings\SiteSettingsTable;
 
 Loc::loadMessages(__FILE__);
 

@@ -6,9 +6,7 @@ const postcssPresetEnv = require('postcss-preset-env');
 const DEFAULT_GLOBALS = {
     vue: 'RobotCore.vue',
     axios: 'RobotCore.axios',
-    'element-plus': 'RobotUI.ElPlus',
-    VueTheMask: 'RobotUI.VueTheMask',
-    'TestCard': 'TestCard'
+    'element-plus': 'RobotUI.ElPlus'
 }
 
 module.exports = (env, argv) => {
@@ -41,7 +39,12 @@ module.exports = (env, argv) => {
         output: {
             path: path.resolve(__dirname, './dist/'),
             filename: 'script.bundle.js',
-            clean: true
+            clean: true,
+            library: {
+                name: 'RobotComposable',
+                type: 'assign-properties',
+                export: 'default',
+            }
         },
         externals: DEFAULT_GLOBALS,
         plugins: [
