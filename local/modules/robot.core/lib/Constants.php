@@ -10,6 +10,9 @@ class Constants
     /** @var string Код ИБ События */
     public const CONTENT_IBLOCK_TYPE = "content";
 
+    /** @var string Код ИБ Обратная связь */
+    public const FEEDBACK_IBLOCK_TYPE = "feedback";
+
     /** @var string Код ИБ События */
     public const EVENTS_IBLOCK_CODE = "events";
 
@@ -33,4 +36,7 @@ class Constants
 
     /** @var string Код ИБ Программа */
     public const PROGRAM_IBLOCK_CODE = "program";
+
+    /** @var string Код ИБ Заявки с формы регистрации */
+    public const REGISTRATION_REQUEST_IBLOCK_CODE = "registration-request";
 }

@@ -6,6 +6,7 @@ use Bitrix\Main\ObjectException;
 use Bitrix\Main\Type\DateTime;
 
 use Robot\Core\DTO\Event\ActiveEvent;
+use Robot\Core\DTO\Event\RegisterForm;
 
 class Event
 {
@@ -29,6 +30,17 @@ class Event
             id: $response["ID"],
             expirationDate: new DateTime($response["PROPERTY_EXPIRATION_DATE_VALUE"]),
             isRegister: static::compareStringFlagToBool($response["PROPERTY_ACTIVE_REGISTRATION_VALUE"])
+        );
+    }
+
+    /**
+     * @param array $participant
+     * @return RegisterForm
+     */
+    public static function mapRegisterFormArrayToModel(array $participant): RegisterForm
+    {
+        return new RegisterForm(
+            formData: $participant
         );
     }
 }

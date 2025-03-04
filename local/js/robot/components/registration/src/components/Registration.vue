@@ -27,6 +27,8 @@
               :placeholder="field.placeholder"
               class="b-datepicker"
               popper-class="b-popper"
+              format="DD.MM.YYYY"
+              value-format="DD.MM.YYYY"
           />
           <el-autocomplete
               v-else-if="field.type === 'autocomplete'"
@@ -57,7 +59,11 @@
               class="b-checkboxGroup"
               v-model="formData[field.code]"
           >
-            <el-checkbox class="b-checkbox" size="large">
+            <el-checkbox
+                class="b-checkbox"
+                size="large"
+                :label="field.code"
+            >
               <span class="b-checkbox__label" v-html="field.label" />
             </el-checkbox>
           </el-checkbox-group>
