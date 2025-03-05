@@ -1,0 +1,26 @@
+.b-select {
+
+  .el-select {
+
+    &__wrapper {
+      @extend %inputWrapperOptions;
+      height: $m55;
+    }
+
+    &__selected-item {
+
+      span {
+        font-size: $textNormal;
+        font-weight: $textDefault;
+        color: $colorSecondaryText;
+      }
+
+      &.is-transparent {
+
+        span {
+          color: $colorPrimaryText;
+        }
+      }
+    }
+  }
+}

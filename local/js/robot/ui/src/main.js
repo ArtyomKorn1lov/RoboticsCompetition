@@ -15,7 +15,9 @@ import {
     ElAutocomplete,
     ElDialog,
     ElSkeleton,
-    ElMessageBox
+    ElMessageBox,
+    ElSelect,
+    ElOption
 } from 'element-plus';
 
 const ElPlus = {
@@ -32,7 +34,9 @@ const ElPlus = {
     ElAutocomplete,
     ElDialog,
     ElSkeleton,
-    ElMessageBox
+    ElMessageBox,
+    ElSelect,
+    ElOption
 }
 
 export default { ElPlus, VueTheMask, Swiper }

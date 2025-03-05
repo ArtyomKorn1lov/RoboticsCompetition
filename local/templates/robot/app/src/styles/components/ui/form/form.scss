@@ -26,13 +26,15 @@
       }
     }
 
-    .el-input__wrapper {
+    .el-input__wrapper,
+    .el-select__wrapper {
       box-shadow: none !important;
     }
 
     &.is-error {
 
-      .el-input__wrapper {
+      .el-input__wrapper,
+      .el-select__wrapper {
         border-color: $colorError;
       }
     }

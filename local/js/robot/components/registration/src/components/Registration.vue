@@ -30,6 +30,21 @@
               format="DD.MM.YYYY"
               value-format="DD.MM.YYYY"
           />
+          <el-select
+              v-else-if="field.type === 'select'"
+              v-model="formData[field.code]"
+              class="b-select"
+              popper-class="b-popper"
+              :placeholder="field.placeholder"
+          >
+            <el-option
+                v-for="option in field.items"
+                class="b-select__tag"
+                :key="option.id"
+                :label="option.name"
+                :value="option.id"
+            />
+          </el-select>
           <el-autocomplete
               v-else-if="field.type === 'autocomplete'"
               v-model="formData[field.code]"
@@ -104,6 +119,8 @@ import {
   ElDatePicker,
   ElButton,
   ElAutocomplete,
+  ElSelect,
+  ElOption
 } from 'element-plus';
 import { reactive, ref } from 'vue';
 import { useForm } from 'composable';

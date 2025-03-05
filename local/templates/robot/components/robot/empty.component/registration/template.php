@@ -54,6 +54,23 @@ $arResult["JS_DATA"]["formFields"] = [
                     "required" => false
                 ],
                 [
+                    "code" => "PROPERTY_SELECT",
+                    "title" => "Тестовое поле",
+                    "type" => "select",
+                    "placeholder" => "Тестовое поле",
+                    "required" => true,
+                    "items" => [
+                        [
+                            "name" => "Test 1",
+                            "id" => 1
+                        ],
+                        [
+                            "name" => "Test 2",
+                            "id" => 2
+                        ]
+                    ]
+                ],
+                [
                     "code" => "PROPERTY_CODE_AND_AREA_TRAINING",
                     "title" => "Шифр и наименование направления подготовки",
                     "type" => "text",
