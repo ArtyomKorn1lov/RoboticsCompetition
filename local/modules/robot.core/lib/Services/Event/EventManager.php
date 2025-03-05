@@ -5,6 +5,7 @@ namespace Robot\Core\Services\Event;
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\ObjectException;
 use Bitrix\Main\SystemException;
+use Robot\Core\DTO\Event\RegisterExternalData;
 use Robot\Core\DTO\Event\RegisterForm;
 use Robot\Core\Entity\Event\RegisterForm as RegisterFormEntity;
 use Robot\Core\Repositories\Event\EventRepository;
@@ -13,26 +14,37 @@ class EventManager implements IEventManager
 {
     /**
      * @param RegisterForm $registerForm
+     * @param int $eventId
      * @return void
      * @throws ArgumentException
      * @throws ObjectException
      * @throws SystemException
      */
-    public function saveForm(RegisterForm $registerForm): void
+    public function saveForm(RegisterForm $registerForm, int $eventId): void
     {
         try {
+            if (empty($eventId)) {
+                throw new ArgumentException("Указанного события не существует");
+            }
+
             $fields = $this->getFormFields();
             if (empty($fields)) {
                 throw new SystemException("Ошибка получения полей формы");
             }
 
-            $entity = new RegisterFormEntity(
-                $fields,
-                $registerForm->formData
-            );
-
             // TODO вынести в сервис-локатор
             $eventRepository = new EventRepository();
+            $lastElementId = $eventRepository->getLastElementId();
+
+            $externalData = new RegisterExternalData(
+                eventId: $eventId,
+                lastElementId: $lastElementId
+            );
+            $entity = new RegisterFormEntity(
+                $fields,
+                $registerForm->formData,
+                $externalData
+            );
             $eventRepository->saveForm($entity);
         } catch (SystemException|ArgumentException|ObjectException $exception) {
             AddMessage2Log($exception->getMessage(), 'robot.core');

@@ -62,7 +62,7 @@ $siteSettings = $arResult["SETTINGS"];
             <?php if (!empty($siteSettings->email)) { ?>
             <div class="b-contacts__group">
                 <span class="b-contacts__subtitle">
-                    <?= Loc::getMessage("PHONE_TITLE") ?>
+                    <?= Loc::getMessage("EMAIL_TITLE") ?>
                 </span>
                 <div class="b-contacts__list">
                     <?php foreach ($siteSettings->email as $item) { ?>

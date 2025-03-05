@@ -11,11 +11,15 @@ use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\SystemException;
 use Robot\Core\Services\Event\EventManager;
 use Robot\Core\Tools\Mappers\Event;
+use Robot\Core\Views\Events\EventsView;
 
 Loc::loadMessages(__FILE__);
 
 class EventController extends Controller
 {
+    /**
+     * @return array[]
+     */
     public function configureActions(): array
     {
         return [
@@ -25,6 +29,10 @@ class EventController extends Controller
         ];
     }
 
+    /**
+     * @param array $formData
+     * @return AjaxJson
+     */
     public function registerAction(array $formData): AjaxJson
     {
         try {
@@ -32,9 +40,14 @@ class EventController extends Controller
                 throw new ArgumentException("Не заполненная форма регистрации");
             }
 
+            $eventId = EventsView::getActiveEventId();
+            if (!$eventId) {
+                throw new ArgumentException(Loc::getMessage("ROBOT_CORE_PROGRAM_INVALID_EVENT_ID"));
+            }
+
             // TODO вынести в сервис-локатор
             $eventManager = new EventManager();
-            $eventManager->saveForm(Event::mapRegisterFormArrayToModel($formData));
+            $eventManager->saveForm(Event::mapRegisterFormArrayToModel($formData), $eventId);
 
             return AjaxJson::createSuccess("Вы успешно зарегистрировались на текущее событие!");
         } catch (SystemException|ArgumentException $exception) {
