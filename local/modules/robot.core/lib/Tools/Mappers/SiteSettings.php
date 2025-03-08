@@ -31,7 +31,7 @@ class SiteSettings
             email: $response["EMAIL"],
             phone: $response["PHONE"],
             address: $response["ADDRESS"],
-            socialNetworks: $response["SOCIAL_NETWORKS"]
+            socialNetworks: $response["SOCIAL_NETWORKS_FOOTER"]
         );
     }
 }

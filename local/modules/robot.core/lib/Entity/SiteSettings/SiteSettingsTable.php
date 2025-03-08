@@ -77,6 +77,10 @@ class SiteSettingsTable extends DataManager
                 'title' => Loc::getMessage('ROBOT_SITE_SETTINGS_ENTITY_SOCIAL_FIELD'),
                 'serialized' => true
             ]),
+            'SOCIAL_NETWORKS_FOOTER' => new TextField('SOCIAL_NETWORKS_FOOTER', [
+                'title' => "Социальные сети для футера",
+                'serialized' => true
+            ]),
             'LOGO' => new IntegerField('LOGO', [
                 'title' => Loc::getMessage('ROBOT_SITE_SETTINGS_ENTITY_LOGO_FIELD')
             ]),
@@ -128,7 +132,7 @@ class SiteSettingsTable extends DataManager
             "EMAIL",
             "PHONE",
             "ADDRESS",
-            "SOCIAL_NETWORKS",
+            "SOCIAL_NETWORKS_FOOTER",
             "LOGO_FOOTER"
         ];
     }

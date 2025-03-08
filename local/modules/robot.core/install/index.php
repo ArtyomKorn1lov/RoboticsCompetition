@@ -1,8 +1,8 @@
 <?php
 //подключаем основные классы для работы с модулем
 use Bitrix\Main\Application;
+use Bitrix\Main\Entity\Query;
 use Bitrix\Main\Loader;
-use Bitrix\Main\Entity\Base;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ModuleManager;
 use Bitrix\Main\DB\SqlQueryException;
@@ -59,7 +59,18 @@ class robot_core extends CModule
     //вызываем метод удаления таблицы и удаляем модуль из регистра
     public function doUninstall(): void
     {
-        ModuleManager::unRegisterModule($this->MODULE_ID);
+        global $APPLICATION;
+        try {
+            Loader::includeModule($this->MODULE_ID);
+            $this->deleteImages();
+            $this->unInstallDb();
+            $this->unInstallFiles();
+            ModuleManager::unRegisterModule($this->MODULE_ID);
+        } catch (Exception $exception) {
+            ModuleManager::unRegisterModule($this->MODULE_ID);
+            AddMessage2Log($exception->getMessage(), $this->MODULE_ID);
+            $APPLICATION->ThrowException($exception->getMessage());
+        }
     }
 
     /**
@@ -104,12 +115,15 @@ class robot_core extends CModule
             $logoFooter = $logoFooter ? CFile::SaveFile($logoFooter, $siteSettingsUploadDir) : 0;
 
             SiteSettingsTable::add([
-                "SITE_ID" => SITE_ID,
-                "EMAIL" => "competation@mail.com",
+                "SITE_ID" => "s1",
+                "EMAIL" => "competation@mail.com, robot@mail.com",
                 "PHONE" => '8 (999) 999-99-99, +7 (800) 999-91-92',
                 "ADDRESS" => "Республика Марий Эл, г. Йошкар-Ола, площадь имени В.И. Ленина, 3",
-                "SOCIAL_NETWORKS" => [
+                "SOCIAL_NETWORKS_FOOTER" => [
                     "telegram_footer" => "tg://resolve?domain=/",
+                ],
+                "SOCIAL_NETWORKS" => [
+                    "telegram" => "tg://resolve?domain=/",
                 ],
                 "LOGO" => $logo,
                 "LOGO_FOOTER" => $logoFooter,
@@ -124,6 +138,78 @@ class robot_core extends CModule
                 AddMessage2Log($exceptionSql->getMessage(), $this->MODULE_ID);
                 return false;
             }
+        }
+    }
+
+    /**
+     * Удаление таблиц из БД
+     * @return false|void
+     */
+    public function unInstallDb()
+    {
+        $connection = Application::getInstance()->getConnection();
+        if (!$connection) {
+            return false;
+        }
+
+        try {
+            $connection->startTransaction();
+
+            $tableName = SiteSettingsTable::getTableName();
+            if ($connection->isTableExists($tableName)) {
+                $connection->dropTable($tableName);
+            }
+
+            $connection->commitTransaction();
+        } catch (Exception $exception) {
+            AddMessage2Log($exception->getMessage(), $this->MODULE_ID);
+            try {
+                $connection->rollbackTransaction();
+            } catch (SqlQueryException $exceptionSql) {
+                AddMessage2Log($exceptionSql->getMessage(), $this->MODULE_ID);
+                return false;
+            }
+        }
+    }
+
+    /**
+     * Удаление таблиц из БД
+     * @return void
+     */
+    public function unInstallFiles()
+    {
+        $moduleUploadDir = $_SERVER['DOCUMENT_ROOT'] . '/upload' . Manager::MODULE_FILE_PATH;
+        if (Directory::isDirectoryExists($moduleUploadDir)) {
+            Directory::deleteDirectory($moduleUploadDir);
+        }
+        $siteSettingsUploadDir = $_SERVER['DOCUMENT_ROOT'] . '/upload' . Manager::SITE_SETTINGS_FILE_PATH;
+        if (Directory::isDirectoryExists($siteSettingsUploadDir)) {
+            Directory::deleteDirectory($siteSettingsUploadDir);
+        }
+    }
+
+    /**
+     * Удаление изображений из БД, связанных с настройками сайта
+     * @return false|void
+     */
+    public function deleteImages()
+    {
+        try {
+            $query = new Query(SiteSettingsTable::getEntity());
+            $query->setOrder(["ID" => "ASC"]);
+            $query->setFilter(["=SITE_ID" => "s1"]);
+            $query->setLimit(1);
+            $query->setSelect(["LOGO", "LOGO_FOOTER"]);
+            $result = $query->exec();
+            $rows = $result->fetchAll();
+
+            foreach ($rows as $row) {
+                CFile::Delete($row["LOGO"]);
+                CFile::Delete($row["LOGO_FOOTER"]);
+            }
+        } catch (Exception $exception) {
+            AddMessage2Log($exception->getMessage(), $this->MODULE_ID);
+            return false;
         }
     }
 }
