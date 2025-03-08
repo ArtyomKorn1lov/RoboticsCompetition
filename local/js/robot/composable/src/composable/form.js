@@ -3,33 +3,14 @@ import { ElMessageBox } from "element-plus";
 
 /**
  * Хук с общей логикой форм обратной связи
- * @param {Array<Object>} fields
- * @param {Function} ajaxFunc
- * @param {Object} validators
- * @returns {Object}
  */
 export default function useForm(fields, ajaxFunc, validators = {}) {
 
-    /**
-     * @type {RegExp}
-     */
     const defaultEmailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i;
-    /**
-     * @type {RegExp}
-     */
     const defaultPhoneRegex = /^(\+7\(\d{3}\)-\d{3}-\d{2}-\d{2})$/;
 
-    /**
-     * @type {Reactive<Object>}
-     */
     const formData = reactive({});
-    /**
-     * @type {Ref<Boolean>}
-     */
     const isLoading = ref(false);
-    /**
-     * @type {Reactive<Object>}
-     */
     const rules = reactive({});
 
     const onInit = () => {
@@ -117,10 +98,6 @@ export default function useForm(fields, ajaxFunc, validators = {}) {
         });
     }
 
-    /**
-     * @param {ShallowRef} formRef
-     * @param {Function} afterSuccess
-     */
     const onSubmit = async (formRef, afterSuccess = null) => {
         if (!formRef) {
             return;
@@ -134,10 +111,6 @@ export default function useForm(fields, ajaxFunc, validators = {}) {
         });
     }
 
-    /**
-     * @param {ShallowRef} formRef
-     * @param {Function} afterSuccess
-     */
     const sendRequest = async (formRef, afterSuccess = null) => {
         isLoading.value = true;
         const data = { formData: formData };
@@ -162,12 +135,6 @@ export default function useForm(fields, ajaxFunc, validators = {}) {
             })
     }
 
-    /**
-     * @param {String} title
-     * @param {String} message
-     * @param {String} type
-     * @param {Function} callback
-     */
     const showMessage = async (title, message, type = "error", callback = null) => {
         await ElMessageBox.alert(
             message,
@@ -186,9 +153,6 @@ export default function useForm(fields, ajaxFunc, validators = {}) {
             });
     }
 
-    /**
-     * @param {ShallowRef} formRef
-     */
     const resetForm = (formRef) => {
         if (!formRef) return;
         formRef.resetFields()

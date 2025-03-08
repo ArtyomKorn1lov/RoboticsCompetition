@@ -13,5 +13,7 @@ return function (RoutingConfigurator $routes) {
 		$routes->post('program/get-items/', [Robot\Core\Controllers\Program\ProgramController::class, 'getItemsAction']);
 
         $routes->post('events/register/', [Robot\Core\Controllers\Event\EventController::class, 'registerAction']);
+
+        $routes->post('events/search-countries/', [Robot\Core\Controllers\Event\EventController::class, 'countriesAction']);
 	});
 };

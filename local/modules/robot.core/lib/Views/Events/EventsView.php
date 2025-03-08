@@ -5,6 +5,7 @@ namespace Robot\Core\Views\Events;
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\LoaderException;
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
 use Bitrix\Main\ObjectException;
 use Bitrix\Main\Type\DateTime;
@@ -13,8 +14,10 @@ use CIBlockElement;
 use Robot\Core\Constants;
 use Robot\Core\DTO\Action\Action;
 use Robot\Core\DTO\Event\ActiveEvent;
+use Robot\Core\DTO\Event\FormField;
 use Robot\Core\Entity\Event\ActiveEventReqParams;
 use Robot\Core\Services\Actions\ActionManager;
+use Robot\Core\Services\Event\EventManager;
 use Robot\Core\Tools\IBlocks\Helper;
 use Robot\Core\Tools\Mappers\Event;
 use Robot\Core\Tools\Modules\Manager;
@@ -89,6 +92,27 @@ class EventsView implements IEventsView
 
             return $actionManager->getByEventId($id);
         } catch (SystemException|ObjectException $exception) {
+            AddMessage2Log($exception->getMessage(), "robot.core");
+            return false;
+        }
+    }
+
+    /**
+     * @return FormField[]|bool
+     */
+    public static function getRegistrationFormFields(): array|bool
+    {
+        try {
+            // TODO вынести в сервис-локатор
+            $eventManager = new EventManager();
+            $fields = $eventManager->getRegistrationFields();
+
+            if (empty($fields)) {
+                throw new SystemException("Ошибка получения полей формы");
+            }
+
+            return $fields;
+        } catch (SystemException|ArgumentException|ObjectException|ObjectPropertyException $exception) {
             AddMessage2Log($exception->getMessage(), "robot.core");
             return false;
         }

@@ -9,9 +9,14 @@ use CUtil;
 use Robot\Core\Constants;
 use Robot\Core\Tools\IBlocks\Helper;
 use Robot\Core\DTO\Event\RegisterExternalData;
+use Robot\Core\DTO\Event\FormField;
+use Robot\Core\DTO\Event\FormFieldValues;
 
 final class RegisterForm
 {
+    /** @var FormField[] Поля формы */
+    private array $fields = [];
+
     /** @var array Данные формы */
     private array $formData;
 
@@ -38,8 +43,9 @@ final class RegisterForm
     protected const EVENT_PROP_CODE = "EVENT";
 
     /**
-     * @param array $fields
+     * @param FormField[] $fields
      * @param array $formData
+     * @param RegisterExternalData $externalData
      * @throws ArgumentException
      */
     public function __construct(
@@ -52,7 +58,11 @@ final class RegisterForm
             throw new ArgumentException("Активного события не существует");
         }
 
-        $formData = $this->validateFields($fields, $formData);
+        if (!empty($fields)) {
+            $this->fields = $fields;
+        }
+
+        $formData = $this->validateFields($formData);
         $this->prepareSaveFormData($formData, $externalData);
     }
 
@@ -65,45 +75,44 @@ final class RegisterForm
     }
 
     /**
-     * @param array $fields
      * @param array $formData
      * @return array
      * @throws ArgumentException
      */
-    protected function validateFields(array $fields, array $formData): array
+    protected function validateFields(array $formData): array
     {
-        foreach ($fields as $field) {
+        foreach ($this->fields as $field) {
 
-            if (!$field["required"]) {
+            if (!$field->required) {
                 continue;
             }
 
-            if ($field["code"] === 'agreement') {
-                if (empty($formData[$field["code"]])) {
+            if ($field->code === 'agreement') {
+                if (empty($formData[$field->code])) {
                     throw new ArgumentException("Не отмечен чекбокс согласия на обработку перс. данных");
                 }
-                unset($formData[$field["code"]]);
+                unset($formData[$field->code]);
                 continue;
             }
 
-            if (empty($formData[$field["code"]])) {
-                throw new ArgumentException('Поле "' . $field["title"] . '" обязательно для заполнения');
+            if (empty($formData[$field->code])) {
+                throw new ArgumentException('Поле "' . $field->title . '" обязательно для заполнения');
             }
 
-            switch ($field["type"]) {
+            switch ($field->type) {
                 case "autocomplete":
-                    if (!in_array($formData[$field["code"]], $field["items"])) {
-                        throw new ArgumentException('Не выбрано значение поля "' . $field["title"] . '"');
+                    if (!$this->validateAutocompleteField($formData[$field->code], $field->values)) {
+                        throw new ArgumentException('Не выбрано значение поля "' . $field->title . '"');
                     }
                     break;
                 case "tel":
-                    if (!preg_match(self::PHONE_REGULAR_EXPRESSION, $formData[$field["code"]])) {
-                        throw new ArgumentException('Не верное значение поля "' . $field["title"] . '"');
+                    if (!preg_match(self::PHONE_REGULAR_EXPRESSION, $formData[$field->code])) {
+                        throw new ArgumentException('Не верное значение поля "' . $field->title . '"');
                     }
                     break;
                 case "email":
-                    if (!preg_match(self::EMAIL_REGULAR_EXPRESSION, $formData[$field["code"]])) {
-                        throw new ArgumentException('Не верное значение поля "' . $field["title"] . '"');
+                    if (!preg_match(self::EMAIL_REGULAR_EXPRESSION, $formData[$field->code])) {
+                        throw new ArgumentException('Не верное значение поля "' . $field->title . '"');
                     }
                     break;
                 default:
@@ -112,6 +121,21 @@ final class RegisterForm
         }
 
         return $formData;
+    }
+
+    /**
+     * @param string $value
+     * @param FormFieldValues[] $items
+     * @return bool
+     */
+    protected function validateAutocompleteField(string $value, array $items): bool
+    {
+        foreach ($items as $item) {
+            if ($item->name === trim($value)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

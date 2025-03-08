@@ -48,7 +48,7 @@
           <el-autocomplete
               v-else-if="field.type === 'autocomplete'"
               v-model="formData[field.code]"
-              :fetch-suggestions="querySearchAsync"
+              :fetch-suggestions="(queryString, callback) => querySearchAsync(queryString, callback, field.id)"
               :placeholder="field.placeholder"
               class="b-input"
               popper-class="b-popper"
@@ -79,7 +79,7 @@
                 size="large"
                 :label="field.code"
             >
-              <span class="b-checkbox__label" v-html="field.label" />
+              <span class="b-checkbox__label" v-html="field.placeholder" />
             </el-checkbox>
           </el-checkbox-group>
           <el-input
@@ -125,16 +125,7 @@ import {
 import { reactive, ref } from 'vue';
 import { useForm } from 'composable';
 import Validators from "../validators";
-import { sendRegisterForm } from 'tools';
-
-// TODO получать из запроса
-const countries = [
-  {value: 'Российская федерация'},
-  {value: 'Республика Таджикистан'},
-  {value: 'Республика Узбекистан'},
-  {value: 'Республика Беларусь'},
-  {value: 'Республика Китай'},
-];
+import { sendRegisterForm, searchCountries } from 'tools';
 
 const { formFields } = defineProps({
   formFields: {
@@ -157,13 +148,26 @@ const {
     Validators
 );
 
-// TODO получать значения с backend'а
-const querySearchAsync = async (queryString, callback) => {
-  if (queryString) {
-    const selectedCountries = countries.filter((item) => {
-      return item.value.includes(queryString);
-    });
-    callback(selectedCountries);
+const querySearchAsync = async (queryString, callback, id) => {
+  if (queryString && id) {
+    let countries = [];
+
+    await searchCountries({
+      id: id,
+      value: queryString
+    })
+        .then((response) => {
+          // TODO обработка ошибки пока не разберусь как возвращать статус ошибки с сервера
+          if (response?.data?.status === "error") {
+            throw new Error(response?.data?.errors[0].message);
+          }
+          countries = [...response?.data?.data];
+        })
+        .catch((error) => {
+          console.error('error', error);
+        });
+
+    callback(countries);
   }
 }
 </script>

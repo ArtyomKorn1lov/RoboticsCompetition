@@ -1,4 +1,4 @@
 import { getProgramItems } from "./api/program";
-import { sendRegisterForm } from "./api/events";
+import { sendRegisterForm, searchCountries } from "./api/events";
 
-export default { getProgramItems, sendRegisterForm };
+export default { getProgramItems, sendRegisterForm, searchCountries };
