@@ -4,10 +4,13 @@
     gap: $m40;
 
     &__img {
+      max-width: 333px;
 
       &-wrap {
         aspect-ratio: 690/406;
         max-width: 690px;
+        padding-top: $m15;
+        padding-bottom: $m15;
       }
     }
 
@@ -48,6 +51,15 @@
 
     &__button {
       margin-top: $m15;
+    }
+  }
+}
+
+@include screen(xs) {
+  .b-event {
+
+    &__img {
+      max-width: 208px;
     }
   }
 }

@@ -8,11 +8,11 @@ use Bitrix\Main\ArgumentException;
 
 use Robot\Core\Constants;
 use Robot\Core\Repositories\Actions\ActionRepository;
-use Robot\Core\Entity\Actions\ActionSectionsReqParams;
 use Robot\Core\Tools\IBlocks\Helper;
 use Robot\Core\Entity\Action\ActionItemsReqParams;
 use Robot\Core\Tools\Mappers\Action;
-use Robot\Core\DTO\Action as ActionModel;
+use Robot\Core\DTO\Action\Action as ActionModel;
+use Robot\Core\Entity\Action\ActionSectionsReqParams;
 
 Loc::loadMessages(__FILE__);
 

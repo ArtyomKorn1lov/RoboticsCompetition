@@ -41,12 +41,10 @@ $showActiveRegistration = !empty($arResult["DISPLAY_PROPERTIES"]["ACTIVE_REGISTR
                 </a>
             <?php } ?>
         </div>
-        <?php if (!empty($arResult["DETAIL_PICTURE"]["SRC"])) { ?>
-            <picture class="b-event__img-wrap">
-                <source class="b-event__img" media="(max-width: 560px)" srcset="/local/templates/robot/app/img/main_event_1024.webp" />
-                <source class="b-event__img" media="(max-width: 1024px)" srcset="/local/templates/robot/app/img/main_event_1024.webp" />
+        <picture class="b-event__img-wrap">
+            <?php if (!empty($arResult["DETAIL_PICTURE"]["SRC"])) { ?>
                 <img class="b-event__img" src="<?= $arResult["DETAIL_PICTURE"]["SRC"] ?>" alt="<?= $arResult["NAME"] ?>">
-            </picture>
-        <?php } ?>
+            <?php } ?>
+        </picture>
     </div>
 </div>

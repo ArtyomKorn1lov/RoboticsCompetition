@@ -3,7 +3,7 @@
 namespace Robot\Core\Repositories\Actions;
 
 use Robot\Core\Entity\Action\ActionItemsReqParams;
-use Robot\Core\Entity\Actions\ActionSectionsReqParams;
+use Robot\Core\Entity\Action\ActionSectionsReqParams;
 
 interface IActionRepository
 {

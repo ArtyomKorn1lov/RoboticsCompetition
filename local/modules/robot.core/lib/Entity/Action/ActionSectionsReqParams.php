@@ -1,6 +1,6 @@
 <?php
 
-namespace Robot\Core\Entity\Actions;
+namespace Robot\Core\Entity\Action;
 
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\Localization\Loc;

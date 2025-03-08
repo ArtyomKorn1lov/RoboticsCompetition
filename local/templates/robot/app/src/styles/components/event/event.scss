@@ -3,15 +3,21 @@
   gap: $m30;
 
   &__img {
-    @extend %imgDefaultStyles;
+    width: $full;
+    height: $full;
+    object-fit: contain;
+    max-width: 546px;
 
     &-wrap {
+      @include flex(false, false, center);
       align-self: center;
       width: $full;
       border-radius: $rounded30;
+      background-color: $colorLight;
       overflow: hidden;
       aspect-ratio: 740/567;
       max-width: 740px;
+      padding: $m30;
     }
   }
 

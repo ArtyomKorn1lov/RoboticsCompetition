@@ -1,6 +1,15 @@
 <?php
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Регистрация");
+
+use Bitrix\Iblock\Component\Tools;
+use Robot\Core\Views\Events\EventsView;
+
+if (!EventsView::showRegistration()) {
+    Tools::process404('', true, true, true, SITE_DIR . '404.php');
+    return;
+}
+
 ?>
 <?php $APPLICATION->IncludeComponent(
     "bitrix:main.include",
