@@ -8,10 +8,10 @@ namespace Robot\Core;
 class Constants
 {
     /** @var string Код ИБ События */
-    public const CONTENT_IBLOCK_TYPE = "content";
+    public const CONTENT_IBLOCK_TYPE = "robot_content";
 
     /** @var string Код ИБ Обратная связь */
-    public const FEEDBACK_IBLOCK_TYPE = "feedback";
+    public const FEEDBACK_IBLOCK_TYPE = "robot_feedback";
 
     /** @var string Код ИБ События */
     public const EVENTS_IBLOCK_CODE = "events";

@@ -5,7 +5,7 @@ IncludeTemplateLangFile(__FILE__);
 global $APPLICATION;
 
 if (!Bitrix\Main\Loader::includeModule('robot.core')) {
-    ShowError('Ошибка! Не подключен модуль ядра сайта.');
+    ShowError('Ошибка! Не подключен главный модуль сайта для проведения соревнований по робототехнике.');
     die();
 }
 
