@@ -2,6 +2,7 @@
 
 namespace Robot\Core\Tools\Mappers;
 
+use Robot\Core\DTO\SiteSettings\SiteSettingsContacts;
 use Robot\Core\DTO\SiteSettings\SiteSettingsFooter;
 use Robot\Core\DTO\SiteSettings\SiteSettingsHeader;
 
@@ -32,6 +33,21 @@ class SiteSettings
             phone: $response["PHONE"],
             address: $response["ADDRESS"],
             socialNetworks: $response["SOCIAL_NETWORKS_FOOTER"]
+        );
+    }
+
+    /**
+     * @param array $response
+     * @return SiteSettingsContacts
+     */
+    public static function mapSiteSettingsContactsResponseToModel(array $response): SiteSettingsContacts
+    {
+        return new SiteSettingsContacts(
+            addressOrganisation: $response["ADDRESS_ORGANISATION"],
+            contactPhones: $response["CONTACT_PHONES"],
+            email: $response["EMAIL"],
+            socialNetworks: $response["SOCIAL_NETWORKS"],
+            coords: $response["MAP_COORDINATES"]
         );
     }
 }

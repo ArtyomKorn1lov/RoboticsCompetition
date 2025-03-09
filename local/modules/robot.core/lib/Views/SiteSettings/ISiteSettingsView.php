@@ -2,6 +2,7 @@
 
 namespace Robot\Core\Views\SiteSettings;
 
+use Robot\Core\DTO\SiteSettings\SiteSettingsContacts;
 use Robot\Core\DTO\SiteSettings\SiteSettingsFooter;
 use Robot\Core\DTO\SiteSettings\SiteSettingsHeader;
 
@@ -16,4 +17,9 @@ interface ISiteSettingsView
      * @return SiteSettingsFooter|bool
      */
     public static function getSettingsFooter(): SiteSettingsFooter|bool;
+
+    /**
+     * @return SiteSettingsContacts|bool
+     */
+    public static function getSettingsContacts(): SiteSettingsContacts|bool;
 }

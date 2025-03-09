@@ -13,4 +13,9 @@ interface ISiteSettingsRepository
      * @return array
      */
     public function getSiteSettingsFooter(): array;
+
+    /**
+     * @return array
+     */
+    public function getSiteSettingsContacts(): array;
 }

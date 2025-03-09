@@ -22,7 +22,7 @@ if (empty($arResult["SETTINGS"])) {
 
 Loc::loadMessages(__FILE__);
 
-/** @var Robot\Core\DTO\SiteSettings\SiteSettingsFooter $siteSettings */
+/** @var Robot\Core\DTO\SiteSettings\SiteSettingsContacts $siteSettings */
 $siteSettings = $arResult["SETTINGS"];
 ?>
 
@@ -32,63 +32,63 @@ $siteSettings = $arResult["SETTINGS"];
             <?=$APPLICATION->GetTitle(false, true)?>
         </h1>
         <div class="b-contacts__info">
-            <?php if (!empty($siteSettings->address)) { ?>
-            <div class="b-contacts__group">
-                <span class="b-contacts__subtitle">
-                    <?= Loc::getMessage("ADDRESS_TITLE") ?>
-                </span>
-                <div class="b-contacts__list">
-                    <span class="b-contacts__item">
-                        <?= $siteSettings->address ?>
+            <?php if (!empty($siteSettings->addressOrganisation)) { ?>
+                <div class="b-contacts__group">
+                    <span class="b-contacts__subtitle">
+                        <?= Loc::getMessage("ADDRESS_TITLE") ?>
                     </span>
+                    <div class="b-contacts__list">
+                        <?php foreach ($siteSettings->addressOrganisation as $key => $item) {  ?>
+                            <span class="b-contacts__item">
+                                <b><?= $key ?></b> <?= $item ?>
+                            </span>
+                        <?php } ?>
+                    </div>
                 </div>
-            </div>
             <?php } ?>
-            <?php if (!empty($siteSettings->phone)) { ?>
-            <div class="b-contacts__group">
-                <span class="b-contacts__subtitle">
-                    <?= Loc::getMessage("PHONE_TITLE") ?>
-                </span>
-                <div class="b-contacts__list">
-                    <?php foreach ($siteSettings->phone as  $item) { ?>
-                        <span class="b-contacts__item">
-                            <a class="b-contacts__link" href="tel:<?= Helper::convertPhoneTelFormat($item) ?>"><?= $item ?></a>
-
-                        </span>
-                    <?php } ?>
+            <?php if (!empty($siteSettings->contactPhones)) { ?>
+                <div class="b-contacts__group">
+                    <span class="b-contacts__subtitle">
+                        <?= Loc::getMessage("PHONE_TITLE") ?>
+                    </span>
+                    <div class="b-contacts__list">
+                        <?php foreach ($siteSettings->contactPhones as $key => $item) { ?>
+                            <span class="b-contacts__item">
+                                <b><?=$key?></b> <a class="b-contacts__link" href="tel:<?= Helper::convertPhoneTelFormat($item) ?>"><?= $item ?></a>
+                            </span>
+                        <?php } ?>
+                    </div>
                 </div>
-            </div>
             <?php } ?>
             <?php if (!empty($siteSettings->email)) { ?>
-            <div class="b-contacts__group">
-                <span class="b-contacts__subtitle">
-                    <?= Loc::getMessage("EMAIL_TITLE") ?>
-                </span>
-                <div class="b-contacts__list">
-                    <?php foreach ($siteSettings->email as $item) { ?>
-                        <span class="b-contacts__item">
-                            <a class="b-contacts__link" href="mailto:<?= $item ?>"><?= $item ?></a>
-                        </span>
-                    <?php } ?>
+                <div class="b-contacts__group">
+                    <span class="b-contacts__subtitle">
+                        <?= Loc::getMessage("EMAIL_TITLE") ?>
+                    </span>
+                    <div class="b-contacts__list">
+                        <?php foreach ($siteSettings->email as $item) { ?>
+                            <span class="b-contacts__item">
+                                <a class="b-contacts__link" href="mailto:<?= $item ?>"><?= $item ?></a>
+                            </span>
+                        <?php } ?>
+                    </div>
                 </div>
-            </div>
             <?php } ?>
             <?php if (!empty($siteSettings->socialNetworks)) { ?>
-            <div class="b-contacts__group">
+                <div class="b-contacts__group">
                 <span class="b-contacts__subtitle">
                     <?= Loc::getMessage("SOCIAL_NETWORK_TITLE") ?>
                 </span>
-                <div class="b-contacts__list">
-                    <?php foreach ($siteSettings->socialNetworks as $key => $item) { ?>
-                        <span class="b-contacts__item">
+                    <div class="b-contacts__list">
+                        <?php foreach ($siteSettings->socialNetworks as $key => $item) { ?>
+                            <span class="b-contacts__item">
                             <a href="<?= $item ?>" target="_blank" class="b-contacts__icon">
-                                <!-- TODO потом получить из БД -->
-                                <?= Helper::getIcon('telegram') ?>
+                                <?= Helper::getIcon($key) ?>
                             </a>
                         </span>
-                    <?php } ?>
+                        <?php } ?>
+                    </div>
                 </div>
-            </div>
             <?php } ?>
         </div>
     </div>

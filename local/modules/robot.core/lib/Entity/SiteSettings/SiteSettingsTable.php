@@ -64,7 +64,6 @@ class SiteSettingsTable extends DataManager
                 ]
             ),
             'EMAIL' => new StringField('EMAIL', [
-                'validation' => [__CLASS__, 'validateEmail'],
                 'title' => Loc::getMessage('ROBOT_SITE_SETTINGS_ENTITY_EMAIL_FIELD'),
             ]),
             'PHONE' => new StringField('PHONE', [
@@ -72,6 +71,18 @@ class SiteSettingsTable extends DataManager
             ]),
             'ADDRESS' => new StringField('ADDRESS', [
                 'title' => Loc::getMessage('ROBOT_SITE_SETTINGS_ENTITY_ADDRESS_FIELD'),
+            ]),
+            'ADDRESS_ORGANISATION' => new TextField('ADDRESS_ORGANISATION', [
+                'title' => "Контактные адреса организации",
+                'serialized' => true
+            ]),
+            'CONTACT_PHONES' => new TextField('CONTACT_PHONES', [
+                'title' => "Контактные номера телефонов",
+                'serialized' => true
+            ]),
+            'MAP_COORDINATES' => new TextField('MAP_COORDINATES', [
+                'title' => "Координаты организации на карте",
+                'serialized' => true
             ]),
             'SOCIAL_NETWORKS' => new TextField('SOCIAL_NETWORKS', [
                 'title' => Loc::getMessage('ROBOT_SITE_SETTINGS_ENTITY_SOCIAL_FIELD'),
@@ -102,16 +113,6 @@ class SiteSettingsTable extends DataManager
     }
 
     /**
-     * @throws ArgumentTypeException
-     */
-    public static function validateEmail(): array
-    {
-        return array(
-            new Length(null, 255),
-        );
-    }
-
-    /**
      * @return string[]
      */
     public static function getHeaderSelectedFields(): array
@@ -134,6 +135,20 @@ class SiteSettingsTable extends DataManager
             "ADDRESS",
             "SOCIAL_NETWORKS_FOOTER",
             "LOGO_FOOTER"
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getContactsSelectedFields(): array
+    {
+        return [
+            "ADDRESS_ORGANISATION",
+            "CONTACT_PHONES",
+            "EMAIL",
+            "SOCIAL_NETWORKS",
+            "MAP_COORDINATES"
         ];
     }
 }

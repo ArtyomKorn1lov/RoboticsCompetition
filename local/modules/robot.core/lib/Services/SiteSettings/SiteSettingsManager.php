@@ -6,6 +6,7 @@ use Bitrix\Main\ArgumentException;
 use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
 
+use Robot\Core\DTO\SiteSettings\SiteSettingsContacts;
 use Robot\Core\DTO\SiteSettings\SiteSettingsHeader;
 use Robot\Core\DTO\SiteSettings\SiteSettingsFooter;
 use Robot\Core\Repositories\SiteSettings\SiteSettingsRepository;
@@ -61,6 +62,30 @@ class SiteSettingsManager implements ISiteSettingsManager
             !empty($siteSetting->logoFooter) && $siteSetting->logoFooter = $fileHelper->getFilePath($siteSetting->logoFooter);
             !empty($siteSetting->email) && $siteSetting->email = $this->getArrayField($siteSetting->email);
             !empty($siteSetting->phone) && $siteSetting->phone = $this->getArrayField($siteSetting->phone);
+            return $siteSetting;
+        } catch (SystemException|ArgumentException|ObjectPropertyException $exception) {
+            AddMessage2Log($exception->getMessage());
+            throw $exception;
+        }
+    }
+
+    /**
+     * @return SiteSettingsContacts
+     * @throws ArgumentException
+     * @throws ObjectPropertyException
+     * @throws SystemException
+     */
+    public function getSettingContacts(): SiteSettingsContacts
+    {
+        try {
+            // TODO заменить через сервис-локатор
+            $siteSettingsRepository = new SiteSettingsRepository();
+            $arSiteSetting = $siteSettingsRepository->getSiteSettingsContacts();
+            if (empty($arSiteSetting)) {
+                throw new SystemException("Запись не найдена");
+            }
+            $siteSetting = SiteSettings::mapSiteSettingsContactsResponseToModel($arSiteSetting);
+            !empty($siteSetting->email) && $siteSetting->email = $this->getArrayField($siteSetting->email);
             return $siteSetting;
         } catch (SystemException|ArgumentException|ObjectPropertyException $exception) {
             AddMessage2Log($exception->getMessage());
