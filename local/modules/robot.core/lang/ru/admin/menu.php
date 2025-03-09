@@ -1,4 +1,4 @@
 <?php
-$MESS["MAIN_MODULE_TITLE"] = "Главный модуль сайта";
-$MESS["MAIN_MODULE_DESCRIPTION"] = "Главный модуль сайта";
-$MESS["MAIN_MODULE_SUBMENU_TITLE"] = "Главный модуль сайта";
+$MESS["MAIN_MODULE_TITLE"] = "Настройки сайта для проведения соревнований по робототехнике";
+$MESS["MAIN_MODULE_DESCRIPTION"] = "Настройки сайта для проведения соревнований по робототехнике";
+$MESS["MAIN_MODULE_SUBMENU_TITLE"] = "Настройки сайта для проведения соревнований по робототехнике";

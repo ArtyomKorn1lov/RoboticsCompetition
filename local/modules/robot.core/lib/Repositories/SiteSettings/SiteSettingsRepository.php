@@ -12,6 +12,34 @@ class SiteSettingsRepository implements ISiteSettingsRepository
 {
     /**
      * @return array
+     */
+    public function getSiteSettingsEdit(string $siteId): array
+    {
+        $query = new Query(SiteSettingsTable::getEntity());
+        $query->setOrder(["ID" => "ASC"]);
+        $query->setFilter(["=SITE_ID" => $siteId]);
+        $query->setLimit(1);
+        $query->setSelect([
+            "ID",
+            "EMAIL",
+            "PHONE",
+            "ADDRESS",
+            "ADDRESS_ORGANISATION",
+            "CONTACT_PHONES",
+            "MAP_COORDINATES",
+            "SOCIAL_NETWORKS",
+            "SOCIAL_NETWORKS_FOOTER"
+        ]);
+        $result = $query->exec();
+        $rows = $result->fetchAll();
+        if (!$rows) {
+            return [];
+        }
+        return $rows[0];
+    }
+
+    /**
+     * @return array
      * @throws ArgumentException
      * @throws ObjectPropertyException
      * @throws SystemException

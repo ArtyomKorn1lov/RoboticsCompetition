@@ -10,6 +10,22 @@ use Robot\Core\Services\SiteSettings\SiteSettingsManager;
 
 class SiteSettingsView implements ISiteSettingsView
 {
+
+    /**
+     * @return array|bool
+     */
+    public static function getSiteSettingsEdit(string $siteId): array|bool
+    {
+        try {
+            // TODO заменить через сервис-локатор
+            $siteSettingsManager = new SiteSettingsManager();
+            return $siteSettingsManager->getSiteSettingsEdit($siteId);
+        } catch (SystemException $exception) {
+            AddMessage2Log($exception->getMessage());
+            return false;
+        }
+    }
+
     /**
      * @return SiteSettingsHeader|bool
      */

@@ -9,6 +9,11 @@ use Robot\Core\DTO\SiteSettings\SiteSettingsHeader;
 interface ISiteSettingsView
 {
     /**
+     * @return array|bool
+     */
+    public static function getSiteSettingsEdit(string $siteId): array|bool;
+
+    /**
      * @return SiteSettingsHeader|bool
      */
     public static function getSettingsHeader(): SiteSettingsHeader|bool;

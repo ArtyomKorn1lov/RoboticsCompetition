@@ -16,6 +16,27 @@ use Robot\Core\Tools\Mappers\SiteSettings;
 class SiteSettingsManager implements ISiteSettingsManager
 {
     /**
+     * @return array
+     */
+    public function getSiteSettingsEdit(string $siteId): array
+    {
+        try {
+            // TODO заменить через сервис-локатор
+            $siteSettingsRepository = new SiteSettingsRepository();
+
+            $data = $siteSettingsRepository->getSiteSettingsEdit($siteId);
+            if (empty($data)) {
+                throw new ArgumentException("Настройки текущего сайта не найдены");
+            }
+
+            return $data;
+        } catch (SystemException|ArgumentException|ObjectPropertyException $exception) {
+            AddMessage2Log($exception->getMessage());
+            throw $exception;
+        }
+    }
+
+    /**
      * @return SiteSettingsHeader
      * @throws ArgumentException
      * @throws ObjectPropertyException

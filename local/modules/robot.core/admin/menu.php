@@ -10,16 +10,8 @@ $menu = array(
         'sort' => 400,  //сортировка, в каком месте будет находится наш пункт
         'text' => Loc::getMessage('MAIN_MODULE_TITLE'),   //описание из файла локализации
         'title' => Loc::getMessage('MAIN_MODULE_TITLE'),  //название из файла локализации
-        'url' => 'robot_core_index.php',  //ссылка на страницу из меню
+        'url' => 'robot_core_site_settings.php?lang=' . LANGUAGE_ID,  //ссылка на страницу из меню
         'items_id' => 'menu_references',    //описание подпункта, то же, что и ранее, либо другое, можно вставить сколько угодно пунктов меню
-        'items' => array(
-            array(
-                'text' => Loc::getMessage('MAIN_MODULE_SUBMENU_TITLE'),
-                'url' => 'robot_core_index.php?lang=' . LANGUAGE_ID,
-                'more_url' => array('robot_core_index.php?lang=' . LANGUAGE_ID),
-                'title' => Loc::getMessage('MAIN_MODULE_SUBMENU_TITLE'),
-            ),
-        ),
     ),
 );
 
