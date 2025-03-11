@@ -37,6 +37,9 @@ class Constants
     /** @var string Код ИБ Программа */
     public const PROGRAM_IBLOCK_CODE = "program";
 
+    /** @var string Код ИБ Программа */
+    public const DOCUMENT_IBLOCK_CODE = "documents";
+
     /** @var string Код ИБ Заявки с формы регистрации */
     public const REGISTRATION_REQUEST_IBLOCK_CODE = "registration-request";
 

@@ -35,7 +35,7 @@ final class Program
         string $timeSerialised
     )
     {
-        if (!$this->validateParams($id, $name, $location, $timeSerialised)) {
+        if (!$this->validateParams($id, $name, $location)) {
             throw new ArgumentException(Loc::getMessage("ROBOT_CORE_ARGUMENT_EXCEPTION"));
         }
 
@@ -61,17 +61,15 @@ final class Program
      * @param string $id
      * @param string $name
      * @param string $location
-     * @param string $timeSerialised
      * @return bool
      */
     protected function validateParams(
         string $id,
         string $name,
         string $location,
-        string $timeSerialised
     ): bool
     {
-        return !(empty($id) || empty($name) || empty($location) || empty($timeSerialised));
+        return !(empty($id) || empty($name) || empty($location) );
     }
 
     /**
@@ -80,6 +78,10 @@ final class Program
      */
     protected function unserializeTimeRange(string $timeSerialised): void
     {
+        if (empty($timeSerialised)) {
+            return;
+        }
+
         $arValue = unserialize(htmlspecialcharsback($timeSerialised), [stdClass::class]);
 
         if (empty($arValue["TIME_FROM"]) || empty($arValue["TIME_TO"])) {

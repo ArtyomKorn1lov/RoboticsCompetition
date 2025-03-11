@@ -60,7 +60,6 @@ class ProgramRepository implements IProgramRepository
         $result = [];
         $demo = [];
         while ($arItem = $rsObject->fetch()) {
-            $demo[] = $arItem;
             $result[] = $arItem[$entity->getSamplePropCode()];
         }
 

@@ -16,6 +16,11 @@ $this->setFrameMode(true);
 use Robot\Core\DTO\Program\ProgramItems;
 use Bitrix\Main\Web\Json;
 
+if (empty($arResult["PROGRAM_ITEMS"])) {
+    ShowError("Список элементов пуст");
+    return;
+}
+
 /** @var ProgramItems $programItems */
 $programItems = $arResult["PROGRAM_ITEMS"];
 
