@@ -3,15 +3,18 @@
 namespace Robot\Core\Services\SiteSettings;
 
 use Bitrix\Main\ArgumentException;
+use Bitrix\Main\ObjectException;
 use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
 
 use Robot\Core\DTO\SiteSettings\SiteSettingsContacts;
 use Robot\Core\DTO\SiteSettings\SiteSettingsHeader;
 use Robot\Core\DTO\SiteSettings\SiteSettingsFooter;
+use Robot\Core\DTO\SiteSettings\SiteSettingsUpdate;
 use Robot\Core\Repositories\SiteSettings\SiteSettingsRepository;
 use Robot\Core\Tools\Files\Helper;
 use Robot\Core\Tools\Mappers\SiteSettings;
+use Robot\Core\Entity\SiteSettings\SiteSettingsUpdate as SiteSettingsUpdateEntity;
 
 class SiteSettingsManager implements ISiteSettingsManager
 {
@@ -109,6 +112,31 @@ class SiteSettingsManager implements ISiteSettingsManager
             !empty($siteSetting->email) && $siteSetting->email = $this->getArrayField($siteSetting->email);
             return $siteSetting;
         } catch (SystemException|ArgumentException|ObjectPropertyException $exception) {
+            AddMessage2Log($exception->getMessage());
+            throw $exception;
+        }
+    }
+
+    /**
+     * @param SiteSettingsUpdate $siteSettingsUpdate
+     * @return void
+     * @throws ArgumentException
+     * @throws ObjectException
+     * @throws SystemException
+     */
+    public function saveSiteSettings(SiteSettingsUpdate $siteSettingsUpdate): void
+    {
+        try {
+            if (empty($siteSettingsUpdate)) {
+                throw new ObjectException("Нет полей для обновления контактной информации");
+            }
+
+            $entity = new SiteSettingsUpdateEntity($siteSettingsUpdate->id, $siteSettingsUpdate->arSiteSettings);
+            
+            // TODO заменить через сервис-локатор
+            $siteSettingsRepository = new SiteSettingsRepository();
+            $siteSettingsRepository->saveSiteSettings($entity);
+        } catch (SystemException $exception) {
             AddMessage2Log($exception->getMessage());
             throw $exception;
         }

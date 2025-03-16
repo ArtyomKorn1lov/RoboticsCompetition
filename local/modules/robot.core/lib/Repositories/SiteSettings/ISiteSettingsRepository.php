@@ -2,6 +2,8 @@
 
 namespace Robot\Core\Repositories\SiteSettings;
 
+use Robot\Core\Entity\SiteSettings\SiteSettingsUpdate;
+
 interface ISiteSettingsRepository
 {
     /**
@@ -23,4 +25,10 @@ interface ISiteSettingsRepository
      * @return array
      */
     public function getSiteSettingsContacts(): array;
+
+    /**
+     * @param SiteSettingsUpdate $entity
+     * @return void
+     */
+    public function saveSiteSettings(SiteSettingsUpdate $entity): void;
 }

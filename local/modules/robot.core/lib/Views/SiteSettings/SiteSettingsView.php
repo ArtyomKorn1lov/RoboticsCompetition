@@ -7,11 +7,13 @@ use Robot\Core\DTO\SiteSettings\SiteSettingsContacts;
 use Robot\Core\DTO\SiteSettings\SiteSettingsFooter;
 use Robot\Core\DTO\SiteSettings\SiteSettingsHeader;
 use Robot\Core\Services\SiteSettings\SiteSettingsManager;
+use Robot\Core\Tools\Mappers\SiteSettings;
 
 class SiteSettingsView implements ISiteSettingsView
 {
 
     /**
+     * @param string $siteId
      * @return array|bool
      */
     public static function getSiteSettingsEdit(string $siteId): array|bool
@@ -68,6 +70,27 @@ class SiteSettingsView implements ISiteSettingsView
         } catch (SystemException $exception) {
             AddMessage2Log($exception->getMessage());
             return false;
+        }
+    }
+
+    /**
+     * @param int $id
+     * @param array $arSiteSettings
+     * @return string|bool
+     */
+    public static function saveSiteSettings(int $id, array $arSiteSettings): string|bool
+    {
+        try {
+            if (empty($arSiteSettings)) {
+                return true;
+            }
+
+            // TODO заменить через сервис-локатор
+            $siteSettingsManager = new SiteSettingsManager();
+            $siteSettingsManager->saveSiteSettings(SiteSettings::mapArraySiteSettingsUpdateToModel($id, $arSiteSettings));
+            return true;
+        } catch (SystemException $exception) {
+            return $exception->getMessage();
         }
     }
 }

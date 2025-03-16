@@ -17,7 +17,8 @@ import {
     ElSkeleton,
     ElMessageBox,
     ElSelect,
-    ElOption
+    ElOption,
+    ElNotification
 } from 'element-plus';
 
 const ElPlus = {
@@ -36,7 +37,8 @@ const ElPlus = {
     ElSkeleton,
     ElMessageBox,
     ElSelect,
-    ElOption
+    ElOption,
+    ElNotification
 }
 
 export default { ElPlus, VueTheMask, Swiper }

@@ -66,10 +66,10 @@ final class Program
     protected function validateParams(
         string $id,
         string $name,
-        string $location,
+        string $location
     ): bool
     {
-        return !(empty($id) || empty($name) || empty($location) );
+        return !(empty($id) || empty($name) || empty($location));
     }
 
     /**

@@ -7,6 +7,7 @@ use Bitrix\Main\Entity\Query;
 use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
 use Robot\Core\Entity\SiteSettings\SiteSettingsTable;
+use Robot\Core\Entity\SiteSettings\SiteSettingsUpdate;
 
 class SiteSettingsRepository implements ISiteSettingsRepository
 {
@@ -99,5 +100,19 @@ class SiteSettingsRepository implements ISiteSettingsRepository
             return [];
         }
         return $rows[0];
+    }
+
+    /**
+     * @param SiteSettingsUpdate $entity
+     * @return void
+     * @throws SystemException
+     */
+    public function saveSiteSettings(SiteSettingsUpdate $entity): void
+    {
+        $result = SiteSettingsTable::update($entity->getId(), $entity->getSiteSettingsFields());
+
+        if (!$result->isSuccess()) {
+            throw new SystemException($result->getError());
+        }
     }
 }

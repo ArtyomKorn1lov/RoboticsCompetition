@@ -29,13 +29,13 @@ class robot_core extends CModule
         //пишем название нашего модуля как и директории
         $this->MODULE_ID = 'robot.core';
         // название модуля
-        $this->MODULE_NAME = Loc::getMessage('MAIN_MODULE_NAME');
+        $this->MODULE_NAME = Loc::getMessage('ROBOT_MODULE_NAME');
         //описание модуля
-        $this->MODULE_DESCRIPTION = Loc::getMessage('MAIN_MODULE_DESCRIPTION');
+        $this->MODULE_DESCRIPTION = Loc::getMessage('ROBOT_MODULE_DESCRIPTION');
         //используем ли индивидуальную схему распределения прав доступа, мы ставим N, так как не используем ее
         $this->MODULE_GROUP_RIGHTS = 'N';
         //название компании партнера предоставляющей модуль
-        $this->PARTNER_NAME = Loc::getMessage('MAIN_MODULE_PARTNER_NAME');
+        $this->PARTNER_NAME = Loc::getMessage('ROBOT_MODULE_PARTNER_NAME');
     }
 
     //здесь мы описываем все, что делаем до инсталляции модуля, мы добавляем наш модуль в регистр
@@ -218,8 +218,8 @@ class robot_core extends CModule
             $rows = $result->fetchAll();
 
             foreach ($rows as $row) {
-                CFile::Delete($row["LOGO"]);
-                CFile::Delete($row["LOGO_FOOTER"]);
+                !empty($row["LOGO"]) && CFile::Delete($row["LOGO"]);
+                !empty($row["LOGO_FOOTER"]) && CFile::Delete($row["LOGO_FOOTER"]);
             }
         } catch (Exception $exception) {
             AddMessage2Log($exception->getMessage(), $this->MODULE_ID);

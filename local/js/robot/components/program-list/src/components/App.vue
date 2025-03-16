@@ -11,12 +11,16 @@
           @change-tab="selectDate"
       />
       <div class="b-program__list">
-        <Card
-            v-if="!isLoading"
-            v-for="program in programData"
-            :key="program.id"
-            :program="program"
-        />
+        <template v-if="!isLoading && programData && programData.length > 0">
+          <Card
+              v-for="program in programData"
+              :key="program.id"
+              :program="program"
+          />
+        </template>
+        <div v-else-if="!isLoading && (!programData || programData.length <= 0)">
+          Список элементов пуст
+        </div>
         <el-skeleton
             v-else
             :rows="6"
@@ -28,7 +32,7 @@
 </template>
 
 <script setup>
-import { ElSkeleton } from "element-plus";
+import { ElSkeleton, ElNotification } from "element-plus";
 import { ref } from "vue";
 import Card from "./Card.vue";
 import TimeLine from "./TimeLine.vue";
@@ -56,6 +60,7 @@ const isLoading = ref(false);
 const selectDate = async (index) => {
   isLoading.value = true;
   activeTab.value = index;
+  programData.value = [];
   await getProgramItems({
     date: dates[index]?.date
   })
@@ -70,6 +75,11 @@ const selectDate = async (index) => {
       .catch((error) => {
         isLoading.value = false;
         console.error('error', error);
+        ElNotification({
+          title: 'Ошибка',
+          message: error,
+          type: 'error',
+        })
       });
 }
 </script>

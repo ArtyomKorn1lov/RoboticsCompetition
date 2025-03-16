@@ -5,6 +5,7 @@ namespace Robot\Core\Tools\Mappers;
 use Robot\Core\DTO\SiteSettings\SiteSettingsContacts;
 use Robot\Core\DTO\SiteSettings\SiteSettingsFooter;
 use Robot\Core\DTO\SiteSettings\SiteSettingsHeader;
+use Robot\Core\DTO\SiteSettings\SiteSettingsUpdate;
 
 class SiteSettings
 {
@@ -49,5 +50,14 @@ class SiteSettings
             socialNetworks: $response["SOCIAL_NETWORKS"],
             coords: $response["MAP_COORDINATES"]
         );
+    }
+
+    /**
+     * @param array $arSiteSettings
+     * @return SiteSettingsUpdate
+     */
+    public static function mapArraySiteSettingsUpdateToModel(int $id, array $arSiteSettings): SiteSettingsUpdate
+    {
+        return new SiteSettingsUpdate($id, $arSiteSettings);
     }
 }

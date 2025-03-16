@@ -5,6 +5,7 @@ namespace Robot\Core\Services\SiteSettings;
 use Robot\Core\DTO\SiteSettings\SiteSettingsContacts;
 use Robot\Core\DTO\SiteSettings\SiteSettingsFooter;
 use Robot\Core\DTO\SiteSettings\SiteSettingsHeader;
+use Robot\Core\DTO\SiteSettings\SiteSettingsUpdate;
 
 interface ISiteSettingsManager
 {
@@ -27,4 +28,6 @@ interface ISiteSettingsManager
      * @return SiteSettingsContacts
      */
     public function getSettingContacts(): SiteSettingsContacts;
+
+    public function saveSiteSettings(SiteSettingsUpdate $siteSettingsUpdate): void;
 }
