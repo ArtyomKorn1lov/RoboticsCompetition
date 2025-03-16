@@ -15,6 +15,7 @@ $this->setFrameMode(true);
 
 use Bitrix\Main\Localization\Loc;
 use Robot\Core\Tools\Template\Helper;
+use Bitrix\Main\Web\Json;
 
 if (empty($arResult["SETTINGS"])) {
     return;
@@ -92,7 +93,35 @@ $siteSettings = $arResult["SETTINGS"];
             <?php } ?>
         </div>
     </div>
-    <div class="b-contacts__map">
-
-    </div>
+    <div class="b-contacts__map b-map"></div>
 </div>
+
+<script>
+    $(function() {
+        //TODO отрефакторить
+        const options = {
+            map: {
+                center: <?=Json::encode($siteSettings->coords)?>,
+                zoom: 17,
+                controls: ['smallMapDefaultSet']
+            },
+            placemark: [
+                {
+                    geometry: <?=Json::encode($siteSettings->coords)?>,
+                    properties: {
+                        balloonContentHeader: '<h6><?=$siteSettings->address?></h6>',
+                        //TODO доинтегрировать
+                        //balloonContentBody: '<div class="b-map__content"><a href="mailto:info1@volgatech.net">info1@volgatech.net</a><a href="tel:79876543210">+7 (987) 654-32-10</a> <div>Республика Марий Эл, г. Йошкар-Ола, ул. Панфилова, 17</div> </div>'
+                    }
+                }
+            ],
+            placemarkDefaults: {
+                iconLayout: 'default#image',
+                iconImageHref: '/local/templates/robot/app/img/map_icon.svg',
+                iconImageSize: [35, 53]
+            }
+        };
+
+        $('.b-contacts__map').eyMaps(options);
+    });
+</script>

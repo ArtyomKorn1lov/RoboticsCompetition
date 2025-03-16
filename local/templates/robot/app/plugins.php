@@ -24,6 +24,11 @@ $extentions = [
         "js" => $pluguinsPath . "jquery/jquery.js",
         "rel" => [],
         "use" => CJSCore::USE_PUBLIC,
+    ],
+    "yandex-map" => [
+        "js" => $pluguinsPath . "yandex-map/jquery.eymaps.js",
+        "rel" => [],
+        "use" => CJSCore::USE_PUBLIC,
     ]
 ];
 

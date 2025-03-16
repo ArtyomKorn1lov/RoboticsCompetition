@@ -1,0 +1,43 @@
+.b-map {
+
+  .ymaps-2-1-79-balloon {
+    border-radius: $rounded15;
+
+    &__tail {
+      display: none;
+    }
+
+    &__layout {
+      border-radius: $rounded15;
+    }
+
+    &__content {
+      padding: $m20;
+    }
+
+    &__close {
+      right: $m10;
+      top: $m5;
+
+      & + .ymaps-2-1-79-balloon {
+
+        &__content {
+          margin-right: $m40;
+          padding-right: $m40;
+        }
+      }
+    }
+
+    &-content {
+
+      &__header {
+        margin-bottom: $m15;
+      }
+    }
+  }
+
+  &__content {
+    @include flex(column);
+    gap: $m5;
+  }
+}

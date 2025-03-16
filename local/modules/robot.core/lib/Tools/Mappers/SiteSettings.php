@@ -44,6 +44,7 @@ class SiteSettings
     public static function mapSiteSettingsContactsResponseToModel(array $response): SiteSettingsContacts
     {
         return new SiteSettingsContacts(
+            address: $response["ADDRESS"],
             addressOrganisation: $response["ADDRESS_ORGANISATION"],
             contactPhones: $response["CONTACT_PHONES"],
             email: $response["EMAIL"],

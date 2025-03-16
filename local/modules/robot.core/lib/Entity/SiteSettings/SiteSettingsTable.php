@@ -144,6 +144,7 @@ class SiteSettingsTable extends DataManager
     public static function getContactsSelectedFields(): array
     {
         return [
+            "ADDRESS",
             "ADDRESS_ORGANISATION",
             "CONTACT_PHONES",
             "EMAIL",

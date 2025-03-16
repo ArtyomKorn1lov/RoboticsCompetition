@@ -8,6 +8,10 @@
     "build dev": "npx webpack-cli --mode development",
     "build prod": "npx webpack-cli"
   },
+  "engines": {
+    "node": ">=20.11.0",
+    "npm": ">=10.2.4"
+  },
   "keywords": [],
   "author": "Robot",
   "license": "ISC",

@@ -16,7 +16,8 @@ Manager::includeFrontendPlugins();
 
 Extension::load([
 	"robot_frontend",
-	"jquery"
+	"jquery",
+    "yandex-map"
 ]);
 
 ?>
