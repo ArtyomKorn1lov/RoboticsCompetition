@@ -3,8 +3,9 @@
     <a
         v-for="(item, index) in items"
         :key="index"
-        @click="openVideo(item)"
-        href="javascript:void(0)"
+        @click="!isPdf(item.file.type) && openVideo(item)"
+        :href="isPdf(item.file.type) ? item.file.url : 'javascript:void(0)'"
+        :target="isPdf(item.file.type) ? '_blank' : '_self'"
         class="b-study__item"
         :id="item.areaId"
     >
@@ -26,6 +27,8 @@
 import MediaPopup from "MediaPopup";
 import {reactive, ref} from "vue";
 
+const PDF_FILE_TYPE = "application/pdf";
+
 const { items } = defineProps({
   items: {
     type: Array,
@@ -41,6 +44,10 @@ const popupContent = reactive({
   type: "",
   isVideo: false
 });
+
+const isPdf = (type) => {
+  return type === PDF_FILE_TYPE;
+}
 
 const openVideo = (item) => {
   toggle.value = true;
