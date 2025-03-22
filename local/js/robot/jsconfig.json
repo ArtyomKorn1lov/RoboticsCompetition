@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "MediaPopup": ["components/media-popup/src/main"],
+      "tools": ["tools/src/main"],
+      "composable": ["composable/src/main"]
+    }
+  }
+}

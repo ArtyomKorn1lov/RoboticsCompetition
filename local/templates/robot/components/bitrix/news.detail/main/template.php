@@ -13,12 +13,11 @@
 $this->setFrameMode(true);
 
 use Robot\Core\Constants;
+use Robot\Core\Views\Events\EventsView;
 use Bitrix\Main\Localization\Loc;
 
 Loc::loadMessages(__FILE__);
 
-$showActiveRegistration = !empty($arResult["DISPLAY_PROPERTIES"]["ACTIVE_REGISTRATION"]["DISPLAY_VALUE"])
-    && $arResult["DISPLAY_PROPERTIES"]["ACTIVE_REGISTRATION"]["DISPLAY_VALUE"] === "Y";
 ?>
 
 <div class="b-section b-section_pb">
@@ -35,7 +34,7 @@ $showActiveRegistration = !empty($arResult["DISPLAY_PROPERTIES"]["ACTIVE_REGISTR
                     <?= $arResult["DETAIL_TEXT"] ?>
                 </div>
             <?php } ?>
-            <?php if ($showActiveRegistration) { ?>
+            <?php if (EventsView::showRegistration()) { ?>
                 <a class="b-button b-button_primary b-event__button" href="<?= Constants::REGISTRATION_URL ?>">
                     <?= Loc::getMessage("EVENT_PARTICIPATE_BTN") ?>
                 </a>

@@ -2,9 +2,7 @@
   <div class="b-section b-section_pb b-section_last b-archive">
 
     <div class="b-section__top">
-      <h2 class="h5 b-section__title b-archive__subtitle">
-        Фотографии
-      </h2>
+      <h2 class="h5 b-section__title b-archive__subtitle" v-text="loc.MEDIA_ITEMS_PHOTO_TITLE" />
     </div>
     <div class="b-materials b-materials_mb">
       <a
@@ -19,9 +17,7 @@
     </div>
 
     <div class="b-section__top">
-      <h2 class="h5 b-section__title b-archive__subtitle">
-        Видео
-      </h2>
+      <h2 class="h5 b-section__title b-archive__subtitle" v-text="loc.MEDIA_ITEMS_VIDEO_TITLE" />
     </div>
     <div class="b-materials b-materials_video">
       <a
@@ -32,10 +28,7 @@
           href="javascript:void(0)"
       >
         <img v-if="item.preview" class="b-materials__video" :src="item.preview" :alt="item.name">
-        <div class="b-materials__video-icon">
-          <svg>
-            <use xlink:href="/local/templates/robot/app/dist/assets/icons/sprite.svg#play"></use>
-          </svg>
+        <div class="b-materials__video-icon" v-html="TemplateHelper.getIcon('play')">
         </div>
       </a>
     </div>
@@ -49,9 +42,14 @@
 </template>
 
 <script setup>
+import { computed, reactive, ref } from "vue";
 import MediaPopup from "MediaPopup";
-import {reactive, ref} from "vue";
+import { TemplateHelper, getFilteredPhrases, MediaPopup as MediaPopupModel, Constants } from 'tools';
 
+/**
+ * @typedef {{ photos: MediaPopupModel[], videos: MediaPopupModel[] }} MediaItemsProps
+ * @return {MediaItemsProps}
+ */
 const { photos, videos } = defineProps({
   photos: {
     type: Array,
@@ -72,21 +70,17 @@ const popupContent = reactive({
   isVideo: false
 });
 
+const loc = computed(() => getFilteredPhrases('MEDIA_ITEMS_'));
+
 const openPopup = (item) => {
   toggle.value = true;
-  Object.assign(popupContent, {...item});
+  Object.assign(popupContent, {...new MediaPopupModel(item)});
 }
 
 const closePopup = () => {
   toggle.value = false;
   setTimeout(() => {
-    Object.assign(popupContent, {
-      url: "",
-      preview: "",
-      name: "",
-      type: "",
-      isVideo: false
-    });
+    Object.assign(popupContent, Constants.DEFAULT_PARAMS_MEDIA_POPUP);
   }, 300);
 }
 

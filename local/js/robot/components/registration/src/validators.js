@@ -1,5 +1,7 @@
+import { Constants } from 'tools';
+
 // Валидаторы для формы
 export default {
-    email: /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i,
-    phone: /^(\+7\(\d{3}\)-\d{3}-\d{2}-\d{2})$/
+    email: Constants.DEFAULT_EMAIL_REGEX,
+    phone: Constants.DEFAULT_PHONE_REGEX
 }

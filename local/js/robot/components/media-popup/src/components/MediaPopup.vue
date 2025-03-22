@@ -12,11 +12,8 @@
           href="javascript:void(0)"
           @click="close"
           class="b-dialog__close"
-      >
-        <svg>
-          <use xlink:href="/local/templates/robot/app/dist/assets/icons/sprite.svg#close"></use>
-        </svg>
-      </a>
+          v-html="TemplateHelper.getIcon('close')"
+      />
     </template>
     <video v-if="item.isVideo && item.url" class="b-dialog__video" controls="controls" muted :poster="item.preview">
       <source :src="item.url" :type="item.type">
@@ -30,6 +27,7 @@
 import {
   ElDialog
 } from "element-plus";
+import { TemplateHelper, MediaPopup, Constants } from 'tools';
 
 const { toggle, item } = defineProps({
   toggle: {
@@ -37,14 +35,8 @@ const { toggle, item } = defineProps({
     default: false
   },
   item: {
-    type: Object,
-    default: {
-      url: "",
-      preview: "",
-      name: "",
-      type: "",
-      isVideo: false
-    }
+    type: MediaPopup,
+    default: Constants.DEFAULT_PARAMS_MEDIA_POPUP
   }
 });
 

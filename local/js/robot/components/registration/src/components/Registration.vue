@@ -27,8 +27,8 @@
               :placeholder="field.placeholder"
               class="b-datepicker"
               popper-class="b-popper"
-              format="DD.MM.YYYY"
-              value-format="DD.MM.YYYY"
+              :format="Constants.DATE_PICKER_DATE_FORMAT"
+              :value-format="Constants.DATE_PICKER_DATE_FORMAT"
           />
           <el-select
               v-else-if="field.type === 'select'"
@@ -57,7 +57,7 @@
               v-else-if="field.type === 'tel'"
               v-model="formData[field.code]"
               :placeholder="field.placeholder"
-              v-mask="'+7(###)-###-##-##'"
+              v-mask="Constants.DEFAULT_PHONE_MASK"
               class="b-input"
           />
           <el-input
@@ -92,15 +92,13 @@
       </el-col>
 
       <el-col class="b-form__col b-form__col_bottom">
-        <div class="b-form__tooltip">
-          Обязательные поля обозначены флажком <span>«*»</span>
-        </div>
+        <div class="b-form__tooltip" v-html="loc.REGISTRATION_REQUIER_LABEL" />
         <el-button
             class="b-button b-button_primary"
             native-type="submit"
             :loading="isLoading"
         >
-          Регистрация
+          {{ loc.REGISTRATION_SUBMIT_TITLE }}
         </el-button>
       </el-col>
     </el-row>
@@ -122,11 +120,15 @@ import {
   ElSelect,
   ElOption
 } from 'element-plus';
-import { reactive, ref } from 'vue';
+import { computed, reactive, ref } from 'vue';
 import { useForm } from 'composable';
 import Validators from "../validators";
-import { sendRegisterForm, searchCountries } from 'tools';
+import { sendRegisterForm, searchCountries, getFilteredPhrases, Constants, FormFields as FormFieldsModel, FormSearch } from 'tools';
 
+/**
+ * @typedef {{ formFields: FormFieldsModel[] }} RegistrationProps
+ * @return {RegistrationProps}
+ */
 const { formFields } = defineProps({
   formFields: {
     type: Object,
@@ -148,17 +150,19 @@ const {
     Validators
 );
 
+const loc = computed(() => getFilteredPhrases('REGISTRATION_'));
+
 const querySearchAsync = async (queryString, callback, id) => {
   if (queryString && id) {
     let countries = [];
 
-    await searchCountries({
+    await searchCountries(new FormSearch({
       id: id,
       value: queryString
-    })
+    }))
         .then((response) => {
           // TODO обработка ошибки пока не разберусь как возвращать статус ошибки с сервера
-          if (response?.data?.status === "error") {
+          if (response?.data?.status === 'error') {
             throw new Error(response?.data?.errors[0].message);
           }
           countries = [...response?.data?.data];

@@ -3,17 +3,15 @@
     <a
         v-for="(item, index) in items"
         :key="index"
-        @click="!isPdf(item.file.type) && openVideo(item)"
-        :href="isPdf(item.file.type) ? item.file.url : 'javascript:void(0)'"
-        :target="isPdf(item.file.type) ? '_blank' : '_self'"
+        @click="!isFile(item.file.type) && openVideo(item)"
+        :href="isFile(item.file.type) ? item.file.url : 'javascript:void(0)'"
+        :target="isFile(item.file.type) ? '_blank' : '_self'"
         class="b-study__item"
         :id="item.areaId"
     >
       <span class="h5 b-study__name" v-text="item.name" />
       <div class="b-study__description" v-html="item.description" />
-      <span class="b-study__icon">
-          <svg><use xlink:href="/local/templates/robot/app/dist/assets/icons/sprite.svg#arrow_right"></use></svg>
-      </span>
+      <span class="b-study__icon" v-html="TemplateHelper.getIcon('arrow_right')" />
     </a>
 
     <MediaPopup
@@ -24,11 +22,14 @@
   </div>
 </template>
 <script setup>
+import { reactive, ref } from "vue";
 import MediaPopup from "MediaPopup";
-import {reactive, ref} from "vue";
+import { TemplateHelper, MediaPopup as MediaPopupModel, Constants, DocsEnum } from "tools";
 
-const PDF_FILE_TYPE = "application/pdf";
-
+/**
+ * @typedef {{ items: MediaPopupModel[] }} EducationVideos
+ * @return {EducationVideos}
+ */
 const { items } = defineProps({
   items: {
     type: Array,
@@ -45,31 +46,25 @@ const popupContent = reactive({
   isVideo: false
 });
 
-const isPdf = (type) => {
-  return type === PDF_FILE_TYPE;
+const isFile = (type) => {
+  return DocsEnum.isDocType(type);
 }
 
 const openVideo = (item) => {
   toggle.value = true;
-  Object.assign(popupContent, {
+  Object.assign(popupContent, new MediaPopupModel({
     name: item.name,
     url: item.file.url,
     preview: item.preview ? item.preview : "",
     type: item.file.type,
     isVideo: true
-  });
+  }));
 }
 
 const closePopup = () => {
   toggle.value = false;
   setTimeout(() => {
-    Object.assign(popupContent, {
-      url: "",
-      preview: "",
-      name: "",
-      type: "",
-      isVideo: false
-    });
+    Object.assign(popupContent, Constants.DEFAULT_PARAMS_MEDIA_POPUP);
   }, 300);
 }
 

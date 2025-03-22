@@ -1,9 +1,9 @@
-import { mutationPostRequest } from "./mutations";
+import { postRequest } from "./requests";
 
 export const sendRegisterForm = async (formData, headers = false) => {
-    return await mutationPostRequest(`/events/register/`, formData);
+    return await postRequest(`/events/register/`, formData);
 }
 
 export const searchCountries = async (formData, headers = false) => {
-    return await mutationPostRequest(`/events/search-countries/`, formData);
+    return await postRequest(`/events/search-countries/`, formData);
 }

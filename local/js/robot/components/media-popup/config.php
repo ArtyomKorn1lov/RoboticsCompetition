@@ -6,7 +6,8 @@ return [
     'js' => './dist/script.bundle.js',
     'rel' => [
         'robot.core',
-        'robot.ui'
+        'robot.ui',
+        'robot.tools'
     ],
     'skip_core' => true,
 ];

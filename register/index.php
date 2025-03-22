@@ -36,5 +36,4 @@ $APPLICATION->IncludeComponent(
     )
 );?>
 <?php
-Bitrix\Main\UI\Extension::load(["robot.components.registration"]);
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

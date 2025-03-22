@@ -1,17 +1,20 @@
-import { ref, reactive } from "vue";
+import { ref, reactive, computed } from "vue";
 import { ElMessageBox } from "element-plus";
+import { getFilteredPhrases, Constants, FormFields } from 'tools';
 
 /**
  * Хук с общей логикой форм обратной связи
+ * @param {FormFields} fields
+ * @param {Function} ajaxFunc
+ * @param {Object} validators
  */
 export default function useForm(fields, ajaxFunc, validators = {}) {
-
-    const defaultEmailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i;
-    const defaultPhoneRegex = /^(\+7\(\d{3}\)-\d{3}-\d{2}-\d{2})$/;
 
     const formData = reactive({});
     const isLoading = ref(false);
     const rules = reactive({});
+
+    const loc = computed(() => getFilteredPhrases('COMPOSABLE_FORM_'));
 
     const onInit = () => {
         initRules();
@@ -19,22 +22,27 @@ export default function useForm(fields, ajaxFunc, validators = {}) {
     }
 
     const initRules = () => {
+
         (!!fields.groups && fields.groups.length > 0)
         && fields.groups.forEach(group => {
             (!!group.items && group.items.length > 0)
             && group.items.forEach((field) => {
+                if (!field.required) {
+                    return;
+                }
+
+                // Правила для валидации поля
                 switch (field.type) {
                     case 'email':
                         rules[field.code] = [
-                            { required: field.required, message: "Поле обязательно для заполнения", trigger: 'blur' },
                             {
                                 validator:
                                     (rule, value, callback) => {
-                                        const regularExpression = !!validators[field.type] ? validators[field.type] : defaultEmailRegex;
+                                        const regularExpression = !!validators[field.type] ? validators[field.type] : Constants.DEFAULT_EMAIL_REGEX;
                                         if (regularExpression.test(value)) {
                                             return callback();
                                         }
-                                        return callback(new Error("Невалидный email"));
+                                        return callback(new Error(loc.value.COMPOSABLE_FORM_EMAIL_INVALID));
                                     },
                                 trigger: "change"
                             }
@@ -42,41 +50,39 @@ export default function useForm(fields, ajaxFunc, validators = {}) {
                         break;
                     case 'tel':
                         rules[field.code] = [
-                            { required: field.required, message: "Поле обязательно для заполнения", trigger: 'blur' },
                             {
                                 validator:
                                     (rule, value, callback) => {
-                                        const regularExpression = !!validators[field.type] ? validators[field.type] : defaultPhoneRegex;
+                                        const regularExpression = !!validators[field.type] ? validators[field.type] : Constants.DEFAULT_PHONE_REGEX;
                                         if (regularExpression.test(value)) {
                                             return callback();
                                         }
-                                        return callback(new Error("Невалидный телефон"));
+                                        return callback(new Error(loc.value.COMPOSABLE_FORM_PHONE_INVALID));
                                     },
                                 trigger: "change"
                             }
                         ];
                         break;
-                    case 'autocomplete':
-                        rules[field.code] = [
-                            { required: field.required, message: "Поле обязательно для заполнения", trigger: 'change' },
-                        ];
-                        break;
-                    case 'select':
-                        rules[field.code] = [
-                            { required: field.required, message: "Поле обязательно для заполнения", trigger: 'change' },
-                        ];
-                        break;
-                    case 'checkbox':
-                        rules[field.code] = [
-                            { required: field.required, message: "Поле обязательно для заполнения", trigger: 'change' },
-                        ];
-                        break;
                     default:
-                        rules[field.code] = [
-                            { required: field.required, message: "Поле обязательно для заполнения", trigger: 'blur' },
-                        ];
                         break;
                 }
+
+                // Установка правила, что поле обязательно для заполнения
+                let requireRule;
+                switch (field.type) {
+                    case 'autocomplete':
+                    case 'select':
+                    case 'checkbox':
+                        requireRule = { required: field.required, message: loc.value.COMPOSABLE_FORM_FIELD_REQUIRED, trigger: 'change' };
+                        break;
+                    default:
+                        requireRule = { required: field.required, message: loc.value.COMPOSABLE_FORM_FIELD_REQUIRED, trigger: 'blur' };
+                        break;
+                }
+
+                (rules[field.code] && rules[field.code].length > 0 && requireRule)
+                    ? rules[field.code].push(requireRule)
+                    : (rules[field.code] = [requireRule]);
             });
         });
     }
@@ -123,14 +129,14 @@ export default function useForm(fields, ajaxFunc, validators = {}) {
                 resetForm(formRef);
                 isLoading.value = false;
                 await showMessage(
-                    'Успешно',
+                    loc.value.COMPOSABLE_FORM_SUCCESS_MESSAGE_TITLE,
                     response?.data?.data,
                     "success",
                     afterSuccess
                 );
             })
             .catch(async (error) => {
-                await showMessage('Ошибка', error);
+                await showMessage(loc.value.COMPOSABLE_FORM_ERROR_MESSAGE_TITLE, error);
                 isLoading.value = false;
             })
     }
@@ -148,7 +154,7 @@ export default function useForm(fields, ajaxFunc, validators = {}) {
                 closeOnHashChange: type === "success",
                 showConfirmButton: true,
                 confirmButtonClass: "b-button b-button_primary b-button_small",
-                confirmButtonText: 'Ок',
+                confirmButtonText: loc.value.COMPOSABLE_FORM_OK_BTN_TITLE,
                 callback: callback
             });
     }
@@ -164,6 +170,7 @@ export default function useForm(fields, ajaxFunc, validators = {}) {
         formData,
         isLoading,
         rules,
-        onSubmit
+        onSubmit,
+        showMessage
     }
 }

@@ -22,7 +22,12 @@
 
 <script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Timing } from 'tools';
 
+/**
+ * @typedef {{ dates: Timing[], activeTab: Number }} TimeLineProps
+ * @return {TimeLineProps}
+ */
 const { dates, activeTab } = defineProps({
   dates: {
     type: Array,

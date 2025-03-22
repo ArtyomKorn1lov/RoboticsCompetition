@@ -18,9 +18,7 @@
               :program="program"
           />
         </template>
-        <div v-else-if="!isLoading && (!programData || programData.length <= 0)">
-          Список элементов пуст
-        </div>
+        <div v-else-if="!isLoading && (!programData || programData.length <= 0)" v-text="loc.PROGRAM_LIST_EMPTY" />
         <el-skeleton
             v-else
             :rows="6"
@@ -33,11 +31,15 @@
 
 <script setup>
 import { ElSkeleton, ElNotification } from "element-plus";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import Card from "./Card.vue";
 import TimeLine from "./TimeLine.vue";
-import { getProgramItems } from 'tools';
+import { getProgramItems, getFilteredPhrases, Program, Timing } from 'tools';
 
+/**
+ * @typedef {{ title: String, dates: Timing[], programs: Program[] }} ProgramListProps
+ * @return {ProgramListProps}
+ */
 const { title, dates, programs } = defineProps({
   title: {
     type: String,
@@ -57,6 +59,8 @@ const programData = ref([...programs]);
 const activeTab = ref(0);
 const isLoading = ref(false);
 
+const loc = computed(() => getFilteredPhrases('PROGRAM_LIST_'));
+
 const selectDate = async (index) => {
   isLoading.value = true;
   activeTab.value = index;
@@ -66,7 +70,7 @@ const selectDate = async (index) => {
   })
       .then((response) => {
         // TODO обработка ошибки пока не разберусь как возвращать статус ошибки с сервера
-        if (response?.data?.status === "error") {
+        if (response?.data?.status === 'error') {
           throw new Error(response?.data?.errors[0].message);
         }
         programData.value = [...response?.data?.data];
@@ -76,7 +80,7 @@ const selectDate = async (index) => {
         isLoading.value = false;
         console.error('error', error);
         ElNotification({
-          title: 'Ошибка',
+          title: loc.value.PROGRAM_LIST_ERROR_TITLE,
           message: error,
           type: 'error',
         })

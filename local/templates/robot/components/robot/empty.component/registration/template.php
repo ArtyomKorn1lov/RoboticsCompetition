@@ -18,7 +18,6 @@ use Bitrix\Main\Localization\Loc;
 
 Loc::loadMessages(__FILE__);
 
-
 $templateId = "registration" . $this->randString();
 $arResult["JS_DATA"]["templateId"] = $templateId;
 

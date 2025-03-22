@@ -6,7 +6,8 @@ const postcssPresetEnv = require('postcss-preset-env');
 const DEFAULT_GLOBALS = {
     vue: 'RobotCore.vue',
     axios: 'RobotCore.axios',
-    'element-plus': 'RobotUI.ElPlus'
+    'element-plus': 'RobotUI.ElPlus',
+    'tools': 'RobotTools'
 }
 
 module.exports = (env, argv) => {

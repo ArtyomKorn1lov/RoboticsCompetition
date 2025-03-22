@@ -149,10 +149,14 @@ class EventsView implements IEventsView
         return Event::mapActiveEventResponseToModel($item);
     }
 
+    /**
+     * @param DateTime $date
+     * @return bool
+     */
     protected static function isDateAvaliable(DateTime $date): bool
     {
         $curDate = new DateTime();
-        if ($curDate->getTimestamp() > $date->getTimestamp()) {
+        if ($curDate->format("Y-m-d") > $date->format("Y-m-d")) {
             return false;
         }
         return true;

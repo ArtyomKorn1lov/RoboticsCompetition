@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "Общие стили, js и статические изображения для всего сайта",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "build": "gulp build",
     "styles": "gulp stylesBuild",

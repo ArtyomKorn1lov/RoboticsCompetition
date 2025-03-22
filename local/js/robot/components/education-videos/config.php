@@ -7,6 +7,7 @@ return [
     'rel' => [
         'robot.core',
         'robot.ui',
+        'robot.tools',
         'robot.components.media-popup'
     ],
     'skip_core' => true,

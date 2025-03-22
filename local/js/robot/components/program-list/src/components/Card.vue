@@ -7,12 +7,16 @@
     <div v-if="program.location" class="b-program__right" v-text="program.location" />
   </div>
 </template>
-
 <script setup>
+import { Program } from 'tools';
 
+/**
+ * @typedef {{ program: Program }} CardProps
+ * @return {CardProps}
+ */
 const { program } = defineProps({
   program: {
-    type: Object,
+    type: Program,
     default: {
       id: 0,
       name: '',

@@ -1,9 +1,9 @@
-import { mutationPostRequest } from "./mutations";
+import { postRequest } from "./requests";
 
 /**
  * @param {Object} formData
  * @param {Boolean|Object} headers
  */
 export const getProgramItems = async (formData, headers = false) => {
-    return await mutationPostRequest(`/program/get-items/`, formData);
+    return await postRequest(`/program/get-items/`, formData);
 }

@@ -12,7 +12,6 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 
-use Robot\Core\Constants;
 use Robot\Core\Tools\Template\Helper;
 
 if (empty($arResult["ITEMS"])) {
