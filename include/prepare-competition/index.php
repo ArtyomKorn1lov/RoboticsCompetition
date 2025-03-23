@@ -27,7 +27,7 @@ $APPLICATION->IncludeComponent(
         "HIDE_LINK_WHEN_NO_DETAIL" => "N",
         "IBLOCK_ID" => Robot\Core\Constants::VIDEO_LESSONS_IBLOCK_CODE,
         "IBLOCK_TYPE" => Robot\Core\Constants::CONTENT_IBLOCK_TYPE,
-        "INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
+        "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
         "INCLUDE_SUBSECTIONS" => "Y",
         "MESSAGE_404" => "",
         "NEWS_COUNT" => "100",

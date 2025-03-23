@@ -15,6 +15,7 @@ Robot\Core\Tools\Template\Helper::initTitle("b-main__title");
         Array(
             "CACHE_TIME" => "36000000",
             "CACHE_TYPE" => "A",
+            "IS_MAIN_PAGE" => ($APPLICATION->GetCurPage(false) === SITE_DIR),
             "MODULES_CODES" => array("robot.core","")
         )
     );?>

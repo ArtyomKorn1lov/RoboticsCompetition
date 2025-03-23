@@ -47,6 +47,7 @@ Extension::load([
             Array(
                 "CACHE_TIME" => "36000000",
                 "CACHE_TYPE" => "A",
+                "IS_MAIN_PAGE" => ($APPLICATION->GetCurPage(false) === SITE_DIR),
                 "MODULES_CODES" => array("robot.core","")
             )
         );?>
@@ -85,5 +86,16 @@ Extension::load([
     </div>
 </header>
 <main class="b-main b-main_centered">
+    <?php if ($APPLICATION->GetCurPage(false) !== SITE_DIR) { ?>
+        <?php $APPLICATION->IncludeComponent(
+            "bitrix:breadcrumb",
+            "main",
+            array(
+                "PATH" => "",
+                "SITE_ID" => SITE_ID,
+                "START_FROM" => "0"
+            )
+        ); ?>
+    <?php } ?>
 
     <?php Robot\Core\Tools\Template\Helper::showTitle() ?>

@@ -24,16 +24,26 @@ Loc::loadMessages(__FILE__);
 
 /** @var Robot\Core\DTO\SiteSettings\SiteSettingsFooter $siteSettings */
 $siteSettings = $arResult["SETTINGS"];
+
+$isMainPage = $arParams["IS_MAIN_PAGE"];
 ?>
 
 <div class="b-footer__wrap">
     <div class="b-footer__logo">
         <?php if (!empty($siteSettings->logoFooter)) { ?>
-            <a class="b-footer__logo-wrap" href="<?= SITE_DIR ?>">
-                <img class="b-footer__logo-icon"
-                     src="<?= $siteSettings->logoFooter ?>"
-                     alt="<?= $siteSettings->siteName ?>">
-            </a>
+            <?php if ($isMainPage) { ?>
+                <div class="b-footer__logo-wrap">
+            <?php } else { ?>
+                <a class="b-footer__logo-wrap" href="<?= SITE_DIR ?>">
+            <?php } ?>
+                    <img class="b-footer__logo-icon"
+                        src="<?= $siteSettings->logoFooter ?>"
+                        alt="<?= $siteSettings->siteName ?>">
+            <?php if ($isMainPage) { ?>
+                </div>
+            <?php } else { ?>
+                </a>
+            <?php } ?>
         <?php } ?>
         <div class="b-footer__title-wrap">
             <div class="b-footer__title">

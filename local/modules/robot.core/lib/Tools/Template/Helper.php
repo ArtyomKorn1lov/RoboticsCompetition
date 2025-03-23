@@ -4,7 +4,7 @@ namespace Robot\Core\Tools\Template;
 
 class Helper
 {
-    /** @var string Отностельный путь к иконке в файловой системе */
+    /** @var string Относительный путь к иконке в файловой системе */
     protected const SPRITE_FOLDER_PATH = SITE_DIR . "local/templates/robot/app/dist/assets/icons/sprite.svg#";
 
     /** @var string Код свойства для хранения заголовка в буфере */

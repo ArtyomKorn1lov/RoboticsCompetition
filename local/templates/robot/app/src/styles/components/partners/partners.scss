@@ -9,17 +9,20 @@
   }
 
   &__item {
-    cursor: pointer;
-    background-image: var(--background-partner);
-    background-repeat: no-repeat;
-    background-size: 65%;
-    background-position: center;
     width: $full;
+    height: $full;
     aspect-ratio: 300/160;
+    filter: grayscale(100%);
 
     &:hover,
     &:active {
-      background-image: var(--background-partner-active);
+      filter: none;
     }
+  }
+
+  &__img {
+    width: $full;
+    height: $full;
+    object-fit: contain;
   }
 }

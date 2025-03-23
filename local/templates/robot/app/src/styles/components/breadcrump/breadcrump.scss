@@ -1,0 +1,36 @@
+.b-breadcrump {
+  @include flex(false, center);
+  gap: $m10;
+  padding-top: $m15;
+
+  &__arrow {
+    width: $m15;
+    height: 1px;
+    background-color: $colorPrimaryText;
+  }
+
+  &__item {
+    @include flex(false, center);
+    gap: $m10;
+  }
+
+  &__name {
+    color: $colorPrimary;
+    font-weight: $textMedium;
+  }
+
+  &__link {
+
+    .b-breadcrump {
+
+      &__name {
+        color: $colorPrimaryText;
+
+        &:hover,
+        &:active {
+          color: $colorSecondary;
+        }
+      }
+    }
+  }
+}
