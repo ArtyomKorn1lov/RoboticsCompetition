@@ -1,6 +1,10 @@
 @include screen(lg) {
   .b-section {
 
+    &_pb_half {
+      padding-bottom: $m60;
+    }
+
     &_last {
       padding-bottom: $m45;
     }
@@ -23,10 +27,36 @@
       padding-bottom: $m70;
     }
 
+    &_pb_half {
+      padding-bottom: $m45;
+    }
+
+    &__top {
+      padding-bottom: $m15;
+    }
+
     &__title {
 
       &_pb_30-full {
         padding-bottom: $m20;
+      }
+    }
+
+    &__description {
+
+      &_mb-35 {
+        margin-bottom: $m25;
+      }
+
+      &_text-normal {
+        font-size: $textRegular;
+      }
+    }
+
+    &__article {
+
+      p, span, a, li {
+        font-size: $textRegular;
       }
     }
   }

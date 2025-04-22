@@ -10,7 +10,8 @@ use Robot\Core\DTO\SiteSettings\SiteSettingsUpdate;
 interface ISiteSettingsManager
 {
     /**
-     * @return int
+     * @param string $siteId
+     * @return array
      */
     public function getSiteSettingsEdit(string $siteId): array;
 

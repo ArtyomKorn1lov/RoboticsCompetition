@@ -20,10 +20,3 @@ export const DEFAULT_PARAMS_MEDIA_POPUP = new MediaPopup({
 
 /** @type {String} */
 export const DATE_PICKER_DATE_FORMAT = 'DD.MM.YYYY';
-
-export const BxDocTypes = {
-    PDF_FILE_TYPE: "application/pdf",
-    DOC_FILE_TYPE: "application/msword",
-    DOCX_FILE_TYPE: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    HTML_FILE_TYPE: "text/html",
-}

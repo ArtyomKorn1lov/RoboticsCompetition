@@ -16,8 +16,7 @@ Manager::includeFrontendPlugins();
 
 Extension::load([
 	"robot_frontend",
-	"jquery",
-    "yandex-map"
+	"jquery"
 ]);
 
 ?>
@@ -49,7 +48,8 @@ Extension::load([
                 "CACHE_TYPE" => "A",
                 "IS_MAIN_PAGE" => ($APPLICATION->GetCurPage(false) === SITE_DIR),
                 "MODULES_CODES" => array("robot.core","")
-            )
+            ),
+            false
         );?>
 
         <div class="b-header__controls">

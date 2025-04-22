@@ -1,0 +1,9 @@
+@include screen(sml) {
+  .b-breadcrump {
+    padding-top: $m10;
+
+    &__name {
+      font-size: $textTiny;
+    }
+  }
+}

@@ -44,10 +44,12 @@ class SiteSettings
     public static function mapSiteSettingsContactsResponseToModel(array $response): SiteSettingsContacts
     {
         return new SiteSettingsContacts(
+            name: $response["NAME"],
             address: $response["ADDRESS"],
             addressOrganisation: $response["ADDRESS_ORGANISATION"],
             contactPhones: $response["CONTACT_PHONES"],
             email: $response["EMAIL"],
+            phone: $response["PHONE"],
             socialNetworks: $response["SOCIAL_NETWORKS"],
             coords: $response["MAP_COORDINATES"]
         );

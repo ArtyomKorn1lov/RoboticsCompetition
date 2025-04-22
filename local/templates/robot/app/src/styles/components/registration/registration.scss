@@ -8,6 +8,7 @@
 
     &-wrap {
       overflow: hidden;
+      box-sizing: border-box;
       width: $full;
       height: auto;
       border-radius: $rounded30;

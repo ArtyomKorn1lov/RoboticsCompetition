@@ -1,0 +1,55 @@
+@include screen(lg) {
+  .b-study {
+
+    &__description {
+
+      &_line-text {
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        text-overflow: ellipsis;
+      }
+    }
+
+    &__show-more {
+      display: block;
+    }
+  }
+}
+
+@include screen(md) {
+  .b-study {
+
+    &__item {
+      padding-right: $m80;
+    }
+
+    &__icon {
+      right: $m20;
+    }
+  }
+}
+
+@include screen(sml) {
+  .b-study {
+    gap: $m20;
+
+    &__item {
+      padding: $m20;
+    }
+
+    &__icon {
+      position: static;
+      align-self: end;
+    }
+
+    &__name {
+      font-size: $textNormal;
+    }
+
+    &__description {
+      font-size: $textRegular;
+    }
+  }
+}

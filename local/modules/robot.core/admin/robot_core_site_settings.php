@@ -24,6 +24,7 @@ if (empty($arSiteSettings)) {
 $currentUrl = $APPLICATION->GetCurPage().'?lang='.LANGUAGE_ID;
 
 $optionList = array(
+    "NAME",
     "EMAIL",
     "PHONE",
     "ADDRESS",
@@ -78,6 +79,18 @@ $tabControl->Begin();
                 Общая информация об организации:
             </td>
         </tr>
+        <?php /** Название организации */ ?>
+        <tr>
+            <td style="width: 40%">
+                Название организации:
+            </td>
+            <td>
+                <label>
+                    <input style="width: 40%" type="text" name="NAME" value="<?= $options["NAME"] ?>" />
+                </label>
+            </td>
+        </tr>
+        <?php /** ! Название организации */ ?>
         <?php /** Email организации */ ?>
         <tr>
             <td style="width: 40%">

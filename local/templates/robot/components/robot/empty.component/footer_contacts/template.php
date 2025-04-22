@@ -29,42 +29,45 @@ $isMainPage = $arParams["IS_MAIN_PAGE"];
 ?>
 
 <div class="b-footer__wrap">
-    <div class="b-footer__logo">
-        <?php if (!empty($siteSettings->logoFooter)) { ?>
-            <?php if ($isMainPage) { ?>
-                <div class="b-footer__logo-wrap">
-            <?php } else { ?>
-                <a class="b-footer__logo-wrap" href="<?= SITE_DIR ?>">
+    <div class="b-footer__logo-section">
+        <div class="b-footer__logo">
+            <?php if (!empty($siteSettings->logoFooter)) { ?>
+                <?php if ($isMainPage) { ?>
+                    <div class="b-footer__logo-wrap">
+                <?php } else { ?>
+                    <a class="b-footer__logo-wrap" href="<?= SITE_DIR ?>">
+                <?php } ?>
+                <img class="b-footer__logo-icon"
+                     src="<?= $siteSettings->logoFooter ?>"
+                     alt="<?= $siteSettings->siteName ?>">
+                <?php if ($isMainPage) { ?>
+                    </div>
+                <?php } else { ?>
+                    </a>
+                <?php } ?>
             <?php } ?>
-                    <img class="b-footer__logo-icon"
-                        src="<?= $siteSettings->logoFooter ?>"
-                        alt="<?= $siteSettings->siteName ?>">
-            <?php if ($isMainPage) { ?>
+            <div class="b-footer__title-wrap">
+                <div class="b-footer__title">
+                    <?= $siteSettings->siteName ?>
                 </div>
-            <?php } else { ?>
-                </a>
-            <?php } ?>
-        <?php } ?>
-        <div class="b-footer__title-wrap">
-            <div class="b-footer__title">
-                <?= $siteSettings->siteName ?>
+                <?php $APPLICATION->IncludeComponent(
+                    "bitrix:main.include",
+                    "custom_wrapper",
+                    array(
+                        "CUSTOM_WRAPPER_START" => '<span class="b-footer__copyright">',
+                        "CUSTOM_WRAPPER_END" => '</span>',
+                        "AREA_FILE_SHOW" => "file",
+                        "PATH" => SITE_DIR."include/copyright.php",
+                        "AREA_FILE_RECURSIVE" => "Y",
+                        "COMPONENT_TEMPLATE" => ".default",
+                        "EDIT_TEMPLATE" => "standard.php"
+                    ),
+                    $component
+                ); ?>
             </div>
-            <?php $APPLICATION->IncludeComponent(
-                "bitrix:main.include",
-                "custom_wrapper",
-                array(
-                    "CUSTOM_WRAPPER_START" => '<span class="b-footer__copyright">',
-                    "CUSTOM_WRAPPER_END" => '</span>',
-                    "AREA_FILE_SHOW" => "file",
-                    "PATH" => SITE_DIR."include/copyright.php",
-                    "AREA_FILE_RECURSIVE" => "Y",
-                    "COMPONENT_TEMPLATE" => ".default",
-                    "EDIT_TEMPLATE" => "standard.php"
-                ),
-                $component
-            ); ?>
         </div>
     </div>
+
 
     <div class="b-footer__contact">
         <?php if (!empty($siteSettings->email)) { ?>

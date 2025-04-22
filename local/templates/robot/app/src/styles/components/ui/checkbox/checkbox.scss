@@ -2,6 +2,8 @@
 
   &__label {
     color: $colorSecondaryText;
+    display: inline-flex;
+    flex-wrap: wrap;
   }
 
   &.el-checkbox {

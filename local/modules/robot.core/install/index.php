@@ -116,6 +116,7 @@ class robot_core extends CModule
 
             SiteSettingsTable::add([
                 "SITE_ID" => "s1",
+                "NAME" => "Поволжский государственный технологический университет",
                 "EMAIL" => "info@volgatech.net",
                 "PHONE" => '+7 (987) 654-32-10',
                 "ADDRESS" => "Республика Марий Эл, г. Йошкар-Ола, площадь имени В.И. Ленина, 3",

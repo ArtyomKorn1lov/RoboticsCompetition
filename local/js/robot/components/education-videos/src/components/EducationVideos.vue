@@ -9,9 +9,20 @@
         class="b-study__item"
         :id="item.areaId"
     >
-      <span class="h5 b-study__name" v-text="item.name" />
-      <div class="b-study__description" v-html="item.description" />
-      <span class="b-study__icon" v-html="TemplateHelper.getIcon('arrow_right')" />
+      <span class="h5 b-study__name" v-text="item.name"/>
+      <div
+          class="b-study__description"
+          :class="{'b-study__description_line-text': !showTextItems.includes(index)}"
+          v-html="item.description"
+      />
+      <a
+          v-if="!showTextItems.includes(index)"
+          class="b-study__show-more"
+          href="javascript:void(0)"
+          v-text="loc.EDUCATION_VIDEOS_SHOW_MORE"
+          @click.prevent.stop="showMore(index)"
+      />
+      <span class="b-study__icon" v-html="TemplateHelper.getIcon('arrow_right')"/>
     </a>
 
     <MediaPopup
@@ -22,9 +33,9 @@
   </div>
 </template>
 <script setup>
-import { reactive, ref } from "vue";
+import { computed, reactive, ref } from "vue";
 import MediaPopup from "MediaPopup";
-import { TemplateHelper, MediaPopup as MediaPopupModel, Constants, DocsEnum } from "tools";
+import { TemplateHelper, getFilteredPhrases, MediaPopup as MediaPopupModel, Constants, DocsEnum } from "tools";
 
 /**
  * @typedef {{ items: MediaPopupModel[] }} EducationVideos
@@ -45,6 +56,9 @@ const popupContent = reactive({
   type: "",
   isVideo: false
 });
+const showTextItems = ref([]);
+
+const loc = computed(() => getFilteredPhrases('EDUCATION_VIDEOS_'));
 
 const isFile = (type) => {
   return DocsEnum.isDocType(type);
@@ -66,6 +80,13 @@ const closePopup = () => {
   setTimeout(() => {
     Object.assign(popupContent, Constants.DEFAULT_PARAMS_MEDIA_POPUP);
   }, 300);
+}
+
+const showMore = (index) => {
+  if (showTextItems.value.includes(index)) {
+    return;
+  }
+  showTextItems.value.push(index);
 }
 
 </script>

@@ -5,6 +5,7 @@
 
   &__icon {
     @include flex(false, center, center);
+    flex-shrink: 0;
     fill: $colorWhite;
     width: $m40;
     height: $m40;

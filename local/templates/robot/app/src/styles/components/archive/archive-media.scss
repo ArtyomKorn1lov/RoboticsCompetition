@@ -1,0 +1,43 @@
+@include screen(lgl) {
+  .b-archive {
+
+    &__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      row-gap: $m25;
+      margin-bottom: $m50;
+    }
+  }
+}
+
+@include screen(md) {
+  .b-archive {
+
+    &__list {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      row-gap: $m20;
+      margin-bottom: $m30;
+    }
+
+    &__item {
+      flex-direction: column;
+      align-items: start;
+      gap: $m10;
+      padding: $m20;
+    }
+
+    &__name {
+      font-size: $textNormal;
+    }
+
+    &__icon {
+      align-self: end;
+      width: $m40;
+      height: $m40;
+
+      svg {
+        width: 16px;
+        height: 14px;
+      }
+    }
+  }
+}

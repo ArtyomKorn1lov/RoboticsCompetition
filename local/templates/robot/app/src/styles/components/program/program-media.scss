@@ -1,0 +1,41 @@
+@include screen(lg) {
+  .b-program {
+
+    &__item {
+      align-items: end;
+    }
+
+    &__left {
+      @include flex(column, start);
+      gap: $m15;
+    }
+  }
+}
+
+@include screen(md) {
+  .b-program {
+    gap: $m25;
+
+    &__list {
+      gap: $m20;
+    }
+
+    &__item {
+      @include flex(column, start);
+      gap: $m10;
+      padding: $m20;
+    }
+
+    &__left {
+      gap: $m10;
+    }
+
+    &__name {
+      font-size: $textNormal;
+    }
+
+    &__time {
+      font-size: $textRegular;
+    }
+  }
+}

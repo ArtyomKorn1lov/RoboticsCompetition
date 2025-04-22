@@ -1,5 +1,6 @@
 .b-breadcrump {
   @include flex(false, center);
+  flex-wrap: wrap;
   gap: $m10;
   padding-top: $m15;
 

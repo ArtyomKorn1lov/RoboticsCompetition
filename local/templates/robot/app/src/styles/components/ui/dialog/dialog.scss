@@ -51,7 +51,8 @@
 
   &__video {
     width: $full;
-    height: $full;
+    aspect-ratio: 715/516;
+    object-fit: cover;
   }
 
   &__img {

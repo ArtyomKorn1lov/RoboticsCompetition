@@ -1,6 +1,6 @@
 import { getProgramItems } from "./api/program";
 import { sendRegisterForm, searchCountries } from "./api/events";
-import Helper from "./template/helper";
+import TemplateHelper from "./template";
 import getFilteredPhrases from "./loc";
 import * as Constants from './constants';
 import * as DocsEnum from "./enums/docs";
@@ -18,7 +18,7 @@ export default {
     getProgramItems,
     sendRegisterForm,
     searchCountries,
-    TemplateHelper: new Helper(),
+    TemplateHelper,
     getFilteredPhrases,
     Constants,
     DocsEnum,

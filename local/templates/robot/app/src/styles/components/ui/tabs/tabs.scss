@@ -2,11 +2,14 @@
 
   &__item {
     display: block;
+    box-sizing: border-box;
+    min-height: $m35;
     border: 1px solid $colorPrimary;
     border-radius: $rounded30;
     font-weight: $textSemiBold;
     padding: $m10 $m15;
     color: $colorPrimary;
+    line-height: 100%;
     text-align: center;
 
     &:hover,

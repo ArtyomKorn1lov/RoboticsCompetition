@@ -1,6 +1,6 @@
 .b-program {
   @include flex(column);
-  gap: $m30;
+  gap: $m35;
 
   &__list {
     @include flex(column);
@@ -11,6 +11,7 @@
     @extend %simpleCardOptions;
     @include flex(row, center, space-between);
     gap: $m25;
+    border-radius: $m20;
   }
 
   &__left {

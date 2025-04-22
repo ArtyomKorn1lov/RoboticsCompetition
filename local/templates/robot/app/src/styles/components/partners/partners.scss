@@ -13,6 +13,7 @@
     height: $full;
     aspect-ratio: 300/160;
     filter: grayscale(100%);
+    transition: filter 0.15s ease-in-out;
 
     &:hover,
     &:active {

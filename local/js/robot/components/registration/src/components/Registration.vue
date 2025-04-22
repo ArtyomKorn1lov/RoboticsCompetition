@@ -94,7 +94,7 @@
       <el-col class="b-form__col b-form__col_bottom">
         <div class="b-form__tooltip" v-html="loc.REGISTRATION_REQUIER_LABEL" />
         <el-button
-            class="b-button b-button_primary"
+            class="b-button b-button_primary b-form__btn"
             native-type="submit"
             :loading="isLoading"
         >

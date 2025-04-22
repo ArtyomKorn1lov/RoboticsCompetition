@@ -1,0 +1,38 @@
+@include screen(lgl) {
+  .b-registration {
+
+    &__banner {
+
+      &-wrap {
+        padding: $m40 $m35;
+      }
+    }
+
+    &__form {
+      max-width: 465px;
+    }
+  }
+}
+
+@include screen(lgs) {
+  .b-registration {
+    flex-direction: column-reverse;
+    justify-content: start;
+    gap: $m25;
+
+    &__banner {
+
+      &-wrap {
+        max-width: 500px;
+        aspect-ratio: 1/1;
+        padding: $m25;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    &__form {
+      max-width: none;
+    }
+  }
+}

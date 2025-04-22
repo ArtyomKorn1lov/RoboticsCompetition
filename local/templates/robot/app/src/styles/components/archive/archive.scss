@@ -14,6 +14,7 @@
     @include flex(row, center);
     gap: $m15;
     padding: $m30;
+    border-radius: $rounded25;
 
     &:hover,
     &:active {

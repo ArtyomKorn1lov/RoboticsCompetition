@@ -10,6 +10,7 @@
 
     &-wrap {
       @include flex(false, false, center);
+      box-sizing: border-box;
       align-self: center;
       width: $full;
       border-radius: $rounded30;

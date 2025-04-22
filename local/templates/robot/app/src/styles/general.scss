@@ -1,7 +1,8 @@
 * {
   margin: 0;
   padding: 0;
-  transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out, fill 0.25s ease-in-out, stroke 0.25s ease-in-out;
+  box-sizing: border-box;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, fill 0.15s ease-in-out, stroke 0.15s ease-in-out;
 }
 
 body {
@@ -34,6 +35,11 @@ body {
     color: $colorHover;
     padding-top: $m25;
     padding-bottom: $m15;
+
+    @include screen(sml) {
+      padding-top: $m20;
+      padding-bottom: $m10;
+    }
   }
 }
 

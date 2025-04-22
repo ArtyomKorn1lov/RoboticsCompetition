@@ -1,0 +1,55 @@
+@include screen(lg) {
+  .b-contacts {
+
+    &__left {
+      width: 50%;
+      max-width: none;
+    }
+
+    &__map {
+      width: 50%;
+      aspect-ratio: 465/553;
+    }
+  }
+}
+
+@include screen(md) {
+  .b-contacts {
+    @include flex(column);
+    gap: $m40;
+
+    &__title {
+      padding-bottom: $m15;
+    }
+
+    &__left {
+      width: $full;
+    }
+
+    &__map {
+      width: $full;
+      aspect-ratio: 850/632;
+    }
+
+    &__info {
+      gap: $m15;
+    }
+
+    &__group {
+      gap: $m5;
+    }
+
+    &__subtitle {
+      font-size: $textRegular;
+    }
+  }
+}
+
+@include screen(sm) {
+  .b-contacts {
+
+    &__map {
+      aspect-ratio: 280/360;
+    }
+  }
+}

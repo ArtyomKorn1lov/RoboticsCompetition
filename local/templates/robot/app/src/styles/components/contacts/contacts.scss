@@ -11,7 +11,7 @@
 
   &__title {
     padding-top: 0;
-    padding-bottom: $m15;
+    padding-bottom: $m25;
   }
 
   &__info {
@@ -34,6 +34,11 @@
   &__list {
     @include flex(column);
     gap: $m5;
+
+    &_socials {
+      @include flex(false);
+      flex-wrap: wrap;
+    }
   }
 
   &__item {

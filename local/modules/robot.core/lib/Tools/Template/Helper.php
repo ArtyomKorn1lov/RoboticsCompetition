@@ -2,6 +2,8 @@
 
 namespace Robot\Core\Tools\Template;
 
+use Robot\Core\DTO\SiteSettings\SiteSettingsContacts;
+
 class Helper
 {
     /** @var string Относительный путь к иконке в файловой системе */
@@ -52,5 +54,48 @@ class Helper
     {
         global $APPLICATION;
         $APPLICATION->ShowViewContent(static::TITLE_VIEW_CONTENT_CODE);
+    }
+
+    /**
+     * @param string $title
+     * @return string|bool
+     */
+    public static function getBallonHeader(string $title): string|bool
+    {
+        if (empty($title)) {
+            return false;
+        }
+        return "<h6>$title</h6>";
+    }
+
+    /**
+     * @param SiteSettingsContacts $contacts
+     * @return string|bool
+     */
+    public static function getBallonBody(SiteSettingsContacts $contacts): string|bool
+    {
+        if (empty($contacts)) {
+            return false;
+        }
+
+        $html = '<div class="b-map__content">';
+
+        if (!empty($contacts->email)) {
+            foreach ($contacts->email as $item) {
+                $html = $html . '<a class="b-map__item b-map__item_mail" href="mailto:'.$item.'">'.$item.'</a>';
+            }
+        }
+
+        if (!empty($contacts->phone)) {
+            foreach ($contacts->phone as $item) {
+                $html = $html . '<a class="b-map__item b-map__item_phone" href="tel:'.static::convertPhoneTelFormat($item).'">'.$item.'</a>';
+            }
+        }
+
+        if (!empty($contacts->address)) {
+            $html = $html . '<span class="b-map__item">'.$contacts->address.'</span>';
+        }
+
+        return $html."</div>";
     }
 }

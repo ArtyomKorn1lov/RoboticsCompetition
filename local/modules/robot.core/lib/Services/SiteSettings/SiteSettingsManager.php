@@ -19,7 +19,11 @@ use Robot\Core\Entity\SiteSettings\SiteSettingsUpdate as SiteSettingsUpdateEntit
 class SiteSettingsManager implements ISiteSettingsManager
 {
     /**
+     * @param string $siteId
      * @return array
+     * @throws ArgumentException
+     * @throws ObjectPropertyException
+     * @throws SystemException
      */
     public function getSiteSettingsEdit(string $siteId): array
     {
@@ -110,6 +114,7 @@ class SiteSettingsManager implements ISiteSettingsManager
             }
             $siteSetting = SiteSettings::mapSiteSettingsContactsResponseToModel($arSiteSetting);
             !empty($siteSetting->email) && $siteSetting->email = $this->getArrayField($siteSetting->email);
+            !empty($siteSetting->phone) && $siteSetting->phone = $this->getArrayField($siteSetting->phone);
             return $siteSetting;
         } catch (SystemException|ArgumentException|ObjectPropertyException $exception) {
             AddMessage2Log($exception->getMessage());

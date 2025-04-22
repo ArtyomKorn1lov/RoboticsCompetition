@@ -57,4 +57,13 @@ class Constants
 
     /** @var string Код поля форм autocomplete */
     public const CODE_FIELD_AUTOCOMPLETE = "autocomplete";
+
+    /** @var int Увеличение карты при инициализации */
+    public const CONTACT_MAP_ZOOM = 17;
+
+    /** @var string Иконка геообъекта на карте */
+    public const CONTACT_MAP_ICON_PATH = SITE_DIR.'local/templates/robot/app/img/map_icon.svg';
+
+    /** @var int[] Размеры геообъекта на карте */
+    public const CONTACT_MAP_ICON_SIZE = [35, 53];
 }

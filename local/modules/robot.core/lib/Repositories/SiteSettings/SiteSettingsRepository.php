@@ -22,6 +22,7 @@ class SiteSettingsRepository implements ISiteSettingsRepository
         $query->setLimit(1);
         $query->setSelect([
             "ID",
+            "NAME",
             "EMAIL",
             "PHONE",
             "ADDRESS",
