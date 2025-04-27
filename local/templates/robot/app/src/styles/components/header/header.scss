@@ -88,11 +88,15 @@
   }
 
   &__burger {
-    display: none;
+    @include flex(false);
     border-radius: $roundedFull;
     padding: 0;
     height: $m45;
     width: $m45;
+
+    &-wrap {
+      display: none;
+    }
 
     svg {
       width: 19px;

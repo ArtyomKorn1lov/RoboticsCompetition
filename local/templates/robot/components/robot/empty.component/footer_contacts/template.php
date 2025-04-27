@@ -50,20 +50,9 @@ $isMainPage = $arParams["IS_MAIN_PAGE"];
                 <div class="b-footer__title">
                     <?= $siteSettings->siteName ?>
                 </div>
-                <?php $APPLICATION->IncludeComponent(
-                    "bitrix:main.include",
-                    "custom_wrapper",
-                    array(
-                        "CUSTOM_WRAPPER_START" => '<span class="b-footer__copyright">',
-                        "CUSTOM_WRAPPER_END" => '</span>',
-                        "AREA_FILE_SHOW" => "file",
-                        "PATH" => SITE_DIR."include/copyright.php",
-                        "AREA_FILE_RECURSIVE" => "Y",
-                        "COMPONENT_TEMPLATE" => ".default",
-                        "EDIT_TEMPLATE" => "standard.php"
-                    ),
-                    $component
-                ); ?>
+                <span class="b-footer__copyright">
+                    <?=date('Y')?> Все права защищены
+                </span>
             </div>
         </div>
     </div>

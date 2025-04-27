@@ -63,7 +63,7 @@ class Helper
     public static function getBallonHeader(string $title): string|bool
     {
         if (empty($title)) {
-            return false;
+            return '';
         }
         return "<h6>$title</h6>";
     }
@@ -75,7 +75,7 @@ class Helper
     public static function getBallonBody(SiteSettingsContacts $contacts): string|bool
     {
         if (empty($contacts)) {
-            return false;
+            return '';
         }
 
         $html = '<div class="b-map__content">';
@@ -93,7 +93,7 @@ class Helper
         }
 
         if (!empty($contacts->address)) {
-            $html = $html . '<span class="b-map__item">'.$contacts->address.'</span>';
+            $html = $html . '<span class="b-map__item b-map__item_address">'.$contacts->address.'</span>';
         }
 
         return $html."</div>";

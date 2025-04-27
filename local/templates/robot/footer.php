@@ -2,8 +2,15 @@
     IncludeTemplateLangFile(__FILE__);
 
 global $APPLICATION;
+use Bitrix\Main\UI\Extension;
 
 Robot\Core\Tools\Template\Helper::initTitle("b-main__title");
+
+// Плагины с основным frontend шаблона подключаются тут, чтобы перегрузить стили js-extention
+Extension::load([
+    "robot_frontend",
+    "jquery"
+]);
 ?>
 </main>
 <footer class="b-footer">

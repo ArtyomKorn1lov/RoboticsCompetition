@@ -10,7 +10,10 @@
     }
 
     &__burger {
-      display: flex;
+
+      &-wrap {
+        display: block;
+      }
     }
   }
 }

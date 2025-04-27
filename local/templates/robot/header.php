@@ -10,14 +10,8 @@ if (!Bitrix\Main\Loader::includeModule('robot.core')) {
 }
 
 use Robot\Core\Tools\Modules\Manager;
-use Bitrix\Main\UI\Extension;
 
 Manager::includeFrontendPlugins();
-
-Extension::load([
-	"robot_frontend",
-	"jquery"
-]);
 
 ?>
 <!doctype html>
@@ -77,11 +71,22 @@ Extension::load([
                 RU
             </a>
 
-            <a href="javascript:void(0)" class="b-button b-button_primary b-header__burger">
-                <svg>
-                    <use xlink:href="/local/templates/robot/app/dist/assets/icons/sprite.svg#burger"></use>
-                </svg>
-            </a>
+            <div class="b-header__burger-wrap">
+                <?php $APPLICATION->IncludeComponent("bitrix:menu", "burger", array(
+                    "ROOT_MENU_TYPE" => "top",
+                    "MAX_LEVEL" => "1",
+                    "CHILD_MENU_TYPE" => "top",
+                    "USE_EXT" => "Y",
+                    "DELAY" => "N",
+                    "ALLOW_MULTI_SELECT" => "Y",
+                    "MENU_CACHE_TYPE" => "N",
+                    "MENU_CACHE_TIME" => "3600",
+                    "MENU_CACHE_USE_GROUPS" => "Y",
+                    "MENU_CACHE_GET_VARS" => "",
+                ),
+                    false
+                ); ?>
+            </div>
         </div>
     </div>
 </header>

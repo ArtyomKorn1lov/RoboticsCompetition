@@ -14,7 +14,6 @@ function initMap(object = null) {
                 geometry: object.coords,
                 properties: {
                     balloonContentHeader: object.header,
-                    //TODO доинтегрировать
                     balloonContentBody: object.body
                 }
             }
@@ -24,7 +23,7 @@ function initMap(object = null) {
             iconImageHref: object.iconPath,
             iconImageSize: object.iconSize
         }
-    };
+    }
 
     $(object.mapSelector).eyMaps(options);
 }

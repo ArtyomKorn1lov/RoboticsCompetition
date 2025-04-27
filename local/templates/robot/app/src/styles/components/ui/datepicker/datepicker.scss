@@ -1,8 +1,11 @@
 .b-datepicker {
 
   &.el-input {
-    width: $full;
-    height: $m55;
+
+    &.el-date-editor {
+      width: $full;
+      height: $m55;
+    }
 
     &.is-disabled {
 

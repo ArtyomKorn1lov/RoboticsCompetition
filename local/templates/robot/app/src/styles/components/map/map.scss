@@ -62,10 +62,16 @@
       flex-shrink: 0;
       width: $m20;
       height: $m20;
-      background-image: url('/local/templates/robot/app/dist/assets/images/address.svg');
       background-repeat: no-repeat;
       background-size: $m20 $m20;
       background-position: center;
+    }
+
+    &_address {
+
+      &:before {
+        background-image: url('/local/templates/robot/app/dist/assets/images/address.svg');
+      }
     }
 
     &_mail {

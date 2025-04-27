@@ -1,0 +1,18 @@
+@include screen(xs) {
+  .b-map {
+
+    .ymaps-2-1-79-balloon {
+      border-radius: $rounded30;
+
+      &__close {
+
+        & + .ymaps-2-1-79-balloon {
+
+          &__content {
+            margin-right: $m30;
+          }
+        }
+      }
+    }
+  }
+}
