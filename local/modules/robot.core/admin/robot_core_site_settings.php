@@ -5,12 +5,14 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_ad
 require $_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_admin_after.php";
 
 use Bitrix\Main\Loader;
+use Bitrix\Main\Web\Json;
 
 if (!Loader::includeModule('robot.core')) {
     die("Не подключен главный модуль сайта для проведения соревнований по робототехнике");
 }
 
 use Robot\Core\Views\SiteSettings\SiteSettingsView;
+use Robot\Core\Enums\SocialIcons;
 
 // TODO получать настройки сайта отдельно
 $arSiteSettings = SiteSettingsView::getSiteSettingsEdit("s1");
@@ -28,6 +30,8 @@ $optionList = array(
     "EMAIL",
     "PHONE",
     "ADDRESS",
+    "LOGO",
+    "LOGO_FOOTER",
     "ADDRESS_ORGANISATION",
     "CONTACT_PHONES",
     "MAP_COORDINATES",
@@ -47,6 +51,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && check_bitrix_sessid() && isset($_PO
             }
         }
     }
+    foreach ($optionList as $option) {
+        foreach ($_FILES as $key => $fileItem) {
+            if ($key === $option) {
+                $arData[$option] = $fileItem;
+            }
+        }
+    }
     $result = SiteSettingsView::saveSiteSettings($arSiteSettings["ID"], $arData);
     if (gettype($result) === "string") {
         ShowError($result);
@@ -54,6 +65,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && check_bitrix_sessid() && isset($_PO
         LocalRedirect($currentUrl);
     }
 }
+
+$socialIcons = SocialIcons::getSelectDefaultList();
+$socialIconsFooter = SocialIcons::getSelectFooterList();
 
 $options = [];
 foreach ($optionList as $option) {
@@ -72,7 +86,12 @@ $tabList = [
 $tabControl = new CAdminTabControl("robot_core_site_settings_options", $tabList);
 $tabControl->Begin();
 ?>
-    <form id="robot_core_site_settings_form" method="post" action="<?= $currentUrl; ?>">
+    <form
+        id="robot_core_site_settings_form"
+        enctype="multipart/form-data"
+        method="post"
+        action="<?= $currentUrl; ?>"
+    >
         <?php $tabControl->BeginNextTab(); ?>
         <tr class="heading">
             <td colspan="2">
@@ -127,6 +146,57 @@ $tabControl->Begin();
             </td>
         </tr>
         <?php /** ! Адрес организации */ ?>
+        <?php /** Загрузить иконку для шапки и футера сайта */ ?>
+        <tr class="heading">
+            <td colspan="2">
+                Файлы организации (при загрузке файла, произойдёт замена выбранного ресурса):
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 40%">
+                Логотип для шапки сайта:
+            </td>
+            <td>
+                <?php if (!empty($options["LOGO"])) { ?>
+                    <div style="aspect-ratio: 1/1; width: 100%; max-width: 100px;">
+                        <img style="width: 100%; height: 100%; object-fit: cover;" src="<?=$options["LOGO"]?>" alt="Логотип в шапке сайта">
+                    </div>
+                <?php } else { ?>
+                    Файл ещё не был загружен в систему
+                <?php } ?>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 40%"></td>
+            <td>
+                <label>
+                    <input type="file" name="LOGO" accept="image/jpeg, image/png, image/bmp, image/svg+xml" />
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 40%">
+                Логотип для подвала сайта:
+            </td>
+            <td>
+                <?php if (!empty($options["LOGO_FOOTER"])) { ?>
+                    <div style="aspect-ratio: 1/1; width: 100%; max-width: 100px;">
+                        <img style="width: 100%; height: 100%; object-fit: cover;" src="<?=$options["LOGO_FOOTER"]?>" alt="Логотип в шапке сайта">
+                    </div>
+                <?php } else { ?>
+                    Файл ещё не был загружен в систему
+                <?php } ?>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 40%"></td>
+            <td>
+                <label>
+                    <input type="file" name="LOGO_FOOTER" accept="image/jpeg, image/png, image/bmp, image/svg+xml" />
+                </label>
+            </td>
+        </tr>
+        <?php /** Загрузить иконку для шапки и футера сайта */ ?>
         <?php /** Контактные адреса организации */ ?>
         <tr class="heading">
             <td colspan="2">
@@ -254,7 +324,16 @@ $tabControl->Begin();
             <tr>
                 <td style="width: 40%">
                     <label>
-                        <input style="width: 20%" type="text" name="SOCIAL_NETWORKS_LABEL_<?= $indexSocialNetworks ?>" value="<?= $key ?>" />
+                        <select style="width: 21.3%" name="SOCIAL_NETWORKS_LABEL_<?= $indexSocialNetworks ?>">
+                            <?php foreach ($socialIcons as $icon) { ?>
+                                <option
+                                    value="<?= $icon["value"] ?>"
+                                    <?php if ($key === $icon["value"]) { ?>selected<?php } ?>
+                                >
+                                    <?= $icon["label"] ?>
+                                </option>
+                            <?php } ?>
+                        </select>
                     </label>
                 </td>
                 <td>
@@ -270,7 +349,16 @@ $tabControl->Begin();
         <tr>
             <td style="width: 40%">
                 <label>
-                    <input style="width: 20%" type="text" name="SOCIAL_NETWORKS_LABEL_<?= $indexSocialNetworks ?>" value="" />
+                    <select style="width: 21.3%" name="SOCIAL_NETWORKS_LABEL_<?= $indexSocialNetworks ?>">
+                        <?php foreach ($socialIcons as $icon) { ?>
+                            <option
+                                value="<?= $icon["value"] ?>"
+                                <?php if (empty($icon["value"])) { ?>selected<?php } ?>
+                            >
+                                <?= $icon["label"] ?>
+                            </option>
+                        <?php } ?>
+                    </select>
                 </label>
             </td>
             <td>
@@ -289,7 +377,7 @@ $tabControl->Begin();
         <?php /** Социальные сети в футере */ ?>
         <tr class="heading">
             <td colspan="2">
-                Социальные сети в футере:
+                Социальные сети в подвале сайта:
             </td>
         </tr>
         <tr>
@@ -307,7 +395,16 @@ $tabControl->Begin();
             <tr>
                 <td style="width: 40%">
                     <label>
-                        <input style="width: 20%" type="text" name="SOCIAL_NETWORKS_FOOTER_LABEL_<?= $indexSocialNetworksFooter ?>" value="<?= $key ?>" />
+                        <select style="width: 21.3%" name="SOCIAL_NETWORKS_FOOTER_LABEL_<?= $indexSocialNetworksFooter ?>">
+                            <?php foreach ($socialIconsFooter as $icon) { ?>
+                                <option
+                                    value="<?= $icon["value"] ?>"
+                                    <?php if ($key === $icon["value"]) { ?>selected<?php } ?>
+                                >
+                                    <?= $icon["label"] ?>
+                                </option>
+                            <?php } ?>
+                        </select>
                     </label>
                 </td>
                 <td>
@@ -323,7 +420,16 @@ $tabControl->Begin();
         <tr>
             <td style="width: 40%">
                 <label>
-                    <input style="width: 20%" type="text" name="SOCIAL_NETWORKS_FOOTER_LABEL_<?= $indexSocialNetworksFooter ?>" value="" />
+                    <select style="width: 21.3%" name="SOCIAL_NETWORKS_FOOTER_LABEL_<?= $indexSocialNetworksFooter ?>">
+                        <?php foreach ($socialIconsFooter as $icon) { ?>
+                            <option
+                                value="<?= $icon["value"] ?>"
+                                <?php if (empty($icon["value"])) { ?>selected<?php } ?>
+                            >
+                                <?= $icon["label"] ?>
+                            </option>
+                        <?php } ?>
+                    </select>
                 </label>
             </td>
             <td>
@@ -369,12 +475,26 @@ $tabControl->Begin();
     </form>
     <script>
         BX.ready(() => {
+            function createSelectKeyField(fieldCode, index, options) {
+                let string = `<td style="width: 40%" class="adm-detail-content-cell-l"><label>`;
+                string = string + `<select style="width: 21.3%" name="${fieldCode}_LABEL_${index}">`;
+
+                options.forEach((item) => {
+                    string = string + (!!item.value ? `<option value="${item.value}">${item.label}</option>` : `<option value="${item.value}" selected>${item.label}</option>`);
+                });
+
+                string = string + `</select></label></td><td class="adm-detail-content-cell-r"><label><input style="width: 60%" type="text" name="${fieldCode}_VALUE_${index}" value="" /></label></td>`;
+
+                return string;
+            }
+
             function dynamicFieldAddHandler(
                 fieldCode,
                 btnWrapperClass,
                 btnClass,
                 formWrapper,
-                lastIndex
+                lastIndex,
+                options = null
             ) {
                 const addBtnWrap = document.querySelector(btnWrapperClass);
                 const addBtn = document.querySelector(btnClass);
@@ -388,7 +508,12 @@ $tabControl->Begin();
 
                 addBtn.addEventListener('click', () => {
                     index++;
-                    const string = `<td style="width: 40%" class="adm-detail-content-cell-l"><label><input style="width: 20%" type="text" name="${fieldCode}_LABEL_${index}" value="" /></label></td><td class="adm-detail-content-cell-r"><label><input style="width: 60%" type="text" name="${fieldCode}_VALUE_${index}" value="" /></label></td>`;
+                    let string = "";
+                    if (options && options.length > 0) {
+                        string = createSelectKeyField(fieldCode, index, options);
+                    } else {
+                        string = `<td style="width: 40%" class="adm-detail-content-cell-l"><label><input style="width: 20%" type="text" name="${fieldCode}_LABEL_${index}" value="" /></label></td><td class="adm-detail-content-cell-r"><label><input style="width: 60%" type="text" name="${fieldCode}_VALUE_${index}" value="" /></label></td>`;
+                    }
                     let element = document.createElement('tr');
                     element.innerHTML = string;
                     wrapper.insertBefore(element, addBtnWrap);
@@ -416,7 +541,8 @@ $tabControl->Begin();
                 '.social_networks_add',
                 '.social_networks_add_input',
                 '#robot_core_site_settings_edit_1_edit_table',
-                <?= $indexSocialNetworks ?>
+                <?= $indexSocialNetworks ?>,
+                <?= Json::encode($socialIcons) ?>
             );
 
             dynamicFieldAddHandler(
@@ -424,7 +550,8 @@ $tabControl->Begin();
                 '.social_networks_footer_add',
                 '.social_networks_footer_add_input',
                 '#robot_core_site_settings_edit_1_edit_table',
-                <?= $indexSocialNetworksFooter ?>
+                <?= $indexSocialNetworksFooter ?>,
+                <?= Json::encode($socialIconsFooter) ?>
             );
         });
     </script>

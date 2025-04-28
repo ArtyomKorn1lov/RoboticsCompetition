@@ -33,10 +33,10 @@
 
   &__list {
     @include flex(column);
-    gap: $m5;
+    gap: $m10;
 
     &_socials {
-      @include flex(false);
+      flex-direction: row;
       flex-wrap: wrap;
     }
   }
@@ -51,18 +51,13 @@
   }
 
   &__icon {
-    fill: $colorSecondary;
+    display: block;
     width: $m35;
     height: $m35;
 
     svg {
       width: $m35;
       height: $m35;
-    }
-
-    &:hover,
-    &:active {
-      fill: $colorHover;
     }
   }
 

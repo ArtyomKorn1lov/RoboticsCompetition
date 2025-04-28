@@ -4,6 +4,12 @@ namespace Robot\Core\Entity\SiteSettings;
 
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\ObjectException;
+use Bitrix\Main\Entity\Query;
+use Bitrix\Main\ObjectPropertyException;
+use Bitrix\Main\SystemException;
+use CFile;
+
+use Robot\Core\Tools\Modules\Manager;
 
 final class SiteSettingsUpdate
 {
@@ -38,10 +44,10 @@ final class SiteSettingsUpdate
     private const FIELD_SOCIAL_NETWORKS_CODE = "SOCIAL_NETWORKS";
 
     /** @var string Код поля логотип сайта */
-    private const LOGO = "SOCIAL_NETWORKS";
+    private const FIELD_LOGO_CODE = "LOGO";
 
     /** @var string Код поля логотип сайта в футере */
-    private const LOGO_FOOTER = "SOCIAL_NETWORKS";
+    private const FIELD_LOGO_FOOTER_CODE = "LOGO_FOOTER";
 
     /** @var string Код идентификатора для определения поля как значения */
     private const VALUE_STR_CONTAIN = "VALUE";
@@ -50,9 +56,11 @@ final class SiteSettingsUpdate
     private const LABEL_STR_CONTAIN = "LABEL";
 
     /**
+     * @param int $id
      * @param array $arSiteSettingsFields
      * @throws ArgumentException
      * @throws ObjectException
+     * @throws SystemException
      */
     public function __construct(
         int $id,
@@ -115,6 +123,7 @@ final class SiteSettingsUpdate
      * @param array $arSiteSettingsFields
      * @return array
      * @throws ArgumentException
+     * @throws SystemException
      */
     protected function compareFieldsArray(array $arSiteSettingsFields): array
     {
@@ -142,6 +151,14 @@ final class SiteSettingsUpdate
                 default:
                     break;
             }
+        }
+
+        // TODO - посмотреть почему иногда дублируются файлы при удалении
+        if (!empty($arSiteSettingsFields[self::FIELD_LOGO_CODE])) {
+            $arSiteSettingsFields = $this->uploadFile($arSiteSettingsFields, self::FIELD_LOGO_CODE);
+        }
+        if (!empty($arSiteSettingsFields[self::FIELD_LOGO_FOOTER_CODE])) {
+            $arSiteSettingsFields = $this->uploadFile($arSiteSettingsFields, self::FIELD_LOGO_FOOTER_CODE);
         }
 
         return $arSiteSettingsFields;
@@ -201,5 +218,50 @@ final class SiteSettingsUpdate
         unset($arSiteSettingsFields[self::FIELD_MAP_COORDINATES_CODE."_".self::VALUE_STR_CONTAIN."_2"]);
 
         return $arSiteSettingsFields;
+    }
+
+    /**
+     * @param array $arSiteSettingsFields
+     * @param string $fieldCode
+     * @return array
+     * @throws ArgumentException
+     * @throws ObjectPropertyException
+     * @throws SystemException
+     */
+    protected function uploadFile(array $arSiteSettingsFields, string $fieldCode): array
+    {
+        if (!empty($arSiteSettingsFields[$fieldCode]["error"])) {
+            unset($arSiteSettingsFields[$fieldCode]);
+            return $arSiteSettingsFields;
+        }
+        $this->deleteFieldFile($fieldCode);
+        $arSiteSettingsFields[$fieldCode] = CFile::SaveFile($arSiteSettingsFields[$fieldCode], Manager::SITE_SETTINGS_FILE_PATH);
+        return $arSiteSettingsFields;
+    }
+
+    /**
+     * @param string $fieldCode
+     * @return void
+     * @throws ArgumentException
+     * @throws ObjectPropertyException
+     * @throws SystemException
+     */
+    protected function deleteFieldFile(string $fieldCode): void
+    {
+        if (empty($fieldCode)) {
+            throw new ArgumentException("Не введён код поля для удаления файла");
+        }
+
+        $query = new Query(SiteSettingsTable::getEntity());
+        $query->setOrder(["ID" => "ASC"]);
+        $query->setFilter(["=SITE_ID" => "s1"]);
+        $query->setLimit(1);
+        $query->setSelect([$fieldCode]);
+        $result = $query->exec();
+        $rows = $result->fetchAll();
+
+        foreach ($rows as $row) {
+            !empty($row[$fieldCode]) && CFile::Delete($row[$fieldCode]);
+        }
     }
 }

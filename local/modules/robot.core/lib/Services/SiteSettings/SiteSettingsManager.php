@@ -32,6 +32,12 @@ class SiteSettingsManager implements ISiteSettingsManager
             $siteSettingsRepository = new SiteSettingsRepository();
 
             $data = $siteSettingsRepository->getSiteSettingsEdit($siteId);
+
+            // TODO заменить через сервис-локатор
+            $fileHelper = new Helper();
+            !empty($data["LOGO"]) && $data["LOGO"] = $fileHelper->getFilePath($data["LOGO"]);
+            !empty($data["LOGO_FOOTER"]) && $data["LOGO_FOOTER"] = $fileHelper->getFilePath($data["LOGO_FOOTER"]);
+
             if (empty($data)) {
                 throw new ArgumentException("Настройки текущего сайта не найдены");
             }

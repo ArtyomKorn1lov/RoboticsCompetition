@@ -26,6 +26,8 @@ class SiteSettingsRepository implements ISiteSettingsRepository
             "EMAIL",
             "PHONE",
             "ADDRESS",
+            "LOGO",
+            "LOGO_FOOTER",
             "ADDRESS_ORGANISATION",
             "CONTACT_PHONES",
             "MAP_COORDINATES",

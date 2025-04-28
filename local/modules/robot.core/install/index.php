@@ -10,6 +10,7 @@ use Bitrix\Main\IO\Directory;
 
 use Robot\Core\Tools\Modules\Manager;
 use Robot\Core\Entity\SiteSettings\SiteSettingsTable;
+use Robot\Core\Enums\SocialIcons;
 
 Loc::loadMessages(__FILE__);
 
@@ -135,10 +136,18 @@ class robot_core extends CModule
                     47.884858
                 ],
                 "SOCIAL_NETWORKS_FOOTER" => [
-                    "telegram_footer" => "tg://resolve?domain=/",
+                    SocialIcons::TelegramFooter->value => "tg://resolve?domain=/",
+                    SocialIcons::WhatsAppFooter->value => "whatsapp://resolve?domain=/",
+                    SocialIcons::VkFooter->value => "vk://resolve?domain=/",
+                    SocialIcons::DzenFooter->value => "dzen://resolve?domain=/",
+                    SocialIcons::YoutubeFooter->value => "youtube://resolve?domain=/"
                 ],
                 "SOCIAL_NETWORKS" => [
-                    "telegram" => "tg://resolve?domain=/",
+                    SocialIcons::Telegram->value => "tg://resolve?domain=/",
+                    SocialIcons::WhatsApp->value => "whatsapp://resolve?domain=/",
+                    SocialIcons::Vk->value => "vk://resolve?domain=/",
+                    SocialIcons::Dzen->value => "dzen://resolve?domain=/",
+                    SocialIcons::Youtube->value => "youtube://resolve?domain=/"
                 ],
                 "LOGO" => $logo,
                 "LOGO_FOOTER" => $logoFooter,
