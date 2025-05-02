@@ -12,7 +12,11 @@ use Robot\Core\Entity\SiteSettings\SiteSettingsUpdate;
 class SiteSettingsRepository implements ISiteSettingsRepository
 {
     /**
+     * @param string $siteId
      * @return array
+     * @throws ArgumentException
+     * @throws ObjectPropertyException
+     * @throws SystemException
      */
     public function getSiteSettingsEdit(string $siteId): array
     {

@@ -2,7 +2,10 @@
 
 namespace Robot\Core\Entity\Event;
 
+use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ArgumentException;
+
+Loc::loadMessages(__FILE__);
 
 final class FormFieldValues
 {
@@ -25,7 +28,7 @@ final class FormFieldValues
     )
     {
         if (!$this->validateValues($id, $code, $name)) {
-            throw new ArgumentException("Неверные значения входных параметров");
+            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_ARGUMENT_EXCEPTION"));
         }
 
         $this->id = $id;
@@ -46,7 +49,7 @@ final class FormFieldValues
      */
     public function getCode(): string
     {
-        return  $this->code;
+        return $this->code;
     }
 
     /**

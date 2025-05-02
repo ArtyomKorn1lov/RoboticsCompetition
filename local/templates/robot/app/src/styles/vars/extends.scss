@@ -24,11 +24,13 @@
   border-radius: $rounded30;
   border-color: $colorPrimary;
   background-color: $colorPrimary;
+  font-size: $textNormal;
   color: $colorWhite;
   font-weight: $textBold;
-  height: $full;
+  height: $m55;
 
   span {
+    font-size: $textNormal;
     color: $colorWhite;
     font-weight: $textBold;
   }
@@ -40,7 +42,13 @@
   }
 
   @include screen(sml) {
+    font-size: $textRegular;
     padding: 13px $m25;
+    height: 42px;
+
+    span {
+      font-size: $textRegular;
+    }
   }
 }
 

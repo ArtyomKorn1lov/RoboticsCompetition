@@ -24,7 +24,9 @@ class ProgramManager implements IProgramManager
 
     /**
      * @param int $eventId
-     * @return array
+     * @return ProgramItems
+     * @throws ArgumentException
+     * @throws ObjectException
      * @throws SystemException
      */
     public function getProgram(int $eventId): ProgramItems
@@ -57,7 +59,8 @@ class ProgramManager implements IProgramManager
             return new ProgramItems(
                 title: $sectionName,
                 dates: $dateList,
-                programs: $programList
+                programs: $programList,
+                lang: Loc::getCurrentLang()
             );
         } catch (SystemException|ArgumentException|ObjectException $exception) {
             AddMessage2Log($exception->getMessage(), 'robot.core');

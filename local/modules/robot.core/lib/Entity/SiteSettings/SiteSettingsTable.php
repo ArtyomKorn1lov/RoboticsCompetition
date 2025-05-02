@@ -63,6 +63,9 @@ class SiteSettingsTable extends DataManager
                     'title' => Loc::getMessage('ROBOT_SITE_SETTINGS_ENTITY_SITE_NAME_FIELD'),
                 ]
             ),
+            'LANG' => new StringField('LANG', [
+                'title' => Loc::getMessage('ROBOT_SITE_SETTINGS_ENTITY_LANG_FIELD'),
+            ]),
             'NAME' => new StringField('NAME', [
                 'title' => Loc::getMessage('ROBOT_SITE_SETTINGS_ENTITY_NAME_FIELD'),
             ]),

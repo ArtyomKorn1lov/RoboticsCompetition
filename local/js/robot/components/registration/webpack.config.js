@@ -9,7 +9,9 @@ const DEFAULT_GLOBALS = {
     'element-plus': 'RobotUI.ElPlus',
     'vue-the-mask': 'RobotUI.VueTheMask',
     composable: 'RobotComposable',
-    'tools': 'RobotTools'
+    'tools': 'RobotTools',
+    'element-plus/es/locale/lang/ru': 'RobotUI.ElPlusRu',
+    'element-plus/es/locale/lang/en': 'RobotUI.ElPlusEn'
 }
 
 module.exports = (env, argv) => {

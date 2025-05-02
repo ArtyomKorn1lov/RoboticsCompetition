@@ -1,0 +1,34 @@
+.b-empty {
+  @include flex(column);
+  gap: $m40;
+  padding-top: $m45;
+  padding-bottom: 120px;
+
+  &__img {
+    @extend %imgDefaultStyles;
+
+    &-wrap {
+      aspect-ratio: 850/500;
+      width: $full;
+      max-height: 500px;
+    }
+  }
+
+  &__content {
+    @include flex(column, center);
+    text-align: center;
+  }
+
+  &__title {
+    padding: 0;
+    margin-bottom: $m15;
+  }
+
+  &__description {
+    font-size: $textNormal;
+    color: $colorSecondaryText;
+    margin-top: 0;
+    margin-bottom: $m30;
+  }
+}
+

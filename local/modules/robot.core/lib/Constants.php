@@ -19,17 +19,20 @@ class Constants
     /** @var string Код ИБ Мероприятия */
     public const ACTIONS_IBLOCK_CODE = "actions";
 
-    /** @var string Код ИБ Мероприятия */
+    /** @var string Код ИБ Организаторы */
     public const PARTNERS_IBLOCK_CODE = "partners";
+
+    /** @var string Код ИБ Организаторы - англ. версия */
+    public const PARTNERS_EN_IBLOCK_CODE = "partners_en";
 
     /** @var string Url страницы регистрации */
     public const REGISTRATION_URL = SITE_DIR."register/";
 
-    /** @var string Формат pdf файла, который выдаёт компонент news.list */
-    public const PDF_FORMAT_NEWS_LIST = "application/pdf";
-
     /** @var string Код ИБ Видеоуроки */
     public const VIDEO_LESSONS_IBLOCK_CODE = "video-lessons";
+
+    /** @var string Код ИБ Видеоуроки - англ. версия */
+    public const VIDEO_LESSONS_EN_IBLOCK_CODE = "video-lessons_en";
 
     /** @var string Код ИБ Архив */
     public const ARCHIVE_IBLOCK_CODE = "archive";
@@ -37,8 +40,11 @@ class Constants
     /** @var string Код ИБ Программа */
     public const PROGRAM_IBLOCK_CODE = "program";
 
-    /** @var string Код ИБ Программа */
+    /** @var string Код ИБ Документы */
     public const DOCUMENT_IBLOCK_CODE = "documents";
+
+    /** @var string Код ИБ Документы - англ. версия */
+    public const DOCUMENT_IBLOCK_CODE_EN = "documents_en";
 
     /** @var string Код ИБ Заявки с формы регистрации */
     public const REGISTRATION_REQUEST_IBLOCK_CODE = "registration-request";
@@ -62,8 +68,14 @@ class Constants
     public const CONTACT_MAP_ZOOM = 17;
 
     /** @var string Иконка геообъекта на карте */
-    public const CONTACT_MAP_ICON_PATH = SITE_DIR.'local/templates/robot/app/img/map_icon.svg';
+    public const CONTACT_MAP_ICON_PATH = '/local/templates/robot/app/img/map_icon.svg';
 
     /** @var int[] Размеры геообъекта на карте */
     public const CONTACT_MAP_ICON_SIZE = [35, 53];
+
+    /** @var string Русский язык для сайта */
+    public const LANG_RUSSIA_CODE = "ru";
+
+    /** @var string Английский язык для сайта */
+    public const LANG_ENGLISH_CODE = "en";
 }

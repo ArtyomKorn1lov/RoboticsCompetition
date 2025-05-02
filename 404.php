@@ -6,16 +6,21 @@ CHTTP::SetStatus("404 Not Found");
 
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 
-$APPLICATION->SetTitle("404 Not Found");
+$APPLICATION->SetTitle("Страница не найдена");
+$APPLICATION->SetPageProperty("SHOW_TITLE", "N");
+?>
 
-$APPLICATION->IncludeComponent("bitrix:main.map", ".default", Array(
-	"LEVEL"	=>	"3",
-	"COL_NUM"	=>	"2",
-	"SHOW_DESCRIPTION"	=>	"Y",
-	"SET_TITLE"	=>	"Y",
-	"CACHE_TIME"	=>	"36000000"
-	)
-);
+<?php
+$APPLICATION->IncludeComponent(
+    "robot:empty.component",
+    "empty",
+    Array(
+        "CACHE_TIME" => "36000000",
+        "CACHE_TYPE" => "A",
+        "MODULES_CODES" => []
+    )
+);?>
 
+<?php
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
 ?>

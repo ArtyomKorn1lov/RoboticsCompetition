@@ -1,0 +1,2 @@
+<?php
+$MESS["HEADER_LANG_TITLE"] = "EN";

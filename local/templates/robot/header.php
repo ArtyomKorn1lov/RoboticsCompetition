@@ -9,7 +9,13 @@ if (!Bitrix\Main\Loader::includeModule('robot.core')) {
     die();
 }
 
+use Bitrix\Main\Localization\Loc;
+
 use Robot\Core\Tools\Modules\Manager;
+use Robot\Core\Tools\Template\Helper;
+use Robot\Core\Constants;
+
+Loc::loadMessages(__FILE__);
 
 Manager::includeFrontendPlugins();
 
@@ -62,13 +68,18 @@ Manager::includeFrontendPlugins();
 	        false
             );?>
 
-            <a href="javascript:void(0)" class="b-header__lang">
-                <span class="b-header__lang-icon">
-                    <svg>
-                        <use xlink:href="/local/templates/robot/app/dist/assets/icons/sprite.svg#flag_russia"></use>
-                    </svg>
+            <?php
+            $isEnLanguage = LANGUAGE_ID === Constants::LANG_ENGLISH_CODE;
+            ?>
+            <a href="<?= $isEnLanguage ? "/" : "/en/" ?>" class="b-header__lang">
+                <span class="b-header__lang-icon-wrap">
+                    <img
+                        class="b-header__lang-icon"
+                        src="/local/templates/robot/app/dist/assets/images/<?=$isEnLanguage ? "flag_english" : "flag_russia"?>.svg"
+                        alt="<?=Loc::getMessage("HEADER_LANG_TITLE")?>"
+                    >
                 </span>
-                RU
+                <?= Loc::getMessage("HEADER_LANG_TITLE"); ?>
             </a>
 
             <div class="b-header__burger-wrap">
@@ -91,7 +102,7 @@ Manager::includeFrontendPlugins();
     </div>
 </header>
 <main class="b-main b-main_centered">
-    <?php if ($APPLICATION->GetCurPage(false) !== SITE_DIR) { ?>
+    <?php if ($APPLICATION->GetCurPage(false) !== SITE_DIR && !(defined('ERROR_404') && ERROR_404 === 'Y')) { ?>
         <?php $APPLICATION->IncludeComponent(
             "bitrix:breadcrumb",
             "main",

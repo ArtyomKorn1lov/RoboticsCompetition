@@ -2,6 +2,8 @@
 
 namespace Robot\Core\Entity\Abstracts;
 
+use Bitrix\Main\Localization\Loc;
+
 use Bitrix\Highloadblock\HighloadBlockTable;
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\LoaderException;
@@ -9,6 +11,8 @@ use Bitrix\Main\ObjectException;
 use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
 use Bitrix\Main\Loader;
+
+Loc::loadMessages(__FILE__);
 
 abstract class HighloadBlocks
 {
@@ -19,7 +23,7 @@ abstract class HighloadBlocks
     protected function includeHighloadBlocksModule(): void
     {
         if (!Loader::includeModule("highloadblock")) {
-            throw new LoaderException("Ошибка подключения модуля highloadblock");
+            throw new LoaderException(Loc::getMessage("ROBOT_CORE_HL_MODULE_NOT_INCLUDE"));
         }
     }
 
@@ -39,7 +43,7 @@ abstract class HighloadBlocks
         ])->fetch();
 
         if (empty($data["ID"])) {
-            throw new ObjectException("Сущность $entityName не найдена");
+            throw new ObjectException(Loc::getMessage("ROBOT_CORE_ENTITY_NOT_FOUND", ["#ENTITY#" => $entityName]));
         }
 
         return $data["ID"];
@@ -65,7 +69,7 @@ abstract class HighloadBlocks
         $entity = HighloadBlockTable::compileEntity($hlblock);
         $entity_data_class = $entity->getDataClass();
         if (empty($entity_data_class)) {
-            throw new ObjectException("Класс сущности $entityName не найден");
+            throw new ObjectException(Loc::getMessage("ROBOT_CORE_ENTITY_CLASS_NOT_FOUND", ["#ENTITY#" => $entityName]));
         }
 
         $rsObject = $entity_data_class::getList([

@@ -2,6 +2,7 @@
 
 namespace Robot\Core\Services\SiteSettings;
 
+use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\ObjectException;
 use Bitrix\Main\ObjectPropertyException;
@@ -15,6 +16,8 @@ use Robot\Core\Repositories\SiteSettings\SiteSettingsRepository;
 use Robot\Core\Tools\Files\Helper;
 use Robot\Core\Tools\Mappers\SiteSettings;
 use Robot\Core\Entity\SiteSettings\SiteSettingsUpdate as SiteSettingsUpdateEntity;
+
+Loc::loadMessages(__FILE__);
 
 class SiteSettingsManager implements ISiteSettingsManager
 {
@@ -39,11 +42,11 @@ class SiteSettingsManager implements ISiteSettingsManager
             !empty($data["LOGO_FOOTER"]) && $data["LOGO_FOOTER"] = $fileHelper->getFilePath($data["LOGO_FOOTER"]);
 
             if (empty($data)) {
-                throw new ArgumentException("Настройки текущего сайта не найдены");
+                throw new ArgumentException(Loc::getMessage("ROBOT_CORE_SITE_SETTINGS_NOT_FOUND"));
             }
 
             return $data;
-        } catch (SystemException|ArgumentException|ObjectPropertyException $exception) {
+        } catch (ArgumentException|ObjectPropertyException $exception) {
             AddMessage2Log($exception->getMessage());
             throw $exception;
         }
@@ -62,7 +65,7 @@ class SiteSettingsManager implements ISiteSettingsManager
             $siteSettingsRepository = new SiteSettingsRepository();
             $arSiteSetting = $siteSettingsRepository->getSiteSettingsHeader();
             if (empty($arSiteSetting)) {
-                throw new SystemException("Запись не найдена");
+                throw new SystemException(Loc::getMessage("ROBOT_CORE_SITE_SETTINGS_ITEM_NOT_FOUND"));
             }
             $siteSetting = SiteSettings::mapSiteSettingHeaderResponseToModel($arSiteSetting);
             // TODO заменить через сервис-локатор
@@ -88,7 +91,7 @@ class SiteSettingsManager implements ISiteSettingsManager
             $siteSettingsRepository = new SiteSettingsRepository();
             $arSiteSetting = $siteSettingsRepository->getSiteSettingsFooter();
             if (empty($arSiteSetting)) {
-                throw new SystemException("Запись не найдена");
+                throw new SystemException(Loc::getMessage("ROBOT_CORE_SITE_SETTINGS_ITEM_NOT_FOUND"));
             }
             $siteSetting = SiteSettings::mapSiteSettingsFooterResponseToModel($arSiteSetting);
             // TODO заменить через сервис-локатор
@@ -116,7 +119,7 @@ class SiteSettingsManager implements ISiteSettingsManager
             $siteSettingsRepository = new SiteSettingsRepository();
             $arSiteSetting = $siteSettingsRepository->getSiteSettingsContacts();
             if (empty($arSiteSetting)) {
-                throw new SystemException("Запись не найдена");
+                throw new SystemException(Loc::getMessage("ROBOT_CORE_SITE_SETTINGS_ITEM_NOT_FOUND"));
             }
             $siteSetting = SiteSettings::mapSiteSettingsContactsResponseToModel($arSiteSetting);
             !empty($siteSetting->email) && $siteSetting->email = $this->getArrayField($siteSetting->email);
@@ -139,7 +142,7 @@ class SiteSettingsManager implements ISiteSettingsManager
     {
         try {
             if (empty($siteSettingsUpdate)) {
-                throw new ObjectException("Нет полей для обновления контактной информации");
+                throw new ObjectException(Loc::getMessage("ROBOT_CORE_SITE_SETTINGS_ITEM_UPDATE_EMPTY"));
             }
 
             $entity = new SiteSettingsUpdateEntity($siteSettingsUpdate->id, $siteSettingsUpdate->arSiteSettings);

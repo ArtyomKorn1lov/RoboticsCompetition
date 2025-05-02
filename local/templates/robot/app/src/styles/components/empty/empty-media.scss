@@ -1,0 +1,12 @@
+@include screen(sml) {
+  .b-empty {
+    gap: $m20;
+    padding-top: $m35;
+    padding-bottom: $m70;
+
+    &__description {
+      font-size: $textRegular;
+      margin-bottom: $m20;
+    }
+  }
+}

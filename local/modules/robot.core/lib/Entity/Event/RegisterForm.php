@@ -2,8 +2,8 @@
 
 namespace Robot\Core\Entity\Event;
 
+use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ArgumentException;
-use Bitrix\Main\ObjectException;
 use CUtil;
 
 use Robot\Core\Constants;
@@ -11,6 +11,8 @@ use Robot\Core\Tools\IBlocks\Helper;
 use Robot\Core\DTO\Event\RegisterExternalData;
 use Robot\Core\DTO\Event\FormField;
 use Robot\Core\DTO\Event\FormFieldValues;
+
+Loc::loadMessages(__FILE__);
 
 final class RegisterForm
 {
@@ -49,13 +51,13 @@ final class RegisterForm
      * @throws ArgumentException
      */
     public function __construct(
-        array $fields,
-        array $formData,
+        array                $fields,
+        array                $formData,
         RegisterExternalData $externalData
     )
     {
         if (empty($externalData->eventId)) {
-            throw new ArgumentException("Активного события не существует");
+            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_EVENT_NOT_FOUND"));
         }
 
         if (!empty($fields)) {
@@ -89,30 +91,30 @@ final class RegisterForm
 
             if ($field->code === 'agreement') {
                 if (empty($formData[$field->code])) {
-                    throw new ArgumentException("Не отмечен чекбокс согласия на обработку перс. данных");
+                    throw new ArgumentException(Loc::getMessage("ROBOT_CORE_AGREEMENT_ERROR"));
                 }
                 unset($formData[$field->code]);
                 continue;
             }
 
             if (empty($formData[$field->code])) {
-                throw new ArgumentException('Поле "' . $field->title . '" обязательно для заполнения');
+                throw new ArgumentException(Loc::getMessage("ROBOT_CORE_REQUIRED_ERROR", ["#NAME#" => $field->title]));
             }
 
             switch ($field->type) {
                 case "autocomplete":
                     if (!$this->validateAutocompleteField($formData[$field->code], $field->values)) {
-                        throw new ArgumentException('Не выбрано значение поля "' . $field->title . '"');
+                        throw new ArgumentException(Loc::getMessage("ROBOT_CORE_AUTOCOMPLETE_ERROR", ["#NAME#" => $field->title]));
                     }
                     break;
                 case "tel":
                     if (!preg_match(self::PHONE_REGULAR_EXPRESSION, $formData[$field->code])) {
-                        throw new ArgumentException('Не верное значение поля "' . $field->title . '"');
+                        throw new ArgumentException(Loc::getMessage("ROBOT_CORE_FIELD_VALUE_ERROR", ["#NAME#" => $field->title]));
                     }
                     break;
                 case "email":
                     if (!preg_match(self::EMAIL_REGULAR_EXPRESSION, $formData[$field->code])) {
-                        throw new ArgumentException('Не верное значение поля "' . $field->title . '"');
+                        throw new ArgumentException(Loc::getMessage("ROBOT_CORE_FIELD_VALUE_ERROR", ["#NAME#" => $field->title]));
                     }
                     break;
                 default:
@@ -152,8 +154,8 @@ final class RegisterForm
         $formData["IBLOCK_ID"] = Helper::getIblock(Constants::REGISTRATION_REQUEST_IBLOCK_CODE);
         $formData["ACTIVE"] = "Y";
         $externalData->lastElementId++;
-        $formData["NAME"] = "Заявка с формы обратной связи №".$externalData->lastElementId;
-        $formData["CODE"] = Cutil::translit($formData["NAME"],LANGUAGE_ID, self::CODE_FIELD_GENERATE_PARAMS);
+        $formData["NAME"] = Loc::getMessage("ROBOT_CORE_NEW_REQUEST_TITLE", ["#NUMBER#" => $externalData->lastElementId]);
+        $formData["CODE"] = Cutil::translit($formData["NAME"], LANGUAGE_ID, self::CODE_FIELD_GENERATE_PARAMS);
 
         $this->formData = $formData;
     }
@@ -165,7 +167,7 @@ final class RegisterForm
     protected function comparePropertyArray(array $formData): array
     {
         foreach ($formData as $key => $item) {
-            if (!str_contains($key, self::PROPERTY_PREFIX_CODE))  {
+            if (!str_contains($key, self::PROPERTY_PREFIX_CODE)) {
                 continue;
             }
 

@@ -7,8 +7,9 @@ import { getFilteredPhrases, Constants, FormFields } from 'tools';
  * @param {FormFields} fields
  * @param {Function} ajaxFunc
  * @param {Object} validators
+ * @param {String} lang
  */
-export default function useForm(fields, ajaxFunc, validators = {}) {
+export default function useForm(fields, ajaxFunc, validators = {}, lang = 'ru') {
 
     const formData = reactive({});
     const isLoading = ref(false);
@@ -120,7 +121,8 @@ export default function useForm(fields, ajaxFunc, validators = {}) {
     const sendRequest = async (formRef, afterSuccess = null) => {
         isLoading.value = true;
         const data = { formData: formData };
-        await ajaxFunc(data)
+        const headers = { lang: lang };
+        await ajaxFunc(data, headers)
             .then(async (response) => {
                 // TODO обработка ошибки пока не разберусь как возвращать статус ошибки с сервера
                 if (response?.data?.status === "error") {

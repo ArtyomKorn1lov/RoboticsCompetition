@@ -17,6 +17,7 @@ use Robot\Core\DTO\Event\AutocompleteSearch;
 use Robot\Core\Services\Event\EventManager;
 use Robot\Core\Tools\Mappers\Event;
 use Robot\Core\Views\Events\EventsView;
+use Robot\Core\Middleware\Language;
 
 Loc::loadMessages(__FILE__);
 
@@ -29,10 +30,14 @@ class EventController extends Controller
     {
         return [
             "register" => [
-                "prefilters" => []
+                "prefilters" => [
+                    new Language()
+                ]
             ],
             "countries" => [
-                "prefilters" => []
+                "prefilters" => [
+                    new Language()
+                ]
             ]
         ];
     }
@@ -45,7 +50,7 @@ class EventController extends Controller
     {
         try {
             if (empty($formData)) {
-                throw new ArgumentException("Не заполненная форма регистрации");
+                throw new ArgumentException(Loc::getMessage("ROBOT_CORE_REGISTER_DATA_EMPTY"));
             }
 
             $eventId = EventsView::getActiveEventId();
@@ -57,7 +62,7 @@ class EventController extends Controller
             $eventManager = new EventManager();
             $eventManager->saveForm(Event::mapRegisterFormArrayToModel($formData), $eventId);
 
-            return AjaxJson::createSuccess("Вы успешно зарегистрировались на текущее событие!");
+            return AjaxJson::createSuccess(Loc::getMessage("ROBOT_CORE_REGISTER_SUCCESS_MESSAGE"));
         } catch (SystemException|ArgumentException|ObjectException|ObjectPropertyException $exception) {
             AddMessage2Log($exception->getMessage(), "robot.core");
             $errorCollection = new ErrorCollection();
@@ -76,7 +81,7 @@ class EventController extends Controller
     {
         try {
             if (empty($id)) {
-                throw new ArgumentException("Не указано id поля для поиска");
+                throw new ArgumentException(Loc::getMessage("ROBOT_CORE_SEARCH_INVALID_ID"));
             }
 
             $autocompleteSearch = new AutocompleteSearch(

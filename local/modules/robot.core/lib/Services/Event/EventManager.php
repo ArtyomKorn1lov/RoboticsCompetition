@@ -2,6 +2,7 @@
 
 namespace Robot\Core\Services\Event;
 
+use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\LoaderException;
 use Bitrix\Main\ObjectException;
@@ -15,6 +16,8 @@ use Robot\Core\Entity\Event\RegisterForm as RegisterFormEntity;
 use Robot\Core\Repositories\Event\EventRepository;
 use Robot\Core\Tools\Mappers\Event;
 use Robot\Core\DTO\Event\FormField;
+
+Loc::loadMessages(__FILE__);
 
 class EventManager implements IEventManager
 {
@@ -30,7 +33,7 @@ class EventManager implements IEventManager
     {
         try {
             if (empty($eventId)) {
-                throw new ArgumentException("Указанного события не существует");
+                throw new ArgumentException(Loc::getMessage("ROBOT_CORE_ERROR_EVENT_ID"));
             }
 
             // TODO вынести в сервис-локатор
@@ -39,7 +42,7 @@ class EventManager implements IEventManager
             $fields = $eventRepository->getRegistrationFields(false);
 
             if (empty($fields)) {
-                throw new SystemException("Ошибка получения полей формы");
+                throw new SystemException(Loc::getMessage("ROBOT_CORE_EVENT_REGISTRATION_FIELDS_ERROR"));
             }
 
             $externalData = new RegisterExternalData(
@@ -91,14 +94,14 @@ class EventManager implements IEventManager
     {
         try {
             if (empty($autocompleteSearch->id)) {
-                throw new ArgumentException("Не указано id поля для поиска");
+                throw new ArgumentException(Loc::getMessage("ROBOT_CORE_EVENT_SEARCH_ERROR_ID"));
             }
 
             // TODO вынести в сервис-локатор
             $eventRepository = new EventRepository();
             $entityName = $eventRepository->getFieldValueEntityById($autocompleteSearch->id);
             if (empty($entityName)) {
-                throw new ArgumentException("Сущность со значениями поля не найдена");
+                throw new ArgumentException(Loc::getMessage("ROBOT_CORE_EVENT_ERROR_SEARCH_ENTITY"));
             }
 
             return Event::mapSearchResultArrayToModelList($eventRepository->searchAutocompleteValues($autocompleteSearch->value, $entityName));

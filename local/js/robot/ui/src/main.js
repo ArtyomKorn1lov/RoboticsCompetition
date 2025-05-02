@@ -1,4 +1,6 @@
 import VueTheMask from 'vue-the-mask';
+import ElPlusRu from 'element-plus/es/locale/lang/ru';
+import ElPlusEn from 'element-plus/es/locale/lang/en';
 import * as Swiper from 'swiper/vue';
 import 'swiper/css';
 import {
@@ -19,7 +21,8 @@ import {
     ElSelect,
     ElOption,
     ElNotification,
-    ElDrawer
+    ElDrawer,
+    ElConfigProvider
 } from 'element-plus';
 
 const ElPlus = {
@@ -40,7 +43,8 @@ const ElPlus = {
     ElSelect,
     ElOption,
     ElNotification,
-    ElDrawer
+    ElDrawer,
+    ElConfigProvider
 }
 
-export default { ElPlus, VueTheMask, Swiper }
+export default { ElPlus, ElPlusRu, ElPlusEn, VueTheMask, Swiper }

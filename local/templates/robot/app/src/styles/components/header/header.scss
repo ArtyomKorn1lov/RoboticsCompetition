@@ -51,11 +51,10 @@
     padding: $m10 $m15;
 
     &-icon {
-      flex-shrink: 0;
-      width: $m25;
-      height: $m25;
+      @extend %imgDefaultStyles;
 
-      svg {
+      &-wrap {
+        flex-shrink: 0;
         width: $m25;
         height: $m25;
       }

@@ -2,6 +2,7 @@
 
 namespace Robot\Core\Entity\SiteSettings;
 
+use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\ObjectException;
 use Bitrix\Main\Entity\Query;
@@ -10,6 +11,8 @@ use Bitrix\Main\SystemException;
 use CFile;
 
 use Robot\Core\Tools\Modules\Manager;
+
+Loc::loadMessages(__FILE__);
 
 final class SiteSettingsUpdate
 {
@@ -99,23 +102,23 @@ final class SiteSettingsUpdate
     protected function validate(int $id, array $arSiteSettingsFields): void
     {
         if (empty($id)) {
-            throw new ArgumentException("Id обновляемого элемента не может быть <= 0");
+            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_ID_UPDATED_ERROR"));
         }
 
         if (empty($arSiteSettingsFields)) {
-            throw new ObjectException("Значения формы не заполнены");
+            throw new ObjectException(Loc::getMessage("ROBOT_CORE_FORM_VALUES_ERROR"));
         }
 
         if (empty($arSiteSettingsFields[self::FIELD_EMAIL_CODE])) {
-            throw new ArgumentException("Email организации не может быть пустым");
+            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_INVALID_EMAIL"));
         }
 
         if (empty($arSiteSettingsFields[self::FIELD_PHONE_CODE])) {
-            throw new ArgumentException("Телефон организации не может быть пустым");
+            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_INVALID_PHONE"));
         }
 
         if (empty($arSiteSettingsFields[self::FIELD_ADDRESS_CODE])) {
-            throw new ArgumentException("Адрес организации не может быть пустым");
+            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_INVALID_ADDRESS"));
         }
     }
 
@@ -209,7 +212,7 @@ final class SiteSettingsUpdate
     protected function compareMapCoors(array $arSiteSettingsFields): array
     {
         if (empty($arSiteSettingsFields[self::FIELD_MAP_COORDINATES_CODE."_VALUE_1"]) || empty($arSiteSettingsFields[self::FIELD_MAP_COORDINATES_CODE."_VALUE_2"])) {
-            throw new ArgumentException("Необходимо ввести 2 координаты для точки на карте");
+            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_INVALID_COORDINATES"));
         }
 
         $arSiteSettingsFields[self::FIELD_MAP_COORDINATES_CODE][] = (float) $arSiteSettingsFields[self::FIELD_MAP_COORDINATES_CODE."_".self::VALUE_STR_CONTAIN."_1"];
@@ -249,7 +252,7 @@ final class SiteSettingsUpdate
     protected function deleteFieldFile(string $fieldCode): void
     {
         if (empty($fieldCode)) {
-            throw new ArgumentException("Не введён код поля для удаления файла");
+            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_INVALID_FILE_FIELD_CODE"));
         }
 
         $query = new Query(SiteSettingsTable::getEntity());

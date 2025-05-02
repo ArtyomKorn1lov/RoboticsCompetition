@@ -7,6 +7,7 @@ use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ModuleManager;
 use Bitrix\Main\DB\SqlQueryException;
 use Bitrix\Main\IO\Directory;
+use Bitrix\Main\IO\File;
 
 use Robot\Core\Tools\Modules\Manager;
 use Robot\Core\Entity\SiteSettings\SiteSettingsTable;
@@ -88,6 +89,11 @@ class robot_core extends CModule
         if (!Directory::isDirectoryExists($siteSettingsUploadDir)) {
             Directory::createDirectory($siteSettingsUploadDir);
         }
+        $siteSettingsAdminPath = __DIR__ . "/admin/robot_core_site_settings.php";
+        $coreAdminPath = $_SERVER['DOCUMENT_ROOT'] . "/bitrix/admin/robot_core_site_settings.php";
+        if (!File::isFileExists($coreAdminPath)) {
+            copy($siteSettingsAdminPath, $coreAdminPath);
+        }
     }
 
     /**
@@ -110,13 +116,15 @@ class robot_core extends CModule
 
             $siteSettingsDir = __DIR__ . "\\public\\assets\\";
             $siteSettingsUploadDir = Manager::SITE_SETTINGS_FILE_PATH;
+
+            /** Установка настроек для русской версии сайта */
             $logo = CFile::MakeFileArray($siteSettingsDir . Manager::DEFAULT_LOGO_FILENAME);
             $logo = $logo ? CFile::SaveFile($logo, $siteSettingsUploadDir) : 0;
             $logoFooter = CFile::MakeFileArray($siteSettingsDir . Manager::DEFAULT_LOGO_FOOTER_FILENAME);
             $logoFooter = $logoFooter ? CFile::SaveFile($logoFooter, $siteSettingsUploadDir) : 0;
-
             SiteSettingsTable::add([
                 "SITE_ID" => "s1",
+                "LANG" => "ru",
                 "NAME" => "Поволжский государственный технологический университет",
                 "EMAIL" => "info@volgatech.net",
                 "PHONE" => '+7 (987) 654-32-10',
@@ -130,6 +138,50 @@ class robot_core extends CModule
                     "Приемная ректора:" => "(8362) 45-53-44",
                     "Отдел кадров:" => "(8362) 68-68-11",
                     "Бухгалтерия:" => "(8362) 68-78-97",
+                ],
+                "MAP_COORDINATES" => [
+                    56.621796,
+                    47.884858
+                ],
+                "SOCIAL_NETWORKS_FOOTER" => [
+                    SocialIcons::TelegramFooter->value => "tg://resolve?domain=/",
+                    SocialIcons::WhatsAppFooter->value => "whatsapp://resolve?domain=/",
+                    SocialIcons::VkFooter->value => "vk://resolve?domain=/",
+                    SocialIcons::DzenFooter->value => "dzen://resolve?domain=/",
+                    SocialIcons::YoutubeFooter->value => "youtube://resolve?domain=/"
+                ],
+                "SOCIAL_NETWORKS" => [
+                    SocialIcons::Telegram->value => "tg://resolve?domain=/",
+                    SocialIcons::WhatsApp->value => "whatsapp://resolve?domain=/",
+                    SocialIcons::Vk->value => "vk://resolve?domain=/",
+                    SocialIcons::Dzen->value => "dzen://resolve?domain=/",
+                    SocialIcons::Youtube->value => "youtube://resolve?domain=/"
+                ],
+                "LOGO" => $logo,
+                "LOGO_FOOTER" => $logoFooter,
+            ]);
+
+            /** Установка настроек для английской версии сайта */
+            $logo = CFile::MakeFileArray($siteSettingsDir . Manager::DEFAULT_LOGO_FILENAME);
+            $logo = $logo ? CFile::SaveFile($logo, $siteSettingsUploadDir) : 0;
+            $logoFooter = CFile::MakeFileArray($siteSettingsDir . Manager::DEFAULT_LOGO_FOOTER_FILENAME);
+            $logoFooter = $logoFooter ? CFile::SaveFile($logoFooter, $siteSettingsUploadDir) : 0;
+            SiteSettingsTable::add([
+                "SITE_ID" => "s2",
+                "LANG" => "en",
+                "NAME" => "Volga region state technological university",
+                "EMAIL" => "info@volgatech.net",
+                "PHONE" => '+7 (987) 654-32-10',
+                "ADDRESS" => "Mari El Republic, Yoshkar-Ola, V.I. Lenin Square, 3",
+                "ADDRESS_ORGANISATION" => [
+                    "1 building:" => "Mari El Republic, Yoshkar-Ola, V.I. Lenin Square, 3",
+                    "2 building:" => "Republic of Mari El, Yoshkar-Ola, st. Sovetskaya, 158",
+                    "3 building:" => "Republic of Mari El, Yoshkar-Ola, st. Panfilova, 17",
+                ],
+                "CONTACT_PHONES" => [
+                    "Rector's reception:" => "(8362) 45-53-44",
+                    "Human resources department:" => "(8362) 68-68-11",
+                    "Accounting:" => "(8362) 68-78-97",
                 ],
                 "MAP_COORDINATES" => [
                     56.621796,
@@ -210,6 +262,10 @@ class robot_core extends CModule
         if (Directory::isDirectoryExists($siteSettingsUploadDir)) {
             Directory::deleteDirectory($siteSettingsUploadDir);
         }
+        $coreAdminPath = $_SERVER['DOCUMENT_ROOT'] . "/bitrix/admin/robot_core_site_settings.php";
+        if (File::isFileExists($coreAdminPath)) {
+            unlink($coreAdminPath);
+        }
     }
 
     /**
@@ -221,8 +277,6 @@ class robot_core extends CModule
         try {
             $query = new Query(SiteSettingsTable::getEntity());
             $query->setOrder(["ID" => "ASC"]);
-            $query->setFilter(["=SITE_ID" => "s1"]);
-            $query->setLimit(1);
             $query->setSelect(["LOGO", "LOGO_FOOTER"]);
             $result = $query->exec();
             $rows = $result->fetchAll();

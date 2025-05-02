@@ -2,6 +2,7 @@
 
 namespace Robot\Core\Repositories\Event;
 
+use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\LoaderException;
 use Bitrix\Main\ObjectPropertyException;
@@ -87,6 +88,7 @@ class EventRepository extends HighloadBlocks implements IEventRepository
 
         $query = new Query(RegistrationFieldsTable::getEntity());
         $query->setOrder(["sort" => "ASC"]);
+        $query->setFilter(["lang" => Loc::getCurrentLang()]);
         $query->setSelect([
             "*",
             "formType"

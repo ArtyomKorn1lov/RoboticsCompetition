@@ -51,7 +51,7 @@ $isMainPage = $arParams["IS_MAIN_PAGE"];
                     <?= $siteSettings->siteName ?>
                 </div>
                 <span class="b-footer__copyright">
-                    <?=date('Y')?> Все права защищены
+                    <?= date('Y') ?> <?= Loc::getMessage("COPYRIGHT_TITLE") ?>
                 </span>
             </div>
         </div>

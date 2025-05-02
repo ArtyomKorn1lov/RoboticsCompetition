@@ -37,10 +37,10 @@ import TimeLine from "./TimeLine.vue";
 import { getProgramItems, getFilteredPhrases, Program, Timing } from 'tools';
 
 /**
- * @typedef {{ title: String, dates: Timing[], programs: Program[] }} ProgramListProps
+ * @typedef {{ title: String, dates: Timing[], programs: Program[], lang: String }} ProgramListProps
  * @return {ProgramListProps}
  */
-const { title, dates, programs } = defineProps({
+const { title, dates, programs, lang } = defineProps({
   title: {
     type: String,
     default: ""
@@ -52,6 +52,10 @@ const { title, dates, programs } = defineProps({
   programs: {
     type: Array,
     default: []
+  },
+  lang: {
+    type: String,
+    default: 'ru'
   }
 });
 
@@ -65,9 +69,14 @@ const selectDate = async (index) => {
   isLoading.value = true;
   activeTab.value = index;
   programData.value = [];
-  await getProgramItems({
-    date: dates[index]?.date
-  })
+  await getProgramItems(
+      {
+        date: dates[index]?.date
+      },
+      {
+        lang: lang
+      }
+  )
       .then((response) => {
         // TODO обработка ошибки пока не разберусь как возвращать статус ошибки с сервера
         if (response?.data?.status === 'error') {

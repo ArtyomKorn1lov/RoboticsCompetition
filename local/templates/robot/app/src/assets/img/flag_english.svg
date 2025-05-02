@@ -1,0 +1,36 @@
+<svg id="flag_english" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_139_420)">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M0 3.5V21.5H25V3.5H0Z" fill="#2E42A5"/>
+        <mask id="mask0_139_420" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="3" width="25"
+              height="19">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M0 3.5V21.5H25V3.5H0Z" fill="white"/>
+        </mask>
+        <g mask="url(#mask0_139_420)">
+            <path d="M-2.78357 20.2138L2.71799 22.448L25.1242 5.92854L28.0266 2.60904L22.1438 1.86279L13.0047 8.98104L5.64846 13.778L-2.78357 20.2138Z"
+                  fill="white"/>
+            <path d="M-2.03125 21.779L0.772656 23.075L26.9844 2.30078H23.0492L-2.03125 21.779Z" fill="#F50100"/>
+            <path d="M27.7835 20.2138L22.282 22.448L-0.124268 5.92854L-3.02661 2.60904L2.8562 1.86279L11.9953 8.98104L19.3515 13.778L27.7835 20.2138Z"
+                  fill="white"/>
+            <path d="M27.5961 21.3374L24.7929 22.6334L13.632 13.7384L10.3226 12.7454L-3.30627 2.62036H0.629663L14.25 12.5054L17.8679 13.6964L27.5961 21.3374Z"
+                  fill="#F50100"/>
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M15.4515 2H9.54841V9.5H-1.54065V15.5H9.54841V23H15.4515V15.5H26.5844V9.5H15.4515V2Z"
+                  fill="#F50100"/>
+            <mask id="mask1_139_420" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="-2" y="2" width="29"
+                  height="21">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M15.4515 2H9.54841V9.5H-1.54065V15.5H9.54841V23H15.4515V15.5H26.5844V9.5H15.4515V2Z"
+                      fill="white"/>
+            </mask>
+            <g mask="url(#mask1_139_420)">
+                <path d="M9.54841 2V0.5H7.98591V2H9.54841ZM15.4515 2H17.014V0.5H15.4515V2ZM9.54841 9.5V11H11.1109V9.5H9.54841ZM-1.54065 9.5V8H-3.10315V9.5H-1.54065ZM-1.54065 15.5H-3.10315V17H-1.54065V15.5ZM9.54841 15.5H11.1109V14H9.54841V15.5ZM9.54841 23H7.98591V24.5H9.54841V23ZM15.4515 23V24.5H17.014V23H15.4515ZM15.4515 15.5V14H13.889V15.5H15.4515ZM26.5844 15.5V17H28.1469V15.5H26.5844ZM26.5844 9.5H28.1469V8H26.5844V9.5ZM15.4515 9.5H13.889V11H15.4515V9.5ZM9.54841 3.5H15.4515V0.5H9.54841V3.5ZM11.1109 9.5V2H7.98591V9.5H11.1109ZM-1.54065 11H9.54841V8H-1.54065V11ZM0.0218506 15.5V9.5H-3.10315V15.5H0.0218506ZM9.54841 14H-1.54065V17H9.54841V14ZM11.1109 23V15.5H7.98591V23H11.1109ZM15.4515 21.5H9.54841V24.5H15.4515V21.5ZM13.889 15.5V23H17.014V15.5H13.889ZM26.5844 14H15.4515V17H26.5844V14ZM25.0219 9.5V15.5H28.1469V9.5H25.0219ZM15.4515 11H26.5844V8H15.4515V11ZM13.889 2V9.5H17.014V2H13.889Z"
+                      fill="white"/>
+            </g>
+        </g>
+    </g>
+    <defs>
+        <clipPath id="clip0_139_420">
+            <rect y="3.5" width="25" height="18" rx="3" fill="white"/>
+        </clipPath>
+    </defs>
+</svg>

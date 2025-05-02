@@ -2,6 +2,7 @@
 
 namespace Robot\Core\Controllers\Program;
 
+use Bitrix\Main\ArgumentException;
 use Bitrix\Main\Engine\Controller;
 use Bitrix\Main\Error;
 use Bitrix\Main\ErrorCollection;
@@ -9,7 +10,9 @@ use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\SystemException;
 use Bitrix\Main\Engine\Response\AjaxJson;
 use Bitrix\Main\Type\DateTime;
+
 use Robot\Core\Services\Program\ProgramManager;
+use Robot\Core\Middleware\Language;
 
 Loc::loadMessages(__FILE__);
 
@@ -23,7 +26,9 @@ class ProgramController extends Controller
     {
         return [
             "getItems" => [
-                "prefilters" => []
+                "prefilters" => [
+                    new Language()
+                ]
             ]
         ];
     }

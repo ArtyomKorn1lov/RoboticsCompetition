@@ -2,13 +2,17 @@
 
 namespace Robot\Core\Entity\Event;
 
+use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\ObjectException;
 use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
+
 use Robot\Core\Constants;
 use Robot\Core\Entity\Abstracts\HighloadBlocks;
 use Robot\Core\Tools\Mappers\Event;
+
+Loc::loadMessages(__FILE__);
 
 final class FormField extends HighloadBlocks
 {
@@ -59,7 +63,7 @@ final class FormField extends HighloadBlocks
     )
     {
         if (!$this->validateValues($id, $code, $type)) {
-            throw new ArgumentException("Неверные значения входных параметров");
+            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_ARGUMENT_EXCEPTION"));
         }
 
         $this->id = $id;

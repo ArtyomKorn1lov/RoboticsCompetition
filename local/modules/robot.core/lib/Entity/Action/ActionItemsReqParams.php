@@ -5,6 +5,8 @@ namespace Robot\Core\Entity\Action;
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\Localization\Loc;
 
+Loc::loadMessages(__FILE__);
+
 /**
  * Параметры запроса для получения списка мероприятий по Id разделов
  */

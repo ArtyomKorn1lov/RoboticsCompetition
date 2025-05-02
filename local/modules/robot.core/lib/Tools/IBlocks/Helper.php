@@ -7,6 +7,7 @@ use Bitrix\Main\SystemException;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\LoaderException;
 use Robot\Core\Tools\Modules\Manager;
+use Robot\Core\Constants;
 
 Loc::loadMessages(__FILE__);
 
@@ -54,8 +55,16 @@ class Helper implements IHelper
     {
         return [
             "select" => ["ID"],
-            "filter" => ["CODE" => $code],
+            "filter" => ["CODE" => static::getLangSiteCode($code)],
             "cache" => static::CacheTypeRequest
         ];
+    }
+
+    protected static function getLangSiteCode(string $code): string
+    {
+        if (Loc::getCurrentLang() === Constants::LANG_ENGLISH_CODE) {
+            return $code . "_" . Constants::LANG_ENGLISH_CODE;
+        }
+        return $code;
     }
 }

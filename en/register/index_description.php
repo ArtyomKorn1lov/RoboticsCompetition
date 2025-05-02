@@ -1,0 +1,1 @@
+Registration for the educational festival <b>"Regional Festival of Robotics at PGTU"</b>

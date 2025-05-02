@@ -7,7 +7,7 @@ use Robot\Core\DTO\SiteSettings\SiteSettingsContacts;
 class Helper
 {
     /** @var string Относительный путь к иконке в файловой системе */
-    protected const SPRITE_FOLDER_PATH = SITE_DIR . "local/templates/robot/app/dist/assets/icons/sprite.svg#";
+    protected const SPRITE_FOLDER_PATH = "/local/templates/robot/app/dist/assets/icons/sprite.svg#";
 
     /** @var string Код свойства для хранения заголовка в буфере */
     protected const TITLE_VIEW_CONTENT_CODE = "PAGER_TITLE";
