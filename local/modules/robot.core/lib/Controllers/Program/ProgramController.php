@@ -2,7 +2,6 @@
 
 namespace Robot\Core\Controllers\Program;
 
-use Bitrix\Main\ArgumentException;
 use Bitrix\Main\Engine\Controller;
 use Bitrix\Main\Error;
 use Bitrix\Main\ErrorCollection;

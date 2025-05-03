@@ -30,5 +30,15 @@ interface ISiteSettingsManager
      */
     public function getSettingContacts(): SiteSettingsContacts;
 
+    /**
+     * @param SiteSettingsUpdate $siteSettingsUpdate
+     * @return void
+     */
     public function saveSiteSettings(SiteSettingsUpdate $siteSettingsUpdate): void;
+
+    /**
+     * @param string $lang
+     * @return string
+     */
+    public function getSiteIdByLang(string $lang): string;
 }

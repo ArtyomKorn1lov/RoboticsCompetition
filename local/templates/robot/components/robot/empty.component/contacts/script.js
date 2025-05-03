@@ -25,5 +25,9 @@ function initMap(object = null) {
         }
     }
 
+    if (object.api) {
+        options.api = object.api;
+    }
+
     $(object.mapSelector).eyMaps(options);
 }

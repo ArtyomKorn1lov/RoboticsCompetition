@@ -156,7 +156,8 @@ const {
 } = useForm(
     fields,
     sendRegisterForm,
-    Validators
+    Validators,
+    lang
 );
 
 const loc = computed(() => getFilteredPhrases('REGISTRATION_'));

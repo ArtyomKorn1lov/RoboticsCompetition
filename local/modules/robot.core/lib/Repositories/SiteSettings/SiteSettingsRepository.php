@@ -122,4 +122,26 @@ class SiteSettingsRepository implements ISiteSettingsRepository
             throw new SystemException($result->getError());
         }
     }
+
+    /**
+     * @param string $lang
+     * @return string
+     * @throws ArgumentException
+     * @throws ObjectPropertyException
+     * @throws SystemException
+     */
+    public function getSiteIdByLang(string $lang): string
+    {
+        $query = new Query(SiteSettingsTable::getEntity());
+        $query->setOrder(["ID" => "ASC"]);
+        $query->setFilter(["=LANG" => $lang]);
+        $query->setLimit(1);
+        $query->setSelect(["SITE_ID"]);
+        $result = $query->exec();
+        $rows = $result->fetchAll();
+        if (!$rows) {
+            return SITE_ID;
+        }
+        return $rows[0]["SITE_ID"];
+    }
 }

@@ -30,8 +30,15 @@ interface ISiteSettingsView
     public static function getSettingsContacts(): SiteSettingsContacts|bool;
 
     /**
+     * @param int $id
      * @param array $arSiteSettings
      * @return string|bool
      */
     public static function saveSiteSettings(int $id, array $arSiteSettings): string|bool;
+
+    /**
+     * @param string $lang
+     * @return string|bool
+     */
+    public static function getSiteIdByLang(string $lang): string|bool;
 }

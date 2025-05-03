@@ -2,7 +2,11 @@
 
 namespace Robot\Core\Tools\Template;
 
+use Bitrix\Main\Localization\Loc;
+
+use Robot\Core\Constants;
 use Robot\Core\DTO\SiteSettings\SiteSettingsContacts;
+use Robot\Core\Enums\YaMapLang;
 
 class Helper
 {
@@ -54,6 +58,15 @@ class Helper
     {
         global $APPLICATION;
         $APPLICATION->ShowViewContent(static::TITLE_VIEW_CONTENT_CODE);
+    }
+
+    /**
+     * @return string
+     */
+    public static function buildYandexApiUrl(): string
+    {
+        $mapLang = Loc::getCurrentLang() === Constants::LANG_ENGLISH_CODE ? YaMapLang::en->value : YaMapLang::ru->value;
+        return Constants::YA_MAP_API_URL."?lang=".$mapLang;
     }
 
     /**

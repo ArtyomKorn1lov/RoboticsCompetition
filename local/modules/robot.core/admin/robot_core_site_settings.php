@@ -6,24 +6,37 @@ require $_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_admin_a
 
 use Bitrix\Main\Loader;
 use Bitrix\Main\Web\Json;
+use Bitrix\Main\Context;
+use Bitrix\Main\Localization\Loc;
 
 if (!Loader::includeModule('robot.core')) {
-    die("Не подключен главный модуль сайта для проведения соревнований по робототехнике");
+    die(Loc::getMessage("ROBOT_CORE_NOT_INCLUDE_MODULE"));
 }
 
 use Robot\Core\Views\SiteSettings\SiteSettingsView;
 use Robot\Core\Enums\SocialIcons;
+use Robot\Core\Constants;
 
-// TODO получать настройки сайта отдельно
-$arSiteSettings = SiteSettingsView::getSiteSettingsEdit("s1");
+$request = Context::getCurrent()->getRequest();
+$siteLang = $request->get('version') ?? Constants::LANG_RUSSIA_CODE;
+$siteId = SiteSettingsView::getSiteIdByLang($siteLang);
 
-if (empty($arSiteSettings)) {
-    ShowError("Не найдены настройки текущего сайта");
+if (empty($siteId)) {
+    ShowError(Loc::getMessage("ROBOT_CORE_LANG_ERROR"));
     require $_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/epilog_admin.php";
     return false;
 }
 
-$currentUrl = $APPLICATION->GetCurPage().'?lang='.LANGUAGE_ID;
+$arSiteSettings = SiteSettingsView::getSiteSettingsEdit($siteId);
+
+if (empty($arSiteSettings)) {
+    ShowError(Loc::getMessage("ROBOT_CORE_SITE_SETTING_EMPTY"));
+    require $_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/epilog_admin.php";
+    return false;
+}
+
+$currentUrl = $APPLICATION->GetCurPage() . '?lang=' . LANGUAGE_ID . "&amp;version=" . ($siteLang === Constants::LANG_ENGLISH_CODE ? Constants::LANG_ENGLISH_CODE : Constants::LANG_RUSSIA_CODE);
+$changeUrl = $APPLICATION->GetCurPage() . '?lang=' . LANGUAGE_ID . "&amp;version=" . ($siteLang === Constants::LANG_ENGLISH_CODE ? Constants::LANG_RUSSIA_CODE : Constants::LANG_ENGLISH_CODE);
 
 $optionList = array(
     "NAME",
@@ -39,10 +52,10 @@ $optionList = array(
     "SOCIAL_NETWORKS_FOOTER"
 );
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && check_bitrix_sessid() && isset($_POST['robot_core_site_settings_update']) && $_POST['robot_core_site_settings_update'] === 'Y') {
+if ($request->getRequestMethod() === "POST" && check_bitrix_sessid() && !empty($request->getPost('robot_core_site_settings_update')) && $request->getPost('robot_core_site_settings_update') === 'Y') {
     $arData = [];
     foreach ($optionList as $option) {
-        foreach ($_POST as $key => $postItem) {
+        foreach ($request->getPostList() as $key => $postItem) {
             if ($key === $option) {
                 $arData[$option] = $postItem;
             }
@@ -52,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && check_bitrix_sessid() && isset($_PO
         }
     }
     foreach ($optionList as $option) {
-        foreach ($_FILES as $key => $fileItem) {
+        foreach ($request->getFileList() as $key => $fileItem) {
             if ($key === $option) {
                 $arData[$option] = $fileItem;
             }
@@ -77,12 +90,19 @@ foreach ($optionList as $option) {
 $tabList = [
     [
         "DIV" => "robot_core_site_settings_edit_1",
-        "TAB" => "Настройки для сайта проведения соревнований по робототехнике",
+        "TAB" => Loc::getMessage("ROBOT_CORE_SITE_SETTING_TAB_TITLE"),
         "ICON" => "ib_settings",
-        "TITLE" => "Настройки для сайта проведения соревнований по робототехнике"
+        "TITLE" => $siteLang === Constants::LANG_ENGLISH_CODE ? Loc::getMessage("ROBOT_CORE_SITE_SETTING_EN_TITLE") : Loc::getMessage("ROBOT_CORE_SITE_SETTING_RU_TITLE")
     ]
 ];
 
+?>
+<div class="adm-filter-wrap">
+    <a href="<?= $changeUrl ?>" class="adm-btn">
+        <?= $siteLang === Constants::LANG_ENGLISH_CODE ? Loc::getMessage("ROBOT_CORE_SITE_SETTING_RU_TITLE") : Loc::getMessage("ROBOT_CORE_SITE_SETTING_EN_TITLE") ?>
+    </a>
+</div>
+<?php
 $tabControl = new CAdminTabControl("robot_core_site_settings_options", $tabList);
 $tabControl->Begin();
 ?>
@@ -95,13 +115,13 @@ $tabControl->Begin();
         <?php $tabControl->BeginNextTab(); ?>
         <tr class="heading">
             <td colspan="2">
-                Общая информация об организации:
+                <?= Loc::getMessage("ROBOT_CORE_GROUP_ORGANISATION_TITLE"); ?>
             </td>
         </tr>
         <?php /** Название организации */ ?>
         <tr>
             <td style="width: 40%">
-                Название организации:
+                <?= Loc::getMessage("ROBOT_CORE_FIELD_ORGANISATION_TITLE"); ?>
             </td>
             <td>
                 <label>
@@ -113,7 +133,7 @@ $tabControl->Begin();
         <?php /** Email организации */ ?>
         <tr>
             <td style="width: 40%">
-                E-mail организации:
+                <?= Loc::getMessage("ROBOT_CORE_FIELD_EMAIL_TITLE"); ?>
             </td>
             <td>
                 <label>
@@ -125,7 +145,7 @@ $tabControl->Begin();
         <?php /** Номер телефона организации */ ?>
         <tr>
             <td style="width: 40%">
-                Номер телефона организации:
+                <?= Loc::getMessage("ROBOT_CORE_FIELD_PHONE_TITLE"); ?>
             </td>
             <td>
                 <label>
@@ -137,7 +157,7 @@ $tabControl->Begin();
         <?php /** Адрес организации */ ?>
         <tr>
             <td style="width: 40%">
-                Адрес организации:
+                <?= Loc::getMessage("ROBOT_CORE_FIELD_ADDRESS_TITLE"); ?>
             </td>
             <td>
                 <label>
@@ -149,20 +169,20 @@ $tabControl->Begin();
         <?php /** Загрузить иконку для шапки и футера сайта */ ?>
         <tr class="heading">
             <td colspan="2">
-                Файлы организации (при загрузке файла, произойдёт замена выбранного ресурса):
+                <?= Loc::getMessage("ROBOT_CORE_GROUP_FILES_TITLE"); ?>
             </td>
         </tr>
         <tr>
             <td style="width: 40%">
-                Логотип для шапки сайта:
+                <?= Loc::getMessage("ROBOT_CORE_FIELD_LOGO_TITLE"); ?>
             </td>
             <td>
                 <?php if (!empty($options["LOGO"])) { ?>
                     <div style="aspect-ratio: 1/1; width: 100%; max-width: 100px;">
-                        <img style="width: 100%; height: 100%; object-fit: cover;" src="<?=$options["LOGO"]?>" alt="Логотип в шапке сайта">
+                        <img style="width: 100%; height: 100%; object-fit: cover;" src="<?=$options["LOGO"]?>" alt="<?= Loc::getMessage("ROBOT_CORE_FIELD_LOGO_IMG_TITLE"); ?>">
                     </div>
                 <?php } else { ?>
-                    Файл ещё не был загружен в систему
+                    <?= Loc::getMessage("ROBOT_CORE_FIELD_FILE_EMPTY"); ?>
                 <?php } ?>
             </td>
         </tr>
@@ -170,21 +190,21 @@ $tabControl->Begin();
             <td style="width: 40%"></td>
             <td>
                 <label>
-                    <input type="file" name="LOGO" accept="image/jpeg, image/png, image/bmp, image/svg+xml" />
+                    <input type="file" name="LOGO" accept="<?= Constants::LOGO_FILE_AVAILABLE_STRING ?>" />
                 </label>
             </td>
         </tr>
         <tr>
             <td style="width: 40%">
-                Логотип для подвала сайта:
+                <?= Loc::getMessage("ROBOT_CORE_FIELD_LOGO_FOOTER_TITLE"); ?>
             </td>
             <td>
                 <?php if (!empty($options["LOGO_FOOTER"])) { ?>
                     <div style="aspect-ratio: 1/1; width: 100%; max-width: 100px;">
-                        <img style="width: 100%; height: 100%; object-fit: cover;" src="<?=$options["LOGO_FOOTER"]?>" alt="Логотип в шапке сайта">
+                        <img style="width: 100%; height: 100%; object-fit: cover;" src="<?=$options["LOGO_FOOTER"]?>" alt="<?= Loc::getMessage("ROBOT_CORE_FIELD_LOGO_FOOTER_IMG_TITLE"); ?>">
                     </div>
                 <?php } else { ?>
-                    Файл ещё не был загружен в систему
+                    <?= Loc::getMessage("ROBOT_CORE_FIELD_FILE_EMPTY"); ?>
                 <?php } ?>
             </td>
         </tr>
@@ -192,7 +212,7 @@ $tabControl->Begin();
             <td style="width: 40%"></td>
             <td>
                 <label>
-                    <input type="file" name="LOGO_FOOTER" accept="image/jpeg, image/png, image/bmp, image/svg+xml" />
+                    <input type="file" name="LOGO_FOOTER" accept="<?= Constants::LOGO_FILE_AVAILABLE_STRING ?>" />
                 </label>
             </td>
         </tr>
@@ -200,15 +220,15 @@ $tabControl->Begin();
         <?php /** Контактные адреса организации */ ?>
         <tr class="heading">
             <td colspan="2">
-                Контактные адреса:
+                <?= Loc::getMessage("ROBOT_CORE_FIELD_CONTACT_TITLE"); ?>
             </td>
         </tr>
         <tr>
             <td style="width: 40%; padding-right: 127px;">
-                Название
+                <?= Loc::getMessage("ROBOT_CORE_FIELD_NAME_COL"); ?>
             </td>
             <td>
-                Описание
+                <?= Loc::getMessage("ROBOT_CORE_FIELD_DESCRIPTION_COL"); ?>
             </td>
         </tr>
         <?php
@@ -246,22 +266,22 @@ $tabControl->Begin();
         <tr class="address_organisation_add">
             <td style="width: 40%"></td>
             <td>
-                <input type="button" class="address_organisation_add_input" value="Добавить" />
+                <input type="button" class="address_organisation_add_input" value="<?= Loc::getMessage("ROBOT_CORE_ADD_BTN_TITLE"); ?>" />
             </td>
         </tr>
         <?php /** ! Контактные адреса организации */ ?>
         <?php /** Контактные номера телефонов */ ?>
         <tr class="heading">
             <td colspan="2">
-                Контактные номера телефонов:
+                <?= Loc::getMessage("ROBOT_CORE_FIELD_CONTACT_PHONE_TITLE"); ?>
             </td>
         </tr>
         <tr>
             <td style="width: 40%; padding-right: 127px;">
-                Название
+                <?= Loc::getMessage("ROBOT_CORE_FIELD_NAME_COL"); ?>
             </td>
             <td>
-                Описание
+                <?= Loc::getMessage("ROBOT_CORE_FIELD_DESCRIPTION_COL"); ?>
             </td>
         </tr>
         <?php
@@ -299,22 +319,22 @@ $tabControl->Begin();
         <tr class="contact_phones_add">
             <td style="width: 40%"></td>
             <td>
-                <input type="button" class="contact_phones_add_input" value="Добавить" />
+                <input type="button" class="contact_phones_add_input" value="<?= Loc::getMessage("ROBOT_CORE_ADD_BTN_TITLE"); ?>" />
             </td>
         </tr>
         <?php /** ! Контактные номера телефонов */ ?>
         <?php /** Социальные сети */ ?>
         <tr class="heading">
             <td colspan="2">
-                Социальные сети:
+                <?= Loc::getMessage("ROBOT_CORE_FIELD_SOCIAL_TITLE"); ?>
             </td>
         </tr>
         <tr>
             <td style="width: 40%; padding-right: 120px;">
-                Код иконки
+                <?= Loc::getMessage("ROBOT_CORE_FIELD_CODE_ICON_COL"); ?>
             </td>
             <td>
-                Ссылка на ресурс
+                <?= Loc::getMessage("ROBOT_CORE_FIELD_RESOURCE_LINK_COL"); ?>
             </td>
         </tr>
         <?php
@@ -370,22 +390,22 @@ $tabControl->Begin();
         <tr class="social_networks_add">
             <td style="width: 40%"></td>
             <td>
-                <input type="button" class="social_networks_add_input" value="Добавить" />
+                <input type="button" class="social_networks_add_input" value="<?= Loc::getMessage("ROBOT_CORE_ADD_BTN_TITLE"); ?>" />
             </td>
         </tr>
         <?php /** ! Социальные сети */ ?>
         <?php /** Социальные сети в футере */ ?>
         <tr class="heading">
             <td colspan="2">
-                Социальные сети в подвале сайта:
+                <?= Loc::getMessage("ROBOT_CORE_FIELD_SOCIAL_FOOTER_TITLE"); ?>
             </td>
         </tr>
         <tr>
             <td style="width: 40%; padding-right: 120px;">
-                Код иконки
+                <?= Loc::getMessage("ROBOT_CORE_FIELD_CODE_ICON_COL"); ?>
             </td>
             <td>
-                Ссылка на ресурс
+                <?= Loc::getMessage("ROBOT_CORE_FIELD_RESOURCE_LINK_COL"); ?>
             </td>
         </tr>
         <?php
@@ -441,14 +461,14 @@ $tabControl->Begin();
         <tr class="social_networks_footer_add">
             <td style="width: 40%"></td>
             <td>
-                <input type="button" class="social_networks_footer_add_input" value="Добавить" />
+                <input type="button" class="social_networks_footer_add_input" value="<?= Loc::getMessage("ROBOT_CORE_ADD_BTN_TITLE"); ?>" />
             </td>
         </tr>
         <?php /** ! Социальные сети в футере */ ?>
         <?php /** Координаты точки на карте */ ?>
         <tr class="heading">
             <td colspan="2">
-                Координаты точки на карте:
+                <?= Loc::getMessage("ROBOT_CORE_FIELD_COORDS_TITLE"); ?>
             </td>
         </tr>
         <?php
@@ -469,7 +489,7 @@ $tabControl->Begin();
         ?>
         <?php /** ! Координаты точки на яндекс карте */ ?>
         <?php $tabControl->Buttons(); ?>
-        <input type="submit" class="adm-btn-save" name="robot_core_site_settings_update" value="Сохранить" />
+        <input type="submit" class="adm-btn-save" name="robot_core_site_settings_update" value="<?= Loc::getMessage("ROBOT_CORE_SUBMIT_BTN_TITLE"); ?>" />
         <input type="hidden" name="robot_core_site_settings_update" value="Y">
         <?= bitrix_sessid_post(); ?>
     </form>

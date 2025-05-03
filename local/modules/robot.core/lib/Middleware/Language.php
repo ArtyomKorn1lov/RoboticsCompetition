@@ -14,6 +14,9 @@ use Robot\Core\Constants;
  */
 class Language extends Base
 {
+    /** @var string Заголовок запроса lang, содержащий информацию о языке */
+    protected const HEADER_LANG_CODE = 'lang';
+
     /**
      * @param Event $event
      * @return EventResult
@@ -21,7 +24,7 @@ class Language extends Base
     public function onBeforeAction(Event $event): EventResult
     {
         $request = $this->action->getController()->getRequest();
-        $lang = $request->getHeader('lang');
+        $lang = $request->getHeader(self::HEADER_LANG_CODE);
         if (!empty($lang) && $lang === Constants::LANG_ENGLISH_CODE) {
             Loc::setCurrentLang(Constants::LANG_ENGLISH_CODE);
         } else {

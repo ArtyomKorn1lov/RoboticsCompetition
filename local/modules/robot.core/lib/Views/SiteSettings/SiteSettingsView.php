@@ -2,6 +2,8 @@
 
 namespace Robot\Core\Views\SiteSettings;
 
+use Bitrix\Main\ArgumentException;
+use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
 use Robot\Core\DTO\SiteSettings\SiteSettingsContacts;
 use Robot\Core\DTO\SiteSettings\SiteSettingsFooter;
@@ -91,6 +93,22 @@ class SiteSettingsView implements ISiteSettingsView
             return true;
         } catch (SystemException $exception) {
             return $exception->getMessage();
+        }
+    }
+
+    /**
+     * @param string $lang
+     * @return string|bool
+     */
+    public static function getSiteIdByLang(string $lang): string|bool
+    {
+        try {
+            // TODO заменить через сервис-локатор
+            $siteSettingsManager = new SiteSettingsManager();
+            return $siteSettingsManager->getSiteIdByLang($lang);
+        } catch (SystemException|ArgumentException|ObjectPropertyException $exception) {
+            AddMessage2Log($exception->getMessage());
+            return false;
         }
     }
 }

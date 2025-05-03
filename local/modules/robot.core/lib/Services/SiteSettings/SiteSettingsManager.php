@@ -16,6 +16,7 @@ use Robot\Core\Repositories\SiteSettings\SiteSettingsRepository;
 use Robot\Core\Tools\Files\Helper;
 use Robot\Core\Tools\Mappers\SiteSettings;
 use Robot\Core\Entity\SiteSettings\SiteSettingsUpdate as SiteSettingsUpdateEntity;
+use Robot\Core\Constants;
 
 Loc::loadMessages(__FILE__);
 
@@ -151,6 +152,29 @@ class SiteSettingsManager implements ISiteSettingsManager
             $siteSettingsRepository = new SiteSettingsRepository();
             $siteSettingsRepository->saveSiteSettings($entity);
         } catch (SystemException $exception) {
+            AddMessage2Log($exception->getMessage());
+            throw $exception;
+        }
+    }
+
+    /**
+     * @param string $lang
+     * @return string
+     * @throws ArgumentException
+     * @throws ObjectPropertyException
+     * @throws SystemException
+     */
+    public function getSiteIdByLang(string $lang): string
+    {
+        try {
+            if (empty($lang)) {
+                $lang = Constants::LANG_RUSSIA_CODE;
+            }
+
+            // TODO заменить через сервис-локатор
+            $siteSettingsRepository = new SiteSettingsRepository();
+            return $siteSettingsRepository->getSiteIdByLang($lang);
+        } catch (SystemException|ObjectPropertyException|ArgumentException $exception) {
             AddMessage2Log($exception->getMessage());
             throw $exception;
         }

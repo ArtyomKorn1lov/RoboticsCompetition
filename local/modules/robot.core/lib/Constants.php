@@ -78,4 +78,10 @@ class Constants
 
     /** @var string Английский язык для сайта */
     public const LANG_ENGLISH_CODE = "en";
+
+    /** @var string URL к API яндекс карт */
+    public const YA_MAP_API_URL = "https://api-maps.yandex.ru/2.1/";
+
+    /** @var string Доступные для загрузки файлы для логотипа */
+    public const LOGO_FILE_AVAILABLE_STRING = "image/jpeg, image/png, image/bmp, image/svg+xml";
 }

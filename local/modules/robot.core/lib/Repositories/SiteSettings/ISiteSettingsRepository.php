@@ -31,4 +31,10 @@ interface ISiteSettingsRepository
      * @return void
      */
     public function saveSiteSettings(SiteSettingsUpdate $entity): void;
+
+    /**
+     * @param string $lang
+     * @return string
+     */
+    public function getSiteIdByLang(string $lang): string;
 }

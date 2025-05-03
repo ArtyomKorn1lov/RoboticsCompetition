@@ -25,7 +25,7 @@ global $APPLICATION;
     <div class="b-empty__img-wrap">
         <img
             class="b-empty__img"
-            src="<?= SITE_DIR ?>local/templates/robot/app/dist/assets/images/empty.svg"
+            src="/local/templates/robot/app/dist/assets/images/empty.svg"
             alt="404"
         >
     </div>

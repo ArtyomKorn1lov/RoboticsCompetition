@@ -99,6 +99,7 @@ $siteSettings = $arResult["SETTINGS"];
 </div>
 <?php
 $arMapSettings = [
+    'api' => Helper::buildYandexApiUrl(),
     'mapSelector' => '.b-contacts__map',
     'coords' => $siteSettings->coords,
     'zoom' => Constants::CONTACT_MAP_ZOOM,
