@@ -1,0 +1,74 @@
+.b-message-box {
+  border-radius: $rounded20;
+  padding: $m15;
+
+  .el-message-box {
+
+    &__header {
+
+      &.show-close {
+        padding-right: 0;
+        padding-bottom: $m10;
+      }
+    }
+
+    &__title {
+      flex-direction: column;
+      gap: $m10;
+
+      span {
+        font-size: $textHuge;
+        font-weight: $textSemiBold;
+        color: $colorHeader;
+        max-width: 250px;
+      }
+    }
+
+    &__status {
+      width: $m50;
+      height: $m50;
+
+      svg {
+        width: $m50;
+        height: $m50;
+      }
+    }
+
+    &__headerbtn {
+
+      &:hover,
+      &:active,
+      &:focus {
+
+        .el-message-box {
+
+          &__close {
+            color: $colorHover;
+          }
+        }
+      }
+    }
+
+    &__close {
+      width: $m20;
+      height: $m20;
+
+      svg {
+        width: $m20;
+        height: $m20;
+      }
+    }
+
+    &__message {
+
+      span, p {
+        font-size: $textNormal;
+        text-align: center;
+      }
+    }
+
+    &__btns {
+      padding-top: $m15;
+    }
+  }
+}

@@ -1,0 +1,43 @@
+@include screen(sml) {
+  .b-message-box {
+
+    .el-message-box {
+
+      &__header {
+
+        &.show-close {
+          padding-bottom: $m5;
+        }
+      }
+
+      &__title {
+        gap: $m5;
+
+        span {
+          font-size: $textLarge;
+        }
+      }
+
+      &__status {
+        width: $m40;
+        height: $m40;
+
+        svg {
+          width: $m40;
+          height: $m40;
+        }
+      }
+
+      &__message {
+
+        span, p {
+          font-size: $textRegular;
+        }
+      }
+
+      &__btns {
+        padding-top: $m10;
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+@include screen(sml) {
+  .b-button,
+  .el-button.b-button {
+
+    &_small {
+      height: $m40;
+      padding: 8px 10px;
+      font-size: $textTiny;
+    }
+  }
+}

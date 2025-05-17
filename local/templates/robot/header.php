@@ -12,7 +12,6 @@ if (!Bitrix\Main\Loader::includeModule('robot.core')) {
 use Bitrix\Main\Localization\Loc;
 
 use Robot\Core\Tools\Modules\Manager;
-use Robot\Core\Tools\Template\Helper;
 use Robot\Core\Constants;
 
 Loc::loadMessages(__FILE__);
@@ -21,7 +20,7 @@ Manager::includeFrontendPlugins();
 
 ?>
 <!doctype html>
-<html lang="ru">
+<html lang="<?=LANGUAGE_ID?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"

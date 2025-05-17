@@ -65,7 +65,10 @@ if (!empty($arResult["DISPLAY_PROPERTIES"]["VIDEO_LINKS"]["VALUE"])) {
 
 if (!empty($arResult["DISPLAY_PROPERTIES"]["VIDEO"]["FILE_VALUE"])) {
     $videoProperty = $arResult["DISPLAY_PROPERTIES"]["VIDEO"]["FILE_VALUE"];
-    $videoPreviews = array_values($arResult["DISPLAY_PROPERTIES"]["VIDEO_PREVIEW"]["FILE_VALUE"]);
+    $videoPreviews = $arResult["DISPLAY_PROPERTIES"]["VIDEO_PREVIEW"]["FILE_VALUE"];
+    if (!empty($videoPreviews)) {
+        $videoPreviews = array_values($videoPreviews);
+    }
 
     if (isset($videoProperty["ID"])) {
         $videos[] = [
