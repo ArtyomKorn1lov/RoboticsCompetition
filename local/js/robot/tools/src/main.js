@@ -5,8 +5,7 @@ import getFilteredPhrases from "./loc";
 import * as Constants from './constants';
 import * as DocsEnum from "./enums/docs";
 
-import Timing from "./models/program/Timing";
-import Program from "./models/program";
+import Program, { Timing } from "./models/program";
 import MediaPopup from "./models/media";
 import FormFieldValue from "./models/field/FormFieldValue";
 import FormField from "./models/field/FormField";

@@ -15,7 +15,10 @@
           v-html="TemplateHelper.getIcon('close')"
       />
     </template>
-    <video v-if="item.isVideo && item.url" class="b-dialog__video" controls="controls" muted :poster="item.preview">
+    <div class="b-dialog__video b-dialog__video_embed" v-if="item.type === Constants.EMBED_VIDEO_TYPES && item.isVideo">
+      <iframe class="b-dialog__video-frame" :src="item.url" :title="item.name" allowfullscreen/>
+    </div>
+    <video v-else-if="item.isVideo && item.url" class="b-dialog__video" controls="controls" muted :poster="item.preview">
       <source :src="item.url" :type="item.type">
     </video>
     <div v-else-if="item.url" class="b-dialog__img-wrap">

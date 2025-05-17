@@ -20,3 +20,6 @@ export const DEFAULT_PARAMS_MEDIA_POPUP = new MediaPopup({
 
 /** @type {String} */
 export const DATE_PICKER_DATE_FORMAT = 'DD.MM.YYYY';
+
+/** @type {String} */
+export const EMBED_VIDEO_TYPES = 'embed_video';

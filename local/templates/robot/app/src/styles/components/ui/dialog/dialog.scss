@@ -53,6 +53,20 @@
     width: $full;
     aspect-ratio: 715/516;
     object-fit: cover;
+
+    &_embed {
+      position: relative;
+    }
+
+    &-frame {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: $full;
+      height: $full;
+    }
   }
 
   &__img {

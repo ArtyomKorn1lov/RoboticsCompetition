@@ -12,6 +12,7 @@
 /** @var CBitrixComponent $component */
 
 use Robot\Core\Tools\Files\Helper;
+use Robot\Core\Constants;
 
 $photos = [];
 if (!empty($arResult["DISPLAY_PROPERTIES"]["PHOTO"]["FILE_VALUE"])) {
@@ -34,11 +35,37 @@ if (!empty($arResult["DISPLAY_PROPERTIES"]["PHOTO"]["FILE_VALUE"])) {
     }
 }
 
+$fileHelper = new Helper();
+
 $videos = [];
+if (!empty($arResult["DISPLAY_PROPERTIES"]["VIDEO_LINKS"]["VALUE"])) {
+    $links = $arResult["DISPLAY_PROPERTIES"]["VIDEO_LINKS"]["VALUE"];
+    $videoPreviews = $arResult["DISPLAY_PROPERTIES"]["VIDEO_PREVIEW"]["FILE_VALUE"];
+
+    foreach ($links as $key => $link) {
+        $preview = false;
+        if (!empty($videoPreviews)) {
+            $preview = $fileHelper->getFilePreviewByIndex($videoPreviews, $key);
+            if (!empty($preview)) {
+                unset($arResult["DISPLAY_PROPERTIES"]["VIDEO_PREVIEW"]["FILE_VALUE"][$key]);
+            }
+        }
+
+        $videos[] = [
+            "name" => $arResult["NAME"],
+            "url" => $fileHelper->getEmbedVideo($link),
+            "preview" => !empty($videoPreviews) ? $fileHelper->getFilePreviewByIndex($videoPreviews, $key) : false,
+            "type" => Constants::EMBED_VIDEO_TYPES,
+            "isVideo" => true
+        ];
+    }
+}
+
+
+
 if (!empty($arResult["DISPLAY_PROPERTIES"]["VIDEO"]["FILE_VALUE"])) {
     $videoProperty = $arResult["DISPLAY_PROPERTIES"]["VIDEO"]["FILE_VALUE"];
-    $videoPreviews = $arResult["DISPLAY_PROPERTIES"]["VIDEO_PREVIEW"]["FILE_VALUE"];
-    $fileHelper = new Helper();
+    $videoPreviews = array_values($arResult["DISPLAY_PROPERTIES"]["VIDEO_PREVIEW"]["FILE_VALUE"]);
 
     if (isset($videoProperty["ID"])) {
         $videos[] = [

@@ -84,4 +84,7 @@ class Constants
 
     /** @var string Доступные для загрузки файлы для логотипа */
     public const LOGO_FILE_AVAILABLE_STRING = "image/jpeg, image/png, image/bmp, image/svg+xml";
+
+    /** @var string Тип видео - ссылка на ресурс */
+    public const EMBED_VIDEO_TYPES = "embed_video";
 }
