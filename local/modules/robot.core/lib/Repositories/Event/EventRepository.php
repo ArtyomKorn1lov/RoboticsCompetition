@@ -2,17 +2,18 @@
 
 namespace Robot\Core\Repositories\Event;
 
-use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\LoaderException;
+use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\ObjectException;
 use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\ORM\Query\Query;
-use Bitrix\Main\ObjectException;
 use Bitrix\Main\SystemException;
 use CIBlockElement;
 
+use Robot\Core\Base\HighloadBlocks;
 use Robot\Core\Constants;
-use Robot\Core\Entity\Abstracts\HighloadBlocks;
+use Robot\Core\Entity\Event\EventDetailReqParams;
 use Robot\Core\Entity\Event\FormField;
 use Robot\Core\Entity\Event\RegisterForm;
 use Robot\Core\Entity\Event\RegistrationFieldsTable;
@@ -22,15 +23,17 @@ class EventRepository extends HighloadBlocks implements IEventRepository
 {
     /**
      * @param RegisterForm $registerFormEntity
-     * @return void
+     * @return int
      * @throws ObjectException
      */
-    public function saveForm(RegisterForm $registerFormEntity): void
+    public function saveForm(RegisterForm $registerFormEntity): int
     {
         $entity = new CIBlockElement();
-        if (!$entity->Add($registerFormEntity->getFormData())) {
+        $itemId = $entity->Add($registerFormEntity->getFormData());
+        if (!$itemId) {
             throw new ObjectException($entity->LAST_ERROR);
         }
+        return $itemId;
     }
 
     /**
@@ -162,5 +165,28 @@ class EventRepository extends HighloadBlocks implements IEventRepository
         }
 
         return $result;
+    }
+
+    /**
+     * @param EventDetailReqParams $entity
+     * @return array
+     * @throws ArgumentException
+     */
+    public function getEventById(EventDetailReqParams $entity): array
+    {
+        $rsObject = CIBlockElement::GetList(
+            $entity->getSortValues(),
+            $entity->getFilterValues(),
+            false,
+            ["nTopCount" => 1],
+            $entity->getSelectedFields()
+        );
+
+        $item = $rsObject->fetch();
+        if (!$item) {
+            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_EVENTS_GET_EMPTY"));
+        }
+
+        return $item;
     }
 }

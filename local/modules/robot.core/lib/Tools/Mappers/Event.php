@@ -9,6 +9,7 @@ use Bitrix\Main\Type\DateTime;
 use Robot\Core\Constants;
 use Robot\Core\DTO\Event\ActiveEvent;
 use Robot\Core\DTO\Event\RegisterForm;
+use Robot\Core\DTO\Event\RegistrationMail;
 use Robot\Core\Entity\Event\FormField as FormFieldEntity;
 use Robot\Core\DTO\Event\FormField;
 use Robot\Core\Entity\Event\FormFieldValues as FormFieldValuesEntity;
@@ -121,5 +122,27 @@ class Event
             );
         }
         return $result;
+    }
+
+    /**
+     * @param array $formData
+     * @param string $eventName
+     * @param string $editUrl
+     * @return RegistrationMail
+     */
+    public static function mapEventRegistrationParamToMailModel(array $formData, string $eventName, string $editUrl): RegistrationMail
+    {
+        return new RegistrationMail(
+            eventName: $eventName,
+            name: $formData["PROPERTY_NAME"],
+            birthday: $formData["PROPERTY_BIRTHDAY"],
+            country: $formData["PROPERTY_COUNTRY"],
+            phone: $formData["PROPERTY_PHONE"],
+            email: $formData["PROPERTY_EMAIL"],
+            course: $formData["PROPERTY_COURSE"],
+            codeAndAreaTraining: $formData["PROPERTY_CODE_AND_AREA_TRAINING"],
+            description: $formData["PREVIEW_TEXT"],
+            editUrl: $editUrl
+        );
     }
 }

@@ -9,6 +9,7 @@ use Bitrix\Main\ObjectException;
 use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
 
+use Robot\Core\Constants;
 use Robot\Core\DTO\Event\AutocompleteSearch;
 use Robot\Core\DTO\Event\RegisterExternalData;
 use Robot\Core\DTO\Event\RegisterForm;
@@ -16,6 +17,9 @@ use Robot\Core\Entity\Event\RegisterForm as RegisterFormEntity;
 use Robot\Core\Repositories\Event\EventRepository;
 use Robot\Core\Tools\Mappers\Event;
 use Robot\Core\DTO\Event\FormField;
+use Robot\Core\Entity\Event\EventDetailReqParams;
+use Robot\Core\Tools\Mail\Helper as MailHelper;
+use Robot\Core\Tools\IBlocks\Helper as IBlockHelper;
 
 Loc::loadMessages(__FILE__);
 
@@ -54,7 +58,8 @@ class EventManager implements IEventManager
                 $registerForm->formData,
                 $externalData
             );
-            $eventRepository->saveForm($entity);
+            $registrationId = $eventRepository->saveForm($entity);
+            $this->sendMail($registerForm->formData, $eventId, $registrationId);
         } catch (SystemException|ArgumentException|ObjectException|ObjectPropertyException $exception) {
             AddMessage2Log($exception->getMessage(), 'robot.core');
             throw $exception;
@@ -109,5 +114,70 @@ class EventManager implements IEventManager
             AddMessage2Log($exception->getMessage(), 'robot.core');
             throw $exception;
         }
+    }
+
+    /**
+     * @param array $formData
+     * @param int $eventId
+     * @param int $registrationId
+     * @return void
+     * @throws ArgumentException
+     * @throws SystemException
+     */
+    protected function sendMail(array $formData, int $eventId, int $registrationId): void
+    {
+        if (empty($formData) || empty($eventId) || empty($registrationId)) {
+            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_EVENT_ARGUMENT_ERROR"));
+        }
+        $reqParams = new EventDetailReqParams(
+            Constants::CONTENT_IBLOCK_TYPE,
+            IBlockHelper::getIblock(Constants::EVENTS_IBLOCK_CODE),
+            $eventId,
+            true
+        );
+
+        // TODO вынести в сервис-локатор
+        $eventRepository = new EventRepository();
+        $mailModel = Event::mapEventRegistrationParamToMailModel(
+            $formData,
+            $eventRepository->getEventById($reqParams)["NAME"], $this->buildEditUrl(Constants::CONTENT_IBLOCK_TYPE, IBlockHelper::getIblock(Constants::REGISTRATION_REQUEST_IBLOCK_CODE), $registrationId)
+        );
+
+        $arFields = [
+            "EVENT_NAME" => $mailModel->eventName,
+            "NAME" => $mailModel->name,
+            "EMAIL" => $mailModel->email,
+            "BIRTHDAY" => $mailModel->birthday,
+            "COUNTRY" => $mailModel->country,
+            "COURSE" => $mailModel->course,
+            "CODE_AND_AREA_TRAINING" => $mailModel->codeAndAreaTraining,
+            "PHONE" => $mailModel->phone,
+            "PREVIEW_TEXT" => $mailModel->description,
+            "EDIT_URL" => $mailModel->editUrl,
+        ];
+
+        $mailHelper = new MailHelper(
+            Constants::REGISTRATION_MAIL_EVENT_CODE,
+            SITE_ID
+        );
+        $mailHelper->sendMail($arFields);
+    }
+
+    /**
+     * @param string $iblockType
+     * @param int $iblockId
+     * @param int $id
+     * @return string
+     * @throws ArgumentException
+     */
+    protected function buildEditUrl(string $iblockType, int $iblockId, int $id): string
+    {
+        if (empty($iblockType) || empty($iblockId) || empty($id)) {
+            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_EVENT_ARGUMENT_ERROR"));
+        }
+        $url = Constants::EDIT_IBLOCK_ELEMENT_URL_TEMPLATE;
+        $url = str_replace("#IBLOCK_TYPE#", $iblockType, $url);
+        $url = str_replace("#IBLOCK_ID#", $iblockId, $url);
+        return str_replace("#ID#", $id, $url);
     }
 }

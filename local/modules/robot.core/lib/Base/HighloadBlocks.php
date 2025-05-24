@@ -1,16 +1,15 @@
 <?php
 
-namespace Robot\Core\Entity\Abstracts;
-
-use Bitrix\Main\Localization\Loc;
+namespace Robot\Core\Base;
 
 use Bitrix\Highloadblock\HighloadBlockTable;
 use Bitrix\Main\ArgumentException;
+use Bitrix\Main\Loader;
 use Bitrix\Main\LoaderException;
+use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ObjectException;
 use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
-use Bitrix\Main\Loader;
 
 Loc::loadMessages(__FILE__);
 

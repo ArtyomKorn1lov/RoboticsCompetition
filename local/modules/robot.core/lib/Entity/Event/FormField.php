@@ -2,14 +2,13 @@
 
 namespace Robot\Core\Entity\Event;
 
-use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ArgumentException;
+use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ObjectException;
 use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
-
+use Robot\Core\Base\HighloadBlocks;
 use Robot\Core\Constants;
-use Robot\Core\Entity\Abstracts\HighloadBlocks;
 use Robot\Core\Tools\Mappers\Event;
 
 Loc::loadMessages(__FILE__);

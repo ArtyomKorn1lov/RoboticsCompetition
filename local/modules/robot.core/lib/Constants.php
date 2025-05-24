@@ -87,4 +87,10 @@ class Constants
 
     /** @var string Тип видео - ссылка на ресурс */
     public const EMBED_VIDEO_TYPES = "embed_video";
+
+    /** @var string шаблон url для редактирования элемента инфоблока */
+    public const EDIT_IBLOCK_ELEMENT_URL_TEMPLATE = "bitrix/admin/iblock_element_edit.php?IBLOCK_ID=#IBLOCK_ID#&type=#IBLOCK_TYPE#&ID=#ID#";
+
+    /** @var string код типа почтового события - отправка письма с формы регистрации на событие */
+    public const REGISTRATION_MAIL_EVENT_CODE = "ROBOT_REGISTRATION";
 }

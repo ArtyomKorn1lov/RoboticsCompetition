@@ -2,6 +2,7 @@
 
 namespace Robot\Core\Repositories\Event;
 
+use Robot\Core\Entity\Event\EventDetailReqParams;
 use Robot\Core\Entity\Event\RegisterForm;
 use Robot\Core\Entity\Event\FormField;
 
@@ -9,9 +10,9 @@ interface IEventRepository
 {
     /**
      * @param RegisterForm $registerFormEntity
-     * @return void
+     * @return int
      */
-    public function saveForm(RegisterForm $registerFormEntity): void;
+    public function saveForm(RegisterForm $registerFormEntity): int;
 
     /**
      * @return int
@@ -36,4 +37,10 @@ interface IEventRepository
      * @return array
      */
     public function searchAutocompleteValues(string $value, string $entityName): array;
+
+    /**
+     * @param EventDetailReqParams $entity
+     * @return array
+     */
+    public function getEventById(EventDetailReqParams $entity): array;
 }
