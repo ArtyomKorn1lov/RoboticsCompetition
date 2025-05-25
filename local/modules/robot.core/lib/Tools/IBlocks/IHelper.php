@@ -8,5 +8,5 @@ interface IHelper
      * @param string $code
      * @return int|bool
      */
-    public static function getIblock(string $code): int|bool;
+    public static function getIBlock(string $code): int|bool;
 }

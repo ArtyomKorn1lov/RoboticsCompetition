@@ -22,6 +22,9 @@ final class SiteSettingsUpdate
     /** @var array Поля настроек сайта */
     private array $siteSettingsFields;
 
+    /** @var string идентификатор сайта */
+    private string $siteId;
+
     /** @var string Код поля контактные адреса организации */
     private const FIELD_ADDRESS_ORGANISATION_CODE = "ADDRESS_ORGANISATION";
 
@@ -61,6 +64,7 @@ final class SiteSettingsUpdate
     /**
      * @param int $id
      * @param array $arSiteSettingsFields
+     * @param string $siteId
      * @throws ArgumentException
      * @throws ObjectException
      * @throws SystemException
@@ -68,11 +72,13 @@ final class SiteSettingsUpdate
     public function __construct(
         int $id,
         array $arSiteSettingsFields,
+        string $siteId
     )
     {
         $this->validate($id, $arSiteSettingsFields);
 
         $this->id = $id;
+        $this->siteId = $siteId;
         $this->siteSettingsFields = $this->compareFieldsArray($arSiteSettingsFields);
     }
 
@@ -156,7 +162,6 @@ final class SiteSettingsUpdate
             }
         }
 
-        // TODO - посмотреть почему иногда дублируются файлы при удалении
         if (!empty($arSiteSettingsFields[self::FIELD_LOGO_CODE])) {
             $arSiteSettingsFields = $this->uploadFile($arSiteSettingsFields, self::FIELD_LOGO_CODE);
         }
@@ -257,7 +262,7 @@ final class SiteSettingsUpdate
 
         $query = new Query(SiteSettingsTable::getEntity());
         $query->setOrder(["ID" => "ASC"]);
-        $query->setFilter(["=SITE_ID" => "s1"]);
+        $query->setFilter(["=SITE_ID" => $this->siteId]);
         $query->setLimit(1);
         $query->setSelect([$fieldCode]);
         $result = $query->exec();

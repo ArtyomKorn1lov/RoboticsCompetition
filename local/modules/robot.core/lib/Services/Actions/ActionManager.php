@@ -31,7 +31,7 @@ class ActionManager implements IActionManager
                 throw new SystemException(Loc::getMessage("ROBOT_CORE_ERROR_EVENT_ID"));
             }
 
-            $iblockId = Helper::getIblock(Constants::ACTIONS_IBLOCK_CODE);
+            $iblockId = Helper::getIBlock(Constants::ACTIONS_IBLOCK_CODE);
 
             $entity = new ActionSectionsReqParams(
                 Constants::CONTENT_IBLOCK_TYPE,

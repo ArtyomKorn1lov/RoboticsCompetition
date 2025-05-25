@@ -42,7 +42,7 @@ class EventRepository extends HighloadBlocks implements IEventRepository
     public function getLastElementId(): int
     {
         $rsObject = CIBlockElement::GetList(["ID" => "DESC"], [
-            "IBLOCK_ID" => Helper::getIblock(Constants::REGISTRATION_REQUEST_IBLOCK_CODE),
+            "IBLOCK_ID" => Helper::getIBlock(Constants::REGISTRATION_REQUEST_IBLOCK_CODE),
             "IBLOCK_TYPE" => Constants::FEEDBACK_IBLOCK_TYPE,
         ], false, ["nTopCount" => 1], ["ID"]);
 

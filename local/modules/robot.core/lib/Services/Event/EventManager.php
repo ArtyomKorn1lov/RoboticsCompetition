@@ -8,6 +8,7 @@ use Bitrix\Main\LoaderException;
 use Bitrix\Main\ObjectException;
 use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
+use Bitrix\Main\Config\Option;
 
 use Robot\Core\Constants;
 use Robot\Core\DTO\Event\AutocompleteSearch;
@@ -131,7 +132,7 @@ class EventManager implements IEventManager
         }
         $reqParams = new EventDetailReqParams(
             Constants::CONTENT_IBLOCK_TYPE,
-            IBlockHelper::getIblock(Constants::EVENTS_IBLOCK_CODE),
+            IBlockHelper::getIBlock(Constants::EVENTS_IBLOCK_CODE),
             $eventId,
             true
         );
@@ -140,7 +141,7 @@ class EventManager implements IEventManager
         $eventRepository = new EventRepository();
         $mailModel = Event::mapEventRegistrationParamToMailModel(
             $formData,
-            $eventRepository->getEventById($reqParams)["NAME"], $this->buildEditUrl(Constants::CONTENT_IBLOCK_TYPE, IBlockHelper::getIblock(Constants::REGISTRATION_REQUEST_IBLOCK_CODE), $registrationId)
+            $eventRepository->getEventById($reqParams)["NAME"], $this->buildEditUrl(Constants::CONTENT_IBLOCK_TYPE, IBlockHelper::getIBlock(Constants::REGISTRATION_REQUEST_IBLOCK_CODE), $registrationId)
         );
 
         $arFields = [
@@ -154,6 +155,7 @@ class EventManager implements IEventManager
             "PHONE" => $mailModel->phone,
             "PREVIEW_TEXT" => $mailModel->description,
             "EDIT_URL" => $mailModel->editUrl,
+            "DEFAULT_RECIPIENT_EMAIL" => Option::get('robot.core', Constants::DEFAULT_RECIPIENT_EMAIL_OPTION_CODE)
         ];
 
         $mailHelper = new MailHelper(

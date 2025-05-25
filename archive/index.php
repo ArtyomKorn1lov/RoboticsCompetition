@@ -50,7 +50,7 @@ $APPLICATION->SetTitle("Архив");
 		"DISPLAY_PREVIEW_TEXT" => "Y",
 		"DISPLAY_TOP_PAGER" => "N",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => Robot\Core\Tools\IBlocks\Helper::getIblock(Robot\Core\Constants::ARCHIVE_IBLOCK_CODE),
+		"IBLOCK_ID" => Robot\Core\Tools\IBlocks\Helper::getIBlock(Robot\Core\Constants::ARCHIVE_IBLOCK_CODE),
 		"IBLOCK_TYPE" => Robot\Core\Constants::CONTENT_IBLOCK_TYPE,
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"LIST_ACTIVE_DATE_FORMAT" => "d.m.Y",

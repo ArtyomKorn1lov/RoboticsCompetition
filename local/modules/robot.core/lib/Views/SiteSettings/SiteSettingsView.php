@@ -78,9 +78,10 @@ class SiteSettingsView implements ISiteSettingsView
     /**
      * @param int $id
      * @param array $arSiteSettings
+     * @param string $siteId
      * @return string|bool
      */
-    public static function saveSiteSettings(int $id, array $arSiteSettings): string|bool
+    public static function saveSiteSettings(int $id, array $arSiteSettings, string $siteId): string|bool
     {
         try {
             if (empty($arSiteSettings)) {
@@ -89,7 +90,7 @@ class SiteSettingsView implements ISiteSettingsView
 
             // TODO заменить через сервис-локатор
             $siteSettingsManager = new SiteSettingsManager();
-            $siteSettingsManager->saveSiteSettings(SiteSettings::mapArraySiteSettingsUpdateToModel($id, $arSiteSettings));
+            $siteSettingsManager->saveSiteSettings(SiteSettings::mapArraySiteSettingsUpdateToModel($id, $arSiteSettings), $siteId);
             return true;
         } catch (SystemException $exception) {
             return $exception->getMessage();

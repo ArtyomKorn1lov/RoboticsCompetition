@@ -32,9 +32,10 @@ interface ISiteSettingsView
     /**
      * @param int $id
      * @param array $arSiteSettings
+     * @param string $siteId
      * @return string|bool
      */
-    public static function saveSiteSettings(int $id, array $arSiteSettings): string|bool;
+    public static function saveSiteSettings(int $id, array $arSiteSettings, string $siteId): string|bool;
 
     /**
      * @param string $lang

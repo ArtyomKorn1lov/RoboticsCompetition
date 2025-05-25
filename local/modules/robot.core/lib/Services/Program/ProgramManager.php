@@ -46,7 +46,7 @@ class ProgramManager implements IProgramManager
 
             $timeLineEntity = new TimeLineReqParams(
                 Constants::CONTENT_IBLOCK_TYPE,
-                Helper::getIblock(Constants::PROGRAM_IBLOCK_CODE),
+                Helper::getIBlock(Constants::PROGRAM_IBLOCK_CODE),
                 $sectionIds,
                 true,
                 "ASC"
@@ -92,7 +92,7 @@ class ProgramManager implements IProgramManager
 
             $programListEntity = new ProgramListReqParam(
                 Constants::CONTENT_IBLOCK_TYPE,
-                Helper::getIblock(Constants::PROGRAM_IBLOCK_CODE),
+                Helper::getIBlock(Constants::PROGRAM_IBLOCK_CODE),
                 $sectionIds,
                 $date,
                 true,
@@ -119,7 +119,7 @@ class ProgramManager implements IProgramManager
 
         $programSectionEntity = new ProgramSectionsReqParams(
             Constants::CONTENT_IBLOCK_TYPE,
-            Helper::getIblock(Constants::PROGRAM_IBLOCK_CODE),
+            Helper::getIBlock(Constants::PROGRAM_IBLOCK_CODE),
             $eventId,
             true,
             "ASC"

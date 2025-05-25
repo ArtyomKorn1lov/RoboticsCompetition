@@ -7,7 +7,7 @@ use CFile;
 
 Loc::loadMessages(__FILE__);
 
-class Helper
+class Helper implements IHelper
 {
     protected const YOUTUBE_URL = 'youtube.com/watch?v=';
 

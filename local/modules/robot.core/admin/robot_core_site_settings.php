@@ -71,7 +71,7 @@ if ($request->getRequestMethod() === "POST" && check_bitrix_sessid() && !empty($
             }
         }
     }
-    $result = SiteSettingsView::saveSiteSettings($arSiteSettings["ID"], $arData);
+    $result = SiteSettingsView::saveSiteSettings($arSiteSettings["ID"], $arData, $siteId);
     if (gettype($result) === "string") {
         ShowError($result);
     } else {

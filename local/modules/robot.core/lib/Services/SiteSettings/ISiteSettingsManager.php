@@ -34,7 +34,7 @@ interface ISiteSettingsManager
      * @param SiteSettingsUpdate $siteSettingsUpdate
      * @return void
      */
-    public function saveSiteSettings(SiteSettingsUpdate $siteSettingsUpdate): void;
+    public function saveSiteSettings(SiteSettingsUpdate $siteSettingsUpdate, string $siteId): void;
 
     /**
      * @param string $lang

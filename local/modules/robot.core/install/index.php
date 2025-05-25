@@ -8,10 +8,12 @@ use Bitrix\Main\ModuleManager;
 use Bitrix\Main\DB\SqlQueryException;
 use Bitrix\Main\IO\Directory;
 use Bitrix\Main\IO\File;
+use Bitrix\Main\Config\Option;
 
 use Robot\Core\Tools\Modules\Manager;
 use Robot\Core\Entity\SiteSettings\SiteSettingsTable;
 use Robot\Core\Enums\SocialIcons;
+use Robot\Core\Constants;
 
 Loc::loadMessages(__FILE__);
 
@@ -50,6 +52,7 @@ class robot_core extends CModule
 
             $this->installFiles();
             $this->installDb();
+            Option::set($this->MODULE_ID, Constants::DEFAULT_RECIPIENT_EMAIL_OPTION_CODE, 'mail@mail.ru');
         }
         catch (Exception $exception) {
             ModuleManager::unRegisterModule($this->MODULE_ID);
@@ -67,6 +70,7 @@ class robot_core extends CModule
             $this->deleteImages();
             $this->unInstallDb();
             $this->unInstallFiles();
+            Option::delete($this->MODULE_ID);
             ModuleManager::unRegisterModule($this->MODULE_ID);
         } catch (Exception $exception) {
             ModuleManager::unRegisterModule($this->MODULE_ID);
@@ -252,7 +256,7 @@ class robot_core extends CModule
      * Удаление таблиц из БД
      * @return void
      */
-    public function unInstallFiles()
+    public function unInstallFiles(): void
     {
         $moduleUploadDir = $_SERVER['DOCUMENT_ROOT'] . '/upload' . Manager::MODULE_FILE_PATH;
         if (Directory::isDirectoryExists($moduleUploadDir)) {

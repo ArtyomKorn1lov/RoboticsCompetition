@@ -5,32 +5,31 @@
 /** @global CUser $USER */
 
 use Bitrix\Main\Loader;
+use Bitrix\Main\Context;
 use Bitrix\Main\Config\Option;
 use Bitrix\Main\Localization\Loc;
 
-if(!$USER->IsAdmin()) {
-    return;
-}
+use Robot\Core\Constants;
 
 if (!Loader::includeModule('robot.core')) {
-    return;
+    die(Loc::getMessage("ROBOT_CORE_NOT_INCLUDE_MODULE"));
 }
 
 Loc::loadMessages(__FILE__);
 
 $currentUrl = $APPLICATION->GetCurPage().'?mid='.urlencode($mid).'&amp;lang='.LANGUAGE_ID;
 
-// TODO при необходимости доделать настройки модуля, внутри данного файла
+$request = Context::getCurrent()->getRequest();
 
-/*$optionList = array(
-    'robot_core_api_key_map'
+$optionList = array(
+    Constants::DEFAULT_RECIPIENT_EMAIL_OPTION_CODE
 );
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && check_bitrix_sessid() && isset($_POST['robot_core_update']) && $_POST['robot_core_update'] === 'Y') {
+if ($request->getRequestMethod() === "POST" && check_bitrix_sessid() && !empty($request->getPost('robot_core_update')) && $request->getPost('robot_core_update') === 'Y') {
     foreach ($optionList as $option) {
         if (!empty($_POST[$option]))
         {
-            Option::set('robot.core', $option, $_POST[$option], '');
+            Option::set('robot.core', $option, $request->getPost($option));
         }
         LocalRedirect($currentUrl);
     }
@@ -38,8 +37,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && check_bitrix_sessid() && isset($_PO
 
 $options = [];
 foreach ($optionList as $option) {
-    $options[$option] = (string)Option::get('robot.core', $option);
-}*/
+    $options[$option] = Option::get('robot.core', $option);
+}
 
 $tabList = [
     [
@@ -53,26 +52,23 @@ $tabList = [
 $tabControl = new CAdminTabControl("robot_core_module_options", $tabList);
 $tabControl->Begin();
 ?>
-    <!--<form id="robot_core_module_options_form" method="post" action="<?php /*= $currentUrl; */?>">
-        <?php /*$tabControl->BeginNextTab(); */?>
+    <form id="robot_core_module_options_form" method="post" action="<?= $currentUrl; ?>">
+        <?php $tabControl->BeginNextTab(); ?>
         <tr>
             <td style="width: 40%">
-                Ключ API Яндекс карт:
+                <?=Loc::getMessage("ROBOT_CORE_DEFAULT_EMAIL_TITLE")?>
             </td>
             <td>
                 <label>
-                    <input style="width: 40%" type="text" name="robot_core_api_key_map" value="<?php /*= $options["robot_core_api_key_map"] */?>" />
+                    <input style="width: 40%" type="text" name="<?=Constants::DEFAULT_RECIPIENT_EMAIL_OPTION_CODE?>" value="<?= $options[Constants::DEFAULT_RECIPIENT_EMAIL_OPTION_CODE] ?>" />
                 </label>
             </td>
         </tr>
-        <?php /*$tabControl->Buttons(); */?>
-        <input type="submit" class="adm-btn-save" name="robot_core_update" value="Сохранить" />
+        <?php $tabControl->Buttons(); ?>
+        <input type="submit" class="adm-btn-save" name="robot_core_update" value="<?=Loc::getMessage("ROBOT_CORE_OPTIONS_SAVE")?>" />
         <input type="hidden" name="robot_core_update" value="Y">
-        <?php /*= bitrix_sessid_post(); */?>
-    </form>-->
+        <?= bitrix_sessid_post(); ?>
+    </form>
     <?php $tabControl->BeginNextTab(); ?>
-    <p>
-        Пока ничего нет, настройки могут появиться в последующих версиях модуля
-    </p>
 <?php
 $tabControl->End();

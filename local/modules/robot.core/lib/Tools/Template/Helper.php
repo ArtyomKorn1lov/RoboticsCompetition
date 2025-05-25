@@ -8,7 +8,7 @@ use Robot\Core\Constants;
 use Robot\Core\DTO\SiteSettings\SiteSettingsContacts;
 use Robot\Core\Enums\YaMapLang;
 
-class Helper
+class Helper implements IHelper
 {
     /** @var string Относительный путь к иконке в файловой системе */
     protected const SPRITE_FOLDER_PATH = "/local/templates/robot/app/dist/assets/icons/sprite.svg#";

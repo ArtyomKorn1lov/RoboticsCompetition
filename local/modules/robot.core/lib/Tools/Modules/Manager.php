@@ -6,7 +6,7 @@ use Bitrix\Main\Loader;
 use Bitrix\Main\LoaderException;
 use Bitrix\Main\Application;
 
-class Manager
+class Manager implements IManager
 {
     public const MODULE_FILE_PATH = '/robot.core/';
 

@@ -151,7 +151,7 @@ final class RegisterForm
 
         $formData["PROPERTY_VALUES"][self::EVENT_PROP_CODE] = $externalData->eventId;
         $formData["IBLOCK_TYPE"] = Constants::FEEDBACK_IBLOCK_TYPE;
-        $formData["IBLOCK_ID"] = Helper::getIblock(Constants::REGISTRATION_REQUEST_IBLOCK_CODE);
+        $formData["IBLOCK_ID"] = Helper::getIBlock(Constants::REGISTRATION_REQUEST_IBLOCK_CODE);
         $formData["ACTIVE"] = "Y";
         $externalData->lastElementId++;
         $formData["NAME"] = Loc::getMessage("ROBOT_CORE_NEW_REQUEST_TITLE", ["#NUMBER#" => $externalData->lastElementId]);

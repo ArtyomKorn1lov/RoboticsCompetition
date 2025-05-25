@@ -139,14 +139,14 @@ class SiteSettingsManager implements ISiteSettingsManager
      * @throws ObjectException
      * @throws SystemException
      */
-    public function saveSiteSettings(SiteSettingsUpdate $siteSettingsUpdate): void
+    public function saveSiteSettings(SiteSettingsUpdate $siteSettingsUpdate, string $siteId): void
     {
         try {
             if (empty($siteSettingsUpdate)) {
                 throw new ObjectException(Loc::getMessage("ROBOT_CORE_SITE_SETTINGS_ITEM_UPDATE_EMPTY"));
             }
 
-            $entity = new SiteSettingsUpdateEntity($siteSettingsUpdate->id, $siteSettingsUpdate->arSiteSettings);
+            $entity = new SiteSettingsUpdateEntity($siteSettingsUpdate->id, $siteSettingsUpdate->arSiteSettings, $siteId);
             
             // TODO заменить через сервис-локатор
             $siteSettingsRepository = new SiteSettingsRepository();

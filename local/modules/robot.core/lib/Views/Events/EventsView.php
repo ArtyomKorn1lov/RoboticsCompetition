@@ -135,7 +135,7 @@ class EventsView implements IEventsView
     {
         $apiParams = new ActiveEventReqParams(
             Constants::CONTENT_IBLOCK_TYPE,
-            Helper::getIblock(Constants::EVENTS_IBLOCK_CODE),
+            Helper::getIBlock(Constants::EVENTS_IBLOCK_CODE),
             true
         );
 

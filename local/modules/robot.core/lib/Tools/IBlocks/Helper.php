@@ -3,6 +3,8 @@
 namespace Robot\Core\Tools\IBlocks;
 
 use Bitrix\Iblock\IblockTable;
+use Bitrix\Main\ArgumentException;
+use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\LoaderException;
@@ -29,7 +31,7 @@ class Helper implements IHelper
      * @param string $code
      * @return int|bool
      */
-    public static function getIblock(string $code): int|bool
+    public static function getIBlock(string $code): int|bool
     {
         try {
             Manager::requireModules(static::MODULES_CODES);
@@ -50,6 +52,9 @@ class Helper implements IHelper
     /**
      * @param string $code
      * @return array
+     * @throws ArgumentException
+     * @throws ObjectPropertyException
+     * @throws SystemException
      */
     protected static function prepareRequestParams(string $code): array
     {
@@ -60,11 +65,36 @@ class Helper implements IHelper
         ];
     }
 
+    /**
+     * @param string $code
+     * @return string
+     * @throws ArgumentException
+     * @throws ObjectPropertyException
+     * @throws SystemException
+     */
     protected static function getLangSiteCode(string $code): string
     {
         if (Loc::getCurrentLang() === Constants::LANG_ENGLISH_CODE) {
-            return $code . "_" . Constants::LANG_ENGLISH_CODE;
+            $newCode = $code . "_" . Constants::LANG_ENGLISH_CODE;
+            return self::checkIsExistIBlock($newCode) ? $newCode : $code;
         }
         return $code;
+    }
+
+    /**
+     * @param $code
+     * @return bool
+     * @throws SystemException
+     * @throws ArgumentException
+     * @throws ObjectPropertyException
+     */
+    protected static function checkIsExistIBlock($code): bool
+    {
+        $result = IblockTable::getRow([
+            "select" => ["ID"],
+            "filter" => ["CODE" => $code],
+            "cache" => static::CacheTypeRequest
+        ]);
+        return !empty($result);
     }
 }

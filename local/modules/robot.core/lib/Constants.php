@@ -93,4 +93,7 @@ class Constants
 
     /** @var string код типа почтового события - отправка письма с формы регистрации на событие */
     public const REGISTRATION_MAIL_EVENT_CODE = "ROBOT_REGISTRATION";
+
+    /** @var string код настройки - email получателя по умолчанию */
+    public const DEFAULT_RECIPIENT_EMAIL_OPTION_CODE = "robot_core_default_recipient_email";
 }

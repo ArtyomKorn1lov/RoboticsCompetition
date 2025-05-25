@@ -31,7 +31,7 @@ $APPLICATION->IncludeComponent(
         "ELEMENT_CODE" => "",
         "ELEMENT_ID" => Robot\Core\Views\Events\EventsView::getActiveEventId(),
         "FIELD_CODE" => array("DETAIL_TEXT", "DETAIL_PICTURE"),
-        "IBLOCK_ID" => Robot\Core\Tools\IBlocks\Helper::getIblock(Robot\Core\Constants::EVENTS_IBLOCK_CODE),
+        "IBLOCK_ID" => Robot\Core\Tools\IBlocks\Helper::getIBlock(Robot\Core\Constants::EVENTS_IBLOCK_CODE),
         "IBLOCK_TYPE" => Robot\Core\Constants::CONTENT_IBLOCK_TYPE,
         "IBLOCK_URL" => "",
         "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
