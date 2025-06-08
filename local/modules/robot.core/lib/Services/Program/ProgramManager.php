@@ -5,14 +5,18 @@ namespace Robot\Core\Services\Program;
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ObjectException;
+use Bitrix\Main\ObjectNotFoundException;
 use Bitrix\Main\SystemException;
 use Bitrix\Main\Type\DateTime;
+use Bitrix\Main\DI\ServiceLocator;
+
+use Psr\Container\NotFoundExceptionInterface;
 use Robot\Core\Constants;
 use Robot\Core\DTO\Program\ProgramItems;
 use Robot\Core\Entity\Program\ProgramListReqParam;
 use Robot\Core\Entity\Program\ProgramSectionsReqParams;
 use Robot\Core\Entity\Program\TimeLineReqParams;
-use Robot\Core\Repositories\Program\ProgramRepository;
+use Robot\Core\Repositories\Program\IProgramRepository;
 use Robot\Core\Tools\IBlocks\Helper;
 use Robot\Core\Tools\Mappers\Program;
 use Robot\Core\Views\Events\EventsView;
@@ -21,6 +25,17 @@ Loc::loadMessages(__FILE__);
 
 class ProgramManager implements IProgramManager
 {
+    /** @var IProgramRepository репозиторий программа проведения события */
+    private IProgramRepository $programRepository;
+
+    /**
+     * @throws ObjectNotFoundException
+     * @throws NotFoundExceptionInterface
+     */
+    public function __construct()
+    {
+        $this->programRepository = ServiceLocator::getInstance()->get(IProgramRepository::class);
+    }
 
     /**
      * @param int $eventId
@@ -36,9 +51,6 @@ class ProgramManager implements IProgramManager
                 throw new SystemException(Loc::getMessage("ROBOT_CORE_PROGRAM_INVALID_EVENT_ID"));
             }
 
-            // TODO вынести в сервис-локатор
-            $programRepository = new ProgramRepository();
-
             [$sectionIds, $sectionName] = $this->getProgramSections($eventId);
             if (empty($sectionIds)) {
                 throw new ArgumentException(Loc::getMessage("ROBOT_CORE_PROGRAM_EMPTY_SECTIONS"));
@@ -51,7 +63,7 @@ class ProgramManager implements IProgramManager
                 true,
                 "ASC"
             );
-            $dateCollectionEntity = $programRepository->getTimeLine($timeLineEntity);
+            $dateCollectionEntity = $this->programRepository->getTimeLine($timeLineEntity);
 
             $programList = $this->getProgramByDate($dateCollectionEntity->getDateUnicByIndex(0)->getDate(), $sectionIds);
             $dateList = Program::mapDateCollectionToModels($dateCollectionEntity);
@@ -82,9 +94,6 @@ class ProgramManager implements IProgramManager
                 throw new SystemException(Loc::getMessage("ROBOT_CORE_PROGRAM_EMPTY_FILTER_DATE"));
             }
 
-            // TODO вынести в сервис-локатор
-            $programRepository = new ProgramRepository();
-
             if (!$sectionIds) {
                 $eventId = EventsView::getActiveEventId();
                 [$sectionIds] = $this->getProgramSections($eventId);
@@ -98,7 +107,7 @@ class ProgramManager implements IProgramManager
                 true,
                 "ASC"
             );
-            $programCollectionEntity = $programRepository->getProgram($programListEntity);
+            $programCollectionEntity = $this->programRepository->getProgram($programListEntity);
 
             return Program::mapProgramCollectionToModels($programCollectionEntity);
         } catch (SystemException $exception) {
@@ -114,8 +123,6 @@ class ProgramManager implements IProgramManager
      */
     protected function getProgramSections(int $eventId): array
     {
-        // TODO вынести в сервис-локатор
-        $programRepository = new ProgramRepository();
 
         $programSectionEntity = new ProgramSectionsReqParams(
             Constants::CONTENT_IBLOCK_TYPE,
@@ -124,6 +131,6 @@ class ProgramManager implements IProgramManager
             true,
             "ASC"
         );
-        return $programRepository->getActiveSectionIds($programSectionEntity);
+        return $this->programRepository->getActiveSectionIds($programSectionEntity);
     }
 }

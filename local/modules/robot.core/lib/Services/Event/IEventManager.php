@@ -7,6 +7,11 @@ use Robot\Core\DTO\Event\RegisterForm;
 
 interface IEventManager
 {
+    /**
+     * @param RegisterForm $registerForm
+     * @param int $eventId
+     * @return void
+     */
     public function saveForm(RegisterForm $registerForm, int $eventId): void;
 
     /**

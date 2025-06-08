@@ -3,11 +3,14 @@
 namespace Robot\Core\Services\Actions;
 
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\ObjectNotFoundException;
 use Bitrix\Main\SystemException;
 use Bitrix\Main\ArgumentException;
+use Bitrix\Main\DI\ServiceLocator;
 
+use Psr\Container\NotFoundExceptionInterface;
 use Robot\Core\Constants;
-use Robot\Core\Repositories\Actions\ActionRepository;
+use Robot\Core\Repositories\Actions\IActionRepository;
 use Robot\Core\Tools\IBlocks\Helper;
 use Robot\Core\Entity\Action\ActionItemsReqParams;
 use Robot\Core\Tools\Mappers\Action;
@@ -18,6 +21,18 @@ Loc::loadMessages(__FILE__);
 
 class ActionManager implements IActionManager
 {
+    /** @var IActionRepository репозиторий активных событий */
+    private IActionRepository $actionRepository;
+
+    /**
+     * @throws ObjectNotFoundException
+     * @throws NotFoundExceptionInterface
+     */
+    public function __construct()
+    {
+        $this->actionRepository = ServiceLocator::getInstance()->get(IActionRepository::class);
+    }
+
     /**
      * @param int $id
      * @return ActionModel[]
@@ -40,9 +55,7 @@ class ActionManager implements IActionManager
                 true,
                 "DESC"
             );
-            // TODO получать через сервис-локатор
-            $actionRepository = new ActionRepository();
-            $arSectionsIds = $actionRepository->getSectionsByEventId($entity);
+            $arSectionsIds = $this->actionRepository->getSectionsByEventId($entity);
             
             if (empty($arSectionsIds)) {
                 throw new ArgumentException(Loc::getMessage("ROBOT_CORE_ERROR_ACTIONS_EMPTY"));
@@ -55,7 +68,7 @@ class ActionManager implements IActionManager
                 true,
                 "DESC"
             );
-            $response = $actionRepository->getActionsBySectionsIds($entity);
+            $response = $this->actionRepository->getActionsBySectionsIds($entity);
 
             if (empty($response)) {
                 throw new ArgumentException(Loc::getMessage("ROBOT_CORE_ERROR_ACTIONS_EMPTY"));

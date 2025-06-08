@@ -5,10 +5,14 @@ namespace Robot\Core\Views\SiteSettings;
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
+use Bitrix\Main\DI\ServiceLocator;
+
+use Psr\Container\NotFoundExceptionInterface;
+
 use Robot\Core\DTO\SiteSettings\SiteSettingsContacts;
 use Robot\Core\DTO\SiteSettings\SiteSettingsFooter;
 use Robot\Core\DTO\SiteSettings\SiteSettingsHeader;
-use Robot\Core\Services\SiteSettings\SiteSettingsManager;
+use Robot\Core\Services\SiteSettings\ISiteSettingsManager;
 use Robot\Core\Tools\Mappers\SiteSettings;
 
 class SiteSettingsView implements ISiteSettingsView
@@ -21,10 +25,10 @@ class SiteSettingsView implements ISiteSettingsView
     public static function getSiteSettingsEdit(string $siteId): array|bool
     {
         try {
-            // TODO заменить через сервис-локатор
-            $siteSettingsManager = new SiteSettingsManager();
+            /** @var ISiteSettingsManager $siteSettingsManager */
+            $siteSettingsManager = ServiceLocator::getInstance()->get(ISiteSettingsManager::class);
             return $siteSettingsManager->getSiteSettingsEdit($siteId);
-        } catch (SystemException $exception) {
+        } catch (SystemException|NotFoundExceptionInterface $exception) {
             AddMessage2Log($exception->getMessage());
             return false;
         }
@@ -36,10 +40,10 @@ class SiteSettingsView implements ISiteSettingsView
     public static function getSettingsHeader(): SiteSettingsHeader|bool
     {
         try {
-            // TODO заменить через сервис-локатор
-            $siteSettingsManager = new SiteSettingsManager();
+            /** @var ISiteSettingsManager $siteSettingsManager */
+            $siteSettingsManager = ServiceLocator::getInstance()->get(ISiteSettingsManager::class);
             return $siteSettingsManager->getSettingsHeader();
-        } catch (SystemException $exception) {
+        } catch (SystemException|NotFoundExceptionInterface $exception) {
             AddMessage2Log($exception->getMessage());
             return false;
         }
@@ -51,10 +55,10 @@ class SiteSettingsView implements ISiteSettingsView
     public static function getSettingsFooter(): SiteSettingsFooter|bool
     {
         try {
-            // TODO заменить через сервис-локатор
-            $siteSettingsManager = new SiteSettingsManager();
+            /** @var ISiteSettingsManager $siteSettingsManager */
+            $siteSettingsManager = ServiceLocator::getInstance()->get(ISiteSettingsManager::class);
             return $siteSettingsManager->getSettingsFooter();
-        } catch (SystemException $exception) {
+        } catch (SystemException|NotFoundExceptionInterface $exception) {
             AddMessage2Log($exception->getMessage());
             return false;
         }
@@ -66,10 +70,10 @@ class SiteSettingsView implements ISiteSettingsView
     public static function getSettingsContacts(): SiteSettingsContacts|bool
     {
         try {
-            // TODO заменить через сервис-локатор
-            $siteSettingsManager = new SiteSettingsManager();
+            /** @var ISiteSettingsManager $siteSettingsManager */
+            $siteSettingsManager = ServiceLocator::getInstance()->get(ISiteSettingsManager::class);
             return $siteSettingsManager->getSettingContacts();
-        } catch (SystemException $exception) {
+        } catch (SystemException|NotFoundExceptionInterface $exception) {
             AddMessage2Log($exception->getMessage());
             return false;
         }
@@ -88,11 +92,11 @@ class SiteSettingsView implements ISiteSettingsView
                 return true;
             }
 
-            // TODO заменить через сервис-локатор
-            $siteSettingsManager = new SiteSettingsManager();
+            /** @var ISiteSettingsManager $siteSettingsManager */
+            $siteSettingsManager = ServiceLocator::getInstance()->get(ISiteSettingsManager::class);
             $siteSettingsManager->saveSiteSettings(SiteSettings::mapArraySiteSettingsUpdateToModel($id, $arSiteSettings), $siteId);
             return true;
-        } catch (SystemException $exception) {
+        } catch (SystemException|NotFoundExceptionInterface $exception) {
             return $exception->getMessage();
         }
     }
@@ -104,10 +108,10 @@ class SiteSettingsView implements ISiteSettingsView
     public static function getSiteIdByLang(string $lang): string|bool
     {
         try {
-            // TODO заменить через сервис-локатор
-            $siteSettingsManager = new SiteSettingsManager();
+            /** @var ISiteSettingsManager $siteSettingsManager */
+            $siteSettingsManager = ServiceLocator::getInstance()->get(ISiteSettingsManager::class);
             return $siteSettingsManager->getSiteIdByLang($lang);
-        } catch (SystemException|ArgumentException|ObjectPropertyException $exception) {
+        } catch (SystemException|ArgumentException|ObjectPropertyException|NotFoundExceptionInterface $exception) {
             AddMessage2Log($exception->getMessage());
             return false;
         }

@@ -6,8 +6,11 @@ use Bitrix\Main\ArgumentException;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ObjectException;
 use Bitrix\Main\SystemException;
+use Bitrix\Main\DI\ServiceLocator;
 
-use Robot\Core\Services\Program\ProgramManager;
+use Psr\Container\NotFoundExceptionInterface;
+
+use Robot\Core\Services\Program\IProgramManager;
 use Robot\Core\Views\Events\EventsView;
 use Robot\Core\DTO\Program\ProgramItems;
 
@@ -27,11 +30,10 @@ class ProgramView implements IProgramView
                 throw new ArgumentException(Loc::getMessage("ROBOT_CORE_PROGRAM_INVALID_EVENT_ID"));
             }
 
-            // TODO вынести в сервис-локатор
-            $programManager = new ProgramManager();
-
+            /** @var IProgramManager $programManager */
+            $programManager = ServiceLocator::getInstance()->get(IProgramManager::class);
             return $programManager->getProgram($eventId);
-        } catch (SystemException|ArgumentException|ObjectException $exception) {
+        } catch (SystemException|ArgumentException|ObjectException|NotFoundExceptionInterface $exception) {
             AddMessage2Log($exception->getMessage(), 'robot.core');
             return false;
         }

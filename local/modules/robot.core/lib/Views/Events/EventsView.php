@@ -5,19 +5,21 @@ namespace Robot\Core\Views\Events;
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\LoaderException;
 use Bitrix\Main\Localization\Loc;
-use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
 use Bitrix\Main\ObjectException;
 use Bitrix\Main\Type\DateTime;
+use Bitrix\Main\DI\ServiceLocator;
 use CIBlockElement;
+
+use Psr\Container\NotFoundExceptionInterface;
 
 use Robot\Core\Constants;
 use Robot\Core\DTO\Action\Action;
 use Robot\Core\DTO\Event\ActiveEvent;
 use Robot\Core\DTO\Event\FormField;
 use Robot\Core\Entity\Event\ActiveEventReqParams;
-use Robot\Core\Services\Actions\ActionManager;
-use Robot\Core\Services\Event\EventManager;
+use Robot\Core\Services\Actions\IActionManager;
+use Robot\Core\Services\Event\IEventManager;
 use Robot\Core\Tools\IBlocks\Helper;
 use Robot\Core\Tools\Mappers\Event;
 use Robot\Core\Tools\Modules\Manager;
@@ -39,8 +41,8 @@ class EventsView implements IEventsView
         try {
             Manager::requireModules(static::MODULES_CODES);
             $event = static::getActiveEvent();
-            return $event->isRegister && static::isDateAvaliable($event->expirationDate);
-        } catch (SystemException|LoaderException|ObjectException $exception) {
+            return $event->isRegister && static::isDateAvailable($event->expirationDate);
+        } catch (SystemException|LoaderException $exception) {
             AddMessage2Log($exception->getMessage(), "robot.core");
             return false;
         }
@@ -54,8 +56,8 @@ class EventsView implements IEventsView
         try {
             static::requireModules();
             $event = static::getActiveEvent();
-            return static::isDateAvaliable($event->expirationDate);
-        } catch (SystemException|LoaderException|ObjectException $exception) {
+            return static::isDateAvailable($event->expirationDate);
+        } catch (SystemException|LoaderException $exception) {
             AddMessage2Log($exception->getMessage(), "robot.core");
             return false;
         }
@@ -70,7 +72,7 @@ class EventsView implements IEventsView
             static::requireModules();
             $event = static::getActiveEvent();
             return $event->id;
-        } catch (SystemException|LoaderException|ObjectException $exception) {
+        } catch (SystemException|LoaderException $exception) {
             AddMessage2Log($exception->getMessage(), "robot.core");
             return false;
         }
@@ -87,11 +89,11 @@ class EventsView implements IEventsView
                 throw new SystemException(Loc::getMessage("ROBOT_CORE_EVENTS_GET_EMPTY"));
             }
 
-            // TODO получать через сервис-локатор
-            $actionManager = new ActionManager();
+            /** @var IActionManager $actionManager */
+            $actionManager = ServiceLocator::getInstance()->get(IActionManager::class);
 
             return $actionManager->getByEventId($id);
-        } catch (SystemException|ObjectException $exception) {
+        } catch (SystemException|NotFoundExceptionInterface $exception) {
             AddMessage2Log($exception->getMessage(), "robot.core");
             return false;
         }
@@ -103,8 +105,8 @@ class EventsView implements IEventsView
     public static function getRegistrationFormFields(): array|bool
     {
         try {
-            // TODO вынести в сервис-локатор
-            $eventManager = new EventManager();
+            /** @var IEventManager $eventManager */
+            $eventManager = ServiceLocator::getInstance()->get(IEventManager::class);
             $fields = $eventManager->getRegistrationFields();
 
             if (empty($fields)) {
@@ -112,7 +114,7 @@ class EventsView implements IEventsView
             }
 
             return $fields;
-        } catch (SystemException|ArgumentException|ObjectException|ObjectPropertyException $exception) {
+        } catch (SystemException|NotFoundExceptionInterface $exception) {
             AddMessage2Log($exception->getMessage(), "robot.core");
             return false;
         }
@@ -153,7 +155,7 @@ class EventsView implements IEventsView
      * @param DateTime $date
      * @return bool
      */
-    protected static function isDateAvaliable(DateTime $date): bool
+    protected static function isDateAvailable(DateTime $date): bool
     {
         $curDate = new DateTime();
         if ($curDate->format("Y-m-d") > $date->format("Y-m-d")) {

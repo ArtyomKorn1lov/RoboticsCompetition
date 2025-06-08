@@ -4,28 +4,37 @@ namespace Robot\Core\Services\Event;
 
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ArgumentException;
-use Bitrix\Main\LoaderException;
 use Bitrix\Main\ObjectException;
 use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
 use Bitrix\Main\Config\Option;
+use Bitrix\Main\DI\ServiceLocator;
 
 use Robot\Core\Constants;
 use Robot\Core\DTO\Event\AutocompleteSearch;
 use Robot\Core\DTO\Event\RegisterExternalData;
 use Robot\Core\DTO\Event\RegisterForm;
 use Robot\Core\Entity\Event\RegisterForm as RegisterFormEntity;
-use Robot\Core\Repositories\Event\EventRepository;
+use Robot\Core\Repositories\Event\IEventRepository;
 use Robot\Core\Tools\Mappers\Event;
 use Robot\Core\DTO\Event\FormField;
 use Robot\Core\Entity\Event\EventDetailReqParams;
 use Robot\Core\Tools\Mail\Helper as MailHelper;
+use Robot\Core\Tools\Mail\IHelper as IMailHelper;
 use Robot\Core\Tools\IBlocks\Helper as IBlockHelper;
 
 Loc::loadMessages(__FILE__);
 
 class EventManager implements IEventManager
 {
+    /** @var IEventRepository репозиторий события */
+    private IEventRepository $eventRepository;
+
+    public function __construct()
+    {
+        $this->eventRepository = ServiceLocator::getInstance()->get(IEventRepository::class);
+    }
+
     /**
      * @param RegisterForm $registerForm
      * @param int $eventId
@@ -41,10 +50,8 @@ class EventManager implements IEventManager
                 throw new ArgumentException(Loc::getMessage("ROBOT_CORE_ERROR_EVENT_ID"));
             }
 
-            // TODO вынести в сервис-локатор
-            $eventRepository = new EventRepository();
-            $lastElementId = $eventRepository->getLastElementId();
-            $fields = $eventRepository->getRegistrationFields(false);
+            $lastElementId = $this->eventRepository->getLastElementId();
+            $fields = $this->eventRepository->getRegistrationFields(false);
 
             if (empty($fields)) {
                 throw new SystemException(Loc::getMessage("ROBOT_CORE_EVENT_REGISTRATION_FIELDS_ERROR"));
@@ -59,7 +66,7 @@ class EventManager implements IEventManager
                 $registerForm->formData,
                 $externalData
             );
-            $registrationId = $eventRepository->saveForm($entity);
+            $registrationId = $this->eventRepository->saveForm($entity);
             $this->sendMail($registerForm->formData, $eventId, $registrationId);
         } catch (SystemException|ArgumentException|ObjectException|ObjectPropertyException $exception) {
             AddMessage2Log($exception->getMessage(), 'robot.core');
@@ -77,9 +84,7 @@ class EventManager implements IEventManager
     public function getRegistrationFields(): array
     {
         try {
-            // TODO вынести в сервис-локатор
-            $eventRepository = new EventRepository();
-            $fields = $eventRepository->getRegistrationFields();
+            $fields = $this->eventRepository->getRegistrationFields();
             return Event::mapFormFieldListEntityToModelList($fields);
         } catch (SystemException|ArgumentException|ObjectException|ObjectPropertyException $exception) {
             AddMessage2Log($exception->getMessage(), 'robot.core');
@@ -94,7 +99,6 @@ class EventManager implements IEventManager
      * @throws ObjectException
      * @throws ObjectPropertyException
      * @throws SystemException
-     * @throws LoaderException
      */
     public function searchAutocompleteValues(AutocompleteSearch $autocompleteSearch): array
     {
@@ -103,14 +107,12 @@ class EventManager implements IEventManager
                 throw new ArgumentException(Loc::getMessage("ROBOT_CORE_EVENT_SEARCH_ERROR_ID"));
             }
 
-            // TODO вынести в сервис-локатор
-            $eventRepository = new EventRepository();
-            $entityName = $eventRepository->getFieldValueEntityById($autocompleteSearch->id);
+            $entityName = $this->eventRepository->getFieldValueEntityById($autocompleteSearch->id);
             if (empty($entityName)) {
                 throw new ArgumentException(Loc::getMessage("ROBOT_CORE_EVENT_ERROR_SEARCH_ENTITY"));
             }
 
-            return Event::mapSearchResultArrayToModelList($eventRepository->searchAutocompleteValues($autocompleteSearch->value, $entityName));
+            return Event::mapSearchResultArrayToModelList($this->eventRepository->searchAutocompleteValues($autocompleteSearch->value, $entityName));
         } catch (SystemException|ArgumentException|ObjectException|ObjectPropertyException $exception) {
             AddMessage2Log($exception->getMessage(), 'robot.core');
             throw $exception;
@@ -137,11 +139,9 @@ class EventManager implements IEventManager
             true
         );
 
-        // TODO вынести в сервис-локатор
-        $eventRepository = new EventRepository();
         $mailModel = Event::mapEventRegistrationParamToMailModel(
             $formData,
-            $eventRepository->getEventById($reqParams)["NAME"], $this->buildEditUrl(Constants::CONTENT_IBLOCK_TYPE, IBlockHelper::getIBlock(Constants::REGISTRATION_REQUEST_IBLOCK_CODE), $registrationId)
+            $this->eventRepository->getEventById($reqParams)["NAME"], $this->buildEditUrl(Constants::CONTENT_IBLOCK_TYPE, IBlockHelper::getIBlock(Constants::REGISTRATION_REQUEST_IBLOCK_CODE), $registrationId)
         );
 
         $arFields = [
@@ -158,6 +158,7 @@ class EventManager implements IEventManager
             "DEFAULT_RECIPIENT_EMAIL" => Option::get('robot.core', Constants::DEFAULT_RECIPIENT_EMAIL_OPTION_CODE)
         ];
 
+        /** @var IMailHelper $mailHelper */
         $mailHelper = new MailHelper(
             Constants::REGISTRATION_MAIL_EVENT_CODE,
             SITE_ID

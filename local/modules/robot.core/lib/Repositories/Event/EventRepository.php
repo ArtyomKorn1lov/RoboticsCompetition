@@ -64,31 +64,6 @@ class EventRepository extends HighloadBlocks implements IEventRepository
      */
     public function getRegistrationFields(bool $isInit = true): array
     {
-        // TODO первично найденный способ, уточнить какой лучше способ
-        /*$query = RegistrationFieldsTable::getList([
-            "order" => [
-                "sort" => "ASC"
-            ],
-            "select" => [
-                "*",
-                "FORMTYPE"
-            ]
-        ]);
-
-        $result = [];
-        while ($item = $query->fetchObject()) {
-            $fieldType = $item->getFormtype();
-
-            $result[] = [
-                "id" => $item->getId(),
-                "code" => $item->getCode(),
-                "name" => $item->getName(),
-                "required" => $item->getRequired(),
-                "typeField" => $fieldType->collectValues(),
-                "values" => $item->getValues()
-            ];
-        }*/
-
         $query = new Query(RegistrationFieldsTable::getEntity());
         $query->setOrder(["sort" => "ASC"]);
         $query->setFilter(["lang" => Loc::getCurrentLang()]);

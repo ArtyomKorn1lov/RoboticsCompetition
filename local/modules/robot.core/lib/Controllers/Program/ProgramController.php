@@ -9,8 +9,11 @@ use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\SystemException;
 use Bitrix\Main\Engine\Response\AjaxJson;
 use Bitrix\Main\Type\DateTime;
+use Bitrix\Main\DI\ServiceLocator;
 
-use Robot\Core\Services\Program\ProgramManager;
+use Psr\Container\NotFoundExceptionInterface;
+
+use Robot\Core\Services\Program\IProgramManager;
 use Robot\Core\Middleware\Language;
 
 Loc::loadMessages(__FILE__);
@@ -43,12 +46,12 @@ class ProgramController extends Controller
                 throw new SystemException(Loc::getMessage("ROBOT_CORE_ARGUMENT_EXCEPTION"));
             }
 
-            // TODO вынести в сервис-локатор
-            $programManager = new ProgramManager();
+            /** @var IProgramManager $programManager */
+            $programManager = ServiceLocator::getInstance()->get(IProgramManager::class);
             $programs = $programManager->getProgramByDate(new DateTime($date));
 
             return AjaxJson::createSuccess($programs);
-        } catch (SystemException $exception) {
+        } catch (SystemException|NotFoundExceptionInterface $exception) {
             AddMessage2Log($exception->getMessage(), "robot.core");
             $errorCollection = new ErrorCollection();
             $errorCollection->setError(new Error($exception->getMessage()));
