@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-import { ElSkeleton, ElNotification } from "element-plus";
+import { ElSkeleton } from "element-plus";
 import { computed, ref } from "vue";
 import Card from "./Card.vue";
 import TimeLine from "./TimeLine.vue";
@@ -69,30 +69,21 @@ const selectDate = async (index) => {
   isLoading.value = true;
   activeTab.value = index;
   programData.value = [];
-  await getProgramItems(
-      {
-        date: dates[index]?.date
-      },
-      {
-        lang: lang
-      }
-  )
+  await getProgramItems({
+    data: {
+      date: dates[index]?.date
+    },
+    headers: {
+      lang: lang
+    }
+  })
       .then((response) => {
-        // TODO обработка ошибки пока не разберусь как возвращать статус ошибки с сервера
-        if (response?.data?.status === 'error') {
-          throw new Error(response?.data?.errors[0].message);
-        }
-        programData.value = [...response?.data?.data];
+        programData.value = [...response];
         isLoading.value = false;
       })
-      .catch((error) => {
+      .catch(() => {
+        programData.value = [];
         isLoading.value = false;
-        console.error('error', error);
-        ElNotification({
-          title: loc.value.PROGRAM_LIST_ERROR_TITLE,
-          message: error,
-          type: 'error',
-        })
       });
 }
 </script>

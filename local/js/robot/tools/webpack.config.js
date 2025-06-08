@@ -2,11 +2,11 @@ const path = require('path');
 const {VueLoaderPlugin} = require("vue-loader");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const postcssPresetEnv = require('postcss-preset-env');
-const ElementPlus = require("unplugin-element-plus/webpack");
 
 const DEFAULT_GLOBALS = {
     vue: 'RobotCore.vue',
     axios: 'RobotCore.axios',
+    'element-plus': 'RobotUI.ElPlus',
 }
 
 module.exports = (env, argv) => {
@@ -49,8 +49,7 @@ module.exports = (env, argv) => {
         externals: DEFAULT_GLOBALS,
         plugins: [
             new VueLoaderPlugin(),
-            new MiniCssExtractPlugin({ filename: 'styles.bundle.css' }),
-            ElementPlus()
+            new MiniCssExtractPlugin({ filename: 'styles.bundle.css' })
         ],
         resolve: {
             extensions: ['.js', '.vue', '.css', '.scss']

@@ -165,22 +165,17 @@ const loc = computed(() => getFilteredPhrases('REGISTRATION_'));
 const querySearchAsync = async (queryString, callback, id) => {
   if (queryString && id) {
     let countries = [];
-
-    await searchCountries(
-        new FormSearch({
-          id: id,
-          value: queryString
-        }),
-        {
-          lang: lang
-        }
-    )
+    await searchCountries({
+      data: new FormSearch({
+        id: id,
+        value: queryString
+      }),
+      headers: {
+        lang: lang
+      }
+    })
         .then((response) => {
-          // TODO обработка ошибки пока не разберусь как возвращать статус ошибки с сервера
-          if (response?.data?.status === 'error') {
-            throw new Error(response?.data?.errors[0].message);
-          }
-          countries = [...response?.data?.data];
+          countries = [...response];
         })
         .catch((error) => {
           console.error('error', error);

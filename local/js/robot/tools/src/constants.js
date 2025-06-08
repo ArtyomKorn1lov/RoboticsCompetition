@@ -1,6 +1,9 @@
 import MediaPopup from "./models/media";
 
 /** @type {String} */
+export const API_URL = '/api';
+
+/** @type {String} */
 export const DEFAULT_PHONE_MASK = '+7(###)-###-##-##';
 
 /** @type {RegExp} */

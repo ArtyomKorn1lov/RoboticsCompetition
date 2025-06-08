@@ -1,6 +1,5 @@
 import { ref, reactive, computed } from "vue";
-import { ElMessageBox } from "element-plus";
-import { getFilteredPhrases, Constants, FormFields } from 'tools';
+import { getFilteredPhrases, Constants, FormFields, ApiHelper } from 'tools';
 
 /**
  * Хук с общей логикой форм обратной связи
@@ -122,43 +121,23 @@ export default function useForm(fields, ajaxFunc, validators = {}, lang = 'ru') 
         isLoading.value = true;
         const data = { formData: formData };
         const headers = { lang: lang };
-        await ajaxFunc(data, headers)
+        await ajaxFunc({
+            data: data,
+            headers: headers,
+        })
             .then(async (response) => {
-                // TODO обработка ошибки пока не разберусь как возвращать статус ошибки с сервера
-                if (response?.data?.status === "error") {
-                    throw new Error(response?.data?.errors[0].message);
-                }
                 resetForm(formRef);
                 isLoading.value = false;
-                await showMessage(
+                await ApiHelper.showMessageBox(
                     loc.value.COMPOSABLE_FORM_SUCCESS_MESSAGE_TITLE,
-                    response?.data?.data,
+                    response,
                     "success",
                     afterSuccess
                 );
             })
-            .catch(async (error) => {
-                await showMessage(loc.value.COMPOSABLE_FORM_ERROR_MESSAGE_TITLE, error);
+            .catch(async () => {
                 isLoading.value = false;
             })
-    }
-
-    const showMessage = async (title, message, type = "error", callback = null) => {
-        await ElMessageBox.alert(
-            message,
-            title,
-            {
-                customClass: "b-message-box",
-                showClose: type === "success",
-                center: true,
-                type: type,
-                closeOnPressEscape: type === "success",
-                closeOnHashChange: type === "success",
-                showConfirmButton: true,
-                confirmButtonClass: "b-button b-button_primary b-button_small",
-                confirmButtonText: loc.value.COMPOSABLE_FORM_OK_BTN_TITLE,
-                callback: callback
-            });
     }
 
     const resetForm = (formRef) => {
@@ -172,7 +151,6 @@ export default function useForm(fields, ajaxFunc, validators = {}, lang = 'ru') 
         formData,
         isLoading,
         rules,
-        onSubmit,
-        showMessage
+        onSubmit
     }
 }
