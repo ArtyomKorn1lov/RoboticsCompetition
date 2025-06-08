@@ -5,20 +5,19 @@ CHTTP::SetStatus("404 Not Found");
 @define("ERROR_404","Y");
 
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-
-$APPLICATION->SetTitle("Страница не найдена");
 $APPLICATION->SetPageProperty("SHOW_TITLE", "N");
 ?>
 
 <?php
 $APPLICATION->IncludeComponent(
-    "robot:empty.component",
-    "empty",
-    Array(
-        "CACHE_TIME" => "36000000",
-        "CACHE_TYPE" => "A",
-        "MODULES_CODES" => []
-    )
+	"robot:empty.component", 
+	"empty", 
+	array(
+		"CACHE_TIME" => "0",
+		"CACHE_TYPE" => "N",
+		"MODULES_CODES" => [],
+	),
+	false
 );?>
 
 <?php

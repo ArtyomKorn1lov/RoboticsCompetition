@@ -19,6 +19,7 @@ Loc::loadMessages(__FILE__);
 
 global $APPLICATION;
 
+$APPLICATION->SetTitle(Loc::getMessage("EMPTY_TITLE"));
 ?>
 
 <div class="b-section b-section_empty b-empty">
@@ -31,7 +32,7 @@ global $APPLICATION;
     </div>
     <div class="b-empty__content">
         <h1 class="b-main__title b-empty__title">
-            <?= $APPLICATION->ShowTitle(false); ?>
+            <?= Loc::getMessage("EMPTY_TITLE") ?>
         </h1>
         <span class="b-empty__description">
             <?= Loc::getMessage("EMPTY_DESCRIPTION") ?>

@@ -69,36 +69,35 @@ $APPLICATION->IncludeComponent(
     )
 );?>
 
-<!-- TODO Сделать множественную включаемую область -->
-<div class="b-section b-section_pb b-section_last b-partners">
-    <h2 class="b-section__title b-partners__title">Organizers</h2>
-    <?php $APPLICATION->IncludeComponent(
-        "bitrix:main.include",
-        "custom_wrapper",
-        array(
-            "CUSTOM_WRAPPER_START" => '<p class="b-section__description">',
-            "CUSTOM_WRAPPER_END" => '</p>',
-            "AREA_FILE_SHOW" => "file",
-            "PATH" => SITE_DIR."include/partners/index_description.php",
-            "AREA_FILE_RECURSIVE" => "Y",
-            "COMPONENT_TEMPLATE" => ".default",
-            "EDIT_TEMPLATE" => "standard.php"
-        ),
-        false
-    ); ?>
-    <?php $APPLICATION->IncludeComponent(
-        "bitrix:main.include",
-        ".default",
-        array(
-            "AREA_FILE_SHOW" => "file",
-            "PATH" => SITE_DIR."include/partners/index.php",
-            "AREA_FILE_RECURSIVE" => "Y",
-            "COMPONENT_TEMPLATE" => ".default",
-            "EDIT_TEMPLATE" => "standard.php"
-        ),
-        false
-    ); ?>
-</div>
+<?php
+$APPLICATION->IncludeComponent(
+    "robot:multiple.include.area",
+    "partners",
+    Array(
+        "INCLUDE_AREA_COUNT" => "3",
+        "TITLE" => "",
+        "TITLE_CLASS" => "",
+        "WRAPPER_CLASS" => "b-section b-section_pb b-section_last b-partners",
+        "TITLE_0" => "",
+        "TITLE_1" => "",
+        "TITLE_2" => "",
+        "AREA_FILE_SHOW_0" => "file",
+        "AREA_FILE_SHOW_1" => "file",
+        "AREA_FILE_SHOW_2" => "file",
+        "AREA_FILE_SUFFIX_0" => "",
+        "AREA_FILE_SUFFIX_1" => "",
+        "AREA_FILE_SUFFIX_3" => "",
+        "EDIT_TEMPLATE_0" => "",
+        "EDIT_TEMPLATE_1" => "",
+        "EDIT_TEMPLATE_2" => "",
+        "PATH_0" => SITE_DIR . "include/partners/title.php",
+        "PATH_1" => SITE_DIR . "include/partners/description.php",
+        "PATH_2" => SITE_DIR . "include/partners/index.php",
+        "WRAPPER_CLASS_0" => "b-section__title b-partners__title",
+        "WRAPPER_CLASS_1" => "b-section__description",
+        "WRAPPER_CLASS_2" => ""
+    )
+);?>
 
 <?php
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
