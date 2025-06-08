@@ -3,10 +3,7 @@
 namespace Robot\Core\Controllers\Event;
 
 use Bitrix\Main\ArgumentException;
-use Bitrix\Main\Engine\Controller;
 use Bitrix\Main\Engine\Response\AjaxJson;
-use Bitrix\Main\Error;
-use Bitrix\Main\ErrorCollection;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ObjectException;
 use Bitrix\Main\ObjectPropertyException;
@@ -20,6 +17,7 @@ use Robot\Core\Services\Event\IEventManager;
 use Robot\Core\Tools\Mappers\Event;
 use Robot\Core\Views\Events\EventsView;
 use Robot\Core\Middleware\Language;
+use Robot\Core\Base\Controller;
 
 Loc::loadMessages(__FILE__);
 
@@ -66,10 +64,7 @@ class EventController extends Controller
 
             return AjaxJson::createSuccess(Loc::getMessage("ROBOT_CORE_REGISTER_SUCCESS_MESSAGE"));
         } catch (SystemException|ArgumentException|ObjectException|ObjectPropertyException|NotFoundExceptionInterface $exception) {
-            AddMessage2Log($exception->getMessage(), "robot.core");
-            $errorCollection = new ErrorCollection();
-            $errorCollection->setError(new Error($exception->getMessage()));
-            return AjaxJson::createError($errorCollection);
+            return $this->onError($exception->getMessage());
         }
     }
 
@@ -96,10 +91,7 @@ class EventController extends Controller
 
             return AjaxJson::createSuccess($result);
         } catch (SystemException|ArgumentException|ObjectException|ObjectPropertyException|NotFoundExceptionInterface $exception) {
-            AddMessage2Log($exception->getMessage(), "robot.core");
-            $errorCollection = new ErrorCollection();
-            $errorCollection->setError(new Error($exception->getMessage()));
-            return AjaxJson::createError($errorCollection);
+            return $this->onError($exception->getMessage());
         }
     }
 }

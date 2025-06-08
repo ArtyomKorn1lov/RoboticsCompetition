@@ -2,9 +2,6 @@
 
 namespace Robot\Core\Controllers\Program;
 
-use Bitrix\Main\Engine\Controller;
-use Bitrix\Main\Error;
-use Bitrix\Main\ErrorCollection;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\SystemException;
 use Bitrix\Main\Engine\Response\AjaxJson;
@@ -15,6 +12,7 @@ use Psr\Container\NotFoundExceptionInterface;
 
 use Robot\Core\Services\Program\IProgramManager;
 use Robot\Core\Middleware\Language;
+use Robot\Core\Base\Controller;
 
 Loc::loadMessages(__FILE__);
 
@@ -52,10 +50,7 @@ class ProgramController extends Controller
 
             return AjaxJson::createSuccess($programs);
         } catch (SystemException|NotFoundExceptionInterface $exception) {
-            AddMessage2Log($exception->getMessage(), "robot.core");
-            $errorCollection = new ErrorCollection();
-            $errorCollection->setError(new Error($exception->getMessage()));
-            return AjaxJson::createError($errorCollection);
+            return $this->onError($exception->getMessage());
         }
     }
 }
