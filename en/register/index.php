@@ -27,7 +27,7 @@ if (!EventsView::showRegistration()) {
 
 <?php
 $APPLICATION->IncludeComponent(
-    "robot:empty.component",
+    "robot:template.component",
     "registration",
     Array(
         "CACHE_TIME" => "36000000",

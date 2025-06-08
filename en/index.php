@@ -60,7 +60,7 @@ $APPLICATION->IncludeComponent(
 
 <?php
 $APPLICATION->IncludeComponent(
-    "robot:empty.component",
+    "robot:template.component",
     "actions",
     Array(
         "CACHE_TIME" => "36000000",

@@ -40,7 +40,7 @@ Manager::includeFrontendPlugins();
 
         <?php
         $APPLICATION->IncludeComponent(
-        "robot:empty.component",
+        "robot:template.component",
         "header_name",
             Array(
                 "CACHE_TIME" => "36000000",

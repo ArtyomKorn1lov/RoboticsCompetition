@@ -6,7 +6,7 @@ $APPLICATION->SetPageProperty("SHOW_TITLE", "N");
 
 <?php
 $APPLICATION->IncludeComponent(
-    "robot:empty.component",
+    "robot:template.component",
     "contacts",
     Array(
         "CACHE_TIME" => "36000000",

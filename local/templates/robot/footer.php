@@ -17,7 +17,7 @@ Extension::load([
 
     <?php
     $APPLICATION->IncludeComponent(
-        "robot:empty.component",
+        "robot:template.component",
         "footer_contacts",
         Array(
             "CACHE_TIME" => "36000000",

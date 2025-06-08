@@ -6,7 +6,7 @@ use Bitrix\Main\Localization\Loc;
 
 Loc::loadMessages(__FILE__);
 
-class EmptyComponent extends CBitrixComponent
+class TemplateComponent extends CBitrixComponent
 {
     /** @var string Код свойства с подключаемыми модулями */
     public const MODULE_NAMES_PROP_CODE = "MODULES_CODES";

@@ -10,7 +10,7 @@ $APPLICATION->SetPageProperty("SHOW_TITLE", "N");
 
 <?php
 $APPLICATION->IncludeComponent(
-	"robot:empty.component", 
+	"robot:template.component",
 	"empty", 
 	array(
 		"CACHE_TIME" => "0",

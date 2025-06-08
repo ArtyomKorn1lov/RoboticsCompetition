@@ -27,7 +27,7 @@ if (!EventsView::showProgram()) {
 
     <?php
     $APPLICATION->IncludeComponent(
-        "robot:empty.component",
+        "robot:template.component",
         "program",
         Array(
             "CACHE_TIME" => "36000000",
