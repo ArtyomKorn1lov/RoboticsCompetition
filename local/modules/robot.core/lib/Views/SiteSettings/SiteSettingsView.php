@@ -29,7 +29,7 @@ class SiteSettingsView implements ISiteSettingsView
             $siteSettingsManager = ServiceLocator::getInstance()->get(ISiteSettingsManager::class);
             return $siteSettingsManager->getSiteSettingsEdit($siteId);
         } catch (SystemException|NotFoundExceptionInterface $exception) {
-            AddMessage2Log($exception->getMessage());
+            ShowError($exception->getMessage());
             return false;
         }
     }
@@ -44,7 +44,7 @@ class SiteSettingsView implements ISiteSettingsView
             $siteSettingsManager = ServiceLocator::getInstance()->get(ISiteSettingsManager::class);
             return $siteSettingsManager->getSettingsHeader();
         } catch (SystemException|NotFoundExceptionInterface $exception) {
-            AddMessage2Log($exception->getMessage());
+            ShowError($exception->getMessage());
             return false;
         }
     }
@@ -59,7 +59,7 @@ class SiteSettingsView implements ISiteSettingsView
             $siteSettingsManager = ServiceLocator::getInstance()->get(ISiteSettingsManager::class);
             return $siteSettingsManager->getSettingsFooter();
         } catch (SystemException|NotFoundExceptionInterface $exception) {
-            AddMessage2Log($exception->getMessage());
+            ShowError($exception->getMessage());
             return false;
         }
     }
@@ -74,7 +74,7 @@ class SiteSettingsView implements ISiteSettingsView
             $siteSettingsManager = ServiceLocator::getInstance()->get(ISiteSettingsManager::class);
             return $siteSettingsManager->getSettingContacts();
         } catch (SystemException|NotFoundExceptionInterface $exception) {
-            AddMessage2Log($exception->getMessage());
+            ShowError($exception->getMessage());
             return false;
         }
     }
@@ -112,7 +112,7 @@ class SiteSettingsView implements ISiteSettingsView
             $siteSettingsManager = ServiceLocator::getInstance()->get(ISiteSettingsManager::class);
             return $siteSettingsManager->getSiteIdByLang($lang);
         } catch (SystemException|ArgumentException|ObjectPropertyException|NotFoundExceptionInterface $exception) {
-            AddMessage2Log($exception->getMessage());
+            ShowError($exception->getMessage());
             return false;
         }
     }

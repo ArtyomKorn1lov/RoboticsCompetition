@@ -34,7 +34,7 @@ class ProgramView implements IProgramView
             $programManager = ServiceLocator::getInstance()->get(IProgramManager::class);
             return $programManager->getProgram($eventId);
         } catch (SystemException|ArgumentException|ObjectException|NotFoundExceptionInterface $exception) {
-            AddMessage2Log($exception->getMessage(), 'robot.core');
+            ShowError($exception->getMessage());
             return false;
         }
     }

@@ -2,6 +2,8 @@
 
 namespace Robot\Core\Services\Event;
 
+use Bitrix\Main\ObjectNotFoundException;
+use Bitrix\Main\Type\DateTime;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\ObjectException;
@@ -10,7 +12,11 @@ use Bitrix\Main\SystemException;
 use Bitrix\Main\Config\Option;
 use Bitrix\Main\DI\ServiceLocator;
 
+use Psr\Container\NotFoundExceptionInterface;
+
 use Robot\Core\Constants;
+use Robot\Core\Entity\Event\ActiveEventReqParams;
+use Robot\Core\DTO\Event\ActiveEvent;
 use Robot\Core\DTO\Event\AutocompleteSearch;
 use Robot\Core\DTO\Event\RegisterExternalData;
 use Robot\Core\DTO\Event\RegisterForm;
@@ -30,9 +36,51 @@ class EventManager implements IEventManager
     /** @var IEventRepository репозиторий события */
     private IEventRepository $eventRepository;
 
+    /**
+     * @throws ObjectNotFoundException
+     * @throws NotFoundExceptionInterface
+     */
     public function __construct()
     {
         $this->eventRepository = ServiceLocator::getInstance()->get(IEventRepository::class);
+    }
+
+    /**
+     * @return ActiveEvent
+     * @throws ArgumentException
+     * @throws ObjectException
+     * @throws SystemException
+     */
+    public function getActiveEvent(): ActiveEvent
+    {
+        try {
+            $apiParams = new ActiveEventReqParams(
+                Constants::CONTENT_IBLOCK_TYPE,
+                IBlockHelper::getIBlock(Constants::EVENTS_IBLOCK_CODE),
+                true
+            );
+            $item = $this->eventRepository->getActiveEvent($apiParams);
+
+            if (empty($item)) {
+                throw new ArgumentException(Loc::getMessage("ROBOT_CORE_EVENTS_GET_EMPTY"));
+            }
+            return Event::mapActiveEventResponseToModel($item);
+        } catch (SystemException|ArgumentException $exception) {
+            AddMessage2Log($exception->getMessage(), 'robot.core');
+            throw $exception;
+        }
+    }
+
+    /**
+     * @param DateTime $date
+     * @return bool
+     */
+    public function isDateAvailable(DateTime $date): bool
+    {
+        if ((new DateTime())->format("Y-m-d") > $date->format("Y-m-d")) {
+            return false;
+        }
+        return true;
     }
 
     /**

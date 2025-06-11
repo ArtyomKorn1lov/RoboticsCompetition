@@ -2,12 +2,19 @@
 
 namespace Robot\Core\Repositories\Event;
 
+use Robot\Core\Entity\Event\ActiveEventReqParams;
 use Robot\Core\Entity\Event\EventDetailReqParams;
 use Robot\Core\Entity\Event\RegisterForm;
 use Robot\Core\Entity\Event\FormField;
 
 interface IEventRepository
 {
+    /**
+     * @param ActiveEventReqParams $apiParams
+     * @return array
+     */
+    public function getActiveEvent(ActiveEventReqParams $apiParams): array;
+
     /**
      * @param RegisterForm $registerFormEntity
      * @return int

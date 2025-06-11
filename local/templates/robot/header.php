@@ -1,20 +1,18 @@
-<?php if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
-<?php
-IncludeTemplateLangFile(__FILE__);
+<?php if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+
+use Bitrix\Main\Localization\Loc;
+
+Loc::loadMessages(__FILE__);
 
 global $APPLICATION;
 
 if (!Bitrix\Main\Loader::includeModule('robot.core')) {
-    ShowError('Ошибка! Не подключен главный модуль сайта для проведения соревнований по робототехнике.');
+    ShowError(Loc::getMessage("ERROR_INCLUDE_MODULE"));
     die();
 }
 
-use Bitrix\Main\Localization\Loc;
-
 use Robot\Core\Tools\Modules\Manager;
 use Robot\Core\Constants;
-
-Loc::loadMessages(__FILE__);
 
 Manager::includeFrontendPlugins();
 

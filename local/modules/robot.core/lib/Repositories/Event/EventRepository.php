@@ -11,6 +11,7 @@ use Bitrix\Main\ORM\Query\Query;
 use Bitrix\Main\SystemException;
 use CIBlockElement;
 
+use Robot\Core\Entity\Event\ActiveEventReqParams;
 use Robot\Core\Base\HighloadBlocks;
 use Robot\Core\Constants;
 use Robot\Core\Entity\Event\EventDetailReqParams;
@@ -21,6 +22,26 @@ use Robot\Core\Tools\IBlocks\Helper;
 
 class EventRepository extends HighloadBlocks implements IEventRepository
 {
+    /**
+     * @param ActiveEventReqParams $apiParams
+     * @return array
+     */
+    public function getActiveEvent(ActiveEventReqParams $apiParams): array
+    {
+        $rsObject = CIBlockElement::GetList(
+            $apiParams->getSortValues(),
+            $apiParams->getFilterValues(),
+            false,
+            ["nTopCount" => 1],
+            $apiParams->getSelectedFields()
+        );
+        $item = $rsObject->fetch();
+        if (!$item) {
+            return [];
+        }
+        return $item;
+    }
+
     /**
      * @param RegisterForm $registerFormEntity
      * @return int
