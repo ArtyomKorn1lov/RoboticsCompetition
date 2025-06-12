@@ -10,11 +10,15 @@ use Robot\Core\Constants;
 use Robot\Core\DTO\Event\ActiveEvent;
 use Robot\Core\DTO\Event\RegisterForm;
 use Robot\Core\DTO\Event\RegistrationMail;
-use Robot\Core\Entity\Event\FormField as FormFieldEntity;
+use Robot\Core\Entity\Event\FormFieldCollection as FormFieldCollectionEntity;
 use Robot\Core\DTO\Event\FormField;
+use Robot\Core\DTO\Event\FormFieldCollection;
 use Robot\Core\Entity\Event\FormFieldValues as FormFieldValuesEntity;
+use Robot\Core\Entity\Event\FormFieldValuesCollection as FormFieldValuesCollectionEntity;
 use Robot\Core\DTO\Event\FormFieldValues;
+use Robot\Core\DTO\Event\FormFieldValuesCollection;
 use Robot\Core\DTO\Event\SearchResult;
+use Robot\Core\DTO\Event\SearchResultCollection;
 
 class Event
 {
@@ -54,31 +58,31 @@ class Event
 
     /**
      * @param array $data
-     * @return FormFieldValuesEntity[]
+     * @return FormFieldValuesCollectionEntity
      * @throws ArgumentException
      */
-    public static function mapFormFieldValuesArrayToEntityList(array $data): array
+    public static function mapFormFieldValuesArrayToEntityList(array $data): FormFieldValuesCollectionEntity
     {
-        $result = [];
+        $collection = new FormFieldValuesCollectionEntity();
         foreach ($data as $item) {
-            $result[] = new FormFieldValuesEntity(
+            $collection->add(new FormFieldValuesEntity(
                 $item[Constants::UF_FIELD_CODE_ID],
                 $item[Constants::UF_FIELD_CODE_CODE],
                 $item[Constants::UF_FIELD_CODE_VALUE]
-            );
+            ));
         }
-        return $result;
+        return $collection;
     }
 
     /**
-     * @param FormFieldEntity[] $entities
-     * @return FormField[]
+     * @param FormFieldCollectionEntity $entities
+     * @return FormFieldCollection
      */
-    public static function mapFormFieldListEntityToModelList(array $entities): array
+    public static function mapFormFieldListEntityToModelList(FormFieldCollectionEntity $entities): FormFieldCollection
     {
-        $result = [];
+        $collection = new FormFieldCollection();
         foreach ($entities as $entity) {
-            $result[] = new FormField(
+            $collection->add(new FormField(
                 id: $entity->getId(),
                 code: $entity->getCode(),
                 title: $entity->getTitle(),
@@ -86,42 +90,41 @@ class Event
                 placeholder: $entity->getPlaceholder(),
                 required: $entity->getRequired(),
                 values: static::mapFormFieldValuesListEntityToModelList($entity->getValues())
-            );
+            ));
         }
-
-        return $result;
+        return $collection;
     }
 
     /**
-     * @param FormFieldValuesEntity[] $entities
-     * @return FormFieldValues[]
+     * @param FormFieldValuesCollectionEntity $entities
+     * @return FormFieldValuesCollection
      */
-    public static function mapFormFieldValuesListEntityToModelList(array $entities): array
+    public static function mapFormFieldValuesListEntityToModelList(FormFieldValuesCollectionEntity $entities): FormFieldValuesCollection
     {
-        $result = [];
+        $collectionModel = new FormFieldValuesCollection();
         foreach ($entities as $entity) {
-            $result[] = new FormFieldValues(
+            $collectionModel->add(new FormFieldValues(
                 id: $entity->getId(),
                 code: $entity->getCode(),
                 name: $entity->getName()
-            );
+            ));
         }
-        return $result;
+        return $collectionModel;
     }
 
     /**
      * @param string[] $items
-     * @return SearchResult[]
+     * @return SearchResultCollection
      */
-    public static function mapSearchResultArrayToModelList(array $items): array
+    public static function mapSearchResultArrayToModelList(array $items): SearchResultCollection
     {
-        $result = [];
+        $collectionModel = new SearchResultCollection();
         foreach ($items as $item) {
-            $result[] = new SearchResult(
+            $collectionModel->add(new SearchResult(
                 value: $item
-            );
+            ));
         }
-        return $result;
+        return $collectionModel;
     }
 
     /**

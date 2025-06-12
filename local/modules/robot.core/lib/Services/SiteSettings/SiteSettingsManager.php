@@ -137,6 +137,7 @@ class SiteSettingsManager implements ISiteSettingsManager
 
     /**
      * @param SiteSettingsUpdate $siteSettingsUpdate
+     * @param string $siteId
      * @return void
      * @throws ArgumentException
      * @throws ObjectException

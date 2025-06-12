@@ -2,7 +2,7 @@
 
 namespace Robot\Core\DTO\Program;
 
-class Program
+final class Program
 {
     /**
      * @param int $id

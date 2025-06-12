@@ -10,6 +10,7 @@ use Bitrix\Main\DI\ServiceLocator;
 
 use Psr\Container\NotFoundExceptionInterface;
 use Robot\Core\Constants;
+use Robot\Core\DTO\Action\ActionCollection;
 use Robot\Core\Repositories\Actions\IActionRepository;
 use Robot\Core\Tools\IBlocks\Helper;
 use Robot\Core\Entity\Action\ActionItemsReqParams;
@@ -35,11 +36,11 @@ class ActionManager implements IActionManager
 
     /**
      * @param int $id
-     * @return ActionModel[]
+     * @return ActionCollection
      * @throws ArgumentException
      * @throws SystemException
      */
-    public function getByEventId(int $id): array
+    public function getByEventId(int $id): ActionCollection
     {
         try {
             if (empty($id)) {
@@ -73,11 +74,8 @@ class ActionManager implements IActionManager
             if (empty($response)) {
                 throw new ArgumentException(Loc::getMessage("ROBOT_CORE_ERROR_ACTIONS_EMPTY"));
             }
-            
-            /** @var ActionModel[] $items */
-            $items = Action::mapActionsResponseToModel($response);
 
-            return $items;
+            return Action::mapActionsResponseToCollection($response);
         } catch (SystemException|ArgumentException $exception) {
             AddMessage2Log($exception->getMessage(), 'robot.core');
             throw $exception;

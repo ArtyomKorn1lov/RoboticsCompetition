@@ -12,6 +12,7 @@ use Bitrix\Main\DI\ServiceLocator;
 
 use Psr\Container\NotFoundExceptionInterface;
 use Robot\Core\Constants;
+use Robot\Core\DTO\Program\ProgramCollection;
 use Robot\Core\DTO\Program\ProgramItems;
 use Robot\Core\Entity\Program\ProgramListReqParam;
 use Robot\Core\Entity\Program\ProgramSectionsReqParams;
@@ -64,8 +65,9 @@ class ProgramManager implements IProgramManager
                 "ASC"
             );
             $dateCollectionEntity = $this->programRepository->getTimeLine($timeLineEntity);
+            $dateCollectionEntity->compareUnicDates();
 
-            $programList = $this->getProgramByDate($dateCollectionEntity->getDateUnicByIndex(0)->getDate(), $sectionIds);
+            $programList = $this->getProgramByDate($dateCollectionEntity->offsetGet(0)->getDate(), $sectionIds);
             $dateList = Program::mapDateCollectionToModels($dateCollectionEntity);
 
             return new ProgramItems(
@@ -83,11 +85,11 @@ class ProgramManager implements IProgramManager
     /**
      * @param DateTime $date
      * @param array|bool $sectionIds
-     * @return array
+     * @return ProgramCollection
      * @throws ArgumentException
      * @throws SystemException
      */
-    public function getProgramByDate(DateTime $date, array|bool $sectionIds = false): array
+    public function getProgramByDate(DateTime $date, array|bool $sectionIds = false): ProgramCollection
     {
         try {
             if (empty($date)) {

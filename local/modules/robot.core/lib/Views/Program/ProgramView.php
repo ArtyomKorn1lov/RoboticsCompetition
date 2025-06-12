@@ -16,7 +16,7 @@ use Robot\Core\DTO\Program\ProgramItems;
 
 Loc::loadMessages(__FILE__);
 
-class ProgramView implements IProgramView
+class ProgramView
 {
 
     /**

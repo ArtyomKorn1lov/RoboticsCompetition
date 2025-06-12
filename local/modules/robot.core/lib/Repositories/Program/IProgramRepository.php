@@ -24,7 +24,7 @@ interface IProgramRepository
 
     /**
      * @param ProgramListReqParam $entity
-     * @return array
+     * @return ProgramCollection
      */
     public function getProgram(ProgramListReqParam $entity): ProgramCollection;
 }

@@ -2,7 +2,7 @@
 
 namespace Robot\Core\DTO\Event;
 
-class SearchResult
+final class SearchResult
 {
     /**
      * @param string $value

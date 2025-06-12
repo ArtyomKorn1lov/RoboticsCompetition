@@ -8,14 +8,14 @@ use Bitrix\Main\DI\ServiceLocator;
 
 use Psr\Container\NotFoundExceptionInterface;
 
-use Robot\Core\DTO\Action\Action;
-use Robot\Core\DTO\Event\FormField;
+use Robot\Core\DTO\Action\ActionCollection;
+use Robot\Core\DTO\Event\FormFieldCollection;
 use Robot\Core\Services\Actions\IActionManager;
 use Robot\Core\Services\Event\IEventManager;
 
 Loc::loadMessages(__FILE__);
 
-class EventsView implements IEventsView
+class EventsView
 {
     /**
      * @return bool
@@ -68,9 +68,9 @@ class EventsView implements IEventsView
     }
 
     /**
-     * @return Action[]|bool
+     * @return ActionCollection|bool
      */
-    public static function getEventActions(): array|bool
+    public static function getEventActions(): ActionCollection|bool
     {
         try {
             $id = static::getActiveEventId();
@@ -89,16 +89,16 @@ class EventsView implements IEventsView
     }
 
     /**
-     * @return FormField[]|bool
+     * @return FormFieldCollection|bool
      */
-    public static function getRegistrationFormFields(): array|bool
+    public static function getRegistrationFormFields(): FormFieldCollection|bool
     {
         try {
             /** @var IEventManager $eventManager */
             $eventManager = ServiceLocator::getInstance()->get(IEventManager::class);
             $fields = $eventManager->getRegistrationFields();
 
-            if (empty($fields)) {
+            if (empty($fields) || $fields->count() <= 0) {
                 throw new SystemException("Ошибка получения полей формы");
             }
 

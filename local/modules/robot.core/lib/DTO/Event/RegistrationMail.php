@@ -2,7 +2,7 @@
 
 namespace Robot\Core\DTO\Event;
 
-class RegistrationMail
+final class RegistrationMail
 {
     /**
      * @param string $eventName

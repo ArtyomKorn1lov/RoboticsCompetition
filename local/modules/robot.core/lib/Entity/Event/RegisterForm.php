@@ -9,15 +9,15 @@ use CUtil;
 use Robot\Core\Constants;
 use Robot\Core\Tools\IBlocks\Helper;
 use Robot\Core\DTO\Event\RegisterExternalData;
-use Robot\Core\DTO\Event\FormField;
-use Robot\Core\DTO\Event\FormFieldValues;
+use Robot\Core\DTO\Event\FormFieldCollection;
+use Robot\Core\DTO\Event\FormFieldValuesCollection;
 
 Loc::loadMessages(__FILE__);
 
 final class RegisterForm
 {
-    /** @var FormField[] Поля формы */
-    private array $fields = [];
+    /** @var FormFieldCollection Поля формы */
+    private FormFieldCollection $fields;
 
     /** @var array Данные формы */
     private array $formData;
@@ -31,7 +31,7 @@ final class RegisterForm
     /** @var string Префикс для определения кода как свойства */
     protected const PROPERTY_PREFIX_CODE = "PROPERTY_";
 
-    /** @var string[] Параметры для генерации символьного кода */
+    /** @var array Параметры для генерации символьного кода */
     protected const CODE_FIELD_GENERATE_PARAMS = [
         "max_len" => "100",
         "change_case" => "L",
@@ -45,13 +45,13 @@ final class RegisterForm
     protected const EVENT_PROP_CODE = "EVENT";
 
     /**
-     * @param FormField[] $fields
+     * @param FormFieldCollection $fields
      * @param array $formData
      * @param RegisterExternalData $externalData
      * @throws ArgumentException
      */
     public function __construct(
-        array                $fields,
+        FormFieldCollection  $fields,
         array                $formData,
         RegisterExternalData $externalData
     )
@@ -60,8 +60,10 @@ final class RegisterForm
             throw new ArgumentException(Loc::getMessage("ROBOT_CORE_EVENT_NOT_FOUND"));
         }
 
-        if (!empty($fields)) {
+        if (!empty($fields) && $fields->count() > 0) {
             $this->fields = $fields;
+        } else {
+            $this->fields = new FormFieldCollection();
         }
 
         $formData = $this->validateFields($formData);
@@ -127,10 +129,10 @@ final class RegisterForm
 
     /**
      * @param string $value
-     * @param FormFieldValues[] $items
+     * @param FormFieldValuesCollection $items
      * @return bool
      */
-    protected function validateAutocompleteField(string $value, array $items): bool
+    protected function validateAutocompleteField(string $value, FormFieldValuesCollection $items): bool
     {
         foreach ($items as $item) {
             if ($item->name === trim($value)) {

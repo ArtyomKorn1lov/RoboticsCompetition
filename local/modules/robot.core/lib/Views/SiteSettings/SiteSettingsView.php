@@ -15,7 +15,7 @@ use Robot\Core\DTO\SiteSettings\SiteSettingsHeader;
 use Robot\Core\Services\SiteSettings\ISiteSettingsManager;
 use Robot\Core\Tools\Mappers\SiteSettings;
 
-class SiteSettingsView implements ISiteSettingsView
+class SiteSettingsView
 {
 
     /**

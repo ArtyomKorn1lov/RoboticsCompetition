@@ -21,7 +21,7 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
 
 Loc::loadMessages(__FILE__);
 
-class SiteSettingsTable extends DataManager
+final class SiteSettingsTable extends DataManager
 {
     /**
      * Returns DB table name for entity.

@@ -3,24 +3,24 @@
 namespace Robot\Core\Tools\Mappers;
 
 use Robot\Core\DTO\Action\Action as ActionModel;
+use Robot\Core\DTO\Action\ActionCollection;
 
 class Action
 {
     /**
-     * @param ActionModel[] $response
-     * @return array
+     * @param array $response
+     * @return ActionCollection
      */
-    public static function mapActionsResponseToModel(array $response): array
+    public static function mapActionsResponseToCollection(array $response): ActionCollection
     {
-        $items = [];
+        $collection = new ActionCollection();
         foreach ($response as $item) {
-            $items[] = new ActionModel(
+            $collection->add(new ActionModel(
                 id: $item["ID"],
                 name: $item["NAME"],
                 description: $item["DETAIL_TEXT"] ?? ""
-            );
+            ));
         }
-
-        return $items;
+        return $collection;
     }
 }

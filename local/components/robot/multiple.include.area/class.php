@@ -147,12 +147,12 @@ class IncludeAreaMultipleComponent extends CBitrixComponent
 
         if ($APPLICATION->GetShowIncludeAreas()) {
             for ($count = 0; $count < $this->arParams["INCLUDE_AREA_COUNT"]; $count++) {
-                $this->setFileEditOperation($this->files->get($count), $count);
+                $this->setFileEditOperation($this->files->offsetGet($count), $count);
             }
         }
 
-        if (!empty($this->files->getAll())) {
-            foreach ($this->files->getAll() as $file) {
+        if (!empty($this->files) && $this->files->count() > 0) {
+            foreach ($this->files as $file) {
                 $this->arResult["FILES"][] = $file->physicalPath;
             }
 

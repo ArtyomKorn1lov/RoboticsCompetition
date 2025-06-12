@@ -12,6 +12,7 @@ use Robot\Core\Entity\Program\ProgramListReqParam;
 use Robot\Core\Entity\Program\ProgramSectionsReqParams;
 use Robot\Core\Entity\Program\TimeLineReqParams;
 use Robot\Core\Entity\Program\DateCollection;
+use Robot\Core\Tools\Mappers\Program;
 
 class ProgramRepository implements IProgramRepository
 {
@@ -58,18 +59,16 @@ class ProgramRepository implements IProgramRepository
         );
 
         $result = [];
-        $demo = [];
         while ($arItem = $rsObject->fetch()) {
             $result[] = $arItem[$entity->getSamplePropCode()];
         }
 
-        return new DateCollection($result);
+        return Program::mapDateArrayToEntityList($result);
     }
 
     /**
      * @param ProgramListReqParam $entity
      * @return ProgramCollection
-     * @throws ArgumentException
      */
     public function getProgram(ProgramListReqParam $entity): ProgramCollection
     {
@@ -86,6 +85,6 @@ class ProgramRepository implements IProgramRepository
             $result[] = $arItem;
         }
         
-        return new ProgramCollection($result);
+        return Program::mapProgramArrayToEntityList($result);
     }
 }

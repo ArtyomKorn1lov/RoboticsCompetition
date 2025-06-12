@@ -48,7 +48,7 @@ class ProgramController extends Controller
             $programManager = ServiceLocator::getInstance()->get(IProgramManager::class);
             $programs = $programManager->getProgramByDate(new DateTime($date));
 
-            return AjaxJson::createSuccess($programs);
+            return AjaxJson::createSuccess($programs->mapToArray(fn($item) => $item));
         } catch (SystemException|NotFoundExceptionInterface $exception) {
             return $this->onError($exception->getMessage());
         }

@@ -15,7 +15,7 @@ Loc::loadMessages(__FILE__);
 /**
  * ORM сущность таблицы "Типы полей для формы"
  */
-class FormTypesTable extends DataManager
+final class FormTypesTable extends DataManager
 {
     /**
      * @return string

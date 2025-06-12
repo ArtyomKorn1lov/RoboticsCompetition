@@ -7,6 +7,8 @@ use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ObjectException;
 use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
+use Bitrix\Main\LoaderException;
+
 use Robot\Core\Base\HighloadBlocks;
 use Robot\Core\Constants;
 use Robot\Core\Tools\Mappers\Event;
@@ -33,8 +35,8 @@ final class FormField extends HighloadBlocks
     /** @var bool Флаг обязательного поля */
     private bool $required;
 
-    /** @var FormFieldValues[] значения для полей select и autocomplete  */
-    private array $values = [];
+    /** @var FormFieldValuesCollection значения для полей select и autocomplete  */
+    private FormFieldValuesCollection $values;
 
     /**
      * @param int $id
@@ -49,6 +51,7 @@ final class FormField extends HighloadBlocks
      * @throws ObjectException
      * @throws ObjectPropertyException
      * @throws SystemException
+     * @throws LoaderException
      */
     public function __construct(
         int $id,
@@ -64,6 +67,7 @@ final class FormField extends HighloadBlocks
         if (!$this->validateValues($id, $code, $type)) {
             throw new ArgumentException(Loc::getMessage("ROBOT_CORE_ARGUMENT_EXCEPTION"));
         }
+        $this->values = new FormFieldValuesCollection();
 
         $this->id = $id;
         $this->type = $type;
@@ -124,9 +128,9 @@ final class FormField extends HighloadBlocks
     }
 
     /**
-     * @return FormFieldValues[]
+     * @return FormFieldValuesCollection
      */
-    public function getValues(): array
+    public function getValues(): FormFieldValuesCollection
     {
         return $this->values;
     }
@@ -154,6 +158,7 @@ final class FormField extends HighloadBlocks
      * @throws ObjectException
      * @throws ObjectPropertyException
      * @throws SystemException
+     * @throws LoaderException
      */
     protected function setEntityValues(string $entityName, bool $isInit): void
     {

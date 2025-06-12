@@ -4,8 +4,8 @@ namespace Robot\Core\Repositories\Event;
 
 use Robot\Core\Entity\Event\ActiveEventReqParams;
 use Robot\Core\Entity\Event\EventDetailReqParams;
+use Robot\Core\Entity\Event\FormFieldCollection;
 use Robot\Core\Entity\Event\RegisterForm;
-use Robot\Core\Entity\Event\FormField;
 
 interface IEventRepository
 {
@@ -28,9 +28,9 @@ interface IEventRepository
 
     /**
      * @param bool $isInit
-     * @return FormField[]
+     * @return FormFieldCollection
      */
-    public function getRegistrationFields(bool $isInit): array;
+    public function getRegistrationFields(bool $isInit): FormFieldCollection;
 
     /**
      * @param int $id

@@ -1,6 +1,6 @@
 <?php
 
-namespace Robot\Core\Entity\Program;
+namespace Robot\Core\DTO\Program;
 
 use Robot\Core\Base\Collection;
 

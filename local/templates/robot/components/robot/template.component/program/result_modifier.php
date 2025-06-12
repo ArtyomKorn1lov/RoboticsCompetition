@@ -14,4 +14,11 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
 use Robot\Core\Views\Program\ProgramView;
 
-$arResult["PROGRAM_ITEMS"] = ProgramView::getPrograms();
+$programItems = ProgramView::getPrograms();
+
+if (!empty($programItems)) {
+    $programItems->programs = $programItems->programs->mapToArray(fn($item) => $item);
+    $programItems->dates = $programItems->dates->mapToArray(fn($item) => $item);
+}
+
+$arResult["PROGRAM_ITEMS"] = $programItems;

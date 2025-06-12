@@ -2,69 +2,45 @@
 
 namespace Robot\Core\Entity\Program;
 
-use Bitrix\Main\ArgumentException;
-use Bitrix\Main\Localization\Loc;
-use Bitrix\Main\ObjectException;
+use Robot\Core\Base\Collection;
 
-final class DateCollection
+/**
+ * Коллекция объектов класса DateUnit
+ * @implements Collection<DateUnit>
+ */
+final class DateCollection extends Collection
 {
-    /** @var DateUnit[]  */
-    private array $dateUnits;
-
     /**
-     * @return DateUnit[]
+     * @return string
      */
-    public function getList(): array
+    protected function type(): string
     {
-        return $this->dateUnits;
+        return DateUnit::class;
     }
 
     /**
-     * @param string[] $dates
-     * @throws ArgumentException|ObjectException
+     * @param array $items
      */
-    public function __construct(
-        array $dates
-    )
+    public function __construct(array $items = [])
     {
-        if (empty($dates)) {
-            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_ARGUMENT_EXCEPTION"));
-        }
-
-        $this->compareUnicDates($dates);
+        parent::__construct($items);
     }
 
     /**
-     * @param int $index
-     * @return DateUnit
-     * @throws ObjectException
-     */
-    public function getDateUnicByIndex(int $index): DateUnit
-    {
-        if (!array_key_exists($index, $this->dateUnits)) {
-            throw new ObjectException(Loc::getMessage("ROBOT_CORE_ELEMENT_NOT_EXIST_EXCEPTION"));
-        }
-        return $this->dateUnits[$index];
-    }
-
-    /**
-     * @param string[] $dates
      * @return void
-     * @throws ArgumentException
-     * @throws ObjectException
      */
-    protected function compareUnicDates(array $dates): void
+    public function compareUnicDates(): void
     {
         $unicDates = [];
-        $this->dateUnits = [];
-        foreach ($dates as $date) {
-            $dateUnit = new DateUnit($date);
-            $formatedDate = $dateUnit->getDefaultDateString();
+        $dateUnits = [];
+        foreach ($this->items() as $date) {
+            $formatedDate = $date->getDefaultDateString();
             if (in_array($formatedDate, $unicDates)) {
                 continue;
             }
             $unicDates[] = $formatedDate;
-            $this->dateUnits[] = $dateUnit;
+            $dateUnits[] = $date;
         }
+        $this->replace(new DateCollection($dateUnits));
     }
 }

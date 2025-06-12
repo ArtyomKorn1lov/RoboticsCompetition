@@ -23,8 +23,9 @@ use Robot\Core\DTO\Event\RegisterForm;
 use Robot\Core\Entity\Event\RegisterForm as RegisterFormEntity;
 use Robot\Core\Repositories\Event\IEventRepository;
 use Robot\Core\Tools\Mappers\Event;
-use Robot\Core\DTO\Event\FormField;
+use Robot\Core\DTO\Event\FormFieldCollection;
 use Robot\Core\Entity\Event\EventDetailReqParams;
+use Robot\Core\DTO\Event\SearchResultCollection;
 use Robot\Core\Tools\Mail\Helper as MailHelper;
 use Robot\Core\Tools\Mail\IHelper as IMailHelper;
 use Robot\Core\Tools\IBlocks\Helper as IBlockHelper;
@@ -101,7 +102,7 @@ class EventManager implements IEventManager
             $lastElementId = $this->eventRepository->getLastElementId();
             $fields = $this->eventRepository->getRegistrationFields(false);
 
-            if (empty($fields)) {
+            if (empty($fields) || $fields->count() <= 0) {
                 throw new SystemException(Loc::getMessage("ROBOT_CORE_EVENT_REGISTRATION_FIELDS_ERROR"));
             }
 
@@ -115,6 +116,7 @@ class EventManager implements IEventManager
                 $externalData
             );
             $registrationId = $this->eventRepository->saveForm($entity);
+
             $this->sendMail($registerForm->formData, $eventId, $registrationId);
         } catch (SystemException|ArgumentException|ObjectException|ObjectPropertyException $exception) {
             AddMessage2Log($exception->getMessage(), 'robot.core');
@@ -123,13 +125,13 @@ class EventManager implements IEventManager
     }
 
     /**
-     * @return FormField[]
+     * @return FormFieldCollection
      * @throws ArgumentException
      * @throws ObjectException
      * @throws ObjectPropertyException
      * @throws SystemException
      */
-    public function getRegistrationFields(): array
+    public function getRegistrationFields(): FormFieldCollection
     {
         try {
             $fields = $this->eventRepository->getRegistrationFields();
@@ -142,13 +144,13 @@ class EventManager implements IEventManager
 
     /**
      * @param AutocompleteSearch $autocompleteSearch
-     * @return array
+     * @return SearchResultCollection
      * @throws ArgumentException
      * @throws ObjectException
      * @throws ObjectPropertyException
      * @throws SystemException
      */
-    public function searchAutocompleteValues(AutocompleteSearch $autocompleteSearch): array
+    public function searchAutocompleteValues(AutocompleteSearch $autocompleteSearch): SearchResultCollection
     {
         try {
             if (empty($autocompleteSearch->id)) {
@@ -189,7 +191,8 @@ class EventManager implements IEventManager
 
         $mailModel = Event::mapEventRegistrationParamToMailModel(
             $formData,
-            $this->eventRepository->getEventById($reqParams)["NAME"], $this->buildEditUrl(Constants::CONTENT_IBLOCK_TYPE, IBlockHelper::getIBlock(Constants::REGISTRATION_REQUEST_IBLOCK_CODE), $registrationId)
+            $this->eventRepository->getEventById($reqParams)["NAME"],
+            $this->buildEditUrl(Constants::CONTENT_IBLOCK_TYPE, IBlockHelper::getIBlock(Constants::REGISTRATION_REQUEST_IBLOCK_CODE), $registrationId)
         );
 
         $arFields = [

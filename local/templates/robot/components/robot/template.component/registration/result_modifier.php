@@ -22,7 +22,10 @@ $arResult["JS_DATA"]["formFields"] = [
         [
             "title" => Loc::getMessage("COMPONENT_TITLE"),
             "code" => "register-fields",
-            "items" => EventsView::getRegistrationFormFields()
+            "items" => EventsView::getRegistrationFormFields()->mapToArray(function ($item) {
+                $item->values = $item->values->mapToArray(fn($item) => $item);
+                return $item;
+            })
         ]
     ]
 ];

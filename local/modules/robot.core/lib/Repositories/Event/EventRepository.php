@@ -16,6 +16,7 @@ use Robot\Core\Base\HighloadBlocks;
 use Robot\Core\Constants;
 use Robot\Core\Entity\Event\EventDetailReqParams;
 use Robot\Core\Entity\Event\FormField;
+use Robot\Core\Entity\Event\FormFieldCollection;
 use Robot\Core\Entity\Event\RegisterForm;
 use Robot\Core\Entity\Event\RegistrationFieldsTable;
 use Robot\Core\Tools\IBlocks\Helper;
@@ -77,13 +78,14 @@ class EventRepository extends HighloadBlocks implements IEventRepository
 
     /**
      * @param bool $isInit
-     * @return FormField[]
+     * @return FormFieldCollection
      * @throws ArgumentException
+     * @throws LoaderException
      * @throws ObjectException
      * @throws ObjectPropertyException
      * @throws SystemException
      */
-    public function getRegistrationFields(bool $isInit = true): array
+    public function getRegistrationFields(bool $isInit = true): FormFieldCollection
     {
         $query = new Query(RegistrationFieldsTable::getEntity());
         $query->setOrder(["sort" => "ASC"]);
@@ -94,11 +96,11 @@ class EventRepository extends HighloadBlocks implements IEventRepository
         ]);
         $rsObject = $query->exec();
 
-        $result = [];
+        $collection = new FormFieldCollection();
         while ($item = $rsObject->fetchObject()) {
             $fieldType = $item->getFormtype();
 
-            $result[] = new FormField(
+            $collection->add(new FormField(
                 $item->getId(),
                 $item->getCode(),
                 $fieldType->getCode(),
@@ -107,9 +109,9 @@ class EventRepository extends HighloadBlocks implements IEventRepository
                 $item->getPlaceholder(),
                 $item->getValues(),
                 $isInit
-            );
+            ));
         }
-        return $result;
+        return $collection;
     }
 
     /**

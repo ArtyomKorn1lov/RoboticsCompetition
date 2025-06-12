@@ -4,7 +4,7 @@ namespace Robot\Core\Services\Event;
 
 use Bitrix\Main\Type\DateTime;
 use Robot\Core\DTO\Event\ActiveEvent;
-use Robot\Core\DTO\Event\FormField;
+use Robot\Core\DTO\Event\FormFieldCollection;
 use Robot\Core\DTO\Event\RegisterForm;
 
 interface IEventManager
@@ -28,7 +28,7 @@ interface IEventManager
     public function saveForm(RegisterForm $registerForm, int $eventId): void;
 
     /**
-     * @return FormField[]
+     * @return FormFieldCollection
      */
-    public function getRegistrationFields(): array;
+    public function getRegistrationFields(): FormFieldCollection;
 }

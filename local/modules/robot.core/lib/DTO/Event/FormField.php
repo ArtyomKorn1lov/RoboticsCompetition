@@ -11,7 +11,7 @@ final class FormField
      * @param string $type
      * @param string $placeholder
      * @param bool $required
-     * @param FormFieldValues[] $values
+     * @param FormFieldValuesCollection|array $values
      */
     public function __construct(
         public int $id,
@@ -20,7 +20,7 @@ final class FormField
         public string $type,
         public string $placeholder,
         public bool $required,
-        public array $values = []
+        public FormFieldValuesCollection|array $values = new FormFieldValuesCollection()
     )
     {
     }

@@ -87,7 +87,7 @@ class EventController extends Controller
 
             /** @var IEventManager $eventManager */
             $eventManager = ServiceLocator::getInstance()->get(IEventManager::class);
-            $result = $eventManager->searchAutocompleteValues($autocompleteSearch);
+            $result = $eventManager->searchAutocompleteValues($autocompleteSearch)->mapToArray(fn($item) => $item);
 
             return AjaxJson::createSuccess($result);
         } catch (SystemException|ArgumentException|ObjectException|ObjectPropertyException|NotFoundExceptionInterface $exception) {

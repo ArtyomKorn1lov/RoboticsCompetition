@@ -2,13 +2,13 @@
 
 namespace Robot\Core\Services\Actions;
 
-use Robot\Core\DTO\Action\Action as ActionModel;
+use Robot\Core\DTO\Action\ActionCollection;
 
 interface IActionManager
 {
     /**
      * @param int $id
-     * @return ActionModel[]
+     * @return ActionCollection
      */
-    public function getByEventId(int $id): array;
+    public function getByEventId(int $id): ActionCollection;
 }

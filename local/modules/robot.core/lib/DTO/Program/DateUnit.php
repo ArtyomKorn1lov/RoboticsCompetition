@@ -2,7 +2,7 @@
 
 namespace Robot\Core\DTO\Program;
 
-class DateUnit
+final class DateUnit
 {
     /**
      * @param string $date

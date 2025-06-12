@@ -17,7 +17,7 @@ Loc::loadMessages(__FILE__);
 /**
  * ORM сущность таблицы "Поля формы регистрации"
  */
-class RegistrationFieldsTable extends DataManager
+final class RegistrationFieldsTable extends DataManager
 {
     /**
      * @return string

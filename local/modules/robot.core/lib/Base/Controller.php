@@ -9,6 +9,7 @@ use Bitrix\Main\ErrorCollection;
 
 /**
  * Базовый котроллер
+ * @implements MainController
  */
 abstract class Controller extends MainController
 {
