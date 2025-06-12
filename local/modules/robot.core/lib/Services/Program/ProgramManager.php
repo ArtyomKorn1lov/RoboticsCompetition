@@ -48,7 +48,7 @@ class ProgramManager implements IProgramManager
     public function getProgram(int $eventId): ProgramItems
     {
         try {
-            if (!$eventId) {
+            if (empty($eventId)) {
                 throw new SystemException(Loc::getMessage("ROBOT_CORE_PROGRAM_INVALID_EVENT_ID"));
             }
 
@@ -102,12 +102,12 @@ class ProgramManager implements IProgramManager
             }
 
             $programListEntity = new ProgramListReqParam(
-                Constants::CONTENT_IBLOCK_TYPE,
-                Helper::getIBlock(Constants::PROGRAM_IBLOCK_CODE),
-                $sectionIds,
-                $date,
-                true,
-                "ASC"
+                iblockType: Constants::CONTENT_IBLOCK_TYPE,
+                iblockId: Helper::getIBlock(Constants::PROGRAM_IBLOCK_CODE),
+                sectionsIds: $sectionIds,
+                date: $date,
+                active: true,
+                sort: "ASC"
             );
             $programCollectionEntity = $this->programRepository->getProgram($programListEntity);
 
@@ -127,11 +127,11 @@ class ProgramManager implements IProgramManager
     {
 
         $programSectionEntity = new ProgramSectionsReqParams(
-            Constants::CONTENT_IBLOCK_TYPE,
-            Helper::getIBlock(Constants::PROGRAM_IBLOCK_CODE),
-            $eventId,
-            true,
-            "ASC"
+            iblockType: Constants::CONTENT_IBLOCK_TYPE,
+            iblockId: Helper::getIBlock(Constants::PROGRAM_IBLOCK_CODE),
+            eventId: $eventId,
+            active: true,
+            sort: "ASC"
         );
         return $this->programRepository->getActiveSectionIds($programSectionEntity);
     }

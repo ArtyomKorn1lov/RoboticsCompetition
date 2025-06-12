@@ -25,7 +25,7 @@ interface IEventManager
      * @param int $eventId
      * @return void
      */
-    public function saveForm(RegisterForm $registerForm, int $eventId): void;
+    public function saveRegisterForm(RegisterForm $registerForm, int $eventId): void;
 
     /**
      * @return FormFieldCollection

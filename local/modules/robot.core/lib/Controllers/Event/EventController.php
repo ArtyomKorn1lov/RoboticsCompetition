@@ -60,7 +60,7 @@ class EventController extends Controller
 
             /** @var IEventManager $eventManager */
             $eventManager = ServiceLocator::getInstance()->get(IEventManager::class);
-            $eventManager->saveForm(Event::mapRegisterFormArrayToModel($formData), $eventId);
+            $eventManager->saveRegisterForm(Event::mapRegisterFormArrayToModel($formData), $eventId);
 
             return AjaxJson::createSuccess(Loc::getMessage("ROBOT_CORE_REGISTER_SUCCESS_MESSAGE"));
         } catch (SystemException|ArgumentException|ObjectException|ObjectPropertyException|NotFoundExceptionInterface $exception) {

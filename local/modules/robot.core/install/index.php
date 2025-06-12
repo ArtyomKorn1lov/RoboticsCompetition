@@ -6,14 +6,18 @@ use Bitrix\Main\Loader;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ModuleManager;
 use Bitrix\Main\DB\SqlQueryException;
+use Bitrix\Main\InvalidOperationException;
 use Bitrix\Main\IO\Directory;
 use Bitrix\Main\IO\File;
 use Bitrix\Main\Config\Option;
+use Bitrix\Main\Config\Configuration;
+use Bitrix\Main\EventManager;
 
 use Robot\Core\Tools\Modules\Manager;
 use Robot\Core\Entity\SiteSettings\SiteSettingsTable;
 use Robot\Core\Enums\SocialIcons;
 use Robot\Core\Constants;
+use Robot\Core\Tools\IBlocks\UserTypeTimeRange;
 
 Loc::loadMessages(__FILE__);
 
@@ -52,6 +56,8 @@ class robot_core extends CModule
 
             $this->installFiles();
             $this->installDb();
+            $this->installRouting();
+            $this->installEventHandlers();
             Option::set($this->MODULE_ID, Constants::DEFAULT_RECIPIENT_EMAIL_OPTION_CODE, 'mail@mail.ru');
         }
         catch (Exception $exception) {
@@ -70,6 +76,8 @@ class robot_core extends CModule
             $this->deleteImages();
             $this->unInstallDb();
             $this->unInstallFiles();
+            $this->unInstallRouting();
+            $this->unInstallEventHandlers();
             Option::delete($this->MODULE_ID);
             ModuleManager::unRegisterModule($this->MODULE_ID);
         } catch (Exception $exception) {
@@ -222,6 +230,42 @@ class robot_core extends CModule
     }
 
     /**
+     * Установка роутинга для контроллеров
+     * @return void
+     * @throws InvalidOperationException
+     */
+    public function installRouting()
+    {
+        $settings = Configuration::getInstance();
+        $config = $settings->get('routing');
+        if (empty($config)) {
+            $config = [];
+        }
+        $config = array_replace_recursive($config, [
+            'config' => ['robot_api.php'],
+        ]);
+        $settings->add('routing', $config);
+        $settings->saveConfiguration();
+        CopyDirFiles(__DIR__ . "/routes", Loader::getDocumentRoot() . BX_ROOT . "/routes");
+    }
+
+    /**
+     * Зарегистрировать обработчики событий для модуля
+     * @return void
+     */
+    public function installEventHandlers()
+    {
+        $eventManager = EventManager::getInstance();
+        $eventManager->registerEventHandler(
+            'iblock',
+            'OnIBlockPropertyBuildList',
+            $this->MODULE_ID,
+            UserTypeTimeRange::class,
+            'getUserTypeDescription'
+        );
+    }
+
+    /**
      * Удаление таблиц из БД
      * @return false|void
      */
@@ -293,5 +337,39 @@ class robot_core extends CModule
             AddMessage2Log($exception->getMessage(), $this->MODULE_ID);
             return false;
         }
+    }
+
+    /**
+     * Удалить роутинг для контроллеров
+     * @return void
+     * @throws InvalidOperationException
+     */
+    public function unInstallRouting()
+    {
+        $settings = Configuration::getInstance();
+        $config = $settings->get('routing');
+        if (!is_array($config) || !isset($config['config']) || !is_array($config['config'])) {
+            return;
+        }
+        $config['config'] = array_diff($config['config'], ['robot_api.php']);
+        $settings->add('routing', $config);
+        $settings->saveConfiguration();
+        DeleteDirFiles(__DIR__ . "/routes", Loader::getDocumentRoot() . BX_ROOT . "/routes");
+    }
+
+    /**
+     * Убрать обработчики событий, зарегистрированные для модуля
+     * @return void
+     */
+    public function unInstallEventHandlers()
+    {
+        $eventManager = EventManager::getInstance();
+        $eventManager->unRegisterEventHandler(
+            'iblock',
+            'OnIBlockPropertyBuildList',
+            $this->MODULE_ID,
+            UserTypeTimeRange::class,
+            'getUserTypeDescription'
+        );
     }
 }

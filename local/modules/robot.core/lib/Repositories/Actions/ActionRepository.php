@@ -17,10 +17,9 @@ class ActionRepository implements IActionRepository
     public function getSectionsByEventId(ActionSectionsReqParams $entity): array
     {
         $rsObject = CIBlockSection::GetList(
-            $entity->getSortValues(),
-            $entity->getFilterValues(),
-            false,
-            $entity->getSelectedFields()
+            arOrder: $entity->getSortValues(),
+            arFilter: $entity->getFilterValues(),
+            arSelect: $entity->getSelectedFields()
         );
 
         $ids = [];
@@ -38,11 +37,9 @@ class ActionRepository implements IActionRepository
     public function getActionsBySectionsIds(ActionItemsReqParams $entity): array
     {
         $rsObject = CIBlockElement::GetList(
-            $entity->getSortValues(),
-            $entity->getFilterValues(),
-            false,
-            false,
-            $entity->getSelectedFields()
+            arOrder: $entity->getSortValues(),
+            arFilter: $entity->getFilterValues(),
+            arSelectFields: $entity->getSelectedFields()
         );
 
         $items = [];

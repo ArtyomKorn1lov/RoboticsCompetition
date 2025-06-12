@@ -15,7 +15,6 @@ use Robot\Core\Repositories\Actions\IActionRepository;
 use Robot\Core\Tools\IBlocks\Helper;
 use Robot\Core\Entity\Action\ActionItemsReqParams;
 use Robot\Core\Tools\Mappers\Action;
-use Robot\Core\DTO\Action\Action as ActionModel;
 use Robot\Core\Entity\Action\ActionSectionsReqParams;
 
 Loc::loadMessages(__FILE__);
@@ -50,11 +49,11 @@ class ActionManager implements IActionManager
             $iblockId = Helper::getIBlock(Constants::ACTIONS_IBLOCK_CODE);
 
             $entity = new ActionSectionsReqParams(
-                Constants::CONTENT_IBLOCK_TYPE,
-                $iblockId,
-                $id,
-                true,
-                "DESC"
+                iblockType: Constants::CONTENT_IBLOCK_TYPE,
+                iblockId: $iblockId,
+                eventId: $id,
+                active: true,
+                sort: "DESC"
             );
             $arSectionsIds = $this->actionRepository->getSectionsByEventId($entity);
             
@@ -63,11 +62,11 @@ class ActionManager implements IActionManager
             }
 
             $entity = new ActionItemsReqParams(
-                Constants::CONTENT_IBLOCK_TYPE,
-                $iblockId,
-                $arSectionsIds,
-                true,
-                "DESC"
+                iblockType: Constants::CONTENT_IBLOCK_TYPE,
+                iblockId: $iblockId,
+                sectionsIds: $arSectionsIds,
+                active: true,
+                sort: "DESC"
             );
             $response = $this->actionRepository->getActionsBySectionsIds($entity);
 

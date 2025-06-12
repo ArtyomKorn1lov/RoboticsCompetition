@@ -56,9 +56,9 @@ class EventManager implements IEventManager
     {
         try {
             $apiParams = new ActiveEventReqParams(
-                Constants::CONTENT_IBLOCK_TYPE,
-                IBlockHelper::getIBlock(Constants::EVENTS_IBLOCK_CODE),
-                true
+                iblockType: Constants::CONTENT_IBLOCK_TYPE,
+                iblockId: IBlockHelper::getIBlock(Constants::EVENTS_IBLOCK_CODE),
+                active: true
             );
             $item = $this->eventRepository->getActiveEvent($apiParams);
 
@@ -92,7 +92,7 @@ class EventManager implements IEventManager
      * @throws ObjectException
      * @throws SystemException
      */
-    public function saveForm(RegisterForm $registerForm, int $eventId): void
+    public function saveRegisterForm(RegisterForm $registerForm, int $eventId): void
     {
         try {
             if (empty($eventId)) {
@@ -111,11 +111,11 @@ class EventManager implements IEventManager
                 lastElementId: $lastElementId
             );
             $entity = new RegisterFormEntity(
-                Event::mapFormFieldListEntityToModelList($fields),
-                $registerForm->formData,
-                $externalData
+                fields: Event::mapFormFieldListEntityToModelList($fields),
+                formData: $registerForm->formData,
+                externalData: $externalData
             );
-            $registrationId = $this->eventRepository->saveForm($entity);
+            $registrationId = $this->eventRepository->saveRegisterForm($entity);
 
             $this->sendMail($registerForm->formData, $eventId, $registrationId);
         } catch (SystemException|ArgumentException|ObjectException|ObjectPropertyException $exception) {
@@ -183,10 +183,10 @@ class EventManager implements IEventManager
             throw new ArgumentException(Loc::getMessage("ROBOT_CORE_EVENT_ARGUMENT_ERROR"));
         }
         $reqParams = new EventDetailReqParams(
-            Constants::CONTENT_IBLOCK_TYPE,
-            IBlockHelper::getIBlock(Constants::EVENTS_IBLOCK_CODE),
-            $eventId,
-            true
+            iblockType: Constants::CONTENT_IBLOCK_TYPE,
+            iblockId: IBlockHelper::getIBlock(Constants::EVENTS_IBLOCK_CODE),
+            id: $eventId,
+            active: true
         );
 
         $mailModel = Event::mapEventRegistrationParamToMailModel(

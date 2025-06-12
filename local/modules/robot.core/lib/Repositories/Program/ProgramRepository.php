@@ -24,10 +24,9 @@ class ProgramRepository implements IProgramRepository
     public function getActiveSectionIds(ProgramSectionsReqParams $entity): array
     {
         $rsObject = CIBlockSection::GetList(
-            $entity->getSortValues(),
-            $entity->getFilterValues(),
-            false,
-            $entity->getSelectedFields()
+            arOrder: $entity->getSortValues(),
+            arFilter: $entity->getFilterValues(),
+            arSelect: $entity->getSelectedFields()
         );
 
         $ids = [];
@@ -51,11 +50,9 @@ class ProgramRepository implements IProgramRepository
     public function getTimeLine(TimeLineReqParams $entity): DateCollection
     {
         $rsObject = CIBlockElement::GetList(
-            $entity->getSortValues(),
-            $entity->getFilterValues(),
-            false,
-            false,
-            $entity->getSelectedFields()
+            arOrder: $entity->getSortValues(),
+            arFilter: $entity->getFilterValues(),
+            arSelectFields: $entity->getSelectedFields()
         );
 
         $result = [];
@@ -69,15 +66,14 @@ class ProgramRepository implements IProgramRepository
     /**
      * @param ProgramListReqParam $entity
      * @return ProgramCollection
+     * @throws ArgumentException
      */
     public function getProgram(ProgramListReqParam $entity): ProgramCollection
     {
         $rsObject = CIBlockElement::GetList(
-            $entity->getSortValues(),
-            $entity->getFilterValues(),
-            false,
-            false,
-            $entity->getSelectedFields()
+            arOrder: $entity->getSortValues(),
+            arFilter: $entity->getFilterValues(),
+            arSelectFields: $entity->getSelectedFields()
         );
 
         $result = [];

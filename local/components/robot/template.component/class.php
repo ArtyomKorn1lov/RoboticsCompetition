@@ -50,8 +50,12 @@ class TemplateComponent extends CBitrixComponent
     {
         $flag = true;
         foreach ($this->arParams[self::MODULE_NAMES_PROP_CODE] as $moduleCode) {
-            !empty($moduleCode)
-                && $flag = Bitrix\Main\Loader::includeModule($moduleCode);
+            if (!empty($moduleCode)) {
+                $flag = Bitrix\Main\Loader::includeModule($moduleCode);
+            }
+            if (!$flag) {
+                break;
+            }
         }
         return $flag;
     }

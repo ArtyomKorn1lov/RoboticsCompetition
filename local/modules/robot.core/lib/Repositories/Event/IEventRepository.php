@@ -19,7 +19,7 @@ interface IEventRepository
      * @param RegisterForm $registerFormEntity
      * @return int
      */
-    public function saveForm(RegisterForm $registerFormEntity): int;
+    public function saveRegisterForm(RegisterForm $registerFormEntity): int;
 
     /**
      * @return int

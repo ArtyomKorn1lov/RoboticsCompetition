@@ -167,13 +167,13 @@ final class FormField extends HighloadBlocks
         }
 
         $arData = $this->getEntityItemsByName(
-            $entityName,
-            [
+            entityName: $entityName,
+            arSelectParams: [
                 Constants::UF_FIELD_CODE_ID,
                 Constants::UF_FIELD_CODE_CODE,
                 Constants::UF_FIELD_CODE_VALUE
             ],
-            [
+            orderParams: [
                 Constants::UF_FIELD_CODE_SORT => "ASC"
             ]
         );

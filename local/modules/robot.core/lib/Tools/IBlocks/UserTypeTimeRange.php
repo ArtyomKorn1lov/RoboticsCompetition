@@ -1,6 +1,6 @@
 <?php
 
-namespace Site\IBlock;
+namespace Robot\Core\Tools\IBlocks;
 
 use Bitrix\Main\ObjectException;
 use Bitrix\Iblock\PropertyTable;
@@ -14,7 +14,7 @@ class UserTypeTimeRange
     /**
      * @return array
      */
-    public static function GetUserTypeDescription(): array
+    public static function getUserTypeDescription(): array
     {
         return [
             'USER_TYPE_ID' => 'user_time_range',

@@ -30,11 +30,10 @@ class EventRepository extends HighloadBlocks implements IEventRepository
     public function getActiveEvent(ActiveEventReqParams $apiParams): array
     {
         $rsObject = CIBlockElement::GetList(
-            $apiParams->getSortValues(),
-            $apiParams->getFilterValues(),
-            false,
-            ["nTopCount" => 1],
-            $apiParams->getSelectedFields()
+            arOrder: $apiParams->getSortValues(),
+            arFilter: $apiParams->getFilterValues(),
+            arNavStartParams: ["nTopCount" => 1],
+            arSelectFields: $apiParams->getSelectedFields()
         );
         $item = $rsObject->fetch();
         if (!$item) {
@@ -48,7 +47,7 @@ class EventRepository extends HighloadBlocks implements IEventRepository
      * @return int
      * @throws ObjectException
      */
-    public function saveForm(RegisterForm $registerFormEntity): int
+    public function saveRegisterForm(RegisterForm $registerFormEntity): int
     {
         $entity = new CIBlockElement();
         $itemId = $entity->Add($registerFormEntity->getFormData());
@@ -63,10 +62,15 @@ class EventRepository extends HighloadBlocks implements IEventRepository
      */
     public function getLastElementId(): int
     {
-        $rsObject = CIBlockElement::GetList(["ID" => "DESC"], [
-            "IBLOCK_ID" => Helper::getIBlock(Constants::REGISTRATION_REQUEST_IBLOCK_CODE),
-            "IBLOCK_TYPE" => Constants::FEEDBACK_IBLOCK_TYPE,
-        ], false, ["nTopCount" => 1], ["ID"]);
+        $rsObject = CIBlockElement::GetList(
+            arOrder: ["ID" => "DESC"],
+            arFilter: [
+                "IBLOCK_ID" => Helper::getIBlock(Constants::REGISTRATION_REQUEST_IBLOCK_CODE),
+                "IBLOCK_TYPE" => Constants::FEEDBACK_IBLOCK_TYPE,
+            ],
+            arNavStartParams: ["nTopCount" => 1],
+            arSelectFields: ["ID"]
+        );
 
         $result = $rsObject->fetch();
         if (empty($result)) {
@@ -145,14 +149,14 @@ class EventRepository extends HighloadBlocks implements IEventRepository
     public function searchAutocompleteValues(string $value, string $entityName): array
     {
         $arData = $this->getEntityItemsByName(
-            $entityName,
-            [
+            entityName: $entityName,
+            arSelectParams: [
                 Constants::UF_FIELD_CODE_VALUE
             ],
-            [
+            orderParams: [
                 Constants::UF_FIELD_CODE_SORT => "ASC"
             ],
-            [
+            filterParams: [
                 Constants::UF_FIELD_CODE_VALUE => "%$value%"
             ]
         );
@@ -173,11 +177,10 @@ class EventRepository extends HighloadBlocks implements IEventRepository
     public function getEventById(EventDetailReqParams $entity): array
     {
         $rsObject = CIBlockElement::GetList(
-            $entity->getSortValues(),
-            $entity->getFilterValues(),
-            false,
-            ["nTopCount" => 1],
-            $entity->getSelectedFields()
+            arOrder: $entity->getSortValues(),
+            arFilter: $entity->getFilterValues(),
+            arNavStartParams: ["nTopCount" => 1],
+            arSelectFields: $entity->getSelectedFields()
         );
 
         $item = $rsObject->fetch();

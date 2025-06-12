@@ -1,6 +1,8 @@
 {
-    "name": "core/robot",
+    "name": "robot/site",
+    "description": "Cайт для проведения соревнований по робототехнике",
     "type": "project",
+    "author": "Robot",
     "license": "MIT",
     "autoload": {
         "psr-4": {
@@ -13,6 +15,7 @@
         }
     },
     "require": {
+        "php": "^8.1",
         "andreyryabin/sprint.migration": "dev-master"
     },
     "config": {
