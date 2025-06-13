@@ -32,9 +32,9 @@ class ApiClient {
      * @param {Object} params
      * @return {String}
      */
-    #prepareUrl(url, params) {
+    #prepareUrl(url, params = null) {
         let queryString = "";
-        if (params) {
+        if (!!params) {
             queryString = '?' + new URLSearchParams(params);
         }
         return `${this.#apiUrl}${url}${queryString}`;
@@ -93,7 +93,7 @@ class ApiClient {
      * @param {RequestConfig} config
      * @return {Promise}
      */
-    async #buildRequest(url, {data, dataType = 'json', params = {}, headers = {}, requestType = 'post'}) {
+    async #buildRequest(url, {data, dataType = 'json', params = null, headers = {}, requestType = 'post'}) {
         const requestUrl = this.#prepareUrl(url, params);
 
         const payload = !!data ? this.#setPayload(data, dataType) : {};

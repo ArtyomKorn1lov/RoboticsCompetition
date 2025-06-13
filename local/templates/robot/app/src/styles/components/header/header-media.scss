@@ -51,17 +51,6 @@
       border-radius: $rounded10;
       padding: $m10;
       font-size: $textTiny;
-
-      &-icon {
-        flex-shrink: 0;
-        width: $m15;
-        height: $m15;
-
-        svg {
-          width: $m15;
-          height: $m15;
-        }
-      }
     }
 
     &__burger {
