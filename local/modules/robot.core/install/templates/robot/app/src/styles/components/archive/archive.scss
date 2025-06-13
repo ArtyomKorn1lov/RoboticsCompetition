@@ -1,0 +1,45 @@
+.b-archive {
+
+  &__subtitle {
+      color: $colorHover;
+  }
+
+  &__list {
+    @include grid(3, false, $m30);
+    margin-bottom: $m35;
+  }
+
+  &__item {
+    @extend %simpleCardOptions;
+    @include flex(row, center);
+    gap: $m15;
+    padding: $m30;
+    border-radius: $rounded25;
+
+    &:hover,
+    &:active {
+
+      .b-archive {
+
+        &__icon {
+          background-color: $colorHover;
+        }
+      }
+    }
+  }
+
+  &__left {
+    @include flex(column);
+    gap: $m15;
+    width: $full;
+  }
+
+  &__description {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  &__icon {
+    @extend %arrowRightIconOptions;
+  }
+}

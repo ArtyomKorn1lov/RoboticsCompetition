@@ -1,0 +1,20 @@
+<?php
+$MESS["MAIN_INCLUDE_AREA_ERROR_INCLUDE_CORE"] = "Ошибка подключения модуля robot.core";
+$MESS["MAIN_INCLUDE_AREA_EDIT_page"] = "Редактировать включаемую область №#COUNT# текущей страницы";
+$MESS["MAIN_INCLUDE_AREA_EDIT_sect"] = "Редактировать включаемую область №#COUNT# раздела";
+$MESS["MAIN_INCLUDE_AREA_EDIT_file"] = "Редактировать файл включаемой области №#COUNT#";
+$MESS["MAIN_INCLUDE_AREA_ADD_page"] = "Добавить включаемую область №#COUNT# для текущей страницы";
+$MESS["MAIN_INCLUDE_AREA_ADD_sect"] = "Добавить включаемую область №#COUNT# текущего раздела";
+$MESS["MAIN_INCLUDE_AREA_ADD_file"] = "Создать файл включаемой области №#COUNT#";
+$MESS["MAIN_INCLUDE_AREA_EDIT_page_NOEDITOR"] = "Редактировать включаемую область №#COUNT# текущей страницы как PHP";
+$MESS["MAIN_INCLUDE_AREA_EDIT_sect_NOEDITOR"] = "Редактировать включаемую область №#COUNT# раздела как PHP";
+$MESS["MAIN_INCLUDE_AREA_EDIT_file_NOEDITOR"] = "Редактировать файл включаемой области №#COUNT# как PHP";
+$MESS["MAIN_INCLUDE_AREA_ADD_page_NOEDITOR"] = "Добавить включаемую область №#COUNT# для текущей страницы как PHP";
+$MESS["MAIN_INCLUDE_AREA_ADD_sect_NOEDITOR"] = "Добавить включаемую область №#COUNT# текущего раздела как PHP";
+$MESS["MAIN_INCLUDE_AREA_ADD_file_NOEDITOR"] = "Создать файл включаемой области как PHP";
+$MESS["main_comp_include_edit"] = "Изменить область №#COUNT#";
+$MESS["main_comp_include_edit_php"] = "Изменить область №#COUNT# как PHP";
+$MESS["main_comp_include_add"] = "Добавить №#COUNT#";
+$MESS["main_comp_include_add_php"] = "Добавить №#COUNT# как PHP";
+$MESS["main_comp_include_add1"] = "Добавить область №#COUNT#";
+$MESS["main_comp_include_add1_php"] = "Добавить область №#COUNT# как PHP";

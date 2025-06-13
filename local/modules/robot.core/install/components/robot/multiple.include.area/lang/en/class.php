@@ -1,0 +1,20 @@
+<?php
+$MESS["MAIN_INCLUDE_AREA_ERROR_INCLUDE_CORE"] = "Error connecting module robot.core";
+$MESS["MAIN_INCLUDE_AREA_EDIT_page"] = "Edit page include area №#COUNT#";
+$MESS["MAIN_INCLUDE_AREA_EDIT_sect"] = "Edit section include area №#COUNT#";
+$MESS["MAIN_INCLUDE_AREA_EDIT_file"] = "Edit include area file №#COUNT#";
+$MESS["MAIN_INCLUDE_AREA_ADD_page"] = "Add include area №#COUNT# to current page";
+$MESS["MAIN_INCLUDE_AREA_ADD_sect"] = "Add include area №#COUNT# to current section";
+$MESS["MAIN_INCLUDE_AREA_ADD_file"] = "Add include area file №#COUNT#";
+$MESS["MAIN_INCLUDE_AREA_EDIT_page_NOEDITOR"] = "Edit page include area №#COUNT# as PHP";
+$MESS["MAIN_INCLUDE_AREA_EDIT_sect_NOEDITOR"] = "Edit section include area №#COUNT# as PHP";
+$MESS["MAIN_INCLUDE_AREA_EDIT_file_NOEDITOR"] = "Edit include area file №#COUNT# as PHP";
+$MESS["MAIN_INCLUDE_AREA_ADD_page_NOEDITOR"] = "Add include area №#COUNT# to page as PHP";
+$MESS["MAIN_INCLUDE_AREA_ADD_sect_NOEDITOR"] = "Add include area №#COUNT# to current section as PHP";
+$MESS["MAIN_INCLUDE_AREA_ADD_file_NOEDITOR"] = "Add include area file №#COUNT# as PHP";
+$MESS["main_comp_include_edit"] = "Edit Area №#COUNT#";
+$MESS["main_comp_include_edit_php"] = "Edit Area №#COUNT# As PHP";
+$MESS["main_comp_include_add"] = "Add №#COUNT#";
+$MESS["main_comp_include_add_php"] = "Add №#COUNT# As PHP";
+$MESS["main_comp_include_add1"] = "Add Area №#COUNT#";
+$MESS["main_comp_include_add1_php"] = "Add Area №#COUNT# As PHP";

@@ -1,0 +1,33 @@
+@include screen(lg) {
+  .b-partners {
+
+    &__description {
+     max-width: none;
+    }
+
+    &__list {
+      @include grid(3);
+    }
+  }
+}
+
+@include screen(md) {
+  .b-partners {
+
+    &__title {
+      margin-bottom: $m10;
+    }
+
+    &__description {
+      margin-bottom: $m20;
+    }
+
+    &__list {
+      @include grid(2, false, $m20);
+    }
+
+    &__item {
+      aspect-ratio: 130/90;
+    }
+  }
+}

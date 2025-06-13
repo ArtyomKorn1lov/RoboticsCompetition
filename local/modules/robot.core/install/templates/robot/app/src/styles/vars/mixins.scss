@@ -1,0 +1,53 @@
+// Миксины, c логикой
+
+@mixin flex($direction: false, $items: false, $justify: false) {
+  display: flex;
+
+  @if $direction {
+    flex-direction: $direction;
+  }
+
+  @if $items {
+    align-items: $items;
+  }
+
+  @if $justify {
+    justify-content: $justify;
+  }
+}
+
+@mixin grid($cols: false, $rows: false, $gap: false) {
+  display: grid;
+
+  @if $cols {
+    grid-template-columns: repeat($cols, minmax(0, 1fr));
+  }
+
+  @if $rows {
+    grid-template-rows: repeat($rows, minmax(0, 1fr));
+  }
+
+  @if $gap {
+    gap: $gap;
+  }
+}
+
+@mixin screen($size) {
+  @if $size == lgl {
+    @media (max-width: $lgl) { @content; }
+  } @else if $size == lg {
+    @media (max-width: $lg) { @content; }
+  } @else if $size == lgs {
+    @media (max-width: $lgs) { @content; }
+  } @else if $size == md {
+    @media (max-width: $md) { @content; }
+  } @else if $size == sml {
+    @media (max-width: $sml) { @content; }
+  } @else if $size == sm {
+    @media (max-width: $sm) { @content; }
+  } @else if $size == xs {
+    @media (max-width: $xs) { @content; }
+  } @else if $size == xss {
+    @media (max-width: $xss) { @content; }
+  }
+}

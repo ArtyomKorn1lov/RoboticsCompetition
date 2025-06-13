@@ -1,0 +1,65 @@
+@include screen(lg) {
+  .b-event {
+    @include flex(column, center);
+    gap: $m40;
+
+    &__img {
+      max-width: 333px;
+
+      &-wrap {
+        aspect-ratio: 690/406;
+        max-width: 690px;
+        padding-top: $m15;
+        padding-bottom: $m15;
+      }
+    }
+
+    &__section {
+      align-items: center;
+      max-width: none;
+    }
+
+    &__title,
+    &__description {
+      text-align: center;
+      max-width: 704px;
+    }
+  }
+}
+
+@include screen(sml) {
+  .b-event {
+    gap: $m30;
+
+    &__img {
+
+      &-wrap {
+        width: 100vw;
+        aspect-ratio: 320/225;
+        border-radius: 0;
+        max-width: none;
+        margin-left: -20px;
+        margin-right: -20px;
+      }
+    }
+
+    &__timeline {
+      padding: 8px $m10;
+      margin-bottom: $m15;
+      font-size: $textTiny;
+    }
+
+    &__button {
+      margin-top: $m15;
+    }
+  }
+}
+
+@include screen(xs) {
+  .b-event {
+
+    &__img {
+      max-width: 208px;
+    }
+  }
+}

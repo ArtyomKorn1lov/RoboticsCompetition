@@ -24,6 +24,9 @@ Loc::loadMessages(__FILE__);
 //в названии класса пишем название директории нашего модуля, только вместо точки ставим нижнее подчеркивание
 class robot_core extends CModule
 {
+    /** @var string корневая папка в которой находится модуль */
+    private string $rootDir = BX_ROOT;
+
     public function __construct()
     {
         $arModuleVersion = array();
@@ -44,6 +47,8 @@ class robot_core extends CModule
         $this->MODULE_GROUP_RIGHTS = 'N';
         //название компании партнера предоставляющей модуль
         $this->PARTNER_NAME = Loc::getMessage('ROBOT_MODULE_PARTNER_NAME');
+
+        $this->setModuleDir();
     }
 
     //здесь мы описываем все, что делаем до инсталляции модуля, мы добавляем наш модуль в регистр
@@ -88,6 +93,17 @@ class robot_core extends CModule
     }
 
     /**
+     * @return void
+     */
+    protected function setModuleDir(): void
+    {
+        $path = getLocalPath('modules/'.$this->MODULE_ID.'/install/index.php');
+        if (str_contains($path, '/local')) {
+            $this->rootDir = '/local';
+        }
+    }
+
+    /**
      * Установка файлов
      * @return void
      */
@@ -101,10 +117,24 @@ class robot_core extends CModule
         if (!Directory::isDirectoryExists($siteSettingsUploadDir)) {
             Directory::createDirectory($siteSettingsUploadDir);
         }
-        $siteSettingsAdminPath = __DIR__ . "/admin/robot_core_site_settings.php";
-        $coreAdminPath = Loader::getDocumentRoot() . BX_ROOT . "/admin/robot_core_site_settings.php";
-        if (!File::isFileExists($coreAdminPath)) {
-            copy($siteSettingsAdminPath, $coreAdminPath);
+        CopyDirFiles(__DIR__ . "/admin/robot_core_site_settings.php", Loader::getDocumentRoot() . BX_ROOT . "/admin/robot_core_site_settings.php");
+        /** Статические файлы в режиме разработки не копируются */
+        if ($_ENV['DEVELOP_MODE'] !== "Y") {
+            CopyDirFiles(
+                path_from: __DIR__ . Manager::FRONTEND_VUE_RELATIVE_PATH,
+                path_to: Loader::getDocumentRoot() . $this->rootDir . Manager::FRONTEND_VUE_RELATIVE_PATH,
+                Recursive: true
+            );
+            CopyDirFiles(
+                path_from: __DIR__ . Manager::TEMPLATE_RELATIVE_PATH,
+                path_to: Loader::getDocumentRoot() . $this->rootDir . Manager::TEMPLATE_RELATIVE_PATH,
+                Recursive: true
+            );
+            CopyDirFiles(
+                path_from: __DIR__ . Manager::COMPONENTS_RELATIVE_PATH,
+                path_to: Loader::getDocumentRoot() . $this->rootDir . Manager::COMPONENTS_RELATIVE_PATH,
+                Recursive: true
+            );
         }
     }
 
@@ -126,7 +156,7 @@ class robot_core extends CModule
                 SiteSettingsTable::getEntity()->createDbTable();
             }
 
-            $siteSettingsDir = __DIR__ . "\\public\\assets\\";
+            $siteSettingsDir = __DIR__ . "\\assets\\";
             $siteSettingsUploadDir = Manager::SITE_SETTINGS_FILE_PATH;
 
             /** Установка настроек для русской версии сайта */
@@ -297,7 +327,7 @@ class robot_core extends CModule
     }
 
     /**
-     * Удаление таблиц из БД
+     * Удаление файлов модуля
      * @return void
      */
     public function unInstallFiles(): void
@@ -313,6 +343,21 @@ class robot_core extends CModule
         $coreAdminPath = Loader::getDocumentRoot() . BX_ROOT . "/admin/robot_core_site_settings.php";
         if (File::isFileExists($coreAdminPath)) {
             unlink($coreAdminPath);
+        }
+        /** Статические файлы в режиме разработки не удаляются */
+        if ($_ENV['DEVELOP_MODE'] !== "Y") {
+            $frontendVuePath = Loader::getDocumentRoot() . $this->rootDir . Manager::FRONTEND_VUE_RELATIVE_PATH;
+            if (Directory::isDirectoryExists($frontendVuePath)) {
+                Directory::deleteDirectory($frontendVuePath);
+            }
+            $templatePath = Loader::getDocumentRoot() . $this->rootDir . Manager::TEMPLATE_RELATIVE_PATH;
+            if (Directory::isDirectoryExists($templatePath)) {
+                Directory::deleteDirectory($templatePath);
+            }
+            $componentsPath = Loader::getDocumentRoot() . $this->rootDir . Manager::COMPONENTS_RELATIVE_PATH;
+            if (Directory::isDirectoryExists($componentsPath)) {
+                Directory::deleteDirectory($componentsPath);
+            }
         }
     }
 

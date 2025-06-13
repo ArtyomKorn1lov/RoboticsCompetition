@@ -1,0 +1,91 @@
+.b-map {
+
+  .ymaps-2-1-79-balloon {
+    border-radius: $rounded15;
+
+    &__tail {
+      display: none;
+    }
+
+    &__layout {
+      border-radius: $rounded15;
+    }
+
+    &__content {
+      font-family: 'Golos Text', sans-serif;
+      padding: $m20;
+    }
+
+    &__close {
+      right: $m15;
+      top: $m15;
+
+      & + .ymaps-2-1-79-balloon {
+
+        &__content {
+          margin-right: $m40;
+        }
+      }
+
+      &-button {
+        width: $m10;
+        height: $m10;
+        background-image: url("/local/templates/robot/app/dist/assets/images/close.svg");
+        background-repeat: no-repeat;
+        background-size: $m10 $m10;
+        background-position: center;
+        transition: opacity 0.15s ease-in-out;
+      }
+    }
+
+    &-content {
+
+      &__header {
+        margin-bottom: $m15;
+      }
+    }
+  }
+
+  &__content {
+    @include flex(column);
+    gap: $m10;
+  }
+
+  &__item {
+    @include flex(false);
+    gap: $m5;
+    font-weight: $textMedium;
+    line-height: 1.5;
+
+    &:before {
+      content: '';
+      flex-shrink: 0;
+      width: $m20;
+      height: $m20;
+      background-repeat: no-repeat;
+      background-size: $m20 $m20;
+      background-position: center;
+    }
+
+    &_address {
+
+      &:before {
+        background-image: url('/local/templates/robot/app/dist/assets/images/address.svg');
+      }
+    }
+
+    &_mail {
+
+      &:before {
+        background-image: url('/local/templates/robot/app/dist/assets/images/mail.svg');
+      }
+    }
+
+    &_phone {
+
+      &:before {
+        background-image: url('/local/templates/robot/app/dist/assets/images/phone.svg');
+      }
+    }
+  }
+}

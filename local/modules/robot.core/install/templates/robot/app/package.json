@@ -1,0 +1,40 @@
+{
+  "name": "robot-frontend",
+  "version": "0.0.1",
+  "description": "Общие стили, js и статические изображения для всего сайта",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "gulp build",
+    "styles": "gulp stylesBuild",
+    "scripts": "gulp scriptsBuild",
+    "icons": "gulp iconsBuild",
+    "dev": "gulp dev"
+  },
+  "engines": {
+    "node": ">=20.11.0",
+    "npm": ">=10.2.4"
+  },
+  "author": "Robot",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^3.0.3",
+    "del": "^8.0.0",
+    "gulp": "^5.0.0",
+    "gulp-autoprefixer": "^9.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-flatten": "^0.4.0",
+    "gulp-imagemin": "^9.1.0",
+    "gulp-postcss": "^10.0.0",
+    "gulp-sass": "^6.0.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-svg-sprite": "^2.0.3",
+    "gulp-svgmin": "^4.1.0",
+    "gulp-terser": "^2.1.0",
+    "postcss": "^8.5.1",
+    "postcss-scss": "^4.0.9",
+    "sass": "^1.83.4"
+  }
+}

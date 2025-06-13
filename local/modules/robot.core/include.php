@@ -13,6 +13,12 @@ if (
 }
 
 /**
+ * Подключение env-файла
+ */
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+/**
  * Неймспейсы контроллеров
  */
 $controllerNamespaces = [

@@ -1,0 +1,53 @@
+.b-burger {
+
+  &__header {
+
+    &.el-drawer {
+
+      &__header {
+        margin-bottom: 0;
+        padding-bottom: $m20;
+        border-bottom: 1px solid $colorSecondaryText;
+      }
+    }
+
+    .el-drawer {
+
+      &__close {
+
+        &-btn {
+          color: $colorPrimary;
+
+          &:hover,
+          &:active,
+          &:focus {
+
+            i {
+              color: $colorHover;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__title {
+    font-size: $textNormal;
+    font-weight: 500;
+    color: $colorHeader;
+  }
+
+  &__menu {
+    @include flex(column);
+    gap: $m15;
+
+    &-item {
+      font-size: $textNormal;
+      font-weight: 500;
+
+      &_selected {
+        color: $colorHover;
+      }
+    }
+  }
+}

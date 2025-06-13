@@ -66,7 +66,7 @@ class Helper implements IHelper
     public static function buildYandexApiUrl(): string
     {
         $mapLang = Loc::getCurrentLang() === Constants::LANG_ENGLISH_CODE ? YaMapLang::en->value : YaMapLang::ru->value;
-        return Constants::YA_MAP_API_URL."?lang=".$mapLang;
+        return $_ENV['YA_MAP_API_URL']."?lang=".$mapLang;
     }
 
     /**

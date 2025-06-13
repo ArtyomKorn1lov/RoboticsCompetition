@@ -1,0 +1,50 @@
+.b-form {
+
+  &__col {
+
+    &.el-col {
+      height: $full;
+    }
+  }
+
+  &__item {
+
+    &.el-form-item {
+      @include flex(column);
+      margin-bottom: $m20;
+    }
+
+    .el-form-item {
+
+      &__label {
+        height: $m30;
+        line-height: $m30;
+      }
+
+      &__error {
+        color: $colorError;
+      }
+    }
+
+    .el-input__wrapper,
+    .el-select__wrapper {
+      box-shadow: none !important;
+    }
+
+    &.is-error {
+
+      .el-input__wrapper,
+      .el-select__wrapper {
+        border-color: $colorError;
+      }
+    }
+  }
+
+  &__tooltip {
+    margin-bottom: $m30;
+
+    span {
+      color: $colorSecondaryText;
+    }
+  }
+}
