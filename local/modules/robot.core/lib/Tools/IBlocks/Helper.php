@@ -16,7 +16,7 @@ Loc::loadMessages(__FILE__);
 /**
  * Вспомогательный класс для взаимодействия с ИБ
  */
-class Helper implements IHelper
+class Helper
 {
     /** @var string[] Модули участвующие в работе класса */
     protected const MODULES_CODES = [

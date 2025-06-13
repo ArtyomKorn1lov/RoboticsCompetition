@@ -93,16 +93,16 @@ class robot_core extends CModule
      */
     public function installFiles(): void
     {
-        $moduleUploadDir = $_SERVER['DOCUMENT_ROOT'] . '/upload' . Manager::MODULE_FILE_PATH;
+        $moduleUploadDir = Loader::getDocumentRoot() . '/upload' . Manager::MODULE_FILE_PATH;
         if (!Directory::isDirectoryExists($moduleUploadDir)) {
             Directory::createDirectory($moduleUploadDir);
         }
-        $siteSettingsUploadDir = $_SERVER['DOCUMENT_ROOT'] . '/upload' . Manager::SITE_SETTINGS_FILE_PATH;
+        $siteSettingsUploadDir = Loader::getDocumentRoot() . '/upload' . Manager::SITE_SETTINGS_FILE_PATH;
         if (!Directory::isDirectoryExists($siteSettingsUploadDir)) {
             Directory::createDirectory($siteSettingsUploadDir);
         }
         $siteSettingsAdminPath = __DIR__ . "/admin/robot_core_site_settings.php";
-        $coreAdminPath = $_SERVER['DOCUMENT_ROOT'] . "/bitrix/admin/robot_core_site_settings.php";
+        $coreAdminPath = Loader::getDocumentRoot() . BX_ROOT . "/admin/robot_core_site_settings.php";
         if (!File::isFileExists($coreAdminPath)) {
             copy($siteSettingsAdminPath, $coreAdminPath);
         }
@@ -302,15 +302,15 @@ class robot_core extends CModule
      */
     public function unInstallFiles(): void
     {
-        $moduleUploadDir = $_SERVER['DOCUMENT_ROOT'] . '/upload' . Manager::MODULE_FILE_PATH;
+        $moduleUploadDir = Loader::getDocumentRoot() . '/upload' . Manager::MODULE_FILE_PATH;
         if (Directory::isDirectoryExists($moduleUploadDir)) {
             Directory::deleteDirectory($moduleUploadDir);
         }
-        $siteSettingsUploadDir = $_SERVER['DOCUMENT_ROOT'] . '/upload' . Manager::SITE_SETTINGS_FILE_PATH;
+        $siteSettingsUploadDir = Loader::getDocumentRoot() . '/upload' . Manager::SITE_SETTINGS_FILE_PATH;
         if (Directory::isDirectoryExists($siteSettingsUploadDir)) {
             Directory::deleteDirectory($siteSettingsUploadDir);
         }
-        $coreAdminPath = $_SERVER['DOCUMENT_ROOT'] . "/bitrix/admin/robot_core_site_settings.php";
+        $coreAdminPath = Loader::getDocumentRoot() . BX_ROOT . "/admin/robot_core_site_settings.php";
         if (File::isFileExists($coreAdminPath)) {
             unlink($coreAdminPath);
         }

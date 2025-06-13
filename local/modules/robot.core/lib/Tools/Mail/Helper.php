@@ -8,7 +8,7 @@ use Bitrix\Main\SystemException;
 
 Loc::loadMessages(__FILE__);
 
-class Helper implements IHelper
+class Helper
 {
     /** @var string Почтовое событие */
     private string $mailEvent;
