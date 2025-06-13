@@ -48,7 +48,7 @@ class robot_core extends CModule
         //название компании партнера предоставляющей модуль
         $this->PARTNER_NAME = Loc::getMessage('ROBOT_MODULE_PARTNER_NAME');
 
-        $this->setModuleDir();
+        $this->setRootDir();
     }
 
     //здесь мы описываем все, что делаем до инсталляции модуля, мы добавляем наш модуль в регистр
@@ -95,7 +95,7 @@ class robot_core extends CModule
     /**
      * @return void
      */
-    protected function setModuleDir(): void
+    protected function setRootDir(): void
     {
         $path = getLocalPath('modules/'.$this->MODULE_ID.'/install/index.php');
         if (str_contains($path, '/local')) {
@@ -135,6 +135,11 @@ class robot_core extends CModule
                 path_to: Loader::getDocumentRoot() . $this->rootDir . Manager::COMPONENTS_RELATIVE_PATH,
                 Recursive: true
             );
+            CopyDirFiles(
+                path_from: __DIR__ . Manager::PUBLIC_RELATIVE_PATH,
+                path_to: Loader::getDocumentRoot() . '/',
+                Recursive: true
+            );
         }
     }
 
@@ -159,7 +164,7 @@ class robot_core extends CModule
             $siteSettingsDir = __DIR__ . "\\assets\\";
             $siteSettingsUploadDir = Manager::SITE_SETTINGS_FILE_PATH;
 
-            /** Установка настроек для русской версии сайта */
+            /** Установка настроек для основной версии сайта */
             $logo = CFile::MakeFileArray($siteSettingsDir . Manager::DEFAULT_LOGO_FILENAME);
             $logo = $logo ? CFile::SaveFile($logo, $siteSettingsUploadDir) : 0;
             $logoFooter = CFile::MakeFileArray($siteSettingsDir . Manager::DEFAULT_LOGO_FOOTER_FILENAME);

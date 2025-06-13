@@ -23,6 +23,9 @@ class Manager implements IManager
     /** @var string относительный путь к компонентам модуля */
     public const COMPONENTS_RELATIVE_PATH = "/components/robot";
 
+    /** @var string публичные файлы страниц модуля */
+    public const PUBLIC_RELATIVE_PATH = "/public";
+
     /** @var string имя файла с логотипом в шапке сайта */
     public const DEFAULT_LOGO_FILENAME = "logo.svg";
 

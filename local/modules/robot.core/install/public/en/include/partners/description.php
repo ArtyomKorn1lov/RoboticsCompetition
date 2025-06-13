@@ -1,0 +1,1 @@
+The festival is organized and held by the Consortium of Organizers of the annual international open scientific and technical festival of robotics
