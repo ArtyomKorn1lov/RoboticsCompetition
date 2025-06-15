@@ -52,8 +52,8 @@ $tabList = [
 $tabControl = new CAdminTabControl("robot_core_module_options", $tabList);
 $tabControl->Begin();
 ?>
+<?php $tabControl->BeginNextTab(); ?>
     <form id="robot_core_module_options_form" method="post" action="<?= $currentUrl; ?>">
-        <?php $tabControl->BeginNextTab(); ?>
         <tr>
             <td style="width: 40%">
                 <?=Loc::getMessage("ROBOT_CORE_DEFAULT_EMAIL_TITLE")?>
@@ -69,6 +69,6 @@ $tabControl->Begin();
         <input type="hidden" name="robot_core_update" value="Y">
         <?= bitrix_sessid_post(); ?>
     </form>
-    <?php $tabControl->BeginNextTab(); ?>
+<?php $tabControl->BeginNextTab(); ?>
 <?php
 $tabControl->End();

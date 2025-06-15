@@ -12,6 +12,7 @@ use Bitrix\Main\IO\File;
 use Bitrix\Main\Config\Option;
 use Bitrix\Main\Config\Configuration;
 use Bitrix\Main\EventManager;
+use Bitrix\Main\Context;
 
 use Robot\Core\Tools\Modules\Manager;
 use Robot\Core\Entity\SiteSettings\SiteSettingsTable;
@@ -26,6 +27,9 @@ class robot_core extends CModule
 {
     /** @var string корневая папка в которой находится модуль */
     private string $rootDir = BX_ROOT;
+
+    /** @var array данные с формы 1-го шага */
+    private array $stepData = [];
 
     public function __construct()
     {
@@ -51,19 +55,105 @@ class robot_core extends CModule
         $this->setRootDir();
     }
 
+    /**
+     * Определение корневой папки для модуля, модуль находится в local или в bitrix
+     * @return void
+     */
+    protected function setRootDir(): void
+    {
+        $path = getLocalPath('modules/'.$this->MODULE_ID.'/install/index.php');
+        if (str_contains($path, '/local')) {
+            $this->rootDir = '/local';
+        }
+    }
+
+    /**
+     * @param array $stepData
+     * @return bool
+     */
+    protected function validateDataStep(array $stepData): bool
+    {
+        global $APPLICATION;
+        if (empty($stepData["primarySiteId"])) {
+            $APPLICATION->ThrowException(Loc::getMessage("ROBOT_MODULE_PRIMARY_SITE_EMPTY"));
+            return false;
+        }
+
+        if (empty($stepData["secondarySiteId"])) {
+            $APPLICATION->ThrowException(Loc::getMessage("ROBOT_MODULE_SECONDARY_SITE_EMPTY"));
+            return false;
+        }
+
+        if ($stepData["primarySiteId"] === $stepData["secondarySiteId"]) {
+            $APPLICATION->ThrowException(Loc::getMessage("ROBOT_MODULE_SITE_SIMILAR_ERROR"));
+            return false;
+        }
+
+        if (!$this->checkSiteIsExist($stepData["primarySiteId"])) {
+            $APPLICATION->ThrowException(Loc::getMessage("ROBOT_MODULE_PRIMARY_SITE_ERROR"));
+            return false;
+        }
+
+        if (!$this->checkSiteIsExist($stepData["secondarySiteId"])) {
+            $APPLICATION->ThrowException(Loc::getMessage("ROBOT_MODULE_SECONDARY_SITE_ERROR"));
+            return false;
+        }
+
+        $this->stepData = $stepData;
+        return true;
+    }
+
+    /**
+     * @param string $siteId
+     * @return bool
+     */
+    protected static function checkSiteIsExist(string $siteId): bool
+    {
+        $rsObj = CSite::GetByID($siteId);
+        $site = $rsObj->fetch();
+        if (!$site) {
+            return false;
+        }
+        return true;
+    }
+
     //здесь мы описываем все, что делаем до инсталляции модуля, мы добавляем наш модуль в регистр
     public function doInstall(): void
     {
         global $APPLICATION;
         try {
-            ModuleManager::registerModule($this->MODULE_ID);
-            Loader::includeModule($this->MODULE_ID);
+            $request = Context::getCurrent()->getRequest();
+            $step = (int)$request->get('step');
 
-            $this->installFiles();
-            $this->installDb();
-            $this->installRouting();
-            $this->installEventHandlers();
-            Option::set($this->MODULE_ID, Constants::DEFAULT_RECIPIENT_EMAIL_OPTION_CODE, 'mail@mail.ru');
+            $validateSecondStep = false;
+            if (!empty($step) && $step === 2) {
+                $stepData = [
+                    "defaultEmail" => $request->get('default_email'),
+                    "primarySiteId" => $request->get('primary_site_id'),
+                    "secondarySiteId" => $request->get('secondary_site_id'),
+                ];
+                $validateSecondStep = $this->validateDataStep($stepData);
+            }
+
+            if (!empty($step) && $step === 2 && $validateSecondStep) {
+                ModuleManager::registerModule($this->MODULE_ID);
+                Loader::includeModule($this->MODULE_ID);
+
+                $this->installFiles();
+                $this->installDb();
+                $this->installRouting();
+                $this->installEventHandlers();
+                Option::set($this->MODULE_ID, Constants::DEFAULT_RECIPIENT_EMAIL_OPTION_CODE, $this->stepData["defaultEmail"]);
+                $APPLICATION->IncludeAdminFile(
+                    Loc::getMessage('INSTALL_TITLE_STEP_2'),
+                    __DIR__ . '/step2.php'
+                );
+            } else {
+                $APPLICATION->IncludeAdminFile(
+                    Loc::getMessage('ROBOT_STEP1_TITLE'),
+                    __DIR__ . '/step1.php'
+                );
+            }
         }
         catch (Exception $exception) {
             ModuleManager::unRegisterModule($this->MODULE_ID);
@@ -85,21 +175,14 @@ class robot_core extends CModule
             $this->unInstallEventHandlers();
             Option::delete($this->MODULE_ID);
             ModuleManager::unRegisterModule($this->MODULE_ID);
+            $APPLICATION->IncludeAdminFile(
+                Loc::getMessage('ROBOT_DEINSTALL_TITLE'),
+                __DIR__ . '/deinstalinfo.php'
+            );
         } catch (Exception $exception) {
             ModuleManager::unRegisterModule($this->MODULE_ID);
             AddMessage2Log($exception->getMessage(), $this->MODULE_ID);
             $APPLICATION->ThrowException($exception->getMessage());
-        }
-    }
-
-    /**
-     * @return void
-     */
-    protected function setRootDir(): void
-    {
-        $path = getLocalPath('modules/'.$this->MODULE_ID.'/install/index.php');
-        if (str_contains($path, '/local')) {
-            $this->rootDir = '/local';
         }
     }
 
@@ -119,28 +202,33 @@ class robot_core extends CModule
         }
         CopyDirFiles(__DIR__ . "/admin/robot_core_site_settings.php", Loader::getDocumentRoot() . BX_ROOT . "/admin/robot_core_site_settings.php");
         /** Статические файлы в режиме разработки не копируются */
-        if ($_ENV['DEVELOP_MODE'] !== "Y") {
-            CopyDirFiles(
-                path_from: __DIR__ . Manager::FRONTEND_VUE_RELATIVE_PATH,
-                path_to: Loader::getDocumentRoot() . $this->rootDir . Manager::FRONTEND_VUE_RELATIVE_PATH,
-                Recursive: true
-            );
-            CopyDirFiles(
-                path_from: __DIR__ . Manager::TEMPLATE_RELATIVE_PATH,
-                path_to: Loader::getDocumentRoot() . $this->rootDir . Manager::TEMPLATE_RELATIVE_PATH,
-                Recursive: true
-            );
-            CopyDirFiles(
-                path_from: __DIR__ . Manager::COMPONENTS_RELATIVE_PATH,
-                path_to: Loader::getDocumentRoot() . $this->rootDir . Manager::COMPONENTS_RELATIVE_PATH,
-                Recursive: true
-            );
-            CopyDirFiles(
-                path_from: __DIR__ . Manager::PUBLIC_RELATIVE_PATH,
-                path_to: Loader::getDocumentRoot() . '/',
-                Recursive: true
-            );
+        if ($_ENV['DEVELOP_MODE'] === "Y") {
+            return;
         }
+        /** Установка frontend'а на vue */
+        CopyDirFiles(
+            path_from: __DIR__ . Manager::FRONTEND_VUE_RELATIVE_PATH,
+            path_to: Loader::getDocumentRoot() . $this->rootDir . Manager::FRONTEND_VUE_RELATIVE_PATH,
+            Recursive: true
+        );
+        /** Установка шаблона сайта */
+        CopyDirFiles(
+            path_from: __DIR__ . Manager::TEMPLATE_RELATIVE_PATH,
+            path_to: Loader::getDocumentRoot() . $this->rootDir . Manager::TEMPLATE_RELATIVE_PATH,
+            Recursive: true
+        );
+        /** Установка компонентов модуля */
+        CopyDirFiles(
+            path_from: __DIR__ . Manager::COMPONENTS_RELATIVE_PATH,
+            path_to: Loader::getDocumentRoot() . $this->rootDir . Manager::COMPONENTS_RELATIVE_PATH,
+            Recursive: true
+        );
+        /** Установка публичных файлов модуля */
+        CopyDirFiles(
+            path_from: __DIR__ . Manager::PUBLIC_RELATIVE_PATH,
+            path_to: Loader::getDocumentRoot() . '/',
+            Recursive: true
+        );
     }
 
     /**
@@ -169,8 +257,24 @@ class robot_core extends CModule
             $logo = $logo ? CFile::SaveFile($logo, $siteSettingsUploadDir) : 0;
             $logoFooter = CFile::MakeFileArray($siteSettingsDir . Manager::DEFAULT_LOGO_FOOTER_FILENAME);
             $logoFooter = $logoFooter ? CFile::SaveFile($logoFooter, $siteSettingsUploadDir) : 0;
+            Manager::updateSiteParams($this->stepData["primarySiteId"], "ru", [
+                'ACTIVE' => 'Y',
+                'SORT' => '1',
+                'NAME' => 'Соревнования  по робототехнике в ПГТУ',
+                'DEF' => 'Y',
+                'DIR' => '/',
+                'FORMAT_DATE' => 'DD.MM.YYYY',
+                'FORMAT_DATETIME' => 'DD.MM.YYYY HH:MI:SS',
+                'FORMAT_NAME' => '#NAME# #LAST_NAME#',
+                'WEEK_START' => '1',
+                'CHARSET' => 'UTF-8',
+                'LANGUAGE_ID' => 'ru',
+                'DOMAIN_LIMITED' => 'N',
+                'SERVER_NAME' => '',
+                'SITE_NAME' => 'Cайт для проведения соревнований по робототехнике',
+            ]);
             SiteSettingsTable::add([
-                "SITE_ID" => "s1",
+                "SITE_ID" => $this->stepData["primarySiteId"],
                 "LANG" => "ru",
                 "NAME" => "Поволжский государственный технологический университет",
                 "EMAIL" => "info@volgatech.net",
@@ -213,8 +317,24 @@ class robot_core extends CModule
             $logo = $logo ? CFile::SaveFile($logo, $siteSettingsUploadDir) : 0;
             $logoFooter = CFile::MakeFileArray($siteSettingsDir . Manager::DEFAULT_LOGO_FOOTER_FILENAME);
             $logoFooter = $logoFooter ? CFile::SaveFile($logoFooter, $siteSettingsUploadDir) : 0;
+            Manager::updateSiteParams($this->stepData["secondarySiteId"], "en", [
+                'ACTIVE' => 'Y',
+                'SORT' => '2',
+                'NAME' => 'Robotics competitions at PGTU',
+                'DEF' => 'N',
+                'DIR' => '/en/',
+                'FORMAT_DATE' => 'DD.MM.YYYY',
+                'FORMAT_DATETIME' => 'DD.MM.YYYY HH:MI:SS',
+                'FORMAT_NAME' => '#NAME# #LAST_NAME#',
+                'WEEK_START' => '1',
+                'CHARSET' => 'UTF-8',
+                'LANGUAGE_ID' => 'en',
+                'DOMAIN_LIMITED' => 'N',
+                'SERVER_NAME' => '',
+                'SITE_NAME' => 'Website for robotics competitions',
+            ]);
             SiteSettingsTable::add([
-                "SITE_ID" => "s2",
+                "SITE_ID" => $this->stepData["secondarySiteId"],
                 "LANG" => "en",
                 "NAME" => "Volga region state technological university",
                 "EMAIL" => "info@volgatech.net",
@@ -350,19 +470,23 @@ class robot_core extends CModule
             unlink($coreAdminPath);
         }
         /** Статические файлы в режиме разработки не удаляются */
-        if ($_ENV['DEVELOP_MODE'] !== "Y") {
-            $frontendVuePath = Loader::getDocumentRoot() . $this->rootDir . Manager::FRONTEND_VUE_RELATIVE_PATH;
-            if (Directory::isDirectoryExists($frontendVuePath)) {
-                Directory::deleteDirectory($frontendVuePath);
-            }
-            $templatePath = Loader::getDocumentRoot() . $this->rootDir . Manager::TEMPLATE_RELATIVE_PATH;
-            if (Directory::isDirectoryExists($templatePath)) {
-                Directory::deleteDirectory($templatePath);
-            }
-            $componentsPath = Loader::getDocumentRoot() . $this->rootDir . Manager::COMPONENTS_RELATIVE_PATH;
-            if (Directory::isDirectoryExists($componentsPath)) {
-                Directory::deleteDirectory($componentsPath);
-            }
+        if ($_ENV['DEVELOP_MODE'] === "Y") {
+            return;
+        }
+        /** Удаление frontend'а на vue */
+        $frontendVuePath = Loader::getDocumentRoot() . $this->rootDir . Manager::FRONTEND_VUE_RELATIVE_PATH;
+        if (Directory::isDirectoryExists($frontendVuePath)) {
+            Directory::deleteDirectory($frontendVuePath);
+        }
+        /** Удаление шаблона сайта */
+        $templatePath = Loader::getDocumentRoot() . $this->rootDir . Manager::TEMPLATE_RELATIVE_PATH;
+        if (Directory::isDirectoryExists($templatePath)) {
+            Directory::deleteDirectory($templatePath);
+        }
+        /** Удаление компонентов модуля */
+        $componentsPath = Loader::getDocumentRoot() . $this->rootDir . Manager::COMPONENTS_RELATIVE_PATH;
+        if (Directory::isDirectoryExists($componentsPath)) {
+            Directory::deleteDirectory($componentsPath);
         }
     }
 
