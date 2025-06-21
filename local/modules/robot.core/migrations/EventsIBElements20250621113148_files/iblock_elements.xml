@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items iblockUid="robot_content:events" exchangeVersion="2" >
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>100</value>
+ </field>
+ <field name="NAME">
+  <value>Региональный фестиваль  по робототехнике в ПГТУ</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE">
+  <value name="main_event.webp" type="file">iblock/0c5/5zu4tcajyfj3fk03a97iv2h07z3bq99h.webp</value>
+ </field>
+ <field name="DETAIL_TEXT">
+  <value>Целью Фестиваля является популяризация научно-технического творчества и робототехники как привлекательных и перспективных занятий среди детей, юношества и молодежи с целью повышения престижа инженерных профессий.</value>
+ </field>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>html</value>
+ </field>
+ <field name="CODE">
+  <value>regionalnyy-festival-po-robototekhnike-v-pgtu</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>8e15d62e-797c-4e27-8b90-5a5633950029</value>
+ </field>
+ <field name="IBLOCK_SECTION"/>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="EXPIRATION_DATE">
+  <value>25.04.2026</value>
+ </property>
+ <property name="EVENT_DATES">
+  <value>c 23 апреля по 25 апреля 2026 года</value>
+ </property>
+ <property name="ACTIVE_REGISTRATION">
+  <value>Y</value>
+ </property>
+</item>
+
+</items>

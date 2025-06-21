@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fa1c357a4a36fc359df47a83b8cb34f2",
+    "content-hash": "290499b15fed171c62f0422dd3f8cc1f",
     "packages": [
         {
             "name": "andreyryabin/sprint.migration",
-            "version": "dev-master",
+            "version": "5.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/andreyryabin/sprint.migration.git",
@@ -27,7 +27,6 @@
                 "ext-xmlwriter": "*",
                 "php": ">=8.1"
             },
-            "default-branch": true,
             "type": "bitrix-module",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -210,9 +209,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "andreyryabin/sprint.migration": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

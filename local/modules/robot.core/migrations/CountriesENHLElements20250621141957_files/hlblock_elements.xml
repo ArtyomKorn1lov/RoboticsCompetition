@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items hlblockUid="CountriesEn" exchangeVersion="2" >
+<item>
+ <field name="UF_VALUE">
+  <value>Russian Federation</value>
+ </field>
+ <field name="UF_CODE">
+  <value>russsia</value>
+ </field>
+ <field name="UF_SORT">
+  <value>100</value>
+ </field>
+ <field name="UF_XML_ID">
+  <value>5f4ae079-648f-42c6-be04-34b8bdd1d2eb</value>
+ </field>
+</item>
+<item>
+ <field name="UF_VALUE">
+  <value>Republic of Tajikistan</value>
+ </field>
+ <field name="UF_CODE">
+  <value>tajikistan</value>
+ </field>
+ <field name="UF_SORT">
+  <value>200</value>
+ </field>
+ <field name="UF_XML_ID">
+  <value>9078a6a2-2031-4e4c-a8ef-33623cd13f9a</value>
+ </field>
+</item>
+<item>
+ <field name="UF_VALUE">
+  <value>Republic of Uzbekistan</value>
+ </field>
+ <field name="UF_CODE">
+  <value>uzbekistan</value>
+ </field>
+ <field name="UF_SORT">
+  <value>300</value>
+ </field>
+ <field name="UF_XML_ID">
+  <value>7682e830-2eaa-496a-81f3-ba123e1f570d</value>
+ </field>
+</item>
+<item>
+ <field name="UF_VALUE">
+  <value>Republic of Belarus</value>
+ </field>
+ <field name="UF_CODE">
+  <value>belarus</value>
+ </field>
+ <field name="UF_SORT">
+  <value>400</value>
+ </field>
+ <field name="UF_XML_ID">
+  <value>ccf59809-0a54-459e-9de9-b455ac9d37c0</value>
+ </field>
+</item>
+<item>
+ <field name="UF_VALUE">
+  <value>Республика Китай</value>
+ </field>
+ <field name="UF_CODE">
+  <value>china</value>
+ </field>
+ <field name="UF_SORT">
+  <value>500</value>
+ </field>
+ <field name="UF_XML_ID">
+  <value>582a9c18-e813-4e55-a880-bfe943536c54</value>
+ </field>
+</item>
+<item>
+ <field name="UF_VALUE">
+  <value>Republic of Kazakhstan</value>
+ </field>
+ <field name="UF_CODE">
+  <value>kazakhstan</value>
+ </field>
+ <field name="UF_SORT">
+  <value>600</value>
+ </field>
+ <field name="UF_XML_ID">
+  <value>3b0c7655-c19a-49ab-8700-6c5bd713c50d</value>
+ </field>
+</item>
+
+</items>

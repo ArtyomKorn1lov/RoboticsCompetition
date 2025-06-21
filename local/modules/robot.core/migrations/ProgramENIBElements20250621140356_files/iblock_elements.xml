@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items iblockUid="robot_content:program_en" exchangeVersion="2" >
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>500</value>
+ </field>
+ <field name="NAME">
+  <value>Opening of the Olympics</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>opening-of-the-olympics</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>b786ce4f-8254-482c-b7da-35d7c5060269</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Competition program for 2026|1|competition-program-for-2026</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="LOCATION">
+  <value>PGTU 3rd building, office 514</value>
+ </property>
+ <property name="DATE_TIME">
+  <value>17.03.2025 10:00:00</value>
+ </property>
+ <property name="TIME">
+  <value><![CDATA[a:2:{s:9:"TIME_FROM";s:5:"10:00";s:7:"TIME_TO";s:5:"12:00";}]]></value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>500</value>
+ </field>
+ <field name="NAME">
+  <value><![CDATA[Project competition "Creative category"]]></value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>project-competition-creative-category</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>1d358073-f7f3-4f43-b7e9-75dd3622585d</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Competition program for 2026|1|competition-program-for-2026</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="LOCATION">
+  <value>PGTU 3rd building, office 518</value>
+ </property>
+ <property name="DATE_TIME">
+  <value>17.03.2025 12:00:00</value>
+ </property>
+ <property name="TIME">
+  <value><![CDATA[a:2:{s:9:"TIME_FROM";s:5:"12:00";s:7:"TIME_TO";s:5:"18:00";}]]></value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>500</value>
+ </field>
+ <field name="NAME">
+  <value>Polytechnic Olympiad</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>polytechnic-olympiad-1</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>d8981dcf-e3ad-4ca9-aef5-79b5cd836a36</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Competition program for 2026|1|competition-program-for-2026</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="LOCATION">
+  <value>PGTU 3rd building, office 514</value>
+ </property>
+ <property name="DATE_TIME">
+  <value>18.03.2025 11:00:00</value>
+ </property>
+ <property name="TIME">
+  <value><![CDATA[a:2:{s:9:"TIME_FROM";s:5:"11:00";s:7:"TIME_TO";s:5:"18:00";}]]></value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>500</value>
+ </field>
+ <field name="NAME">
+  <value><![CDATA[Project competition "Creative category"]]></value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>project-competition-creative-category-3</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>069e23a2-c322-4ab4-b7d5-f234c65d8903</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Competition program for 2026|1|competition-program-for-2026</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="LOCATION">
+  <value>PGTU 3rd building, office 518</value>
+ </property>
+ <property name="DATE_TIME">
+  <value>19.03.2025 10:00:00</value>
+ </property>
+ <property name="TIME">
+  <value><![CDATA[a:2:{s:9:"TIME_FROM";s:5:"10:00";s:7:"TIME_TO";s:5:"18:00";}]]></value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>500</value>
+ </field>
+ <field name="NAME">
+  <value><![CDATA[Project competition "Creative category"]]></value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>project-competition-creative-category-4</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>4ea2f9fe-4763-4f8f-bd7d-913f0b396bbc</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Competition program for 2026|1|competition-program-for-2026</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="LOCATION">
+  <value>PGTU 3rd building, office 518</value>
+ </property>
+ <property name="DATE_TIME">
+  <value>20.03.2025 10:00:00</value>
+ </property>
+ <property name="TIME">
+  <value><![CDATA[a:2:{s:9:"TIME_FROM";s:5:"10:00";s:7:"TIME_TO";s:5:"18:00";}]]></value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>500</value>
+ </field>
+ <field name="NAME">
+  <value><![CDATA[Project competition "Creative category"]]></value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>project-competition-creative-category-5</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>9c11f147-025c-4b2b-bb0d-c64f60494c89</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Competition program for 2026|1|competition-program-for-2026</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="LOCATION">
+  <value>PGTU 3rd building, office 518</value>
+ </property>
+ <property name="DATE_TIME">
+  <value>21.03.2025 10:00:00</value>
+ </property>
+ <property name="TIME">
+  <value><![CDATA[a:2:{s:9:"TIME_FROM";s:5:"10:00";s:7:"TIME_TO";s:5:"15:00";}]]></value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>500</value>
+ </field>
+ <field name="NAME">
+  <value>Closing of the Olympics</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>closing-of-the-olympics</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>3e8162ec-8a9b-4738-b703-076fc2f524a5</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Competition program for 2026|1|competition-program-for-2026</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="LOCATION">
+  <value>PGTU 3rd building, office 518</value>
+ </property>
+ <property name="DATE_TIME">
+  <value>21.03.2025 15:00:00</value>
+ </property>
+ <property name="TIME">
+  <value><![CDATA[a:2:{s:9:"TIME_FROM";s:5:"15:00";s:7:"TIME_TO";s:5:"18:00";}]]></value>
+ </property>
+</item>
+
+</items>

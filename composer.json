@@ -16,7 +16,7 @@
     },
     "require": {
         "php": "^8.1",
-        "andreyryabin/sprint.migration": "dev-master"
+        "andreyryabin/sprint.migration": "5.0.2"
     },
     "config": {
         "allow-plugins": {

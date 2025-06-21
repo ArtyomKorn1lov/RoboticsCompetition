@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items iblockUid="robot_content:program" exchangeVersion="2" >
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>500</value>
+ </field>
+ <field name="NAME">
+  <value>Открытие олимпиады</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>politekhnicheskaya-olimpiada</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>c861afd6-2145-4572-84ca-cc87ff5657f0</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Программа проведения соревнований 2026 года|1|programma-provedeniya-sorevnovaniy-2026-goda</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="LOCATION">
+  <value>ПГТУ 3-тий корпус, кабинет 514</value>
+ </property>
+ <property name="DATE_TIME">
+  <value>17.03.2025 10:00:00</value>
+ </property>
+ <property name="TIME">
+  <value><![CDATA[a:2:{s:9:"TIME_FROM";s:5:"10:00";s:7:"TIME_TO";s:5:"12:00";}]]></value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>500</value>
+ </field>
+ <field name="NAME">
+  <value>Конкурс проектов «Творческая категория»</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>konkurs-proektov-tvorcheskaya-kategoriya</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>f4872e9f-47cb-4437-93e8-a9f975212a83</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Программа проведения соревнований 2026 года|1|programma-provedeniya-sorevnovaniy-2026-goda</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="LOCATION">
+  <value>ПГТУ 3-тий корпус, кабинет 518</value>
+ </property>
+ <property name="DATE_TIME">
+  <value>17.03.2025 12:00:00</value>
+ </property>
+ <property name="TIME">
+  <value><![CDATA[a:2:{s:9:"TIME_FROM";s:5:"12:00";s:7:"TIME_TO";s:5:"16:00";}]]></value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>500</value>
+ </field>
+ <field name="NAME">
+  <value>Чемпионат компетенций «Профи»</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>chempionat-kompetentsiy-profi</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>db96d1fc-d111-4dd5-9d96-b2282a90cedf</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Программа проведения соревнований 2026 года|1|programma-provedeniya-sorevnovaniy-2026-goda</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="LOCATION">
+  <value>ПГТУ 3-тий корпус, кабинет 521</value>
+ </property>
+ <property name="DATE_TIME">
+  <value>17.03.2025 16:00:00</value>
+ </property>
+ <property name="TIME">
+  <value><![CDATA[a:2:{s:9:"TIME_FROM";s:5:"16:00";s:7:"TIME_TO";s:5:"18:00";}]]></value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>500</value>
+ </field>
+ <field name="NAME">
+  <value>Чемпионат компетенций «Профи»</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>chempionat-kompetentsiy-profi-1</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>6409904b-4a5e-46d6-82a7-5264313b61ba</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Программа проведения соревнований 2026 года|1|programma-provedeniya-sorevnovaniy-2026-goda</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="LOCATION">
+  <value>ПГТУ 3-тий корпус, кабинет 521</value>
+ </property>
+ <property name="DATE_TIME">
+  <value>18.03.2025 10:00:00</value>
+ </property>
+ <property name="TIME">
+  <value><![CDATA[a:2:{s:9:"TIME_FROM";s:5:"10:00";s:7:"TIME_TO";s:5:"11:00";}]]></value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>500</value>
+ </field>
+ <field name="NAME">
+  <value>Политехническая олимпиада</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>politekhnicheskaya-olimpiada-1</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>7484f892-d844-4e67-a73c-494738d22644</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Программа проведения соревнований 2026 года|1|programma-provedeniya-sorevnovaniy-2026-goda</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="LOCATION">
+  <value>ПГТУ 3-тий корпус, кабинет 514</value>
+ </property>
+ <property name="DATE_TIME">
+  <value>18.03.2025 11:00:00</value>
+ </property>
+ <property name="TIME">
+  <value><![CDATA[a:2:{s:9:"TIME_FROM";s:5:"11:00";s:7:"TIME_TO";s:5:"12:00";}]]></value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>500</value>
+ </field>
+ <field name="NAME">
+  <value>Конкурс проектов «Творческая категория»</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>konkurs-proektov-tvorcheskaya-kategoriya-2</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>352ed73d-4879-46ef-a5fa-e586e9a52488</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Программа проведения соревнований 2026 года|1|programma-provedeniya-sorevnovaniy-2026-goda</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="LOCATION">
+  <value>ПГТУ 3-тий корпус, кабинет 518</value>
+ </property>
+ <property name="DATE_TIME">
+  <value>18.03.2025 13:00:00</value>
+ </property>
+ <property name="TIME">
+  <value><![CDATA[a:2:{s:9:"TIME_FROM";s:5:"12:00";s:7:"TIME_TO";s:5:"13:00";}]]></value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>500</value>
+ </field>
+ <field name="NAME">
+  <value>Политехническая олимпиада</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>politekhnicheskaya-olimpiada-2</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>e9768e7b-6fe1-4d2e-957e-27543d9f8916</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Программа проведения соревнований 2026 года|1|programma-provedeniya-sorevnovaniy-2026-goda</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="LOCATION">
+  <value>ПГТУ 3-тий корпус, кабинет 514</value>
+ </property>
+ <property name="DATE_TIME">
+  <value>18.03.2025 14:00:00</value>
+ </property>
+ <property name="TIME">
+  <value><![CDATA[a:2:{s:9:"TIME_FROM";s:5:"14:00";s:7:"TIME_TO";s:5:"15:00";}]]></value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>500</value>
+ </field>
+ <field name="NAME">
+  <value>Политехническая олимпиада</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>politekhnicheskaya-olimpiada-3</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>66137a04-3934-4f35-a316-1ce2199eed36</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Программа проведения соревнований 2026 года|1|programma-provedeniya-sorevnovaniy-2026-goda</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="LOCATION">
+  <value>ПГТУ 3-тий корпус, кабинет 514</value>
+ </property>
+ <property name="DATE_TIME">
+  <value>18.03.2025 15:00:00</value>
+ </property>
+ <property name="TIME">
+  <value><![CDATA[a:2:{s:9:"TIME_FROM";s:5:"15:00";s:7:"TIME_TO";s:5:"16:00";}]]></value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>500</value>
+ </field>
+ <field name="NAME">
+  <value>Политехническая олимпиада</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>politekhnicheskaya-olimpiada-4</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>e4529023-5c8e-439b-8c22-af5e0d2d9277</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Программа проведения соревнований 2026 года|1|programma-provedeniya-sorevnovaniy-2026-goda</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="LOCATION">
+  <value>ПГТУ 3-тий корпус, кабинет 514</value>
+ </property>
+ <property name="DATE_TIME">
+  <value>18.03.2025 17:00:00</value>
+ </property>
+ <property name="TIME">
+  <value><![CDATA[a:2:{s:9:"TIME_FROM";s:5:"16:00";s:7:"TIME_TO";s:5:"17:00";}]]></value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>500</value>
+ </field>
+ <field name="NAME">
+  <value>Конкурс проектов «Творческая категория»</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>konkurs-proektov-tvorcheskaya-kategoriya-3</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>c07a3c75-01f5-43a2-ad24-bfd72295d2ee</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Программа проведения соревнований 2026 года|1|programma-provedeniya-sorevnovaniy-2026-goda</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="LOCATION">
+  <value>ПГТУ 3-тий корпус, кабинет 518</value>
+ </property>
+ <property name="DATE_TIME">
+  <value>19.03.2025 10:00:00</value>
+ </property>
+ <property name="TIME">
+  <value><![CDATA[a:2:{s:9:"TIME_FROM";s:5:"10:00";s:7:"TIME_TO";s:5:"18:00";}]]></value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>500</value>
+ </field>
+ <field name="NAME">
+  <value>Конкурс проектов «Творческая категория»</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>konkurs-proektov-tvorcheskaya-kategoriya-4</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>3f213eee-0703-4065-a628-808b7de3db49</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Программа проведения соревнований 2026 года|1|programma-provedeniya-sorevnovaniy-2026-goda</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="LOCATION">
+  <value>ПГТУ 3-тий корпус, кабинет 518</value>
+ </property>
+ <property name="DATE_TIME">
+  <value>20.03.2025 10:00:00</value>
+ </property>
+ <property name="TIME">
+  <value><![CDATA[a:2:{s:9:"TIME_FROM";s:5:"10:00";s:7:"TIME_TO";s:5:"18:00";}]]></value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>500</value>
+ </field>
+ <field name="NAME">
+  <value>Конкурс проектов «Творческая категория»</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>konkurs-proektov-tvorcheskaya-kategoriya-5</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>6274fa37-b61c-4d80-a6d0-4cbf0005660b</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Программа проведения соревнований 2026 года|1|programma-provedeniya-sorevnovaniy-2026-goda</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="LOCATION">
+  <value>ПГТУ 3-тий корпус, кабинет 518</value>
+ </property>
+ <property name="DATE_TIME">
+  <value>21.03.2025 10:00:00</value>
+ </property>
+ <property name="TIME">
+  <value><![CDATA[a:2:{s:9:"TIME_FROM";s:5:"10:00";s:7:"TIME_TO";s:5:"18:00";}]]></value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>500</value>
+ </field>
+ <field name="NAME">
+  <value>Закрытие олимпиады</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>zakrytie-olimpiady</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>95483222-8168-4953-9de7-857422b7ebd5</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Программа проведения соревнований 2026 года|1|programma-provedeniya-sorevnovaniy-2026-goda</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="LOCATION">
+  <value>ПГТУ 3-тий корпус, кабинет 518</value>
+ </property>
+ <property name="DATE_TIME">
+  <value>21.03.2025 18:00:00</value>
+ </property>
+ <property name="TIME">
+  <value><![CDATA[a:2:{s:9:"TIME_FROM";s:5:"18:00";s:7:"TIME_TO";s:5:"19:00";}]]></value>
+ </property>
+</item>
+
+</items>

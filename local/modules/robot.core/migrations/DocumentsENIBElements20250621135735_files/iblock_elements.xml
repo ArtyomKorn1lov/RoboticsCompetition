@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items iblockUid="robot_content:documents_en" exchangeVersion="2" >
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>100</value>
+ </field>
+ <field name="NAME">
+  <value>Organizing Committee</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>organizing-committee</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>4ceecae7-2009-4350-a564-484d71f9ccfd</value>
+ </field>
+ <field name="IBLOCK_SECTION"/>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="DOCUMENT">
+  <value name="&#x422;&#x435;&#x441;&#x442;&#x43E;&#x432;&#x44B;&#x439; &#x434;&#x43E;&#x43A;&#x443;&#x43C;&#x435;&#x43D;&#x442;.doc" type="file">iblock/60b/rxazyjzobl9wvfrdr717s3jk8ko9zro6.docx</value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>200</value>
+ </field>
+ <field name="NAME">
+  <value><![CDATA[Regulations of the discipline "Project competition "Creative category"]]></value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>regulations-of-the-discipline-project-competition-creative-category</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>0bff2869-5d5b-4f8e-a2ef-6acf24813a84</value>
+ </field>
+ <field name="IBLOCK_SECTION"/>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="DOCUMENT">
+  <value name="&#x422;&#x435;&#x441;&#x442;&#x43E;&#x432;&#x44B;&#x439; &#x434;&#x43E;&#x43A;&#x443;&#x43C;&#x435;&#x43D;&#x442;.docx" type="file">iblock/60b/rxazyjzobl9wvfrdr717s3jk8ko9zro6.docx</value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>300</value>
+ </field>
+ <field name="NAME">
+  <value><![CDATA[Regulations of the discipline "Polytechnic Olympiad"]]></value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>regulations-of-the-discipline-polytechnic-olympiad</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>11099033-dbfa-42fb-a02d-16d61c638bef</value>
+ </field>
+ <field name="IBLOCK_SECTION"/>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="DOCUMENT">
+  <value name="&#x422;&#x435;&#x441;&#x442;&#x43E;&#x432;&#x44B;&#x439;-&#x434;&#x43E;&#x43A;&#x443;&#x43C;&#x435;&#x43D;&#x442;.pdf" type="file">iblock/2f9/kq3918z8froo9y7ry922np8ax042rewi.pdf</value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>400</value>
+ </field>
+ <field name="NAME">
+  <value><![CDATA[Regulations of the discipline "Project Competition "Creative Category" 2]]></value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>regulations-of-the-discipline-project-competition-creative-category-2</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>e1afc3bf-97e4-4b20-912c-79e5a064bb9e</value>
+ </field>
+ <field name="IBLOCK_SECTION"/>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="DOCUMENT">
+  <value name="&#x422;&#x435;&#x441;&#x442;&#x43E;&#x432;&#x44B;&#x439; &#x434;&#x43E;&#x43A;&#x443;&#x43C;&#x435;&#x43D;&#x442;.doc" type="file">iblock/60b/rxazyjzobl9wvfrdr717s3jk8ko9zro6.docx</value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>500</value>
+ </field>
+ <field name="NAME">
+  <value>Regulations of the festival “Regional festival of robotics in PSTU”</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>regulations-of-the-festival-regional-festival-of-robotics-in-pstu</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>ca50dc67-4937-48fa-ac23-2726789eb338</value>
+ </field>
+ <field name="IBLOCK_SECTION"/>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="DOCUMENT">
+  <value name="&#x422;&#x435;&#x441;&#x442;&#x43E;&#x432;&#x44B;&#x439; &#x434;&#x43E;&#x43A;&#x443;&#x43C;&#x435;&#x43D;&#x442;.docx" type="file">iblock/60b/rxazyjzobl9wvfrdr717s3jk8ko9zro6.docx</value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>600</value>
+ </field>
+ <field name="NAME">
+  <value><![CDATA[Regulations of the discipline "Polytechnic Olympiad" 2]]></value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>regulations-of-the-discipline-polytechnic-olympiad-2</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>eab944ec-bd50-4c10-b65d-3e9689d57d97</value>
+ </field>
+ <field name="IBLOCK_SECTION"/>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="DOCUMENT">
+  <value name="&#x422;&#x435;&#x441;&#x442;&#x43E;&#x432;&#x44B;&#x439;-&#x434;&#x43E;&#x43A;&#x443;&#x43C;&#x435;&#x43D;&#x442;.pdf" type="file">iblock/2f9/kq3918z8froo9y7ry922np8ax042rewi.pdf</value>
+ </property>
+</item>
+
+</items>

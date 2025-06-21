@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items iblockUid="robot_content:archive_en" exchangeVersion="2" >
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>100</value>
+ </field>
+ <field name="NAME">
+  <value>Photos from the festival</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT">
+  <value>All photos taken at the event</value>
+ </field>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>photos-from-the-festival</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>3e57e39b-2feb-41c9-b8ce-c7f3c544b115</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>2024 year|1|2024-year</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="PHOTO">
+  <value name="archive_photo_3.webp" type="file">iblock/404/1j6hy5x7litlspau8gxtlf4orwivlpad.webp</value>
+  <value name="archive_photo_4.webp" type="file">iblock/359/d80zwnyqogmghw54sx3q6e9n0t2wql77.webp</value>
+  <value name="archive_photo_1.webp" type="file">iblock/70c/hkecn926zx8mt3xr9glw33r9e411xbc6.webp</value>
+  <value name="archive_photo_2.webp" type="file">iblock/9bc/kyt3ap7f46omeb9do2ksnpg2f927nzco.webp</value>
+  <value name="archive_photo_4.webp" type="file">iblock/359/d80zwnyqogmghw54sx3q6e9n0t2wql77.webp</value>
+  <value name="archive_photo_1.webp" type="file">iblock/70c/hkecn926zx8mt3xr9glw33r9e411xbc6.webp</value>
+  <value name="archive_photo_2.webp" type="file">iblock/9bc/kyt3ap7f46omeb9do2ksnpg2f927nzco.webp</value>
+  <value name="archive_photo_3.webp" type="file">iblock/404/1j6hy5x7litlspau8gxtlf4orwivlpad.webp</value>
+ </property>
+ <property name="VIDEO_PREVIEW">
+  <value name="archive_video_1.webp" type="file">iblock/c65/8npxw3aqqbmw3n1c3ciiuzhs1ojstolq.webp</value>
+  <value name="archive_video_1.webp" type="file">iblock/c65/8npxw3aqqbmw3n1c3ciiuzhs1ojstolq.webp</value>
+  <value name="archive_photo_1.webp" type="file">iblock/70c/hkecn926zx8mt3xr9glw33r9e411xbc6.webp</value>
+ </property>
+ <property name="VIDEO">
+  <value name="demo-video.mp4" type="file">iblock/bd2/kx4ncbr1av9rmrtj8qcs7t8j9bjwa997.mp4</value>
+  <value name="demo-video.mp4" type="file">iblock/bd2/kx4ncbr1av9rmrtj8qcs7t8j9bjwa997.mp4</value>
+  <value name="demo-video.mp4" type="file">iblock/bd2/kx4ncbr1av9rmrtj8qcs7t8j9bjwa997.mp4</value>
+ </property>
+ <property name="VIDEO_LINKS"/>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>200</value>
+ </field>
+ <field name="NAME">
+  <value>Photos from the Olympics</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT">
+  <value>All photos taken at the Olympics</value>
+ </field>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>photos-from-the-olympics</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>04b760e5-e2da-47da-82c6-92240ca6ee82</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>2024 year|1|2024-year</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="PHOTO">
+  <value name="archive_video_1.webp" type="file">iblock/c65/8npxw3aqqbmw3n1c3ciiuzhs1ojstolq.webp</value>
+  <value name="archive_photo_2.webp" type="file">iblock/9bc/kyt3ap7f46omeb9do2ksnpg2f927nzco.webp</value>
+  <value name="archive_photo_2.webp" type="file">iblock/9bc/kyt3ap7f46omeb9do2ksnpg2f927nzco.webp</value>
+  <value name="archive_photo_4.webp" type="file">iblock/359/d80zwnyqogmghw54sx3q6e9n0t2wql77.webp</value>
+ </property>
+ <property name="VIDEO_PREVIEW">
+  <value name="archive_video_1.webp" type="file">iblock/c65/8npxw3aqqbmw3n1c3ciiuzhs1ojstolq.webp</value>
+  <value name="archive_photo_1.webp" type="file">iblock/70c/hkecn926zx8mt3xr9glw33r9e411xbc6.webp</value>
+  <value name="archive_photo_2.webp" type="file">iblock/9bc/kyt3ap7f46omeb9do2ksnpg2f927nzco.webp</value>
+  <value name="archive_photo_3.webp" type="file">iblock/404/1j6hy5x7litlspau8gxtlf4orwivlpad.webp</value>
+ </property>
+ <property name="VIDEO">
+  <value name="demo-video.mp4" type="file">iblock/bd2/kx4ncbr1av9rmrtj8qcs7t8j9bjwa997.mp4</value>
+ </property>
+ <property name="VIDEO_LINKS">
+  <value>https://www.youtube.com/watch?v=dLw6aqKbpsg</value>
+  <value>https://rutube.ru/video/aac37ec4902a2189930b2f03a210c096/</value>
+  <value>https://vkvideo.ru/video-227494634_456239074</value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>100</value>
+ </field>
+ <field name="NAME">
+  <value>Photos from the Olympics</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT">
+  <value>3434636 All photos taken at the Olympics</value>
+ </field>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>photos-from-the-olympics-22</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>76dd694b-45aa-4645-8b81-30a0d2344c0e</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>2023 year|1|2023-year</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="PHOTO">
+  <value name="archive_photo_4.webp" type="file">iblock/359/d80zwnyqogmghw54sx3q6e9n0t2wql77.webp</value>
+  <value name="archive_photo_1.webp" type="file">iblock/70c/hkecn926zx8mt3xr9glw33r9e411xbc6.webp</value>
+  <value name="archive_photo_2.webp" type="file">iblock/9bc/kyt3ap7f46omeb9do2ksnpg2f927nzco.webp</value>
+  <value name="archive_photo_3.webp" type="file">iblock/404/1j6hy5x7litlspau8gxtlf4orwivlpad.webp</value>
+ </property>
+ <property name="VIDEO_PREVIEW"/>
+ <property name="VIDEO">
+  <value name="demo-video.mp4" type="file">iblock/bd2/kx4ncbr1av9rmrtj8qcs7t8j9bjwa997.mp4</value>
+ </property>
+ <property name="VIDEO_LINKS"/>
+</item>
+
+</items>
