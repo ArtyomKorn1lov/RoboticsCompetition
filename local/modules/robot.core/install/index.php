@@ -13,16 +13,21 @@ use Bitrix\Main\Config\Option;
 use Bitrix\Main\Config\Configuration;
 use Bitrix\Main\EventManager;
 use Bitrix\Main\Context;
+use Bitrix\Main\LoaderException;
 
 use Robot\Core\Tools\Modules\Manager;
 use Robot\Core\Entity\SiteSettings\SiteSettingsTable;
 use Robot\Core\Enums\SocialIcons;
 use Robot\Core\Constants;
 use Robot\Core\Tools\IBlocks\UserTypeTimeRange;
+use Robot\Core\Tools\Migration\MigrationConfig;
+use Sprint\Migration\Installer;
 
 Loc::loadMessages(__FILE__);
 
-//в названии класса пишем название директории нашего модуля, только вместо точки ставим нижнее подчеркивание
+/**
+ * В названии класса используется название директории модуля, только вместо точки ставим нижнее подчеркивание
+ */
 class robot_core extends CModule
 {
     /** @var string корневая папка в которой находится модуль */
@@ -31,32 +36,39 @@ class robot_core extends CModule
     /** @var array данные с формы 1-го шага */
     private array $stepData = [];
 
+    /** @var array список подмодулей */
+    private array $subModules = [
+        "sprint.migration",
+        "asd.iblock",
+    ];
+
     public function __construct()
     {
         $arModuleVersion = array();
-        //подключаем версию модуля (файл будет следующим в списке)
+        // Подключение версии модуля (файл будет следующим в списке)
         include __DIR__ . '/version.php';
         //присваиваем свойствам класса переменные из нашего файла
         if (is_array($arModuleVersion) && array_key_exists('VERSION', $arModuleVersion)) {
             $this->MODULE_VERSION = $arModuleVersion['VERSION'];
             $this->MODULE_VERSION_DATE = $arModuleVersion['VERSION_DATE'];
         }
-        //пишем название нашего модуля как и директории
+        // Идентификатор модуля как и директории
         $this->MODULE_ID = 'robot.core';
-        // название модуля
+        // Название модуля
         $this->MODULE_NAME = Loc::getMessage('ROBOT_MODULE_NAME');
-        //описание модуля
+        // Описание модуля
         $this->MODULE_DESCRIPTION = Loc::getMessage('ROBOT_MODULE_DESCRIPTION');
-        //используем ли индивидуальную схему распределения прав доступа, мы ставим N, так как не используем ее
+        // Используется ли индивидуальная схема распределения прав доступа, ставится N, так как не используется
         $this->MODULE_GROUP_RIGHTS = 'N';
-        //название компании партнера предоставляющей модуль
+        // Название компании партнера предоставляющей модуль
         $this->PARTNER_NAME = Loc::getMessage('ROBOT_MODULE_PARTNER_NAME');
 
+        // Установка папки корневой директории - либо папка /bitrix либо /local
         $this->setRootDir();
     }
 
     /**
-     * Определение корневой папки для модуля, модуль находится в local или в bitrix
+     * Определение корневой папки для модуля, модуль находится в /local или в /bitrix
      * @return void
      */
     protected function setRootDir(): void
@@ -64,6 +76,21 @@ class robot_core extends CModule
         $path = getLocalPath('modules/'.$this->MODULE_ID.'/install/index.php');
         if (str_contains($path, '/local')) {
             $this->rootDir = '/local';
+        }
+    }
+
+    /**
+     * Проверка всех модулей, которые необходимы для работы текущего модуля
+     * @return void
+     * @throws LoaderException
+     * @throws Exception
+     */
+    protected function checkSubModules(): void
+    {
+        foreach ($this->subModules as $item) {
+            if (!Loader::includeModule($item)) {
+                throw new Exception(Loc::getMessage("ROBOT_SUBMODULE_NOT_INCLUDE", ["#NAME#" => $item]));
+            }
         }
     }
 
@@ -117,11 +144,16 @@ class robot_core extends CModule
         return true;
     }
 
-    //здесь мы описываем все, что делаем до инсталляции модуля, мы добавляем наш модуль в регистр
+    /**
+     * Установка модуля в системе
+     * @return void
+     */
     public function doInstall(): void
     {
         global $APPLICATION;
         try {
+            $this->checkSubModules();
+
             $request = Context::getCurrent()->getRequest();
             $step = (int)$request->get('step');
 
@@ -162,7 +194,10 @@ class robot_core extends CModule
         }
     }
 
-    //вызываем метод удаления таблицы и удаляем модуль из регистра
+    /**
+     * Удаление модуля из системы
+     * @return void
+     */
     public function doUninstall(): void
     {
         global $APPLICATION;
@@ -418,6 +453,13 @@ class robot_core extends CModule
             UserTypeTimeRange::class,
             'getUserTypeDescription'
         );
+        $eventManager->registerEventHandler(
+            'sprint.migration',
+            'OnSearchConfigFiles',
+            $this->MODULE_ID,
+            toClass: MigrationConfig::class,
+            toMethod: 'getConfigDirectory'
+        );
     }
 
     /**
@@ -544,6 +586,13 @@ class robot_core extends CModule
             $this->MODULE_ID,
             UserTypeTimeRange::class,
             'getUserTypeDescription'
+        );
+        $eventManager->unRegisterEventHandler(
+            'sprint.migration',
+            'OnSearchConfigFiles',
+            $this->MODULE_ID,
+            MigrationConfig::class,
+            'getConfigDirectory'
         );
     }
 }

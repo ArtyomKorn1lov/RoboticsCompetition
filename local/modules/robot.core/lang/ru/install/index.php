@@ -10,3 +10,4 @@ $MESS["ROBOT_MODULE_SECONDARY_SITE_EMPTY"] = "Не выбран сайт для 
 $MESS["ROBOT_MODULE_SITE_SIMILAR_ERROR"] = "Выбраны одинаковые сайты для основной и английской версии";
 $MESS["ROBOT_MODULE_PRIMARY_SITE_ERROR"] = "Выбранного сайта для основной версии не существует";
 $MESS["ROBOT_MODULE_SECONDARY_SITE_ERROR"] = "Выбранного сайта для английской версии не существует";
+$MESS["ROBOT_SUBMODULE_NOT_INCLUDE"] = "Не установлен модуль #NAME#";
