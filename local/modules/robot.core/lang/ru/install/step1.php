@@ -6,5 +6,7 @@ $MESS["ROBOT_MODULE_DEFAULT_EMAIL_TITLE"] = "Email получателя писе
 $MESS["ROBOT_MODULE_HEAD_SITES"] = "Выберите сайты из системы, которые будут использоваться для отображения контента в публичной части";
 $MESS["ROBOT_MODULE_PRIMARY_SITES"] = "Сайт для основной версии";
 $MESS["ROBOT_MODULE_SECONDARY_SITES"] = "Сайт для английской версии";
+$MESS["ROBOT_MODULE_HEAD_ADDITION"] = "Дополнительные настройки";
+$MESS["ROBOT_MODULE_INSTALL_MIGRATIONS"] = "Установить миграции модуля?";
 $MESS["ROBOT_MODULE_SAVE"] = "Установить модуль";
 $MESS["ROBOT_MODULE_FAILED"] = "Ошибка";

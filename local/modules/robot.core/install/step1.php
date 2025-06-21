@@ -119,6 +119,21 @@ $tabControl->Begin();
             </label>
         </td>
     </tr>
+    <tr class="heading">
+        <td colspan="2">
+            <?= Loc::getMessage("ROBOT_MODULE_HEAD_ADDITION"); ?>
+        </td>
+    </tr>
+    <tr>
+        <td style="width: 40%">
+            <?= Loc::getMessage("ROBOT_MODULE_INSTALL_MIGRATIONS"); ?>
+        </td>
+        <td>
+            <label>
+                <input style="width: 40%" type="checkbox" name="install_migrations" value="Y" />
+            </label>
+        </td>
+    </tr>
     <?php $tabControl->Buttons(); ?>
     <!-- Кнопка подтверждения выполнения шага -->
     <input type="submit" class="adm-btn-save" value="<?= Loc::getMessage("ROBOT_MODULE_SAVE") ?>">

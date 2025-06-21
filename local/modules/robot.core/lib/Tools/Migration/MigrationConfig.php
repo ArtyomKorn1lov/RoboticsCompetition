@@ -17,6 +17,6 @@ class MigrationConfig
      */
     public static function getConfig(): array
     {
-        return require self::getConfigDirectory() . '/migrations.core.php';
+        return require self::getConfigDirectory() . '/migrations.robot_core.php';
     }
 }

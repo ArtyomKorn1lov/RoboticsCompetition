@@ -163,6 +163,7 @@ class robot_core extends CModule
                     "defaultEmail" => $request->get('default_email'),
                     "primarySiteId" => $request->get('primary_site_id'),
                     "secondarySiteId" => $request->get('secondary_site_id'),
+                    "isInstallMigrations" => $request->get('install_migrations'),
                 ];
                 $validateSecondStep = $this->validateDataStep($stepData);
             }
@@ -175,6 +176,7 @@ class robot_core extends CModule
                 $this->installDb();
                 $this->installRouting();
                 $this->installEventHandlers();
+                $this->installMigrations();
                 Option::set($this->MODULE_ID, Constants::DEFAULT_RECIPIENT_EMAIL_OPTION_CODE, $this->stepData["defaultEmail"]);
                 $APPLICATION->IncludeAdminFile(
                     Loc::getMessage('INSTALL_TITLE_STEP_2'),
@@ -460,6 +462,19 @@ class robot_core extends CModule
             toClass: MigrationConfig::class,
             toMethod: 'getConfigDirectory'
         );
+    }
+
+    /**
+     * Установка миграций для модуля
+     * @return void
+     * @throws Sprint\Migration\Exceptions\MigrationException
+     */
+    public function installMigrations()
+    {
+        if ($this->stepData["isInstallMigrations"] !== "Y") {
+            return;
+        }
+        (new Installer(MigrationConfig::getConfig()))->up();
     }
 
     /**
