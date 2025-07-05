@@ -14,3 +14,12 @@ if ($errorException = $APPLICATION->getException()) {
         Loc::getMessage('ROBOT_MODULE_FAILED') . ': ' . $errorException->GetString()
     );
 }
+?>
+
+<!-- Вывод кнопки для перехода на страницу модулей -->
+<form action="<?= $APPLICATION->GetCurPage() ?>">
+    <!-- В форме обязательно должно быть поле lang, с id языка, чтобы язык не сбросился -->
+    <input type="hidden" name="lang" value="<?= LANGUAGE_ID ?>">
+    <!-- Кнопка вернуться к списку модулей -->
+    <input type="submit" name="" value="<?= Loc::getMessage("ROBOT_MODULE_RETURN") ?>">
+</form>
