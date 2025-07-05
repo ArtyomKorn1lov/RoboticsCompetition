@@ -30,7 +30,7 @@ $arJsData = Json::encode($arResult["JS_DATA"]);
         <div class="b-registration__form" id="<?= $templateId ?>"></div>
         <div class="b-registration__banner-wrap">
             <img class="b-registration__banner"
-                 src="/local/templates/robot/app/dist/assets/images/registration_banner.svg"
+                 src="<?=SITE_TEMPLATE_PATH?>/app/dist/assets/images/registration_banner.svg"
                  alt="<?= Loc::getMessage("COMPONENT_TITLE") ?>">
         </div>
     </div>

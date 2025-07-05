@@ -30,7 +30,7 @@
       &-button {
         width: $m10;
         height: $m10;
-        background-image: url("/local/templates/robot/app/dist/assets/images/close.svg");
+        background-image: url("../assets/images/close.svg");
         background-repeat: no-repeat;
         background-size: $m10 $m10;
         background-position: center;
@@ -70,21 +70,21 @@
     &_address {
 
       &:before {
-        background-image: url('/local/templates/robot/app/dist/assets/images/address.svg');
+        background-image: url('../assets/images/address.svg');
       }
     }
 
     &_mail {
 
       &:before {
-        background-image: url('/local/templates/robot/app/dist/assets/images/mail.svg');
+        background-image: url('../assets/images/mail.svg');
       }
     }
 
     &_phone {
 
       &:before {
-        background-image: url('/local/templates/robot/app/dist/assets/images/phone.svg');
+        background-image: url('../assets/images/phone.svg');
       }
     }
   }

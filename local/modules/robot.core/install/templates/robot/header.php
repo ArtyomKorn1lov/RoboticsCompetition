@@ -13,6 +13,7 @@ if (!Bitrix\Main\Loader::includeModule('robot.core')) {
 
 use Robot\Core\Tools\Modules\Manager;
 use Robot\Core\Constants;
+use Robot\Core\Tools\Template\Helper;
 
 Manager::includeFrontendPlugins();
 
@@ -24,9 +25,11 @@ Manager::includeFrontendPlugins();
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <?php Helper::includeFontsCSS(); ?>
     <?php $APPLICATION->ShowHead();?>
     <title><?php $APPLICATION->ShowTitle()?></title>
 </head>
+<?php Helper::createJSGlobalSiteTemplatePath(); ?>
 <body class="custom-scroll">
 
 <div class="mainContainer">
@@ -72,7 +75,7 @@ Manager::includeFrontendPlugins();
                 <span class="b-header__lang-icon-wrap">
                     <img
                         class="b-header__lang-icon"
-                        src="/local/templates/robot/app/dist/assets/images/<?=$isEnLanguage ? "flag_english" : "flag_russia"?>.svg"
+                        src="<?=SITE_TEMPLATE_PATH?>/app/dist/assets/images/<?=$isEnLanguage ? "flag_english" : "flag_russia"?>.svg"
                         alt="<?=Loc::getMessage("HEADER_LANG_TITLE")?>"
                     >
                 </span>

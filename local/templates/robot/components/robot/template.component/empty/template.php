@@ -26,7 +26,7 @@ $APPLICATION->SetTitle(Loc::getMessage("EMPTY_TITLE"));
     <div class="b-empty__img-wrap">
         <img
             class="b-empty__img"
-            src="/local/templates/robot/app/dist/assets/images/empty.svg"
+            src="<?=SITE_TEMPLATE_PATH?>/app/dist/assets/images/empty.svg"
             alt="404"
         >
     </div>

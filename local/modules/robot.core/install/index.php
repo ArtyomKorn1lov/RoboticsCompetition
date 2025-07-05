@@ -474,7 +474,9 @@ class robot_core extends CModule
         if ($this->stepData["isInstallMigrations"] !== "Y") {
             return;
         }
+        ob_start();
         (new Installer(MigrationConfig::getConfig()))->up();
+        ob_end_clean();
     }
 
     /**

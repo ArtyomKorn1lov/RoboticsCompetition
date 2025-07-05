@@ -1,12 +1,13 @@
 const TemplateHelper = {
 
-    SPRITE_PATH: '/local/templates/robot/app/dist/assets/icons/sprite.svg#',
+    SPRITE_PATH: '/app/dist/assets/icons/sprite.svg#',
 
     getIcon(icon, iconClass) {
         if (!icon) {
             return '';
         }
-        return `<svg ${iconClass ? `class="${iconClass}"` : ''}><use xlink:href="${this.SPRITE_PATH}${icon}"></use></svg>`;
+        const siteTemplatePath = BX?.Globals?.SiteTemplatePath ?? '/bitrix/templates/robot';
+        return `<svg ${iconClass ? `class="${iconClass}"` : ''}><use xlink:href="${siteTemplatePath}${this.SPRITE_PATH}${icon}"></use></svg>`;
     }
 }
 

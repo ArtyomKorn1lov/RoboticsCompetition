@@ -68,7 +68,7 @@ class Constants
     public const CONTACT_MAP_ZOOM = 17;
 
     /** @var string Иконка геообъекта на карте */
-    public const CONTACT_MAP_ICON_PATH = '/local/templates/robot/app/img/map_icon.svg';
+    public const CONTACT_MAP_ICON_PATH = SITE_TEMPLATE_PATH . '/app/img/map_icon.svg';
 
     /** @var int[] Размеры геообъекта на карте */
     public const CONTACT_MAP_ICON_SIZE = [35, 53];

@@ -3,8 +3,9 @@
 
 global $APPLICATION;
 use Bitrix\Main\UI\Extension;
+use Robot\Core\Tools\Template\Helper;
 
-Robot\Core\Tools\Template\Helper::initTitle("b-main__title");
+Helper::initTitle("b-main__title");
 
 // Плагины с основным frontend шаблона подключаются тут, чтобы перегрузить стили js-extention
 Extension::load([

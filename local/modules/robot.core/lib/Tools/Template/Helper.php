@@ -11,10 +11,36 @@ use Robot\Core\Enums\YaMapLang;
 class Helper implements IHelper
 {
     /** @var string Относительный путь к иконке в файловой системе */
-    protected const SPRITE_FOLDER_PATH = "/local/templates/robot/app/dist/assets/icons/sprite.svg#";
+    protected const SPRITE_FOLDER_PATH = SITE_TEMPLATE_PATH . "/app/dist/assets/icons/sprite.svg#";
 
     /** @var string Код свойства для хранения заголовка в буфере */
     protected const TITLE_VIEW_CONTENT_CODE = "PAGER_TITLE";
+
+    /** @var string Путь к шрифтам для шаблона сайта */
+    protected const FONTS_CSS_PATH = "/templates/robot/app/fonts/";
+
+    /**
+     * @return void
+     */
+    public static function includeFontsCSS(): void
+    {
+        global $APPLICATION;
+        $localDir = '/local';
+        $bitrixDir = BX_ROOT;
+        if (str_contains(SITE_TEMPLATE_PATH, $localDir)) {
+            $APPLICATION->SetAdditionalCSS($localDir . static::FONTS_CSS_PATH . "local-fonts.css");
+        } else {
+            $APPLICATION->SetAdditionalCSS($bitrixDir . static::FONTS_CSS_PATH . "bitrix-fonts.css");
+        }
+    }
+
+    /**
+     * @return void
+     */
+    public static function createJSGlobalSiteTemplatePath(): void
+    {
+        echo '<script>BX.ready(function()  {addSiteTemplatePath("' . SITE_TEMPLATE_PATH . '"); });</script>';
+    }
 
     /**
      * @param string $code

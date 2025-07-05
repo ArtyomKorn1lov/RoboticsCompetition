@@ -44,7 +44,7 @@ Loc::loadMessages(__FILE__);
             <?php if (!empty($arResult["DETAIL_PICTURE"]["SRC"])) { ?>
                 <img class="b-event__img" src="<?= $arResult["DETAIL_PICTURE"]["SRC"] ?>" alt="<?= $arResult["NAME"] ?>">
             <?php } else { ?>
-                <img class="b-event__img" src="/local/templates/robot/app/dist/assets/images/event_banner.svg" alt="<?= $arResult["NAME"] ?>">
+                <img class="b-event__img" src="<?=SITE_TEMPLATE_PATH?>/app/dist/assets/images/event_banner.svg" alt="<?= $arResult["NAME"] ?>">
             <?php } ?>
         </picture>
     </div>
