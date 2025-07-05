@@ -190,9 +190,14 @@ class robot_core extends CModule
             }
         }
         catch (Exception $exception) {
+            file_put_contents($_SERVER["DOCUMENT_ROOT"] . "/log.txt", var_export($exception->getMessage(), true));
             ModuleManager::unRegisterModule($this->MODULE_ID);
             AddMessage2Log($exception->getMessage(), $this->MODULE_ID);
             $APPLICATION->ThrowException($exception->getMessage());
+            $APPLICATION->IncludeAdminFile(
+                Loc::getMessage('ROBOT_STEP1_TITLE'),
+                __DIR__ . '/installerror.php'
+            );
         }
     }
 

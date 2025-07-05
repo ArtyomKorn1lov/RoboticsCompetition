@@ -2,6 +2,7 @@
 $MESS["ROBOT_MODULE_NAME"] = "Сайт для проведения соревнований по робототехнике";
 $MESS["ROBOT_MODULE_DESCRIPTION"] = "Модуль для управления сайтом для проведений соревнований по робототехнике";
 $MESS["ROBOT_MODULE_PARTNER_NAME"] = "Студент ПГТУ";
+$MESS["ROBOT_STEP_ERROR_TITLE"] = "Ошибка при установке модуля";
 $MESS["ROBOT_STEP1_TITLE"] = "Установка модуля шаг 1";
 $MESS["ROBOT_STEP2_TITLE"] = "Установка модуля шаг 2";
 $MESS["ROBOT_DEINSTALL_TITLE"] = "Удаление модуля";

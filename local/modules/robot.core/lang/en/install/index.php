@@ -2,6 +2,7 @@
 $MESS["ROBOT_MODULE_NAME"] = "Website for holding robotics competitions";
 $MESS["ROBOT_MODULE_DESCRIPTION"] = "Module for managing a website for holding robotics competitions";
 $MESS["ROBOT_MODULE_PARTNER_NAME"] = "Student of PGTU";
+$MESS["ROBOT_STEP_ERROR_TITLE"] = "Error installing module";
 $MESS["ROBOT_STEP1_TITLE"] = "Installing the module step 1";
 $MESS["ROBOT_STEP2_TITLE"] = "Installing the module step 2";
 $MESS["ROBOT_DEINSTALL_TITLE"] = "Removing a module";
