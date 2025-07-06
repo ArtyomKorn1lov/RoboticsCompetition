@@ -1,0 +1,16 @@
+.b-slider {
+
+  &.swiper {
+    margin-left: -32px;
+    margin-right: -32px;
+    padding-left: $m32;
+    padding-right: $m32;
+  }
+
+  &__item {
+
+    &.swiper-slide {
+      width: fit-content;
+    }
+  }
+}

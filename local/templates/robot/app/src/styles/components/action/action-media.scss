@@ -1,0 +1,25 @@
+@include screen(lg) {
+  .b-action {
+
+    &__section {
+      @include grid(2);
+    }
+  }
+}
+
+@include screen(md) {
+  .b-action {
+
+    &__title {
+      margin-bottom: $m20;
+    }
+
+    &__section {
+      @include grid(1, false, 20px);
+    }
+
+    &__name {
+      font-size: $textNormal;
+    }
+  }
+}

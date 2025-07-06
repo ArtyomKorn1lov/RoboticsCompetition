@@ -1,0 +1,66 @@
+@include screen(lgl) {
+  .b-header {
+
+    &__menu {
+      display: none;
+    }
+
+    &__controls {
+      gap: $m30;
+    }
+
+    &__burger {
+
+      &-wrap {
+        display: block;
+      }
+    }
+  }
+}
+
+@include screen(sml) {
+  .b-header {
+
+    &__wrap {
+      padding-top: $m8;
+      padding-bottom: $m20;
+    }
+
+    &__site {
+      gap: $m8;
+    }
+
+    &__logo {
+
+      &-wrap {
+        max-width: 32px;
+        aspect-ratio: 32/30;
+      }
+    }
+
+    &__title {
+      font-size: $textTinyLittle;
+      max-width: 122px;
+    }
+
+    &__controls {
+      gap: $m10;
+    }
+
+    &__lang {
+      border-radius: $rounded10;
+      padding: $m10;
+      font-size: $textTiny;
+    }
+
+    &__burger {
+      width: $m35;
+      height: $m35;
+
+      svg {
+        width: $m15;
+        height: $m15;
+      }
+    }
+  }
+}

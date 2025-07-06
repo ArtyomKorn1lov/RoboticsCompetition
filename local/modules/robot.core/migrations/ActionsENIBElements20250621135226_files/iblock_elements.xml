@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items iblockUid="robot_content:actions_en" exchangeVersion="2" >
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>100</value>
+ </field>
+ <field name="NAME">
+  <value>Regional robotics marathon</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT">
+  <value>The purpose of the event is to popularize scientific and technical creativity and robotics among children and young people.</value>
+ </field>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>html</value>
+ </field>
+ <field name="CODE">
+  <value>regional-robotics-marathon</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>85e773cd-7e54-440f-b448-de553e504bd7</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Regional festival on robotics in PGTU|1|regional-festival-on-robotics-in-pgtu</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>200</value>
+ </field>
+ <field name="NAME">
+  <value><![CDATA[Project competition "Creative category"]]></value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT">
+  <value>It is carried out with the aim of popularizing and developing robotics as a direction of modern technologies and an element of training basic skills in the learning process in educational robotics.</value>
+ </field>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>html</value>
+ </field>
+ <field name="CODE">
+  <value>project-competition-creative-category</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>0ebdfdb2-5104-47c1-a81c-66b1e7ac03c3</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Regional festival on robotics in PGTU|1|regional-festival-on-robotics-in-pgtu</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>300</value>
+ </field>
+ <field name="NAME">
+  <value>Engineering project</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT">
+  <value>This is comprehensive documentation that includes calculations, drawings, diagrams and descriptions for the design, construction and operation of the facility’s engineering systems.</value>
+ </field>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>html</value>
+ </field>
+ <field name="CODE">
+  <value>engineering-project</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>d76543dc-6f9c-427b-b0f1-df46fa39837d</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Regional festival on robotics in PGTU|1|regional-festival-on-robotics-in-pgtu</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>400</value>
+ </field>
+ <field name="NAME">
+  <value><![CDATA[Championship of competencies "Profi"]]></value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT">
+  <value>This is comprehensive documentation that includes calculations, drawings, diagrams and descriptions for the design, construction and operation of the facility’s engineering systems.</value>
+ </field>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>html</value>
+ </field>
+ <field name="CODE">
+  <value>championship-of-competencies-profi</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>0426ea31-f93b-4809-98aa-5d422dbfbbc4</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Regional festival on robotics in PGTU|1|regional-festival-on-robotics-in-pgtu</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>500</value>
+ </field>
+ <field name="NAME">
+  <value>Polytechnic Olympiad</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT"/>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT">
+  <value>As part of the Olympiad, participants will be offered tasks that will require knowledge in the field of electronics, design and programming.</value>
+ </field>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>html</value>
+ </field>
+ <field name="CODE">
+  <value>polytechnic-olympiad</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>54bfd9dd-6ef9-4465-af3c-09f488f64559</value>
+ </field>
+ <field name="IBLOCK_SECTION">
+  <value>Regional festival on robotics in PGTU|1|regional-festival-on-robotics-in-pgtu</value>
+ </field>
+ <field name="IPROPERTY_TEMPLATES"/>
+</item>
+
+</items>

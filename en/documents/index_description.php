@@ -1,0 +1,1 @@
+All documents related to the robotics competition at PGTU

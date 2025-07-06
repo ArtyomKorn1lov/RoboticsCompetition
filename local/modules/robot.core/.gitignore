@@ -1,0 +1,28 @@
+# IDE
+.idea/
+.vscode/
+
+# Temporary
+/log*
+/tmp*
+
+# Composer
+/vendor
+
+# Misc
+*.backup
+*.bak
+*.cache
+*.DS_Store
+*.env
+*.log
+*.orig
+
+# Archive
+*.7z
+*.bzip
+*.gz
+*.gzip
+*.lz
+*.tar
+*.zip

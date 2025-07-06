@@ -1,0 +1,71 @@
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  @extend %headerDefaultOptions;
+}
+
+h1, .h1 {
+  font-size: 45px;
+
+  @include screen(sml) {
+    font-size: $textLarge;
+  }
+}
+
+h2, .h2 {
+  font-size: 40px;
+
+  @include screen(sml) {
+    font-size: $textBase;
+  }
+}
+
+h3, .h3 {
+  font-size: 32px;
+
+  @include screen(sml) {
+    font-size: $textBase;
+  }
+}
+
+h4, .h4 {
+  font-size: $textHuge;
+
+  @include screen(sml) {
+    font-size: $textBase;
+  }
+}
+
+h5, .h5 {
+  font-size: $textLarge;
+
+  @include screen(sml) {
+    font-size: $textBase;
+  }
+}
+
+h6, .h6 {
+  font-size: $textBase;
+
+  @include screen(sml) {
+    font-size: $textNormal;
+  }
+}
+
+span, p, a, div {
+  @extend %textDefaultOptions;
+}
+
+p {
+  margin-top: $m10;
+  margin-bottom: $m10;
+}
+
+a {
+  line-height: $leadingSmall;
+  color: $colorPrimary;
+  text-decoration: none;
+
+  &:hover,
+  &:active {
+    color: $colorSecondary;
+  }
+}

@@ -1,0 +1,41 @@
+@include screen(lgl) {
+  .b-materials {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    &_video {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+}
+
+@include screen(md) {
+  .b-materials {
+    @include grid(2, false, $m20);
+
+    &_mb {
+      margin-bottom: $m35;
+    }
+
+    &_video {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+  }
+}
+
+@include screen(sml) {
+  .b-materials {
+
+    &__video {
+
+      &-icon {
+        width: 42px;
+        height: 42px;
+
+        svg {
+          width: 12px;
+          height: 14px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+// Исходный код шрифтов, подключение шрифтов было перенесено в /robot/app/fonts , для того, чтобы можно было подключать их вне зависимости от папки bitrix/local
+@font-face {
+  font-family: 'Golos Text';
+  src: url('/local/templates/robot/app/src/assets/fonts/GolosText-Medium.eot');
+  src: local('Golos Text Medium'), local('GolosText-Medium'),
+  url('/local/templates/robot/app/src/assets/fonts/GolosText-Medium.eot?#iefix') format('embedded-opentype'),
+  url('/local/templates/robot/app/src/assets/fonts/GolosText-Medium.woff2') format('woff2'),
+  url('/local/templates/robot/app/src/assets/fonts/GolosText-Medium.woff') format('woff'),
+  url('/local/templates/robot/app/src/assets/fonts/GolosText-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Golos Text';
+  src: url('/local/templates/robot/app/src/assets/fonts/GolosText-Black.eot');
+  src: local('Golos Text Black'), local('GolosText-Black'),
+  url('/local/templates/robot/app/src/assets/fonts/GolosText-Black.eot?#iefix') format('embedded-opentype'),
+  url('/local/templates/robot/app/src/assets/fonts/GolosText-Black.woff2') format('woff2'),
+  url('/local/templates/robot/app/src/assets/fonts/GolosText-Black.woff') format('woff'),
+  url('/local/templates/robot/app/src/assets/fonts/GolosText-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Golos Text';
+  src: url('/local/templates/robot/app/src/assets/fonts/GolosText-DemiBold.eot');
+  src: local('Golos Text DemiBold'), local('GolosText-DemiBold'),
+  url('/local/templates/robot/app/src/assets/fonts/GolosText-DemiBold.eot?#iefix') format('embedded-opentype'),
+  url('/local/templates/robot/app/src/assets/fonts/GolosText-DemiBold.woff2') format('woff2'),
+  url('/local/templates/robot/app/src/assets/fonts/GolosText-DemiBold.woff') format('woff'),
+  url('/local/templates/robot/app/src/assets/fonts/GolosText-DemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Golos Text';
+  src: url('/local/templates/robot/app/src/assets/fonts/GolosText-Bold.eot');
+  src: local('Golos Text Bold'), local('GolosText-Bold'),
+  url('/local/templates/robot/app/src/assets/fonts/GolosText-Bold.eot?#iefix') format('embedded-opentype'),
+  url('/local/templates/robot/app/src/assets/fonts/GolosText-Bold.woff2') format('woff2'),
+  url('/local/templates/robot/app/src/assets/fonts/GolosText-Bold.woff') format('woff'),
+  url('/local/templates/robot/app/src/assets/fonts/GolosText-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Golos Text';
+  src: url('/local/templates/robot/app/src/assets/fonts/GolosText-Regular.eot');
+  src: local('Golos Text Regular'), local('GolosText-Regular'),
+  url('/local/templates/robot/app/src/assets/fonts/GolosText-Regular.eot?#iefix') format('embedded-opentype'),
+  url('/local/templates/robot/app/src/assets/fonts/GolosText-Regular.woff2') format('woff2'),
+  url('/local/templates/robot/app/src/assets/fonts/GolosText-Regular.woff') format('woff'),
+  url('/local/templates/robot/app/src/assets/fonts/GolosText-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+

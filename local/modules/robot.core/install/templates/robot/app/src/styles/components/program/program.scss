@@ -1,0 +1,37 @@
+.b-program {
+  @include flex(column);
+  gap: $m35;
+
+  &__list {
+    @include flex(column);
+    gap: $m25;
+  }
+
+  &__item {
+    @extend %simpleCardOptions;
+    @include flex(row, center, space-between);
+    gap: $m25;
+    border-radius: $m20;
+  }
+
+  &__left {
+    @include flex(false, center);
+    gap: $m30;
+  }
+
+  &__time {
+    padding: $m8 $m10;
+    border-radius: $rounded10;
+    background-color: $colorPrimary;
+    font-size: $textNormal;
+    font-weight: $textBold;
+    color: $colorWhite;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  &__right {
+    font-weight: $textBold;
+    flex-shrink: 0;
+  }
+}

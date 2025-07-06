@@ -1,0 +1,105 @@
+.b-header {
+  @include flex(false, false, center);
+  flex-shrink: 0;
+
+  &__wrap {
+    @include flex(false, center, space-between);
+    @extend %paddingYPageOptions;
+    @extend %pageContainerOptions;
+    gap: $m15;
+    width: $full;
+    padding-top: $m8;
+    padding-bottom: $m8;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__site {
+    @include flex(false, center);
+    gap: 15px;
+  }
+
+  &__logo {
+    @extend %imgDefaultStyles;
+
+    &-wrap {
+      max-width: $m80;
+      aspect-ratio: 80/73;
+      flex-shrink: 0;
+    }
+  }
+
+  &__title {
+    font-size: $textRegular;
+    color: $colorHover;
+    text-transform: uppercase;
+    max-width: 209px;
+  }
+
+  &__controls {
+    @include flex(false, center);
+    gap: $m80;
+  }
+
+  &__lang {
+    @include flex(false, center);
+    gap: $m5;
+    border-radius: $rounded15;
+    border: 1px solid $colorBG;
+    font-weight: $textBold;
+    color: $colorHover;
+    padding: $m10 $m15;
+
+    &-icon {
+      @extend %imgDefaultStyles;
+
+      &-wrap {
+        flex-shrink: 0;
+        width: $m25;
+        height: $m25;
+      }
+    }
+
+    &:hover,
+    &:active {
+      color: $colorPrimary;
+      background-color: $colorBG;
+    }
+  }
+
+  &__menu {
+    @include flex(false, center);
+    gap: $m25;
+
+    &-link {
+      font-weight: $textSemiBold;
+      color: $colorHeader;
+
+      &:hover,
+      &:active {
+        color: $colorSecondary;
+      }
+
+      &_active {
+        color: $colorHover;
+      }
+    }
+  }
+
+  &__burger {
+    @include flex(false);
+    border-radius: $roundedFull;
+    padding: 0;
+    height: $m45;
+    width: $m45;
+
+    &-wrap {
+      display: none;
+    }
+
+    svg {
+      width: 19px;
+      height: 19px;
+    }
+  }
+}

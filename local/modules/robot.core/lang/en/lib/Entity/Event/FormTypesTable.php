@@ -1,0 +1,5 @@
+<?php
+$MESS["ROBOT_FORM_TYPE_ID_TITLE"] = "Identifier";
+$MESS["ROBOT_FORM_TYPE_NAME_TITLE"] = "Name";
+$MESS["ROBOT_FORM_TYPE_CODE_TITLE"] = "Field code";
+$MESS["ROBOT_FORM_TYPE_SORT_TITLE"] = "Sorting";

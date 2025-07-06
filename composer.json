@@ -1,0 +1,26 @@
+{
+    "name": "robot/site",
+    "description": "Cайт для проведения соревнований по робототехнике",
+    "type": "project",
+    "author": "Robot",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Site\\": "local/lib/"
+        }
+    },
+    "extra": {
+        "installer-paths": {
+            "bitrix/modules/{$name}/": ["type:bitrix-module"]
+        }
+    },
+    "require": {
+        "php": "^8.1",
+        "andreyryabin/sprint.migration": "5.0.2"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    }
+}

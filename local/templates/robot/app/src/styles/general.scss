@@ -1,0 +1,75 @@
+* {
+  font-family: 'Golos Text', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, fill 0.15s ease-in-out, stroke 0.15s ease-in-out;
+}
+
+body {
+  font-size: $textNormal;
+  font-weight: $textDefault;
+  color: $colorPrimaryText;
+  background-color: $colorWhite;
+  position: relative;
+}
+
+.mainContainer {
+  @include flex(column);
+  height: 100vh;
+}
+
+.b-main {
+  @include flex(column);
+  flex-grow: 1;
+
+  &_centered {
+    @extend %paddingYPageOptions;
+    @extend %pageContainerOptions;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__title {
+    text-transform: uppercase;
+    color: $colorHover;
+    padding-top: $m25;
+    padding-bottom: $m15;
+
+    @include screen(sml) {
+      padding-top: $m20;
+      padding-bottom: $m10;
+    }
+  }
+}
+
+ul, li {
+  list-style: none;
+}
+
+
+.custom-scroll {
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: $colorSecondaryText;
+  }
+}
+
+.overflow-y {
+  overflow-y: auto;
+  margin-right: -10px;
+
+  @include screen(md) {
+    margin-right: -7px;
+    padding-right: 3px;
+  }
+}

@@ -1,0 +1,25 @@
+.b-action {
+
+  &__title {
+    margin-bottom: $m40;
+  }
+
+  &__section {
+    @include grid(3, false, 30px);
+  }
+
+  &__item {
+    @extend %simpleCardOptions;
+    padding: $m30;
+  }
+
+  &__name {
+    font-size: $textBase;
+    font-weight: $textBold;
+    color: $colorHeader;
+  }
+
+  &__description {
+    font-size: $textRegular;
+  }
+}

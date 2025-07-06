@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items iblockUid="robot_content:video-lessons_en" exchangeVersion="2" >
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>100</value>
+ </field>
+ <field name="NAME">
+  <value>Lesson 1. Basics of circuit design</value>
+ </field>
+ <field name="PREVIEW_PICTURE">
+  <value name="archive_video_1.webp" type="file">iblock/c65/8npxw3aqqbmw3n1c3ciiuzhs1ojstolq.webp</value>
+ </field>
+ <field name="PREVIEW_TEXT">
+  <value>The video discusses the concept of electric current, its main parameters: voltage, resistance, current; the relationship of these parameters through Ohm's law. Then the main elements that can be found in an electrical circuit are analyzed: resistors, capacitors, diodes, LEDs, connectors, microcircuits. It shows how to read electrical circuits and what the electrical circuit and the device board have in common. At the end of the video, the main points of working with a laboratory power supply and a multimeter are shown.</value>
+ </field>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>lesson-1-basics-of-circuit-design</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>a9756d05-bf57-4cde-8ab7-a086faa609b6</value>
+ </field>
+ <field name="IBLOCK_SECTION"/>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="VIDEO_LINK"/>
+ <property name="FILE">
+  <value name="demo-video.mp4" type="file">iblock/bd2/kx4ncbr1av9rmrtj8qcs7t8j9bjwa997.mp4</value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>200</value>
+ </field>
+ <field name="NAME">
+  <value>Lesson 2. Basics of soldering and mounting radio components</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT">
+  <value>This video shows examples of how to solder an SMD resistor and a PLS connector onto a board. And also how to solder a connector onto a wire.</value>
+ </field>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>lesson-2-basics-of-soldering-and-mounting-radio-components</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>049e31b3-6a15-4dca-baac-48fcbeb0d083</value>
+ </field>
+ <field name="IBLOCK_SECTION"/>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="VIDEO_LINK"/>
+ <property name="FILE">
+  <value name="&#x422;&#x435;&#x441;&#x442;&#x43E;&#x432;&#x44B;&#x439;-&#x434;&#x43E;&#x43A;&#x443;&#x43C;&#x435;&#x43D;&#x442;.pdf" type="file">iblock/2f9/kq3918z8froo9y7ry922np8ax042rewi.pdf</value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>300</value>
+ </field>
+ <field name="NAME">
+  <value>Lesson 3.1. Basics of 3D Modeling and Design</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT">
+  <value>This video tutorial shows the basics of working with 3D elements in the CAD system Kompas-3D. The example shows how 3D models of parts needed to assemble a mobile robot are created. In the process of creating models, work with sketches, extrusion operations, cutting and rotation elements are considered.</value>
+ </field>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>urok-3-1-osnovy-3d-modelirovaniya-i-konstruirovaniya</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>037af286-7a48-498f-9dd7-974c879b4695</value>
+ </field>
+ <field name="IBLOCK_SECTION"/>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="VIDEO_LINK"/>
+ <property name="FILE">
+  <value name="&#x422;&#x435;&#x441;&#x442;&#x43E;&#x432;&#x44B;&#x439; &#x434;&#x43E;&#x43A;&#x443;&#x43C;&#x435;&#x43D;&#x442;.docx" type="file">iblock/60b/rxazyjzobl9wvfrdr717s3jk8ko9zro6.docx</value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>400</value>
+ </field>
+ <field name="NAME">
+  <value>Lesson 3.2. Assembly in the compass</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT">
+  <value>This video tutorial shows how to work with assembly units in the CAD system Kompas-3D.</value>
+ </field>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>lesson-3-2-assembly-in-the-compass</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>594a6038-df76-495e-a2d6-79604516e706</value>
+ </field>
+ <field name="IBLOCK_SECTION"/>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="VIDEO_LINK"/>
+ <property name="FILE">
+  <value name="test.html" type="file">iblock/8a1/erui898j25d3u7os18wucbi683e9vm2w.html</value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>500</value>
+ </field>
+ <field name="NAME">
+  <value>Lesson 4. Basics of working with a 3D printer and laser cutting machine</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT">
+  <value>This video tutorial shows how to prepare 3D models for printing on a 3D printer or for a laser cutting machine. The process of saving a model in STL format is considered. Work with an STL model in specialized software for a 3D printer is shown, the main printing parameters are analyzed. An example shows how to create a sketch for a laser cutting machine.</value>
+ </field>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>lesson-4-basics-of-working-with-a-3d-printer-and-laser-cutting-machine</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>2c1fcfcf-50d1-4a03-8175-616fba71825d</value>
+ </field>
+ <field name="IBLOCK_SECTION"/>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="VIDEO_LINK"/>
+ <property name="FILE">
+  <value name="&#x422;&#x435;&#x441;&#x442;&#x43E;&#x432;&#x44B;&#x439; &#x434;&#x43E;&#x43A;&#x443;&#x43C;&#x435;&#x43D;&#x442;.doc" type="file">iblock/60b/rxazyjzobl9wvfrdr717s3jk8ko9zro6.docx</value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>600</value>
+ </field>
+ <field name="NAME">
+  <value>Lesson 5. Programming microcontrollers</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT">
+  <value>This video tutorial shows how to work with the ESP32 microcontroller, how to program it in the Arduino IDE, what capabilities it has and what are the differences in programming compared to Arduino boards. We also discuss what a PWM signal is and how to work with the Bluetooth hardware module on the ESP32.</value>
+ </field>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>lesson-5-programming-microcontrollers</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>c304b58c-36ba-423f-97e1-d9d2bd21fc81</value>
+ </field>
+ <field name="IBLOCK_SECTION"/>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="VIDEO_LINK">
+  <value>https://www.youtube.com/watch?v=dLw6aqKbpsg</value>
+ </property>
+ <property name="FILE">
+  <value name="demo-video.mp4" type="file">iblock/bd2/kx4ncbr1av9rmrtj8qcs7t8j9bjwa997.mp4</value>
+ </property>
+</item>
+<item>
+ <field name="ACTIVE">
+  <value>Y</value>
+ </field>
+ <field name="ACTIVE_FROM"/>
+ <field name="ACTIVE_TO"/>
+ <field name="SORT">
+  <value>700</value>
+ </field>
+ <field name="NAME">
+  <value>Lesson 6. Robot sensors</value>
+ </field>
+ <field name="PREVIEW_PICTURE"/>
+ <field name="PREVIEW_TEXT">
+  <value>This video tutorial covers the main sensors that can be used on a mobile robot for autonomous movement. It covers ultrasonic and laser distance sensors, a contrast strip sensor, and angular displacement sensors – encoders.</value>
+ </field>
+ <field name="PREVIEW_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="DETAIL_PICTURE"/>
+ <field name="DETAIL_TEXT"/>
+ <field name="DETAIL_TEXT_TYPE">
+  <value>text</value>
+ </field>
+ <field name="CODE">
+  <value>lesson-6-robot-sensors</value>
+ </field>
+ <field name="TAGS"/>
+ <field name="XML_ID">
+  <value>ff552f6b-982e-4ff0-b9f5-a54a14cbe663</value>
+ </field>
+ <field name="IBLOCK_SECTION"/>
+ <field name="IPROPERTY_TEMPLATES"/>
+ <property name="VIDEO_LINK">
+  <value>https://vkvideo.ru/video-227494634_456239074</value>
+ </property>
+ <property name="FILE"/>
+</item>
+
+</items>

@@ -1,0 +1,7 @@
+<?php
+$MESS["COMPOSABLE_FORM_FIELD_REQUIRED"] = "Поле обязательно для заполнения";
+$MESS["COMPOSABLE_FORM_EMAIL_INVALID"] = "Невалидный email";
+$MESS["COMPOSABLE_FORM_PHONE_INVALID"] = "Невалидный телефон";
+$MESS["COMPOSABLE_FORM_ERROR_MESSAGE_TITLE"] = "Ошибка";
+$MESS["COMPOSABLE_FORM_SUCCESS_MESSAGE_TITLE"] = "Успешно";
+$MESS["COMPOSABLE_FORM_OK_BTN_TITLE"] = "Ок";

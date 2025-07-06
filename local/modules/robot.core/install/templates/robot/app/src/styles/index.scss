@@ -1,0 +1,23 @@
+// Подключение базовых стилей
+@import "./vars";
+@import "./general";
+@import "./typography";
+@import "./animation";
+// Подключение стилей-компонентов
+@import "./components/ui";
+@import "./components/header";
+@import "./components/footer";
+@import "./components/section";
+@import "./components/event";
+@import "./components/action";
+@import "./components/partners";
+@import "./components/program";
+@import "./components/docs";
+@import "./components/archive";
+@import "./components/materials";
+@import "./components/study";
+@import "./components/contacts";
+@import "./components/registration";
+@import "./components/map";
+@import "./components/breadcrump";
+@import "./components/empty";

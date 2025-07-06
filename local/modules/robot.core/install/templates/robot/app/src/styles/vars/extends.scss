@@ -1,0 +1,122 @@
+// Наследуемые стили
+%headerDefaultOptions {
+  font-weight: $textBold;
+  line-height: $leadingTited;
+  color: $colorHeader;
+}
+
+%textDefaultOptions {
+  font-size: $textRegular;
+  font-weight: $textDefault;
+  line-height: $leadingTited;
+  color: $colorPrimaryText;
+}
+
+%imgDefaultStyles {
+  width: $full;
+  height: $full;
+  object-fit: cover;
+}
+
+%btnDefaultOptions {
+  @include flex(false, center, center);
+  padding: 18px $m35;
+  border-radius: $rounded30;
+  border-color: $colorPrimary;
+  background-color: $colorPrimary;
+  font-size: $textNormal;
+  color: $colorWhite;
+  font-weight: $textBold;
+  height: $m55;
+
+  span {
+    font-size: $textNormal;
+    color: $colorWhite;
+    font-weight: $textBold;
+  }
+
+  &:hover,
+  &:active {
+    background-color: $colorHover;
+    color: $colorWhite;
+  }
+
+  @include screen(sml) {
+    font-size: $textRegular;
+    padding: 13px $m25;
+    height: 42px;
+
+    span {
+      font-size: $textRegular;
+    }
+  }
+}
+
+%paddingYPageOptions {
+  padding-left: $m32;
+  padding-right: $m32;
+
+  @include screen(sml) {
+    padding-left: $m20;
+    padding-right: $m20;
+  }
+}
+
+%pageContainerOptions {
+  width: $full;
+  box-sizing: border-box;
+  max-width: 1354px;
+}
+
+%simpleCardOptions {
+  @include flex(column);
+  gap: $m15;
+  padding: $m25 $m30;
+  background-color: $colorBG2;
+  border: 1px solid $colorBG;
+  border-radius: $rounded25;
+
+  @include screen(md) {
+    padding: $m25 $m20;
+    border-radius: $rounded20;
+  }
+}
+
+%arrowRightIconOptions {
+  @include flex(false, center, center);
+  flex-shrink: 0;
+  background-color: $colorPrimary;
+  border-radius: $roundedFull;
+  width: $m50;
+  height: $m50;
+  fill: $colorWhite;
+
+  svg {
+    width: $m20;
+    height: 18px;
+  }
+}
+
+%inputWrapperOptions {
+  padding: 0 $m20;
+  background-color: $colorLight;
+  border: 1px solid $colorBG;
+  border-radius: $rounded15;
+  box-shadow: none;
+
+  &.is-focus {
+    border-color: $colorSecondary;
+  }
+}
+
+%inputInnerOptions {
+  height: $m55;
+  font-family: "Golos Text", sans-serif;
+  font-size: $textNormal;
+  color: $colorSecondaryText;
+
+  &::placeholder {
+    color: $colorPrimaryText;
+    font-weight: $textDefault;
+  }
+}

@@ -1,0 +1,52 @@
+.b-checkbox {
+
+  &__label {
+    color: $colorSecondaryText;
+    display: inline-flex;
+    flex-wrap: wrap;
+  }
+
+  &.el-checkbox {
+
+    .el-checkbox {
+
+      &__inner {
+        width: $m20;
+        height: $m20;
+      }
+    }
+  }
+
+  .el-checkbox {
+
+    &__input {
+
+      &.is-checked {
+
+        .el-checkbox {
+
+          &__inner {
+            border-color: $colorPrimary;
+            background-color: $colorPrimary;
+          }
+        }
+      }
+    }
+
+    &__inner {
+      border-radius: $rounded5;
+
+      &:hover {
+        border-color: $colorPrimary;
+      }
+
+      &:after {
+        border-width: 2px;
+        height: 8px;
+        left: 6px;
+        top: 2px;
+        width: 4px;
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+.b-event {
+  @include flex(false, end);
+  gap: $m30;
+
+  &__img {
+    width: $full;
+    height: $full;
+    object-fit: contain;
+    max-width: 546px;
+
+    &-wrap {
+      @include flex(false, false, center);
+      box-sizing: border-box;
+      align-self: center;
+      width: $full;
+      border-radius: $rounded30;
+      background-color: $colorLight;
+      overflow: hidden;
+      aspect-ratio: 740/567;
+      max-width: 740px;
+      padding: $m30;
+    }
+  }
+
+  &__section {
+    @include flex(column, start);
+    max-width: 520px;
+  }
+
+  &__timeline {
+    border-radius: $rounded30;
+    border: 1px solid $colorPrimaryText;
+    padding: 9px $m15;
+    margin-bottom: $m20;
+    font-size: $textRegular;
+    font-weight: $textSemiBold;
+  }
+
+  &__title {
+    color: $colorHover;
+    margin-bottom: $m10;
+  }
+
+  &__description {
+    font-size: $textRegular;
+  }
+
+  &__button {
+    margin-top: $m30;
+  }
+}

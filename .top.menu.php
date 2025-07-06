@@ -1,0 +1,54 @@
+<?php
+Bitrix\Main\Loader::requireModule('robot.core');
+$aMenuLinks = Array(
+    Array(
+        "Главная",
+        SITE_DIR,
+        Array(),
+        Array(),
+        ""
+    ),
+	Array(
+		"Программа", 
+		SITE_DIR."program/",
+		Array(), 
+		Array(),
+        "Robot\\Core\\Views\\Events\\EventsView::showProgram()"
+	),
+	Array(
+		"Регистрация",
+        SITE_DIR."register/",
+		Array(), 
+		Array(),
+        "Robot\\Core\\Views\\Events\\EventsView::showRegistration()"
+	),
+	Array(
+		"Документы",
+        SITE_DIR."documents/",
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Архив",
+        SITE_DIR."archive/",
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"О соревнованиях",
+        SITE_DIR."prepare-competition/",
+		Array(), 
+		Array(), 
+		"" 
+	),
+    Array(
+        "Контакты",
+        SITE_DIR."contacts/",
+        Array(),
+        Array(),
+        ""
+    )
+);
+?>

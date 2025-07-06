@@ -1,0 +1,79 @@
+.b-materials {
+  @include grid(4, false, $m30);
+
+  &_mb {
+    margin-bottom: $m50;
+  }
+
+  &_video {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  &__img,
+  &__video {
+    @extend %imgDefaultStyles;
+    transition: transform .2s;
+
+    &-wrap {
+      overflow: hidden;
+      border-radius: $rounded10;
+      aspect-ratio: 3/2;
+
+      &:hover,
+      &:active {
+
+        .b-materials {
+
+          &__img,
+          &__video {
+            transform: scale(1.05);
+
+            &-icon {
+              fill: $colorHover;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__video {
+
+    &-wrap {
+      position: relative;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
+        background-color: $colorHeader;
+        opacity: 0.4;
+        width: $full;
+        height: $full;
+      }
+    }
+
+    &-icon {
+      @include flex(false, center, center);
+      border-radius: $roundedFull;
+      width: $m70;
+      height: $m70;
+      background-color: $colorWhite;
+      position: absolute;
+      z-index: 3;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      fill: $colorPrimary;
+
+      svg {
+        width: 22px;
+        height: 24px;
+      }
+    }
+  }
+}

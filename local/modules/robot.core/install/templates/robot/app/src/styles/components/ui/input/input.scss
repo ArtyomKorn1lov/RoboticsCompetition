@@ -1,0 +1,36 @@
+.b-input {
+
+  &.el-input {
+
+    &.is-disabled {
+
+      .el-input {
+
+        &__wrapper {
+          box-shadow: none;
+          border-color: transparent;
+        }
+
+        &__inner {
+          color: $colorPrimaryText;
+
+          &::placeholder {
+            color: $colorPrimaryText;
+            font-weight: $textDefault;
+          }
+        }
+      }
+    }
+  }
+
+  .el-input {
+
+    &__wrapper {
+      @extend %inputWrapperOptions;
+    }
+
+    &__inner {
+      @extend %inputInnerOptions;
+    }
+  }
+}

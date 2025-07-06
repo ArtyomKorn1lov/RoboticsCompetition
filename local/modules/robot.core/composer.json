@@ -1,0 +1,17 @@
+{
+    "name": "robot/core",
+    "description": "Главный модуль сайта для проведения соревнований по робототехнике",
+    "type": "project",
+    "author": "Robot",
+    "license": "MIT",
+    "require": {
+        "php": "^8.1",
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Robot\\Core\\": "lib/"
+        }
+    },
+    "minimum-stability": "stable"
+}

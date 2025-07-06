@@ -1,0 +1,68 @@
+@include screen(lg) {
+  .b-dialog {
+
+    &.el-dialog {
+      margin-left: 32px;
+      margin-right: 32px;
+      width: 100%;
+      max-width: none;
+    }
+
+    &__img {
+
+      &-wrap {
+        aspect-ratio: 900/516;
+      }
+    }
+
+    &__video {
+      aspect-ratio: 900/516;
+    }
+  }
+}
+
+@include screen(sml) {
+  .b-dialog {
+
+    &.el-dialog {
+      padding: $m30 $m20;
+      border-radius: 0;
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    .el-dialog {
+
+      &__header {
+        padding-bottom: $m15;
+        padding-right: 0;
+        padding-top: $m30;
+      }
+    }
+
+    &__close {
+      top: $m30;
+      right: $m20;
+      width: $m30;
+      height: $m30;
+
+      svg {
+        width: $m10;
+        height: $m10;
+      }
+    }
+
+    &__img {
+
+      &-wrap {
+        aspect-ratio: 280/202;
+      }
+    }
+
+    &__video {
+      aspect-ratio: 280/202;
+    }
+  }
+}

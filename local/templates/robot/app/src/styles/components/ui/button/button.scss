@@ -1,0 +1,26 @@
+.b-button,
+.el-button.b-button {
+  @extend %btnDefaultOptions;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, fill 0.15s ease-in-out, stroke 0.15s ease-in-out;
+
+  &_primary {
+    text-transform: uppercase;
+  }
+
+  &_small {
+    height: $m45;
+    padding: $m10 $m15;
+    font-size: $textRegular;
+    border-radius: $rounded15;
+  }
+
+  &_disabled {
+    opacity: 0.6;
+    cursor: none;
+
+    &:hover,
+    &:active {
+      background-color: $colorPrimary;
+    }
+  }
+}

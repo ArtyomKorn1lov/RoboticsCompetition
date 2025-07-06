@@ -1,0 +1,29 @@
+.b-partners {
+
+  &__title {
+    margin-bottom: $m30;
+  }
+
+  &__list {
+    @include grid(4, false, $m30);
+  }
+
+  &__item {
+    width: $full;
+    height: $full;
+    aspect-ratio: 300/160;
+    filter: grayscale(100%);
+    transition: filter 0.15s ease-in-out;
+
+    &:hover,
+    &:active {
+      filter: none;
+    }
+  }
+
+  &__img {
+    width: $full;
+    height: $full;
+    object-fit: contain;
+  }
+}

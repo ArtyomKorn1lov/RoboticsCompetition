@@ -1,0 +1,1 @@
+All archive photos and videos related to robotics competitions at PGTU

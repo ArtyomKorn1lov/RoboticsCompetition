@@ -1,0 +1,15 @@
+@include screen(md) {
+  .b-docs {
+    @include grid(1, false, $m25);
+
+    &__icon {
+      width: $m30;
+      height: $m30;
+
+      svg {
+        width: 12px;
+        height: $m15;
+      }
+    }
+  }
+}
