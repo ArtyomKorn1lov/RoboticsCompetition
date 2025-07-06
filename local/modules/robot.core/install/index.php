@@ -38,8 +38,14 @@ class robot_core extends CModule
 
     /** @var array список подмодулей */
     private array $subModules = [
-        "sprint.migration",
-        "asd.iblock",
+        "sprint.migration" => [
+            "url" => "https://marketplace.1c-bitrix.ru/solutions/sprint.migration/",
+            "name" => "Миграции для разработчиков",
+        ],
+        "asd.iblock" => [
+            "url" => "https://marketplace.1c-bitrix.ru/solutions/asd.iblock/",
+            "name" => "Информационные блоки, инструменты",
+        ],
     ];
 
     public function __construct()
@@ -87,9 +93,9 @@ class robot_core extends CModule
      */
     protected function checkSubModules(): void
     {
-        foreach ($this->subModules as $item) {
-            if (!Loader::includeModule($item)) {
-                throw new Exception(Loc::getMessage("ROBOT_SUBMODULE_NOT_INCLUDE", ["#NAME#" => $item]));
+        foreach ($this->subModules as $key => $item) {
+            if (!Loader::includeModule($key)) {
+                throw new Exception(Loc::getMessage("ROBOT_SUBMODULE_NOT_INCLUDE", ["#NAME#" => $item["name"], "#URL#" => $item["url"]]));
             }
         }
     }
@@ -190,12 +196,11 @@ class robot_core extends CModule
             }
         }
         catch (Exception $exception) {
-            file_put_contents($_SERVER["DOCUMENT_ROOT"] . "/log.txt", var_export($exception->getMessage(), true));
             ModuleManager::unRegisterModule($this->MODULE_ID);
             AddMessage2Log($exception->getMessage(), $this->MODULE_ID);
             $APPLICATION->ThrowException($exception->getMessage());
             $APPLICATION->IncludeAdminFile(
-                Loc::getMessage('ROBOT_STEP1_TITLE'),
+                Loc::getMessage('ROBOT_STEP_ERROR_TITLE'),
                 __DIR__ . '/installerror.php'
             );
         }
