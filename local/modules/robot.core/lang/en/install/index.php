@@ -11,4 +11,4 @@ $MESS["ROBOT_MODULE_SECONDARY_SITE_EMPTY"] = "No site selected for English versi
 $MESS["ROBOT_MODULE_SITE_SIMILAR_ERROR"] = "The same sites were selected for the main and English versions";
 $MESS["ROBOT_MODULE_PRIMARY_SITE_ERROR"] = "The selected site for the main version does not exist";
 $MESS["ROBOT_MODULE_SECONDARY_SITE_ERROR"] = "The selected site for the English version does not exist";
-$MESS["ROBOT_SUBMODULE_NOT_INCLUDE"] = 'The module "#NAME#" is not installed, follow the <a href="#URL#" target="_blank">link</a> to install this module';
+$MESS["ROBOT_SUBMODULE_NOT_INCLUDE"] = 'The module "#NAME#" is not installed, follow the link - #URL#, to install this module';
