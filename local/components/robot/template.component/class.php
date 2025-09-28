@@ -35,9 +35,7 @@ class TemplateComponent extends CBitrixComponent
             if (!$this->includeModules()) {
                 throw new LoaderException(Loc::getMessage("COMPONENT_MODULE_ERROR"));
             }
-            if ($this->startResultCache()) {
-                $this->includeComponentTemplate();
-            }
+            $this->includeComponentTemplate();
         } catch (LoaderException $exception) {
             LoggerFactory::build()->error($exception);
             ShowError($exception->getMessage());

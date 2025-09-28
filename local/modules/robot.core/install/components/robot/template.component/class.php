@@ -27,8 +27,6 @@ class TemplateComponent extends CBitrixComponent
 
     /**
      * @return void
-     * @throws Bitrix\Main\ObjectNotFoundException
-     * @throws Psr\Container\NotFoundExceptionInterface
      */
     public function executeComponent(): void
     {

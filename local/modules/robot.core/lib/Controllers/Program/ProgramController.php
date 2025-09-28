@@ -61,7 +61,7 @@ class ProgramController extends Controller
 
             /** @var IProgramManager $programManager */
             $programManager = ServiceLocator::getInstance()->get(IProgramManager::class);
-            $programs = $programManager->getProgramByDate(new DateTime($date));
+            $programs = $programManager->getProgramList(new DateTime($date));
 
             return AjaxJson::createSuccess($programs->mapToArray(fn($item) => $item));
         } catch (RobotException $exception) {

@@ -30,6 +30,7 @@ return [
             Robot\Core\Services\Event\IEventManager::class => ['className' => Robot\Core\Services\Event\EventManager::class],
             Robot\Core\Services\Program\IProgramManager::class => ['className' => Robot\Core\Services\Program\ProgramManager::class],
             Robot\Core\Services\SiteSettings\ISiteSettingsManager::class => ['className' => Robot\Core\Services\SiteSettings\SiteSettingsManager::class],
+            Robot\Core\Cache\ICacheService::class => ['className' => Robot\Core\Cache\CacheService::class],
         ]
     ]
 ];

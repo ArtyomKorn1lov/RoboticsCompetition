@@ -4,13 +4,13 @@ namespace Robot\Core\Services\Program;
 
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\Localization\Loc;
-use Bitrix\Main\ObjectException;
 use Bitrix\Main\ObjectNotFoundException;
 use Bitrix\Main\SystemException;
 use Bitrix\Main\Type\DateTime;
 use Bitrix\Main\DI\ServiceLocator;
 
 use Psr\Container\NotFoundExceptionInterface;
+use Robot\Core\Cache\ICacheService;
 use Robot\Core\Constants;
 use Robot\Core\DTO\Program\ProgramCollection;
 use Robot\Core\DTO\Program\ProgramItems;
@@ -31,8 +31,17 @@ class ProgramManager implements IProgramManager
 {
     /** @var IProgramRepository репозиторий программа проведения события */
     private IProgramRepository $programRepository;
+    /** @var ICacheService сервис кэширования */
+    private ICacheService $cacheService;
     /** @var Logger объект логирования */
     private Logger $logger;
+
+    /** @var string */
+    protected const PROGRAM_CACHE_KEY = 'robot_core_cache_program_key';
+    /** @var string */
+    protected const PROGRAM_ITEMS_CACHE_PATH = 'program/items';
+    /** @var string */
+    protected const PROGRAM_LIST_CACHE_PATH = 'program/list';
 
     /**
      * @throws ObjectNotFoundException
@@ -42,6 +51,7 @@ class ProgramManager implements IProgramManager
     {
         $serviceLocator = ServiceLocator::getInstance();
         $this->programRepository = $serviceLocator->get(IProgramRepository::class);
+        $this->cacheService = $serviceLocator->get(ICacheService::class);
         $this->logger = LoggerFactory::build();
     }
 
@@ -58,33 +68,89 @@ class ProgramManager implements IProgramManager
                 throw new RobotException(Loc::getMessage("ROBOT_CORE_PROGRAM_INVALID_EVENT_ID"));
             }
 
-            [$sectionIds, $sectionName] = $this->getProgramSections($eventId);
-            if (empty($sectionIds)) {
-                throw new RobotException(Loc::getMessage("ROBOT_CORE_PROGRAM_EMPTY_SECTIONS"));
+            $cachePath = self::PROGRAM_ITEMS_CACHE_PATH . "/" . Loc::getCurrentLang();
+            if ($this->cacheService->init(self::PROGRAM_CACHE_KEY, $cachePath)) {
+                /** @var ProgramItems $programItems */
+                $programItems = $this->cacheService->getData();
+                return $programItems;
+            } elseif ($this->cacheService->start()) {
+                $this->cacheService->startTag($cachePath);
+
+                [$sectionIds, $sectionName] = $this->getProgramSections($eventId);
+                if (empty($sectionIds)) {
+                    throw new RobotException(Loc::getMessage("ROBOT_CORE_PROGRAM_EMPTY_SECTIONS"));
+                }
+
+                $programIblockId = Helper::getIBlock(Constants::PROGRAM_IBLOCK_CODE);
+                $timeLineEntity = new TimeLineReqParams(
+                    Constants::CONTENT_IBLOCK_TYPE,
+                    $programIblockId,
+                    $sectionIds,
+                    true,
+                    "ASC"
+                );
+                $dateCollectionEntity = $this->programRepository->getTimeLine($timeLineEntity);
+                $dateCollectionEntity->compareUnicDates();
+
+                $programList = $this->getProgramByDate($dateCollectionEntity->offsetGet(0)->getDate(), $sectionIds);
+                $dateList = Program::mapDateCollectionToModels($dateCollectionEntity);
+
+                $programItems = new ProgramItems(
+                    title: $sectionName,
+                    dates: $dateList,
+                    programs: $programList,
+                    lang: Loc::getCurrentLang()
+                );
+
+                $eventIblockId = Helper::getIBlock(Constants::EVENTS_IBLOCK_CODE);
+                $this->cacheService->registerTag("iblock_id_$programIblockId");
+                $this->cacheService->registerTag("iblock_id_$eventIblockId");
+                $this->cacheService->endTag();
+                $this->cacheService->end($programItems);
+                return $programItems;
+            } else {
+                throw new SystemException("Ошибка создания кэша " . self::PROGRAM_ITEMS_CACHE_PATH);
             }
-
-            $timeLineEntity = new TimeLineReqParams(
-                Constants::CONTENT_IBLOCK_TYPE,
-                Helper::getIBlock(Constants::PROGRAM_IBLOCK_CODE),
-                $sectionIds,
-                true,
-                "ASC"
-            );
-            $dateCollectionEntity = $this->programRepository->getTimeLine($timeLineEntity);
-            $dateCollectionEntity->compareUnicDates();
-
-            $programList = $this->getProgramByDate($dateCollectionEntity->offsetGet(0)->getDate(), $sectionIds);
-            $dateList = Program::mapDateCollectionToModels($dateCollectionEntity);
-
-            return new ProgramItems(
-                title: $sectionName,
-                dates: $dateList,
-                programs: $programList,
-                lang: Loc::getCurrentLang()
-            );
         } catch (RobotException $exception) {
             throw $exception;
         } catch (SystemException $exception) {
+            $this->logger->error($exception);
+            throw $exception;
+        }
+    }
+
+    public function getProgramList(DateTime $date, array|bool $sectionIds = false): ProgramCollection
+    {
+        try {
+            $cachePath = self::PROGRAM_LIST_CACHE_PATH . "/" . $date->format('Y-m-d');
+
+            if ($this->cacheService->init(self::PROGRAM_CACHE_KEY, $cachePath)) {
+                /** @var ProgramCollection $programList */
+                $programList = $this->cacheService->getData();
+                return $programList;
+            } elseif ($this->cacheService->start()) {
+                $this->cacheService->startTag($cachePath);
+
+                $programList = $this->getProgramByDate($date, $sectionIds);
+
+                $programIblockId = Helper::getIBlock(Constants::PROGRAM_IBLOCK_CODE);
+                $eventIblockId = Helper::getIBlock(Constants::EVENTS_IBLOCK_CODE);
+
+                $this->cacheService->registerTag("iblock_id_$programIblockId");
+                $this->cacheService->registerTag("iblock_id_$eventIblockId");
+                $this->cacheService->endTag();
+                $this->cacheService->end($programList);
+                return $programList;
+            } else {
+                throw new SystemException("Ошибка создания кэша " . self::PROGRAM_LIST_CACHE_PATH);
+            }
+        } catch (RobotException $exception) {
+            $this->cacheService->abortTag();
+            $this->cacheService->abort();
+            throw $exception;
+        } catch (SystemException $exception) {
+            $this->cacheService->abortTag();
+            $this->cacheService->abort();
             $this->logger->error($exception);
             throw $exception;
         }
@@ -95,43 +161,35 @@ class ProgramManager implements IProgramManager
      * @param array|bool $sectionIds
      * @return ProgramCollection
      * @throws RobotException
-     * @throws SystemException
      */
-    public function getProgramByDate(DateTime $date, array|bool $sectionIds = false): ProgramCollection
+    protected function getProgramByDate(DateTime $date, array|bool $sectionIds = false): ProgramCollection
     {
-        try {
-            if (empty($date)) {
-                throw new RobotException(Loc::getMessage("ROBOT_CORE_PROGRAM_EMPTY_FILTER_DATE"));
-            }
-
-            if (!$sectionIds) {
-                $eventId = EventsView::getActiveEventId();
-                [$sectionIds] = $this->getProgramSections($eventId);
-            }
-
-            $programListEntity = new ProgramListReqParam(
-                iblockType: Constants::CONTENT_IBLOCK_TYPE,
-                iblockId: Helper::getIBlock(Constants::PROGRAM_IBLOCK_CODE),
-                sectionsIds: $sectionIds,
-                date: $date,
-                active: true,
-                sort: "ASC"
-            );
-            $programCollectionEntity = $this->programRepository->getProgram($programListEntity);
-
-            return Program::mapProgramCollectionToModels($programCollectionEntity);
-        } catch (RobotException $exception) {
-            throw $exception;
-        } catch (SystemException $exception) {
-            $this->logger->error($exception);
-            throw $exception;
+        if (empty($date)) {
+            throw new RobotException(Loc::getMessage("ROBOT_CORE_PROGRAM_EMPTY_FILTER_DATE"));
         }
+
+        if (!$sectionIds) {
+            $eventId = EventsView::getActiveEventId();
+            [$sectionIds] = $this->getProgramSections($eventId);
+        }
+
+        $programListEntity = new ProgramListReqParam(
+            iblockType: Constants::CONTENT_IBLOCK_TYPE,
+            iblockId: Helper::getIBlock(Constants::PROGRAM_IBLOCK_CODE),
+            sectionsIds: $sectionIds,
+            date: $date,
+            active: true,
+            sort: "ASC"
+        );
+        $programCollectionEntity = $this->programRepository->getProgram($programListEntity);
+
+        return Program::mapProgramCollectionToModels($programCollectionEntity);
     }
 
     /**
      * @param int $eventId
      * @return array
-     * @throws ArgumentException
+     * @throws RobotException
      */
     protected function getProgramSections(int $eventId): array
     {
