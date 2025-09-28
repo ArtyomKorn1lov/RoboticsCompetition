@@ -2,8 +2,8 @@
 
 namespace Robot\Core\Entity\Program;
 
-use Bitrix\Main\ArgumentException;
 use Bitrix\Main\Localization\Loc;
+use Robot\Core\Exceptions\RobotException;
 use stdClass;
 
 Loc::loadMessages(__FILE__);
@@ -26,7 +26,7 @@ final class Program
      * @param string $name
      * @param string $location
      * @param string $timeSerialised
-     * @throws ArgumentException
+     * @throws RobotException
      */
     public function __construct(
         int $id,
@@ -36,7 +36,7 @@ final class Program
     )
     {
         if (!$this->validateParams($id, $name, $location)) {
-            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_ARGUMENT_EXCEPTION"));
+            throw new RobotException(Loc::getMessage("ROBOT_CORE_ARGUMENT_EXCEPTION"));
         }
 
         $this->id = $id;

@@ -17,6 +17,9 @@ use Robot\Core\DTO\Program\ProgramItems;
 use Robot\Core\Entity\Program\ProgramListReqParam;
 use Robot\Core\Entity\Program\ProgramSectionsReqParams;
 use Robot\Core\Entity\Program\TimeLineReqParams;
+use Robot\Core\Exceptions\RobotException;
+use Robot\Core\Logger\Logger;
+use Robot\Core\Logger\LoggerFactory;
 use Robot\Core\Repositories\Program\IProgramRepository;
 use Robot\Core\Tools\IBlocks\Helper;
 use Robot\Core\Tools\Mappers\Program;
@@ -28,6 +31,8 @@ class ProgramManager implements IProgramManager
 {
     /** @var IProgramRepository репозиторий программа проведения события */
     private IProgramRepository $programRepository;
+    /** @var Logger объект логирования */
+    private Logger $logger;
 
     /**
      * @throws ObjectNotFoundException
@@ -35,26 +40,27 @@ class ProgramManager implements IProgramManager
      */
     public function __construct()
     {
-        $this->programRepository = ServiceLocator::getInstance()->get(IProgramRepository::class);
+        $serviceLocator = ServiceLocator::getInstance();
+        $this->programRepository = $serviceLocator->get(IProgramRepository::class);
+        $this->logger = LoggerFactory::build();
     }
 
     /**
      * @param int $eventId
      * @return ProgramItems
-     * @throws ArgumentException
-     * @throws ObjectException
+     * @throws RobotException
      * @throws SystemException
      */
     public function getProgram(int $eventId): ProgramItems
     {
         try {
             if (empty($eventId)) {
-                throw new SystemException(Loc::getMessage("ROBOT_CORE_PROGRAM_INVALID_EVENT_ID"));
+                throw new RobotException(Loc::getMessage("ROBOT_CORE_PROGRAM_INVALID_EVENT_ID"));
             }
 
             [$sectionIds, $sectionName] = $this->getProgramSections($eventId);
             if (empty($sectionIds)) {
-                throw new ArgumentException(Loc::getMessage("ROBOT_CORE_PROGRAM_EMPTY_SECTIONS"));
+                throw new RobotException(Loc::getMessage("ROBOT_CORE_PROGRAM_EMPTY_SECTIONS"));
             }
 
             $timeLineEntity = new TimeLineReqParams(
@@ -76,8 +82,10 @@ class ProgramManager implements IProgramManager
                 programs: $programList,
                 lang: Loc::getCurrentLang()
             );
-        } catch (SystemException|ArgumentException|ObjectException $exception) {
-            AddMessage2Log($exception->getMessage(), 'robot.core');
+        } catch (RobotException $exception) {
+            throw $exception;
+        } catch (SystemException $exception) {
+            $this->logger->error($exception);
             throw $exception;
         }
     }
@@ -86,14 +94,14 @@ class ProgramManager implements IProgramManager
      * @param DateTime $date
      * @param array|bool $sectionIds
      * @return ProgramCollection
-     * @throws ArgumentException
+     * @throws RobotException
      * @throws SystemException
      */
     public function getProgramByDate(DateTime $date, array|bool $sectionIds = false): ProgramCollection
     {
         try {
             if (empty($date)) {
-                throw new SystemException(Loc::getMessage("ROBOT_CORE_PROGRAM_EMPTY_FILTER_DATE"));
+                throw new RobotException(Loc::getMessage("ROBOT_CORE_PROGRAM_EMPTY_FILTER_DATE"));
             }
 
             if (!$sectionIds) {
@@ -112,8 +120,10 @@ class ProgramManager implements IProgramManager
             $programCollectionEntity = $this->programRepository->getProgram($programListEntity);
 
             return Program::mapProgramCollectionToModels($programCollectionEntity);
+        } catch (RobotException $exception) {
+            throw $exception;
         } catch (SystemException $exception) {
-            AddMessage2Log($exception->getMessage(), 'robot.core');
+            $this->logger->error($exception);
             throw $exception;
         }
     }

@@ -3,10 +3,10 @@
 namespace Robot\Core\Entity\Event;
 
 use Bitrix\Main\Localization\Loc;
-use Bitrix\Main\ArgumentException;
 use CUtil;
 
 use Robot\Core\Constants;
+use Robot\Core\Exceptions\RobotException;
 use Robot\Core\Tools\IBlocks\Helper;
 use Robot\Core\DTO\Event\RegisterExternalData;
 use Robot\Core\DTO\Event\FormFieldCollection;
@@ -48,7 +48,7 @@ final class RegisterForm
      * @param FormFieldCollection $fields
      * @param array $formData
      * @param RegisterExternalData $externalData
-     * @throws ArgumentException
+     * @throws RobotException
      */
     public function __construct(
         FormFieldCollection  $fields,
@@ -57,7 +57,7 @@ final class RegisterForm
     )
     {
         if (empty($externalData->eventId)) {
-            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_EVENT_NOT_FOUND"));
+            throw new RobotException(Loc::getMessage("ROBOT_CORE_EVENT_NOT_FOUND"));
         }
 
         if (!empty($fields) && $fields->count() > 0) {
@@ -81,7 +81,7 @@ final class RegisterForm
     /**
      * @param array $formData
      * @return array
-     * @throws ArgumentException
+     * @throws RobotException
      */
     protected function validateFields(array $formData): array
     {
@@ -93,30 +93,30 @@ final class RegisterForm
 
             if ($field->code === 'agreement') {
                 if (empty($formData[$field->code])) {
-                    throw new ArgumentException(Loc::getMessage("ROBOT_CORE_AGREEMENT_ERROR"));
+                    throw new RobotException(Loc::getMessage("ROBOT_CORE_AGREEMENT_ERROR"));
                 }
                 unset($formData[$field->code]);
                 continue;
             }
 
             if (empty($formData[$field->code])) {
-                throw new ArgumentException(Loc::getMessage("ROBOT_CORE_REQUIRED_ERROR", ["#NAME#" => $field->title]));
+                throw new RobotException(Loc::getMessage("ROBOT_CORE_REQUIRED_ERROR", ["#NAME#" => $field->title]));
             }
 
             switch ($field->type) {
                 case "autocomplete":
                     if (!$this->validateAutocompleteField($formData[$field->code], $field->values)) {
-                        throw new ArgumentException(Loc::getMessage("ROBOT_CORE_AUTOCOMPLETE_ERROR", ["#NAME#" => $field->title]));
+                        throw new RobotException(Loc::getMessage("ROBOT_CORE_AUTOCOMPLETE_ERROR", ["#NAME#" => $field->title]));
                     }
                     break;
                 case "tel":
                     if (!preg_match(self::PHONE_REGULAR_EXPRESSION, $formData[$field->code])) {
-                        throw new ArgumentException(Loc::getMessage("ROBOT_CORE_FIELD_VALUE_ERROR", ["#NAME#" => $field->title]));
+                        throw new RobotException(Loc::getMessage("ROBOT_CORE_FIELD_VALUE_ERROR", ["#NAME#" => $field->title]));
                     }
                     break;
                 case "email":
                     if (!preg_match(self::EMAIL_REGULAR_EXPRESSION, $formData[$field->code])) {
-                        throw new ArgumentException(Loc::getMessage("ROBOT_CORE_FIELD_VALUE_ERROR", ["#NAME#" => $field->title]));
+                        throw new RobotException(Loc::getMessage("ROBOT_CORE_FIELD_VALUE_ERROR", ["#NAME#" => $field->title]));
                     }
                     break;
                 default:

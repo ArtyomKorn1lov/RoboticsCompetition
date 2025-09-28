@@ -3,6 +3,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 
 use Bitrix\Main\LoaderException;
 use Bitrix\Main\Localization\Loc;
+use Robot\Core\Logger\LoggerFactory;
 
 Loc::loadMessages(__FILE__);
 
@@ -26,6 +27,8 @@ class TemplateComponent extends CBitrixComponent
 
     /**
      * @return void
+     * @throws Bitrix\Main\ObjectNotFoundException
+     * @throws Psr\Container\NotFoundExceptionInterface
      */
     public function executeComponent(): void
     {
@@ -33,11 +36,9 @@ class TemplateComponent extends CBitrixComponent
             if (!$this->includeModules()) {
                 throw new LoaderException(Loc::getMessage("COMPONENT_MODULE_ERROR"));
             }
-            if ($this->startResultCache()) {
-                $this->includeComponentTemplate();
-            }
+            $this->includeComponentTemplate();
         } catch (LoaderException $exception) {
-            AddMessage2Log($exception->getMessage(), "main");
+            LoggerFactory::build()->error($exception);
             ShowError($exception->getMessage());
         }
     }

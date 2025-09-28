@@ -11,6 +11,9 @@ use Bitrix\Main\DI\ServiceLocator;
 use Psr\Container\NotFoundExceptionInterface;
 use Robot\Core\Constants;
 use Robot\Core\DTO\Action\ActionCollection;
+use Robot\Core\Exceptions\RobotException;
+use Robot\Core\Logger\Logger;
+use Robot\Core\Logger\LoggerFactory;
 use Robot\Core\Repositories\Actions\IActionRepository;
 use Robot\Core\Tools\IBlocks\Helper;
 use Robot\Core\Entity\Action\ActionItemsReqParams;
@@ -23,6 +26,8 @@ class ActionManager implements IActionManager
 {
     /** @var IActionRepository репозиторий активных событий */
     private IActionRepository $actionRepository;
+    /** @var Logger объект логирования */
+    private Logger $logger;
 
     /**
      * @throws ObjectNotFoundException
@@ -30,20 +35,22 @@ class ActionManager implements IActionManager
      */
     public function __construct()
     {
-        $this->actionRepository = ServiceLocator::getInstance()->get(IActionRepository::class);
+        $serviceLocator = ServiceLocator::getInstance();
+        $this->actionRepository = $serviceLocator->get(IActionRepository::class);
+        $this->logger = LoggerFactory::build();
     }
 
     /**
      * @param int $id
      * @return ActionCollection
-     * @throws ArgumentException
      * @throws SystemException
+     * @throws RobotException
      */
     public function getByEventId(int $id): ActionCollection
     {
         try {
             if (empty($id)) {
-                throw new SystemException(Loc::getMessage("ROBOT_CORE_ERROR_EVENT_ID"));
+                throw new RobotException(Loc::getMessage("ROBOT_CORE_ERROR_EVENT_ID"));
             }
 
             $iblockId = Helper::getIBlock(Constants::ACTIONS_IBLOCK_CODE);
@@ -58,7 +65,7 @@ class ActionManager implements IActionManager
             $arSectionsIds = $this->actionRepository->getSectionsByEventId($entity);
             
             if (empty($arSectionsIds)) {
-                throw new ArgumentException(Loc::getMessage("ROBOT_CORE_ERROR_ACTIONS_EMPTY"));
+                throw new RobotException(Loc::getMessage("ROBOT_CORE_ERROR_ACTIONS_EMPTY"));
             }
 
             $entity = new ActionItemsReqParams(
@@ -71,12 +78,14 @@ class ActionManager implements IActionManager
             $response = $this->actionRepository->getActionsBySectionsIds($entity);
 
             if (empty($response)) {
-                throw new ArgumentException(Loc::getMessage("ROBOT_CORE_ERROR_ACTIONS_EMPTY"));
+                throw new RobotException(Loc::getMessage("ROBOT_CORE_ERROR_ACTIONS_EMPTY"));
             }
 
             return Action::mapActionsResponseToCollection($response);
-        } catch (SystemException|ArgumentException $exception) {
-            AddMessage2Log($exception->getMessage(), 'robot.core');
+        } catch (RobotException $exception) {
+            throw $exception;
+        } catch (SystemException $exception) {
+            $this->logger->error($exception);
             throw $exception;
         }
     }

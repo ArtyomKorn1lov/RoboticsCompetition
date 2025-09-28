@@ -10,6 +10,7 @@ use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
 use CFile;
 
+use Robot\Core\Exceptions\RobotException;
 use Robot\Core\Tools\Modules\Manager;
 
 Loc::loadMessages(__FILE__);
@@ -66,7 +67,8 @@ final class SiteSettingsUpdate
      * @param array $arSiteSettingsFields
      * @param string $siteId
      * @throws ArgumentException
-     * @throws ObjectException
+     * @throws ObjectPropertyException
+     * @throws RobotException
      * @throws SystemException
      */
     public function __construct(
@@ -102,29 +104,28 @@ final class SiteSettingsUpdate
      * @param int $id
      * @param array $arSiteSettingsFields
      * @return void
-     * @throws ArgumentException
-     * @throws ObjectException
+     * @throws RobotException
      */
     protected function validate(int $id, array $arSiteSettingsFields): void
     {
         if (empty($id)) {
-            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_ID_UPDATED_ERROR"));
+            throw new RobotException(Loc::getMessage("ROBOT_CORE_ID_UPDATED_ERROR"));
         }
 
         if (empty($arSiteSettingsFields)) {
-            throw new ObjectException(Loc::getMessage("ROBOT_CORE_FORM_VALUES_ERROR"));
+            throw new RobotException(Loc::getMessage("ROBOT_CORE_FORM_VALUES_ERROR"));
         }
 
         if (empty($arSiteSettingsFields[self::FIELD_EMAIL_CODE])) {
-            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_INVALID_EMAIL"));
+            throw new RobotException(Loc::getMessage("ROBOT_CORE_INVALID_EMAIL"));
         }
 
         if (empty($arSiteSettingsFields[self::FIELD_PHONE_CODE])) {
-            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_INVALID_PHONE"));
+            throw new RobotException(Loc::getMessage("ROBOT_CORE_INVALID_PHONE"));
         }
 
         if (empty($arSiteSettingsFields[self::FIELD_ADDRESS_CODE])) {
-            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_INVALID_ADDRESS"));
+            throw new RobotException(Loc::getMessage("ROBOT_CORE_INVALID_ADDRESS"));
         }
     }
 
@@ -132,6 +133,8 @@ final class SiteSettingsUpdate
      * @param array $arSiteSettingsFields
      * @return array
      * @throws ArgumentException
+     * @throws ObjectPropertyException
+     * @throws RobotException
      * @throws SystemException
      */
     protected function compareFieldsArray(array $arSiteSettingsFields): array
@@ -212,12 +215,12 @@ final class SiteSettingsUpdate
     /**
      * @param array $arSiteSettingsFields
      * @return array
-     * @throws ArgumentException
+     * @throws RobotException
      */
     protected function compareMapCoors(array $arSiteSettingsFields): array
     {
         if (empty($arSiteSettingsFields[self::FIELD_MAP_COORDINATES_CODE."_VALUE_1"]) || empty($arSiteSettingsFields[self::FIELD_MAP_COORDINATES_CODE."_VALUE_2"])) {
-            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_INVALID_COORDINATES"));
+            throw new RobotException(Loc::getMessage("ROBOT_CORE_INVALID_COORDINATES"));
         }
 
         $arSiteSettingsFields[self::FIELD_MAP_COORDINATES_CODE][] = (float) $arSiteSettingsFields[self::FIELD_MAP_COORDINATES_CODE."_".self::VALUE_STR_CONTAIN."_1"];
@@ -234,6 +237,7 @@ final class SiteSettingsUpdate
      * @return array
      * @throws ArgumentException
      * @throws ObjectPropertyException
+     * @throws RobotException
      * @throws SystemException
      */
     protected function uploadFile(array $arSiteSettingsFields, string $fieldCode): array
@@ -252,12 +256,13 @@ final class SiteSettingsUpdate
      * @return void
      * @throws ArgumentException
      * @throws ObjectPropertyException
+     * @throws RobotException
      * @throws SystemException
      */
     protected function deleteFieldFile(string $fieldCode): void
     {
         if (empty($fieldCode)) {
-            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_INVALID_FILE_FIELD_CODE"));
+            throw new RobotException(Loc::getMessage("ROBOT_CORE_INVALID_FILE_FIELD_CODE"));
         }
 
         $query = new Query(SiteSettingsTable::getEntity());

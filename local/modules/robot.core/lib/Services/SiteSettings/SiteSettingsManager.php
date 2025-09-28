@@ -15,6 +15,9 @@ use Robot\Core\DTO\SiteSettings\SiteSettingsContacts;
 use Robot\Core\DTO\SiteSettings\SiteSettingsHeader;
 use Robot\Core\DTO\SiteSettings\SiteSettingsFooter;
 use Robot\Core\DTO\SiteSettings\SiteSettingsUpdate;
+use Robot\Core\Exceptions\RobotException;
+use Robot\Core\Logger\Logger;
+use Robot\Core\Logger\LoggerFactory;
 use Robot\Core\Repositories\SiteSettings\ISiteSettingsRepository;
 use Robot\Core\Tools\Files\IHelper;
 use Robot\Core\Tools\Mappers\SiteSettings;
@@ -29,6 +32,8 @@ class SiteSettingsManager implements ISiteSettingsManager
     private ISiteSettingsRepository $siteSettingsRepository;
     /** @var IHelper хелпер для работы с файлами */
     private IHelper $fileHelper;
+    /** @var Logger объект логирования */
+    private Logger $logger;
 
     /**
      * @throws ObjectNotFoundException
@@ -36,15 +41,16 @@ class SiteSettingsManager implements ISiteSettingsManager
      */
     public function __construct()
     {
-        $this->siteSettingsRepository = ServiceLocator::getInstance()->get(ISiteSettingsRepository::class);
-        $this->fileHelper = ServiceLocator::getInstance()->get(IHelper::class);
+        $serviceLocator = ServiceLocator::getInstance();
+        $this->siteSettingsRepository = $serviceLocator->get(ISiteSettingsRepository::class);
+        $this->fileHelper = $serviceLocator->get(IHelper::class);
+        $this->logger = LoggerFactory::build();
     }
 
     /**
      * @param string $siteId
      * @return array
-     * @throws ArgumentException
-     * @throws ObjectPropertyException
+     * @throws RobotException
      * @throws SystemException
      */
     public function getSiteSettingsEdit(string $siteId): array
@@ -56,20 +62,21 @@ class SiteSettingsManager implements ISiteSettingsManager
             !empty($data["LOGO_FOOTER"]) && $data["LOGO_FOOTER"] = $this->fileHelper->getFilePath($data["LOGO_FOOTER"]);
 
             if (empty($data)) {
-                throw new ArgumentException(Loc::getMessage("ROBOT_CORE_SITE_SETTINGS_NOT_FOUND"));
+                throw new RobotException(Loc::getMessage("ROBOT_CORE_SITE_SETTINGS_NOT_FOUND"));
             }
 
             return $data;
-        } catch (ArgumentException|ObjectPropertyException $exception) {
-            AddMessage2Log($exception->getMessage());
+        } catch (RobotException $exception) {
+            throw $exception;
+        } catch (SystemException $exception) {
+            $this->logger->error($exception);
             throw $exception;
         }
     }
 
     /**
      * @return SiteSettingsHeader
-     * @throws ArgumentException
-     * @throws ObjectPropertyException
+     * @throws RobotException
      * @throws SystemException
      */
     public function getSettingsHeader(): SiteSettingsHeader
@@ -77,21 +84,22 @@ class SiteSettingsManager implements ISiteSettingsManager
         try {
             $arSiteSetting = $this->siteSettingsRepository->getSiteSettingsHeader();
             if (empty($arSiteSetting)) {
-                throw new SystemException(Loc::getMessage("ROBOT_CORE_SITE_SETTINGS_ITEM_NOT_FOUND"));
+                throw new RobotException(Loc::getMessage("ROBOT_CORE_SITE_SETTINGS_ITEM_NOT_FOUND"));
             }
             $siteSetting = SiteSettings::mapSiteSettingHeaderResponseToModel($arSiteSetting);
             !empty($siteSetting->logo) && $siteSetting->logo = $this->fileHelper->getFilePath($siteSetting->logo);
             return $siteSetting;
-        } catch (SystemException|ArgumentException|ObjectPropertyException $exception) {
-            AddMessage2Log($exception->getMessage());
+        } catch (RobotException $exception) {
+            throw $exception;
+        } catch (SystemException $exception) {
+            $this->logger->error($exception);
             throw $exception;
         }
     }
 
     /**
      * @return SiteSettingsFooter
-     * @throws ArgumentException
-     * @throws ObjectPropertyException
+     * @throws RobotException
      * @throws SystemException
      */
     public function getSettingsFooter(): SiteSettingsFooter
@@ -99,23 +107,24 @@ class SiteSettingsManager implements ISiteSettingsManager
         try {
             $arSiteSetting = $this->siteSettingsRepository->getSiteSettingsFooter();
             if (empty($arSiteSetting)) {
-                throw new SystemException(Loc::getMessage("ROBOT_CORE_SITE_SETTINGS_ITEM_NOT_FOUND"));
+                throw new RobotException(Loc::getMessage("ROBOT_CORE_SITE_SETTINGS_ITEM_NOT_FOUND"));
             }
             $siteSetting = SiteSettings::mapSiteSettingsFooterResponseToModel($arSiteSetting);
             !empty($siteSetting->logoFooter) && $siteSetting->logoFooter = $this->fileHelper->getFilePath($siteSetting->logoFooter);
             !empty($siteSetting->email) && $siteSetting->email = $this->getArrayField($siteSetting->email);
             !empty($siteSetting->phone) && $siteSetting->phone = $this->getArrayField($siteSetting->phone);
             return $siteSetting;
-        } catch (SystemException|ArgumentException|ObjectPropertyException $exception) {
-            AddMessage2Log($exception->getMessage());
+        } catch (RobotException $exception) {
+            throw $exception;
+        } catch (SystemException $exception) {
+            $this->logger->error($exception);
             throw $exception;
         }
     }
 
     /**
      * @return SiteSettingsContacts
-     * @throws ArgumentException
-     * @throws ObjectPropertyException
+     * @throws RobotException
      * @throws SystemException
      */
     public function getSettingContacts(): SiteSettingsContacts
@@ -123,14 +132,16 @@ class SiteSettingsManager implements ISiteSettingsManager
         try {
             $arSiteSetting = $this->siteSettingsRepository->getSiteSettingsContacts();
             if (empty($arSiteSetting)) {
-                throw new SystemException(Loc::getMessage("ROBOT_CORE_SITE_SETTINGS_ITEM_NOT_FOUND"));
+                throw new RobotException(Loc::getMessage("ROBOT_CORE_SITE_SETTINGS_ITEM_NOT_FOUND"));
             }
             $siteSetting = SiteSettings::mapSiteSettingsContactsResponseToModel($arSiteSetting);
             !empty($siteSetting->email) && $siteSetting->email = $this->getArrayField($siteSetting->email);
             !empty($siteSetting->phone) && $siteSetting->phone = $this->getArrayField($siteSetting->phone);
             return $siteSetting;
-        } catch (SystemException|ArgumentException|ObjectPropertyException $exception) {
-            AddMessage2Log($exception->getMessage());
+        } catch (RobotException $exception) {
+            throw $exception;
+        } catch (SystemException $exception) {
+            $this->logger->error($exception);
             throw $exception;
         }
     }
@@ -139,22 +150,23 @@ class SiteSettingsManager implements ISiteSettingsManager
      * @param SiteSettingsUpdate $siteSettingsUpdate
      * @param string $siteId
      * @return void
-     * @throws ArgumentException
-     * @throws ObjectException
+     * @throws RobotException
      * @throws SystemException
      */
     public function saveSiteSettings(SiteSettingsUpdate $siteSettingsUpdate, string $siteId): void
     {
         try {
             if (empty($siteSettingsUpdate)) {
-                throw new ObjectException(Loc::getMessage("ROBOT_CORE_SITE_SETTINGS_ITEM_UPDATE_EMPTY"));
+                throw new RobotException(Loc::getMessage("ROBOT_CORE_SITE_SETTINGS_ITEM_UPDATE_EMPTY"));
             }
 
             $entity = new SiteSettingsUpdateEntity($siteSettingsUpdate->id, $siteSettingsUpdate->arSiteSettings, $siteId);
 
             $this->siteSettingsRepository->saveSiteSettings($entity);
+        } catch (RobotException $exception) {
+            throw $exception;
         } catch (SystemException $exception) {
-            AddMessage2Log($exception->getMessage());
+            $this->logger->error($exception);
             throw $exception;
         }
     }
@@ -162,8 +174,7 @@ class SiteSettingsManager implements ISiteSettingsManager
     /**
      * @param string $lang
      * @return string
-     * @throws ArgumentException
-     * @throws ObjectPropertyException
+     * @throws RobotException
      * @throws SystemException
      */
     public function getSiteIdByLang(string $lang): string
@@ -174,8 +185,10 @@ class SiteSettingsManager implements ISiteSettingsManager
             }
 
             return $this->siteSettingsRepository->getSiteIdByLang($lang);
-        } catch (SystemException|ObjectPropertyException|ArgumentException $exception) {
-            AddMessage2Log($exception->getMessage());
+        } catch (RobotException $exception) {
+            throw $exception;
+        } catch (SystemException $exception) {
+            $this->logger->error($exception);
             throw $exception;
         }
     }

@@ -10,6 +10,8 @@ use Psr\Container\NotFoundExceptionInterface;
 
 use Robot\Core\DTO\Action\ActionCollection;
 use Robot\Core\DTO\Event\FormFieldCollection;
+use Robot\Core\Exceptions\RobotException;
+use Robot\Core\Logger\LoggerFactory;
 use Robot\Core\Services\Actions\IActionManager;
 use Robot\Core\Services\Event\IEventManager;
 
@@ -28,8 +30,12 @@ class EventsView
             $eventManager = ServiceLocator::getInstance()->get(IEventManager::class);
             $event = $eventManager->getActiveEvent();
             return $event->isRegister && $eventManager->isDateAvailable($event->expirationDate);
-        } catch (SystemException $exception) {
+        } catch (RobotException $exception) {
             ShowError($exception->getMessage());
+            return false;
+        } catch (SystemException $exception) {
+            LoggerFactory::build()->error($exception);
+            ShowError("Произошла внутренняя ошибка");
             return false;
         }
     }
@@ -45,8 +51,12 @@ class EventsView
             $eventManager = ServiceLocator::getInstance()->get(IEventManager::class);
             $event = $eventManager->getActiveEvent();
             return $eventManager->isDateAvailable($event->expirationDate);
-        } catch (SystemException $exception) {
+        } catch (RobotException $exception) {
             ShowError($exception->getMessage());
+            return false;
+        } catch (SystemException $exception) {
+            LoggerFactory::build()->error($exception);
+            ShowError("Произошла внутренняя ошибка");
             return false;
         }
     }
@@ -61,8 +71,12 @@ class EventsView
             $eventManager = ServiceLocator::getInstance()->get(IEventManager::class);
             $event = $eventManager->getActiveEvent();
             return $event->id;
-        } catch (SystemException|NotFoundExceptionInterface $exception) {
+        } catch (RobotException $exception) {
             ShowError($exception->getMessage());
+            return false;
+        } catch (SystemException|NotFoundExceptionInterface $exception) {
+            LoggerFactory::build()->error($exception);
+            ShowError("Произошла внутренняя ошибка");
             return false;
         }
     }
@@ -75,15 +89,19 @@ class EventsView
         try {
             $id = static::getActiveEventId();
             if (!$id) {
-                throw new SystemException(Loc::getMessage("ROBOT_CORE_EVENTS_GET_EMPTY"));
+                throw new RobotException(Loc::getMessage("ROBOT_CORE_EVENTS_GET_EMPTY"));
             }
 
             /** @var IActionManager $actionManager */
             $actionManager = ServiceLocator::getInstance()->get(IActionManager::class);
 
             return $actionManager->getByEventId($id);
-        } catch (SystemException|NotFoundExceptionInterface $exception) {
+        } catch (RobotException $exception) {
             ShowError($exception->getMessage());
+            return false;
+        } catch (SystemException|NotFoundExceptionInterface $exception) {
+            LoggerFactory::build()->error($exception);
+            ShowError("Произошла внутренняя ошибка");
             return false;
         }
     }
@@ -99,12 +117,16 @@ class EventsView
             $fields = $eventManager->getRegistrationFields();
 
             if (empty($fields) || $fields->count() <= 0) {
-                throw new SystemException("Ошибка получения полей формы");
+                throw new RobotException("Ошибка получения полей формы");
             }
 
             return $fields;
-        } catch (SystemException|NotFoundExceptionInterface $exception) {
+        } catch (RobotException $exception) {
             ShowError($exception->getMessage());
+            return false;
+        } catch (SystemException|NotFoundExceptionInterface $exception) {
+            LoggerFactory::build()->error($exception);
+            ShowError("Произошла внутренняя ошибка");
             return false;
         }
     }

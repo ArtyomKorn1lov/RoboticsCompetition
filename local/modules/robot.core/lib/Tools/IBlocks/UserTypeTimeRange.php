@@ -5,6 +5,7 @@ namespace Robot\Core\Tools\IBlocks;
 use Bitrix\Main\ObjectException;
 use Bitrix\Iblock\PropertyTable;
 use Bitrix\Main\Localization\Loc;
+use Robot\Core\Logger\LoggerFactory;
 use stdClass;
 
 Loc::loadMessages(__FILE__);
@@ -57,7 +58,7 @@ class UserTypeTimeRange
 
                 $value['VALUE'] = base64_encode(serialize($value['VALUE']));
             } catch (ObjectException $exception) {
-                AddMessage2Log($exception->getMessage(), 'robot.core');
+                LoggerFactory::build()->error($exception);
                 $value['VALUE'] = '';
             }
         } else {
@@ -79,7 +80,7 @@ class UserTypeTimeRange
             try {
                 $value['VALUE'] = base64_decode($value['VALUE']);
             } catch (\Exception $exception) {
-                AddMessage2Log($exception->getMessage(), 'robot.core');
+                LoggerFactory::build()->error($exception);
             }
         }
 

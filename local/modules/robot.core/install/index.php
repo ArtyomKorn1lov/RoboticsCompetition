@@ -21,6 +21,9 @@ use Robot\Core\Enums\SocialIcons;
 use Robot\Core\Constants;
 use Robot\Core\Tools\IBlocks\UserTypeTimeRange;
 use Robot\Core\Tools\Migration\MigrationConfig;
+use Robot\Core\Logger\Logger;
+use Robot\Core\Logger\LoggerFactory;
+
 use Sprint\Migration\Installer;
 
 Loc::loadMessages(__FILE__);
@@ -35,6 +38,7 @@ class robot_core extends CModule
 
     /** @var array данные с формы 1-го шага */
     private array $stepData = [];
+    private Logger $logger;
 
     /** @var array список подмодулей */
     private array $subModules = [
@@ -68,6 +72,9 @@ class robot_core extends CModule
         $this->MODULE_GROUP_RIGHTS = 'N';
         // Название компании партнера предоставляющей модуль
         $this->PARTNER_NAME = Loc::getMessage('ROBOT_MODULE_PARTNER_NAME');
+
+        // Объект логгера
+        $this->logger = LoggerFactory::build();
 
         // Установка папки корневой директории - либо папка /bitrix либо /local
         $this->setRootDir();
@@ -197,7 +204,7 @@ class robot_core extends CModule
         }
         catch (Exception $exception) {
             ModuleManager::unRegisterModule($this->MODULE_ID);
-            AddMessage2Log($exception->getMessage(), $this->MODULE_ID);
+            $this->logger->error($exception);
             $APPLICATION->ThrowException($exception->getMessage());
             $APPLICATION->IncludeAdminFile(
                 Loc::getMessage('ROBOT_STEP_ERROR_TITLE'),
@@ -228,7 +235,7 @@ class robot_core extends CModule
             );
         } catch (Exception $exception) {
             ModuleManager::unRegisterModule($this->MODULE_ID);
-            AddMessage2Log($exception->getMessage(), $this->MODULE_ID);
+            $this->logger->error($exception);
             $APPLICATION->ThrowException($exception->getMessage());
         }
     }
@@ -421,11 +428,11 @@ class robot_core extends CModule
 
             $connection->commitTransaction();
         } catch (Exception $exception) {
-            AddMessage2Log($exception->getMessage(), $this->MODULE_ID);
+            $this->logger->error($exception);
             try {
                 $connection->rollbackTransaction();
             } catch (SqlQueryException $exceptionSql) {
-                AddMessage2Log($exceptionSql->getMessage(), $this->MODULE_ID);
+                $this->logger->error($exceptionSql);
                 return false;
             }
         }
@@ -510,11 +517,11 @@ class robot_core extends CModule
 
             $connection->commitTransaction();
         } catch (Exception $exception) {
-            AddMessage2Log($exception->getMessage(), $this->MODULE_ID);
+            $this->logger->error($exception);
             try {
                 $connection->rollbackTransaction();
             } catch (SqlQueryException $exceptionSql) {
-                AddMessage2Log($exceptionSql->getMessage(), $this->MODULE_ID);
+                $this->logger->error($exceptionSql);
                 return false;
             }
         }
@@ -577,7 +584,7 @@ class robot_core extends CModule
                 !empty($row["LOGO_FOOTER"]) && CFile::Delete($row["LOGO_FOOTER"]);
             }
         } catch (Exception $exception) {
-            AddMessage2Log($exception->getMessage(), $this->MODULE_ID);
+            $this->logger->error($exception);
             return false;
         }
     }

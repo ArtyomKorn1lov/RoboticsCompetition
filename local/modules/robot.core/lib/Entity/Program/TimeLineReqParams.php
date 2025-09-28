@@ -2,8 +2,8 @@
 
 namespace Robot\Core\Entity\Program;
 
-use Bitrix\Main\ArgumentException;
 use Bitrix\Main\Localization\Loc;
+use Robot\Core\Exceptions\RobotException;
 
 /**
  * Параметры запроса для получения списка дат события
@@ -29,7 +29,7 @@ final class TimeLineReqParams
      * @param int[] $sectionsIds
      * @param bool $active
      * @param string $sort
-     * @throws ArgumentException
+     * @throws RobotException
      */
     public function __construct(
         string $iblockType,
@@ -40,7 +40,7 @@ final class TimeLineReqParams
     )
     {
         if (empty($iblockType) || empty($iblockId) || empty($sectionsIds)) {
-            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_ARGUMENT_EXCEPTION"));
+            throw new RobotException(Loc::getMessage("ROBOT_CORE_ARGUMENT_EXCEPTION"));
         }
         $this->iblockType = $iblockType;
         $this->iblockId = $iblockId;

@@ -7,12 +7,16 @@ use Bitrix\Main\Engine\Response\AjaxJson;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ObjectException;
 use Bitrix\Main\ObjectPropertyException;
+use Bitrix\Main\Request;
 use Bitrix\Main\SystemException;
 use Bitrix\Main\DI\ServiceLocator;
 
 use Psr\Container\NotFoundExceptionInterface;
 
 use Robot\Core\DTO\Event\AutocompleteSearch;
+use Robot\Core\Exceptions\RobotException;
+use Robot\Core\Logger\Logger;
+use Robot\Core\Logger\LoggerFactory;
 use Robot\Core\Services\Event\IEventManager;
 use Robot\Core\Tools\Mappers\Event;
 use Robot\Core\Views\Events\EventsView;
@@ -23,6 +27,19 @@ Loc::loadMessages(__FILE__);
 
 class EventController extends Controller
 {
+    /** @var Logger объект логирования */
+    private Logger $logger;
+
+
+    /**
+     * @param Request|null $request
+     */
+    public function __construct(Request $request = null)
+    {
+        parent::__construct($request);
+        $this->logger = LoggerFactory::build();
+    }
+
     /**
      * @return array[]
      */
@@ -50,12 +67,12 @@ class EventController extends Controller
     {
         try {
             if (empty($formData)) {
-                throw new ArgumentException(Loc::getMessage("ROBOT_CORE_REGISTER_DATA_EMPTY"));
+                throw new RobotException(Loc::getMessage("ROBOT_CORE_REGISTER_DATA_EMPTY"));
             }
 
             $eventId = EventsView::getActiveEventId();
             if (!$eventId) {
-                throw new ArgumentException(Loc::getMessage("ROBOT_CORE_PROGRAM_INVALID_EVENT_ID"));
+                throw new RobotException(Loc::getMessage("ROBOT_CORE_PROGRAM_INVALID_EVENT_ID"));
             }
 
             /** @var IEventManager $eventManager */
@@ -63,8 +80,11 @@ class EventController extends Controller
             $eventManager->saveRegisterForm(Event::mapRegisterFormArrayToModel($formData), $eventId);
 
             return AjaxJson::createSuccess(Loc::getMessage("ROBOT_CORE_REGISTER_SUCCESS_MESSAGE"));
-        } catch (SystemException|ArgumentException|ObjectException|ObjectPropertyException|NotFoundExceptionInterface $exception) {
+        } catch (RobotException $exception) {
             return $this->onError($exception->getMessage());
+        } catch (SystemException|NotFoundExceptionInterface $exception) {
+            $this->logger->error($exception);
+            return $this->onError("Произошла внутренняя ошибка");
         }
     }
 
@@ -77,7 +97,7 @@ class EventController extends Controller
     {
         try {
             if (empty($id)) {
-                throw new ArgumentException(Loc::getMessage("ROBOT_CORE_SEARCH_INVALID_ID"));
+                throw new RobotException(Loc::getMessage("ROBOT_CORE_SEARCH_INVALID_ID"));
             }
 
             $autocompleteSearch = new AutocompleteSearch(
@@ -90,8 +110,11 @@ class EventController extends Controller
             $result = $eventManager->searchAutocompleteValues($autocompleteSearch)->mapToArray(fn($item) => $item);
 
             return AjaxJson::createSuccess($result);
-        } catch (SystemException|ArgumentException|ObjectException|ObjectPropertyException|NotFoundExceptionInterface $exception) {
+        } catch (RobotException $exception) {
             return $this->onError($exception->getMessage());
+        } catch (SystemException|NotFoundExceptionInterface $exception) {
+            $this->logger->error($exception);
+            return $this->onError("Произошла внутренняя ошибка");
         }
     }
 }
