@@ -2,7 +2,6 @@
 
 namespace Robot\Core\Services\Program;
 
-use Bitrix\Main\ArgumentException;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ObjectNotFoundException;
 use Bitrix\Main\SystemException;
@@ -39,9 +38,7 @@ class ProgramManager implements IProgramManager
     /** @var string */
     protected const PROGRAM_CACHE_KEY = 'robot_core_cache_program_key';
     /** @var string */
-    protected const PROGRAM_ITEMS_CACHE_PATH = 'program/items';
-    /** @var string */
-    protected const PROGRAM_LIST_CACHE_PATH = 'program/list';
+    protected const PROGRAM_CACHE_PATH = 'program/items';
 
     /**
      * @throws ObjectNotFoundException
@@ -68,13 +65,12 @@ class ProgramManager implements IProgramManager
                 throw new RobotException(Loc::getMessage("ROBOT_CORE_PROGRAM_INVALID_EVENT_ID"));
             }
 
-            $cachePath = self::PROGRAM_ITEMS_CACHE_PATH . "/" . Loc::getCurrentLang();
-            if ($this->cacheService->init(self::PROGRAM_CACHE_KEY, $cachePath)) {
+            if ($this->cacheService->init(self::PROGRAM_CACHE_KEY, self::PROGRAM_CACHE_PATH)) {
                 /** @var ProgramItems $programItems */
                 $programItems = $this->cacheService->getData();
                 return $programItems;
             } elseif ($this->cacheService->start()) {
-                $this->cacheService->startTag($cachePath);
+                $this->cacheService->startTag(self::PROGRAM_CACHE_PATH);
 
                 [$sectionIds, $sectionName] = $this->getProgramSections($eventId);
                 if (empty($sectionIds)) {
@@ -109,7 +105,7 @@ class ProgramManager implements IProgramManager
                 $this->cacheService->end($programItems);
                 return $programItems;
             } else {
-                throw new SystemException("Ошибка создания кэша " . self::PROGRAM_ITEMS_CACHE_PATH);
+                throw new SystemException("Ошибка создания кэша " . self::PROGRAM_CACHE_PATH);
             }
         } catch (RobotException $exception) {
             throw $exception;
@@ -122,14 +118,12 @@ class ProgramManager implements IProgramManager
     public function getProgramList(DateTime $date, array|bool $sectionIds = false): ProgramCollection
     {
         try {
-            $cachePath = self::PROGRAM_LIST_CACHE_PATH . "/" . $date->format('Y-m-d');
-
-            if ($this->cacheService->init(self::PROGRAM_CACHE_KEY, $cachePath)) {
+            if ($this->cacheService->init(self::PROGRAM_CACHE_KEY, self::PROGRAM_CACHE_PATH, cacheParams: [$date->format('Y-m-d')])) {
                 /** @var ProgramCollection $programList */
                 $programList = $this->cacheService->getData();
                 return $programList;
             } elseif ($this->cacheService->start()) {
-                $this->cacheService->startTag($cachePath);
+                $this->cacheService->startTag(self::PROGRAM_CACHE_PATH);
 
                 $programList = $this->getProgramByDate($date, $sectionIds);
 
@@ -142,7 +136,7 @@ class ProgramManager implements IProgramManager
                 $this->cacheService->end($programList);
                 return $programList;
             } else {
-                throw new SystemException("Ошибка создания кэша " . self::PROGRAM_LIST_CACHE_PATH);
+                throw new SystemException("Ошибка создания кэша " . self::PROGRAM_CACHE_PATH);
             }
         } catch (RobotException $exception) {
             $this->cacheService->abortTag();

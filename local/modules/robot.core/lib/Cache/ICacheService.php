@@ -5,12 +5,13 @@ namespace Robot\Core\Cache;
 interface ICacheService
 {
     /**
-     * @param int $ttl
      * @param string $cacheKey
      * @param string $initDir
+     * @param int $ttl
+     * @param array $cacheParams
      * @return bool
      */
-    public function init(string $cacheKey, string $initDir, int $ttl): bool;
+    public function init(string $cacheKey, string $initDir, int $ttl, array $cacheParams): bool;
 
     /**
      * @return mixed

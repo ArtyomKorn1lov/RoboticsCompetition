@@ -6,6 +6,7 @@ use Bitrix\Main\ArgumentException;
 use Bitrix\Main\Data\Cache;
 use Bitrix\Main\Application;
 use Bitrix\Main\Data\TaggedCache;
+use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
 
@@ -31,13 +32,15 @@ class CacheService implements ICacheService
     }
 
     /**
-     * @param int $ttl
      * @param string $cacheKey
      * @param string $initDir
+     * @param int $ttl
+     * @param array $cacheParams
      * @return bool
      */
-    public function init(string $cacheKey = self::DEFAULT_CACHE_KEY, string $initDir = self::DEFAULT_CACHE_PATH, int $ttl = self::CACHE_TTL): bool
+    public function init(string $cacheKey = self::DEFAULT_CACHE_KEY, string $initDir = self::DEFAULT_CACHE_PATH, int $ttl = self::CACHE_TTL, array $cacheParams = []): bool
     {
+        $cacheKey = $this->generateCacheKey($cacheKey, $cacheParams);
         return $this->cache->initCache($ttl, $cacheKey, self::MODULE_CACHE_PATH . $initDir);
     }
 
@@ -76,7 +79,7 @@ class CacheService implements ICacheService
 
     public function startTag(string $path): void
     {
-        $this->taggedCache->startTagCache($path);
+        $this->taggedCache->startTagCache(self::MODULE_CACHE_PATH . $path);
     }
 
     /**
@@ -116,5 +119,11 @@ class CacheService implements ICacheService
     public function clearTag(string $tagName): void
     {
         $this->taggedCache->clearByTag($tagName);
+    }
+
+    protected function generateCacheKey(string $baseCacheKey, array $cacheParams = []): string
+    {
+        $cacheKey = $baseCacheKey."|".SITE_ID."|".Loc::getCurrentLang();
+        return $cacheKey."|".serialize($cacheParams);
     }
 }
