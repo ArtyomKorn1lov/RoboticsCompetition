@@ -89,6 +89,7 @@ class EventRepository extends HighloadBlocks implements IEventRepository
      * @throws ObjectException
      * @throws ObjectPropertyException
      * @throws SystemException
+     * @throws RobotException
      */
     public function getRegistrationFields(bool $isInit = true): FormFieldCollection
     {

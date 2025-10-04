@@ -93,4 +93,19 @@ class Constants
 
     /** @var string код настройки - email получателя по умолчанию */
     public const DEFAULT_RECIPIENT_EMAIL_OPTION_CODE = "robot_core_default_recipient_email";
+
+    /** @var string тег для кэша списка полей для формы регистрации */
+    public const REGISTRATION_FIELD_TAG_CACHE = "robot_core_registration_fields_cache";
+
+    /** @var string тег для кэша список стран для формы регистрации */
+    public const COUNTRIES_TAG_CACHE = "robot_core_countries_cache";
+
+    /** @var string тег для кэша контактная информация в шапке сайта */
+    public const SITE_SETTINGS_HEADER_TAG_CACHE = "robot_core_site_settings_header_cache";
+
+    /** @var string тег для кэша контактная информация в подвале сайта */
+    public const SITE_SETTINGS_FOOTER_TAG_CACHE = "robot_core_site_settings_footer_cache";
+
+    /** @var string тег для кэша контактная информация на стр. контакты */
+    public const SITE_SETTINGS_CONTACTS_TAG_CACHE = "robot_core_site_settings_contacts_cache";
 }

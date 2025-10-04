@@ -3,9 +3,11 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Программа");
 
 use Bitrix\Iblock\Component\Tools;
+use Bitrix\Main\Loader;
 use Robot\Core\Views\Events\EventsView;
 
 if (!EventsView::showProgram()) {
+    Loader::includeModule('iblock');
     Tools::process404('', true, true, true, SITE_DIR . '404.php');
     return;
 }

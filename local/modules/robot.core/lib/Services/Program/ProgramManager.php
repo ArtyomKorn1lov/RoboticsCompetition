@@ -20,9 +20,9 @@ use Robot\Core\Exceptions\RobotException;
 use Robot\Core\Logger\Logger;
 use Robot\Core\Logger\LoggerFactory;
 use Robot\Core\Repositories\Program\IProgramRepository;
+use Robot\Core\Services\Event\IEventManager;
 use Robot\Core\Tools\IBlocks\Helper;
 use Robot\Core\Tools\Mappers\Program;
-use Robot\Core\Views\Events\EventsView;
 
 Loc::loadMessages(__FILE__);
 
@@ -32,12 +32,14 @@ class ProgramManager implements IProgramManager
     private IProgramRepository $programRepository;
     /** @var ICacheService сервис кэширования */
     private ICacheService $cacheService;
+    /** @var IEventManager сервис события */
+    private IEventManager $eventManager;
     /** @var Logger объект логирования */
     private Logger $logger;
 
-    /** @var string */
+    /** @var string уникальный ключ кэша */
     protected const PROGRAM_CACHE_KEY = 'robot_core_cache_program_key';
-    /** @var string */
+    /** @var string путь к кэшу */
     protected const PROGRAM_CACHE_PATH = 'program/items';
 
     /**
@@ -49,6 +51,7 @@ class ProgramManager implements IProgramManager
         $serviceLocator = ServiceLocator::getInstance();
         $this->programRepository = $serviceLocator->get(IProgramRepository::class);
         $this->cacheService = $serviceLocator->get(ICacheService::class);
+        $this->eventManager = $serviceLocator->get(IEventManager::class);
         $this->logger = LoggerFactory::build();
     }
 
@@ -108,8 +111,12 @@ class ProgramManager implements IProgramManager
                 throw new SystemException("Ошибка создания кэша " . self::PROGRAM_CACHE_PATH);
             }
         } catch (RobotException $exception) {
+            $this->cacheService->abortTag();
+            $this->cacheService->abort();
             throw $exception;
         } catch (SystemException $exception) {
+            $this->cacheService->abortTag();
+            $this->cacheService->abort();
             $this->logger->error($exception);
             throw $exception;
         }
@@ -163,7 +170,7 @@ class ProgramManager implements IProgramManager
         }
 
         if (!$sectionIds) {
-            $eventId = EventsView::getActiveEventId();
+            $eventId = $this->eventManager->getActiveEventElement()->id;
             [$sectionIds] = $this->getProgramSections($eventId);
         }
 

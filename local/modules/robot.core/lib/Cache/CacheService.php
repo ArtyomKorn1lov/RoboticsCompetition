@@ -10,6 +10,11 @@ use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
 
+/**
+ * @CacheService
+ * @implements ICacheService
+ * Сервис-прослойка кэширования D7 bitrix
+ */
 class CacheService implements ICacheService
 {
     /** @var int время жизни кэша */

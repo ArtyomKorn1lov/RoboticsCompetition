@@ -23,6 +23,7 @@ use Robot\Core\Tools\IBlocks\UserTypeTimeRange;
 use Robot\Core\Tools\Migration\MigrationConfig;
 use Robot\Core\Logger\Logger;
 use Robot\Core\Logger\LoggerFactory;
+use Robot\Core\Tools\Events\HighloadBlocksEventHandler;
 
 use Sprint\Migration\Installer;
 
@@ -55,28 +56,24 @@ class robot_core extends CModule
     public function __construct()
     {
         $arModuleVersion = array();
-        // Подключение версии модуля (файл будет следующим в списке)
+        /** Подключение версии модуля (файл будет следующим в списке) */
         include __DIR__ . '/version.php';
-        //присваиваем свойствам класса переменные из нашего файла
+        /** Присваивание свойствам класса переменных из файла с версией модуля */
         if (is_array($arModuleVersion) && array_key_exists('VERSION', $arModuleVersion)) {
             $this->MODULE_VERSION = $arModuleVersion['VERSION'];
             $this->MODULE_VERSION_DATE = $arModuleVersion['VERSION_DATE'];
         }
-        // Идентификатор модуля как и директории
+        /** Идентификатор модуля как и директории */
         $this->MODULE_ID = 'robot.core';
-        // Название модуля
+        /** Название модуля */
         $this->MODULE_NAME = Loc::getMessage('ROBOT_MODULE_NAME');
-        // Описание модуля
+        /** Описание модуля */
         $this->MODULE_DESCRIPTION = Loc::getMessage('ROBOT_MODULE_DESCRIPTION');
-        // Используется ли индивидуальная схема распределения прав доступа, ставится N, так как не используется
+        /** Используется ли индивидуальная схема распределения прав доступа, ставится N, так как не используется */
         $this->MODULE_GROUP_RIGHTS = 'N';
-        // Название компании партнера предоставляющей модуль
+        /** Название компании партнера предоставляющей модуль */
         $this->PARTNER_NAME = Loc::getMessage('ROBOT_MODULE_PARTNER_NAME');
-
-        // Объект логгера
-        $this->logger = LoggerFactory::build();
-
-        // Установка папки корневой директории - либо папка /bitrix либо /local
+        /** Установка папки корневой директории - либо папка /bitrix либо /local */
         $this->setRootDir();
     }
 
@@ -108,6 +105,7 @@ class robot_core extends CModule
     }
 
     /**
+     * Валидация входных параметров первого шага формы
      * @param array $stepData
      * @return bool
      */
@@ -144,6 +142,7 @@ class robot_core extends CModule
     }
 
     /**
+     * Проверка существует ли сайт в системе
      * @param string $siteId
      * @return bool
      */
@@ -185,6 +184,8 @@ class robot_core extends CModule
                 ModuleManager::registerModule($this->MODULE_ID);
                 Loader::includeModule($this->MODULE_ID);
 
+                $this->logger = LoggerFactory::build();
+
                 $this->installFiles();
                 $this->installDb();
                 $this->installRouting();
@@ -203,8 +204,8 @@ class robot_core extends CModule
             }
         }
         catch (Exception $exception) {
+            !empty($this->logger) && $this->logger->error($exception);
             ModuleManager::unRegisterModule($this->MODULE_ID);
-            $this->logger->error($exception);
             $APPLICATION->ThrowException($exception->getMessage());
             $APPLICATION->IncludeAdminFile(
                 Loc::getMessage('ROBOT_STEP_ERROR_TITLE'),
@@ -222,6 +223,7 @@ class robot_core extends CModule
         global $APPLICATION;
         try {
             Loader::includeModule($this->MODULE_ID);
+            $this->logger = LoggerFactory::build();
             $this->deleteImages();
             $this->unInstallDb();
             $this->unInstallFiles();
@@ -234,8 +236,8 @@ class robot_core extends CModule
                 __DIR__ . '/deinstalinfo.php'
             );
         } catch (Exception $exception) {
+            !empty($this->logger) && $this->logger->error($exception);
             ModuleManager::unRegisterModule($this->MODULE_ID);
-            $this->logger->error($exception);
             $APPLICATION->ThrowException($exception->getMessage());
         }
     }
@@ -465,6 +467,7 @@ class robot_core extends CModule
     public function installEventHandlers()
     {
         $eventManager = EventManager::getInstance();
+        /** Обработчик для пользовательского поля "Временной диапазон" */
         $eventManager->registerEventHandler(
             'iblock',
             'OnIBlockPropertyBuildList',
@@ -472,12 +475,101 @@ class robot_core extends CModule
             UserTypeTimeRange::class,
             'getUserTypeDescription'
         );
+        /** Обработчик для кастомных миграций модуля sprint.migration v5.0.2 */
         $eventManager->registerEventHandler(
             'sprint.migration',
             'OnSearchConfigFiles',
             $this->MODULE_ID,
             toClass: MigrationConfig::class,
             toMethod: 'getConfigDirectory'
+        );
+        /** Обработчики изменения значений справочника "Поля формы регистрации" */
+        $eventManager->registerEventHandler(
+            '',
+            'RegistrationFieldsOnAfterAdd',
+            $this->MODULE_ID,
+            toClass: HighloadBlocksEventHandler::class,
+            toMethod: 'onAfterChange'
+        );
+        $eventManager->registerEventHandler(
+            '',
+            'RegistrationFieldsOnAfterUpdate',
+            $this->MODULE_ID,
+            toClass: HighloadBlocksEventHandler::class,
+            toMethod: 'onAfterChange'
+        );
+        $eventManager->registerEventHandler(
+            '',
+            'RegistrationFieldsOnAfterDelete',
+            $this->MODULE_ID,
+            toClass: HighloadBlocksEventHandler::class,
+            toMethod: 'onAfterChange'
+        );
+        /** Обработчики изменения значений справочника "Типы полей для формы" */
+        $eventManager->registerEventHandler(
+            '',
+            'FormTypesOnAfterAdd',
+            $this->MODULE_ID,
+            toClass: HighloadBlocksEventHandler::class,
+            toMethod: 'onAfterChange'
+        );
+        $eventManager->registerEventHandler(
+            '',
+            'FormTypesOnAfterUpdate',
+            $this->MODULE_ID,
+            toClass: HighloadBlocksEventHandler::class,
+            toMethod: 'onAfterChange'
+        );
+        $eventManager->registerEventHandler(
+            '',
+            'FormTypesOnAfterDelete',
+            $this->MODULE_ID,
+            toClass: HighloadBlocksEventHandler::class,
+            toMethod: 'onAfterChange'
+        );
+        /** Обработчики изменения значений справочника "Страны" */
+        $eventManager->registerEventHandler(
+            '',
+            'CountriesOnAfterAdd',
+            $this->MODULE_ID,
+            toClass: HighloadBlocksEventHandler::class,
+            toMethod: 'onAfterChange'
+        );
+        $eventManager->registerEventHandler(
+            '',
+            'CountriesOnAfterUpdate',
+            $this->MODULE_ID,
+            toClass: HighloadBlocksEventHandler::class,
+            toMethod: 'onAfterChange'
+        );
+        $eventManager->registerEventHandler(
+            '',
+            'CountriesOnAfterDelete',
+            $this->MODULE_ID,
+            toClass: HighloadBlocksEventHandler::class,
+            toMethod: 'onAfterChange'
+        );
+        /** Обработчики изменения значений справочника "Страны - англ. версия" */
+        $eventManager->registerEventHandler(
+            '',
+            'CountriesEnOnAfterAdd',
+            $this->MODULE_ID,
+            toClass: HighloadBlocksEventHandler::class,
+            toMethod: 'onAfterChange'
+        );
+        $eventManager->registerEventHandler(
+            '',
+            'CountriesEnOnAfterUpdate',
+            $this->MODULE_ID,
+            toClass: HighloadBlocksEventHandler::class,
+            toMethod: 'onAfterChange'
+        );
+        $eventManager->registerEventHandler(
+            '',
+            'CountriesEnOnAfterDelete',
+            $this->MODULE_ID,
+            toClass: HighloadBlocksEventHandler::class,
+            toMethod: 'onAfterChange'
         );
     }
 
@@ -614,6 +706,7 @@ class robot_core extends CModule
     public function unInstallEventHandlers()
     {
         $eventManager = EventManager::getInstance();
+        /** Обработчик для пользовательского поля "Временной диапазон" */
         $eventManager->unRegisterEventHandler(
             'iblock',
             'OnIBlockPropertyBuildList',
@@ -621,12 +714,101 @@ class robot_core extends CModule
             UserTypeTimeRange::class,
             'getUserTypeDescription'
         );
+        /** Обработчик для кастомных миграций модуля sprint.migration v5.0.2 */
         $eventManager->unRegisterEventHandler(
             'sprint.migration',
             'OnSearchConfigFiles',
             $this->MODULE_ID,
             MigrationConfig::class,
             'getConfigDirectory'
+        );
+        /** Обработчики изменения значений справочника "Поля формы регистрации" */
+        $eventManager->unRegisterEventHandler(
+            '',
+            'RegistrationFieldsOnAfterAdd',
+            $this->MODULE_ID,
+            HighloadBlocksEventHandler::class,
+            'onAfterChange'
+        );
+        $eventManager->unRegisterEventHandler(
+            '',
+            'RegistrationFieldsOnAfterUpdate',
+            $this->MODULE_ID,
+            HighloadBlocksEventHandler::class,
+            'onAfterChange'
+        );
+        $eventManager->unRegisterEventHandler(
+            '',
+            'RegistrationFieldsOnAfterDelete',
+            $this->MODULE_ID,
+            HighloadBlocksEventHandler::class,
+            'onAfterChange'
+        );
+        /** Обработчики изменения значений справочника "Типы полей для формы" */
+        $eventManager->unRegisterEventHandler(
+            '',
+            'FormTypesOnAfterAdd',
+            $this->MODULE_ID,
+            HighloadBlocksEventHandler::class,
+            'onAfterChange'
+        );
+        $eventManager->unRegisterEventHandler(
+            '',
+            'FormTypesOnAfterUpdate',
+            $this->MODULE_ID,
+            HighloadBlocksEventHandler::class,
+            'onAfterChange'
+        );
+        $eventManager->unRegisterEventHandler(
+            '',
+            'FormTypesOnAfterDelete',
+            $this->MODULE_ID,
+            HighloadBlocksEventHandler::class,
+            'onAfterChange'
+        );
+        /** Обработчики изменения значений справочника "Страны" */
+        $eventManager->unRegisterEventHandler(
+            '',
+            'CountriesOnAfterAdd',
+            $this->MODULE_ID,
+            HighloadBlocksEventHandler::class,
+            'onAfterChange'
+        );
+        $eventManager->unRegisterEventHandler(
+            '',
+            'CountriesOnAfterUpdate',
+            $this->MODULE_ID,
+            HighloadBlocksEventHandler::class,
+            'onAfterChange'
+        );
+        $eventManager->unRegisterEventHandler(
+            '',
+            'CountriesOnAfterDelete',
+            $this->MODULE_ID,
+            HighloadBlocksEventHandler::class,
+            'onAfterChange'
+        );
+        /** Обработчики изменения значений справочника "Страны - англ. версия" */
+        $eventManager->unRegisterEventHandler(
+            '',
+            'CountriesEnOnAfterAdd',
+            $this->MODULE_ID,
+            HighloadBlocksEventHandler::class,
+            'onAfterChange'
+        );
+        $eventManager->unRegisterEventHandler(
+            '',
+            'CountriesEnOnAfterUpdate',
+            $this->MODULE_ID,
+            HighloadBlocksEventHandler::class,
+            'onAfterChange'
+        );
+        $eventManager->unRegisterEventHandler(
+            '',
+            'CountriesEnOnAfterDelete',
+            $this->MODULE_ID,
+            HighloadBlocksEventHandler::class,
+            'onAfterChange'
         );
     }
 }
