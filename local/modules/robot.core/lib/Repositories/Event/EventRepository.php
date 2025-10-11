@@ -63,10 +63,11 @@ class EventRepository extends HighloadBlocks implements IEventRepository
      */
     public function getLastElementId(): int
     {
+        $iblockId = Helper::getIBlock(Constants::REGISTRATION_REQUEST_IBLOCK_CODE);
         $rsObject = CIBlockElement::GetList(
             arOrder: ["ID" => "DESC"],
             arFilter: [
-                "IBLOCK_ID" => Helper::getIBlock(Constants::REGISTRATION_REQUEST_IBLOCK_CODE),
+                "IBLOCK_ID" => $iblockId,
                 "IBLOCK_TYPE" => Constants::FEEDBACK_IBLOCK_TYPE,
             ],
             arNavStartParams: ["nTopCount" => 1],

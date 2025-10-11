@@ -68,7 +68,7 @@ class ProgramController extends Controller
             return $this->onError($exception->getMessage());
         } catch (SystemException|NotFoundExceptionInterface $exception) {
             $this->logger->error($exception);
-            return $this->onError("Произошла внутренняя ошибка");
+            return $this->onError(Loc::getMessage("ROBOT_CORE_PROGRAM_ERROR"));
         }
     }
 }

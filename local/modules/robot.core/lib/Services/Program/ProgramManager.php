@@ -108,7 +108,7 @@ class ProgramManager implements IProgramManager
                 $this->cacheService->end($programItems);
                 return $programItems;
             } else {
-                throw new SystemException("Ошибка создания кэша " . self::PROGRAM_CACHE_PATH);
+                throw new SystemException(Loc::getMessage("ROBOT_CORE_PROGRAM_CACHE", ["#PATH#" => self::PROGRAM_CACHE_PATH]));
             }
         } catch (RobotException $exception) {
             $this->cacheService->abortTag();
@@ -143,7 +143,7 @@ class ProgramManager implements IProgramManager
                 $this->cacheService->end($programList);
                 return $programList;
             } else {
-                throw new SystemException("Ошибка создания кэша " . self::PROGRAM_CACHE_PATH);
+                throw new SystemException(Loc::getMessage("ROBOT_CORE_PROGRAM_CACHE", ["#PATH#" => self::PROGRAM_CACHE_PATH]));
             }
         } catch (RobotException $exception) {
             $this->cacheService->abortTag();

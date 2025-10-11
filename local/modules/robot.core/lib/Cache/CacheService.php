@@ -3,12 +3,15 @@
 namespace Robot\Core\Cache;
 
 use Bitrix\Main\ArgumentException;
+use Bitrix\Main\Config\Option;
 use Bitrix\Main\Data\Cache;
 use Bitrix\Main\Application;
 use Bitrix\Main\Data\TaggedCache;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
+
+use Robot\Core\Constants;
 
 /**
  * @CacheService
@@ -17,8 +20,8 @@ use Bitrix\Main\SystemException;
  */
 class CacheService implements ICacheService
 {
-    /** @var int время жизни кэша */
-    private const CACHE_TTL = 3600;
+    /** @var int время жизни кэша по умолчанию */
+    public const DEFAULT_CACHE_TTL = 36000000;
     private const MODULE_CACHE_PATH = 'robot.core/';
     /** @var int путь к папке кэша */
     private const DEFAULT_CACHE_PATH = 'cache';
@@ -29,22 +32,31 @@ class CacheService implements ICacheService
     protected Cache $cache;
     /** @var TaggedCache служба пометки кеша тегами */
     protected TaggedCache $taggedCache;
+    /** @var int время жизни кэша */
+    protected int $cacheTTL;
 
     public function __construct()
     {
         $this->cache = Cache::createInstance();
         $this->taggedCache = Application::getInstance()->getTaggedCache();
+        $this->cacheTTL = (int)Option::get('robot.core', Constants::CACHE_TTL_OPTION_CODE) ?? self::DEFAULT_CACHE_TTL;
     }
 
     /**
      * @param string $cacheKey
      * @param string $initDir
-     * @param int $ttl
+     * @param int|null $ttl
      * @param array $cacheParams
      * @return bool
      */
-    public function init(string $cacheKey = self::DEFAULT_CACHE_KEY, string $initDir = self::DEFAULT_CACHE_PATH, int $ttl = self::CACHE_TTL, array $cacheParams = []): bool
+    public function init(string $cacheKey = self::DEFAULT_CACHE_KEY, string $initDir = self::DEFAULT_CACHE_PATH, ?int $ttl = null, array $cacheParams = []): bool
     {
+        if (empty($ttl) || !is_numeric($ttl)) {
+            $ttl = $this->cacheTTL;
+        }
+        if (is_numeric($ttl) && $ttl < 0) {
+            $ttl = $this->cacheTTL;
+        }
         $cacheKey = $this->generateCacheKey($cacheKey, $cacheParams);
         return $this->cache->initCache($ttl, $cacheKey, self::MODULE_CACHE_PATH . $initDir);
     }
@@ -82,6 +94,10 @@ class CacheService implements ICacheService
         $this->cache->abortDataCache();
     }
 
+    /**
+     * @param string $path
+     * @return void
+     */
     public function startTag(string $path): void
     {
         $this->taggedCache->startTagCache(self::MODULE_CACHE_PATH . $path);
@@ -126,6 +142,11 @@ class CacheService implements ICacheService
         $this->taggedCache->clearByTag($tagName);
     }
 
+    /**
+     * @param string $baseCacheKey
+     * @param array $cacheParams
+     * @return string
+     */
     protected function generateCacheKey(string $baseCacheKey, array $cacheParams = []): string
     {
         $cacheKey = $baseCacheKey."|".SITE_ID."|".Loc::getCurrentLang();

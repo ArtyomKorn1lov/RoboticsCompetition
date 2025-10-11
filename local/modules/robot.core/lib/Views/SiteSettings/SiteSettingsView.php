@@ -2,8 +2,7 @@
 
 namespace Robot\Core\Views\SiteSettings;
 
-use Bitrix\Main\ArgumentException;
-use Bitrix\Main\ObjectPropertyException;
+use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\SystemException;
 use Bitrix\Main\DI\ServiceLocator;
 
@@ -16,6 +15,8 @@ use Robot\Core\Exceptions\RobotException;
 use Robot\Core\Logger\LoggerFactory;
 use Robot\Core\Services\SiteSettings\ISiteSettingsManager;
 use Robot\Core\Tools\Mappers\SiteSettings;
+
+Loc::loadMessages(__FILE__);
 
 class SiteSettingsView
 {
@@ -35,7 +36,7 @@ class SiteSettingsView
             return false;
         } catch (SystemException|NotFoundExceptionInterface $exception) {
             LoggerFactory::build()->error($exception);
-            ShowError("Произошла внутренняя ошибка");
+            ShowError(Loc::getMessage("SITE_SETTINGS_ERROR"));
             return false;
         }
     }
@@ -54,7 +55,7 @@ class SiteSettingsView
             return false;
         } catch (SystemException|NotFoundExceptionInterface $exception) {
             LoggerFactory::build()->error($exception);
-            ShowError("Произошла внутренняя ошибка");
+            ShowError(Loc::getMessage("SITE_SETTINGS_ERROR"));
             return false;
         }
     }
@@ -73,7 +74,7 @@ class SiteSettingsView
             return false;
         } catch (SystemException|NotFoundExceptionInterface $exception) {
             LoggerFactory::build()->error($exception);
-            ShowError("Произошла внутренняя ошибка");
+            ShowError(Loc::getMessage("SITE_SETTINGS_ERROR"));
             return false;
         }
     }
@@ -92,7 +93,7 @@ class SiteSettingsView
             return false;
         } catch (SystemException|NotFoundExceptionInterface $exception) {
             LoggerFactory::build()->error($exception);
-            ShowError("Произошла внутренняя ошибка");
+            ShowError(Loc::getMessage("SITE_SETTINGS_ERROR"));
             return false;
         }
     }
@@ -137,7 +138,7 @@ class SiteSettingsView
             return false;
         } catch (SystemException|NotFoundExceptionInterface $exception) {
             LoggerFactory::build()->error($exception);
-            ShowError("Произошла внутренняя ошибка");
+            ShowError(Loc::getMessage("SITE_SETTINGS_ERROR"));
             return false;
         }
     }

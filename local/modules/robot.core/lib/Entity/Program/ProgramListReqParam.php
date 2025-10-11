@@ -20,7 +20,7 @@ final class ProgramListReqParam
     private string $sort;
     /** @var int[] Список id разделов для выборки */
     private array $sectionsIds;
-    /** @var string Дата проведения события */
+    /** @var string Даты проведения события */
     private string $requestStartDate;
     private string $requestEndDate;
 

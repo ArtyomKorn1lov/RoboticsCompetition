@@ -25,7 +25,7 @@ $sites = [
     [
         "id" => null,
         "lid" => null,
-        "name" => "Не выбрано",
+        "name" => Loc::getMessage('ROBOT_MODULE_SELECT_EMPTY'),
     ],
 ];
 
@@ -75,6 +75,16 @@ $tabControl->Begin();
         <td>
             <label>
                 <input style="width: 40%" type="text" name="default_email" value="" />
+            </label>
+        </td>
+    </tr>
+    <tr>
+        <td style="width: 40%">
+            <?= Loc::getMessage("ROBOT_MODULE_CACHE_TTL_TITLE") ?>
+        </td>
+        <td>
+            <label>
+                <input style="width: 40%" type="number" min="0" name="cache_ttl" value="" />
             </label>
         </td>
     </tr>

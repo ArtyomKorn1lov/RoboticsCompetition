@@ -24,6 +24,7 @@ use Robot\Core\Tools\Migration\MigrationConfig;
 use Robot\Core\Logger\Logger;
 use Robot\Core\Logger\LoggerFactory;
 use Robot\Core\Tools\Events\HighloadBlocksEventHandler;
+use Robot\Core\Cache\CacheService;
 
 use Sprint\Migration\Installer;
 
@@ -46,10 +47,12 @@ class robot_core extends CModule
         "sprint.migration" => [
             "url" => "https://marketplace.1c-bitrix.ru/solutions/sprint.migration/",
             "name" => "Миграции для разработчиков",
+            "version" => "5.0.2",
         ],
         "asd.iblock" => [
             "url" => "https://marketplace.1c-bitrix.ru/solutions/asd.iblock/",
             "name" => "Информационные блоки, инструменты",
+            "version" => "4.9.5",
         ],
     ];
 
@@ -100,6 +103,10 @@ class robot_core extends CModule
         foreach ($this->subModules as $key => $item) {
             if (!Loader::includeModule($key)) {
                 throw new Exception(Loc::getMessage("ROBOT_SUBMODULE_NOT_INCLUDE", ["#NAME#" => $item["name"], "#URL#" => $item["url"]]));
+            }
+            $version = ModuleManager::getVersion($key);
+            if (!version_compare($version, $item["version"], ">=")) {
+                throw new Exception(Loc::getMessage("ROBOT_SUBMODULE_VERSION_INCORRECT", ["#NAME#" => $item["name"], "#VERSION#" => $item["version"], "#URL#" => $item["url"]]));
             }
         }
     }
@@ -173,6 +180,7 @@ class robot_core extends CModule
             if (!empty($step) && $step === 2) {
                 $stepData = [
                     "defaultEmail" => $request->get('default_email'),
+                    "cacheTtl" => $request->get('cache_ttl'),
                     "primarySiteId" => $request->get('primary_site_id'),
                     "secondarySiteId" => $request->get('secondary_site_id'),
                     "isInstallMigrations" => $request->get('install_migrations'),
@@ -192,6 +200,7 @@ class robot_core extends CModule
                 $this->installEventHandlers();
                 $this->installMigrations();
                 Option::set($this->MODULE_ID, Constants::DEFAULT_RECIPIENT_EMAIL_OPTION_CODE, $this->stepData["defaultEmail"]);
+                Option::set($this->MODULE_ID, Constants::CACHE_TTL_OPTION_CODE, $this->stepData["cacheTtl"] ?? CacheService::DEFAULT_CACHE_TTL);
                 $APPLICATION->IncludeAdminFile(
                     Loc::getMessage('INSTALL_TITLE_STEP_2'),
                     __DIR__ . '/step2.php'

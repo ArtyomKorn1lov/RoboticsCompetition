@@ -12,3 +12,4 @@ $MESS["ROBOT_MODULE_SITE_SIMILAR_ERROR"] = "Выбраны одинаковые 
 $MESS["ROBOT_MODULE_PRIMARY_SITE_ERROR"] = "Выбранного сайта для основной версии не существует";
 $MESS["ROBOT_MODULE_SECONDARY_SITE_ERROR"] = "Выбранного сайта для английской версии не существует";
 $MESS["ROBOT_SUBMODULE_NOT_INCLUDE"] = 'Не установлен модуль "#NAME#", перейдите по ссылке - #URL#, для установки данного модуля';
+$MESS["ROBOT_SUBMODULE_VERSION_INCORRECT"] = 'Минимальная версия модуля "#NAME#" должна быть >=#VERSION#, перейдите по ссылке - #URL#, для обновления версии модуля';

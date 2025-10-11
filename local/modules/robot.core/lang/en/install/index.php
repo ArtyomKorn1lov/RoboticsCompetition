@@ -12,3 +12,4 @@ $MESS["ROBOT_MODULE_SITE_SIMILAR_ERROR"] = "The same sites were selected for the
 $MESS["ROBOT_MODULE_PRIMARY_SITE_ERROR"] = "The selected site for the main version does not exist";
 $MESS["ROBOT_MODULE_SECONDARY_SITE_ERROR"] = "The selected site for the English version does not exist";
 $MESS["ROBOT_SUBMODULE_NOT_INCLUDE"] = 'The module "#NAME#" is not installed, follow the link - #URL#, to install this module';
+$MESS["ROBOT_SUBMODULE_VERSION_INCORRECT"] = 'The minimum version of the module "#NAME#" must be >=#VERSION#, follow the link - #URL#, to update the module version';

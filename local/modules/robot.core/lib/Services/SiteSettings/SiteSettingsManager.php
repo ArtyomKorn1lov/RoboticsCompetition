@@ -117,7 +117,7 @@ class SiteSettingsManager implements ISiteSettingsManager
                 $this->cacheService->end($siteSetting);
                 return $siteSetting;
             } else {
-                throw new SystemException("Ошибка создания кэша " . self::SITE_SETTINGS_HEADER_CACHE_PATH);
+                throw new SystemException(Loc::getMessage("ROBOT_CORE_SITE_SETTINGS_CACHE", ["#PATH#" => self::SITE_SETTINGS_HEADER_CACHE_PATH]));
             }
         } catch (RobotException $exception) {
             $this->cacheService->abortTag();
@@ -160,7 +160,7 @@ class SiteSettingsManager implements ISiteSettingsManager
                 $this->cacheService->end($siteSetting);
                 return $siteSetting;
             } else {
-                throw new SystemException("Ошибка создания кэша " . self::SITE_SETTINGS_FOOTER_CACHE_PATH);
+                throw new SystemException(Loc::getMessage("ROBOT_CORE_SITE_SETTINGS_CACHE", ["#PATH#" => self::SITE_SETTINGS_FOOTER_CACHE_PATH]));
             }
         } catch (RobotException $exception) {
             $this->cacheService->abortTag();
@@ -202,7 +202,7 @@ class SiteSettingsManager implements ISiteSettingsManager
                 $this->cacheService->end($siteSetting);
                 return $siteSetting;
             } else {
-                throw new SystemException("Ошибка создания кэша " . self::SITE_SETTINGS_CONTACTS_CACHE_PATH);
+                throw new SystemException(Loc::getMessage("ROBOT_CORE_SITE_SETTINGS_CACHE", ["#PATH#" => self::SITE_SETTINGS_CONTACTS_CACHE_PATH]));
             }
         } catch (RobotException $exception) {
             $this->cacheService->abortTag();

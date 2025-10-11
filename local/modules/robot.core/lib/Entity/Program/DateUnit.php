@@ -2,7 +2,6 @@
 
 namespace Robot\Core\Entity\Program;
 
-use Bitrix\Main\ArgumentException;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ObjectException;
 use Bitrix\Main\Type\DateTime;
@@ -33,7 +32,6 @@ final class DateUnit
 
     /**
      * @param string $date
-     * @throws ArgumentException
      * @throws ObjectException
      * @throws RobotException
      */

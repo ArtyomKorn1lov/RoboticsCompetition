@@ -3,11 +3,11 @@
 namespace Robot\Core\Logger;
 
 use Bitrix\Main\Diag\LogFormatter;
-use Psr\Log\LogLevel;
-
 use Bitrix\Main\Diag\FileLogger;
 use Bitrix\Main\IO\Directory;
 use Bitrix\Main\Type\DateTime;
+
+use Psr\Log\LogLevel;
 
 final class LoggerFactory
 {

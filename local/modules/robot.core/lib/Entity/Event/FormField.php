@@ -161,6 +161,7 @@ final class FormField extends HighloadBlocks
      * @throws ObjectPropertyException
      * @throws SystemException
      * @throws LoaderException
+     * @throws RobotException
      */
     protected function setEntityValues(string $entityName, bool $isInit): void
     {

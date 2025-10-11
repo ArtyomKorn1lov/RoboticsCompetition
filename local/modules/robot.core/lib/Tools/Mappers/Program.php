@@ -4,6 +4,7 @@ namespace Robot\Core\Tools\Mappers;
 
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\ObjectException;
+
 use Robot\Core\DTO\Program\DateCollection as DateCollectionModel;
 use Robot\Core\DTO\Program\DateUnit as DateUnitModel;
 use Robot\Core\Entity\Program\DateCollection;
@@ -12,13 +13,14 @@ use Robot\Core\Entity\Program\ProgramCollection as ProgramCollectionEntity;
 use Robot\Core\Entity\Program\Program as ProgramEntity;
 use Robot\Core\DTO\Program\ProgramCollection as ProgramCollectionModel;
 use Robot\Core\DTO\Program\Program as ProgramModel;
+use Robot\Core\Exceptions\RobotException;
 
 class Program
 {
     /**
      * @param array $items
      * @return ProgramCollectionEntity
-     * @throws ArgumentException
+     * @throws RobotException
      */
     public static function mapProgramArrayToEntityList(array $items): ProgramCollectionEntity
     {
@@ -39,6 +41,7 @@ class Program
      * @return DateCollection
      * @throws ArgumentException
      * @throws ObjectException
+     * @throws RobotException
      */
     public static function mapDateArrayToEntityList(array $items): DateCollection
     {

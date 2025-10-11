@@ -4,7 +4,6 @@ namespace Robot\Core\Entity\SiteSettings;
 
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ArgumentException;
-use Bitrix\Main\ObjectException;
 use Bitrix\Main\Entity\Query;
 use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;

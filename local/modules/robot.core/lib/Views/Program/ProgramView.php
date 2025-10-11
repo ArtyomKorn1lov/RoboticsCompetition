@@ -40,7 +40,7 @@ class ProgramView
             return false;
         } catch (SystemException|NotFoundExceptionInterface $exception) {
             LoggerFactory::build()->error($exception);
-            ShowError("Произошла внутренняя ошибка");
+            ShowError(Loc::getMessage("ROBOT_CORE_PROGRAM_ERROR"));
             return false;
         }
     }

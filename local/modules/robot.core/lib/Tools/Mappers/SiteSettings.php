@@ -56,6 +56,7 @@ class SiteSettings
     }
 
     /**
+     * @param int $id
      * @param array $arSiteSettings
      * @return SiteSettingsUpdate
      */

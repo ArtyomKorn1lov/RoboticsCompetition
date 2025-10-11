@@ -2,11 +2,10 @@
  * @param {String} siteTemplatePath
  * @return {void}
  */
-function addSiteTemplatePath(siteTemplatePath = '/bitrix') {
+function addSiteTemplatePath(siteTemplatePath = '/bitrix/templates/robot') {
     if (!BX) {
         return;
     }
-    console.log('siteTemplatePath ', siteTemplatePath);
     BX.namespace("BX.Globals");
     BX.Globals.SiteTemplatePath = siteTemplatePath;
 }

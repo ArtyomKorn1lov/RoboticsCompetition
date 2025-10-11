@@ -12,6 +12,7 @@ use Robot\Core\Entity\Program\ProgramListReqParam;
 use Robot\Core\Entity\Program\ProgramSectionsReqParams;
 use Robot\Core\Entity\Program\TimeLineReqParams;
 use Robot\Core\Entity\Program\DateCollection;
+use Robot\Core\Exceptions\RobotException;
 use Robot\Core\Tools\Mappers\Program;
 
 class ProgramRepository implements IProgramRepository
@@ -46,6 +47,7 @@ class ProgramRepository implements IProgramRepository
      * @return DateCollection
      * @throws ArgumentException
      * @throws ObjectException
+     * @throws RobotException
      */
     public function getTimeLine(TimeLineReqParams $entity): DateCollection
     {
@@ -66,7 +68,7 @@ class ProgramRepository implements IProgramRepository
     /**
      * @param ProgramListReqParam $entity
      * @return ProgramCollection
-     * @throws ArgumentException
+     * @throws RobotException
      */
     public function getProgram(ProgramListReqParam $entity): ProgramCollection
     {

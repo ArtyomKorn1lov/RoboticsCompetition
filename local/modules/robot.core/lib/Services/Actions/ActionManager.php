@@ -103,7 +103,7 @@ class ActionManager implements IActionManager
                 $this->cacheService->end($list);
                 return $list;
             } else {
-                throw new SystemException("Ошибка создания кэша " . self::ACTION_CACHE_PATH);
+                throw new SystemException(Loc::getMessage("ROBOT_CORE_ERROR_ACTIONS_EMPTY", ["#PATH#" => self::ACTION_CACHE_PATH]));
             }
         } catch (RobotException $exception) {
             $this->cacheService->abortTag();

@@ -2,11 +2,8 @@
 
 namespace Robot\Core\Controllers\Event;
 
-use Bitrix\Main\ArgumentException;
 use Bitrix\Main\Engine\Response\AjaxJson;
 use Bitrix\Main\Localization\Loc;
-use Bitrix\Main\ObjectException;
-use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\Request;
 use Bitrix\Main\SystemException;
 use Bitrix\Main\DI\ServiceLocator;
@@ -84,7 +81,7 @@ class EventController extends Controller
             return $this->onError($exception->getMessage());
         } catch (SystemException|NotFoundExceptionInterface $exception) {
             $this->logger->error($exception);
-            return $this->onError("Произошла внутренняя ошибка");
+            return $this->onError(Loc::getMessage("ROBOT_CORE_EVENT_ERROR"));
         }
     }
 
@@ -114,7 +111,7 @@ class EventController extends Controller
             return $this->onError($exception->getMessage());
         } catch (SystemException|NotFoundExceptionInterface $exception) {
             $this->logger->error($exception);
-            return $this->onError("Произошла внутренняя ошибка");
+            return $this->onError(Loc::getMessage("ROBOT_CORE_EVENT_ERROR"));
         }
     }
 }

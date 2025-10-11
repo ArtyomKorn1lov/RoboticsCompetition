@@ -3,9 +3,11 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Программа");
 
 use Bitrix\Iblock\Component\Tools;
+use Bitrix\Main\Loader;
 use Robot\Core\Views\Events\EventsView;
 
 if (!EventsView::showProgram()) {
+    Loader::includeModule('iblock');
     Tools::process404('', true, true, true, SITE_DIR . '404.php');
     return;
 }
@@ -30,8 +32,6 @@ if (!EventsView::showProgram()) {
         "robot:template.component",
         "program",
         Array(
-            "CACHE_TIME" => "36000000",
-            "CACHE_TYPE" => "A",
             "MODULES_CODES" => array("robot.core","")
         )
     );?>

@@ -2,8 +2,6 @@
 
 namespace Robot\Core\Services\Event;
 
-use Bitrix\Main\Loader;
-use Bitrix\Main\LoaderException;
 use Bitrix\Main\ObjectException;
 use Bitrix\Main\ObjectNotFoundException;
 use Bitrix\Main\Type\DateTime;
@@ -53,11 +51,6 @@ class EventManager implements IEventManager
     protected const REGISTRATION_FIELDS_CACHE_KEY = 'robot_core_registration_fields_key';
     /** @var string путь к кэшу */
     protected const REGISTRATION_FIELDS_CACHE_PATH = 'event/registration.fields';
-
-    /** @var string уникальный ключ кэша */
-    protected const COUNTRIES_CACHE_KEY = 'robot_core_countries_key';
-    /** @var string путь к кэшу */
-    protected const COUNTRIES_CACHE_PATH = 'event/countries';
 
     /**
      * @throws ObjectNotFoundException
@@ -148,15 +141,10 @@ class EventManager implements IEventManager
      * @return void
      * @throws RobotException
      * @throws SystemException
-     * @throws LoaderException
      */
     public function saveRegisterForm(RegisterForm $registerForm, int $eventId): void
     {
         try {
-            if (!Loader::includeModule('iblock')) {
-                throw new LoaderException("Модуль iblock не подключен");
-            }
-
             if (empty($eventId)) {
                 throw new RobotException(Loc::getMessage("ROBOT_CORE_ERROR_EVENT_ID"));
             }
@@ -182,7 +170,7 @@ class EventManager implements IEventManager
             $this->sendMail($registerForm->formData, $eventId, $registrationId);
         } catch (RobotException $exception) {
             throw $exception;
-        } catch (SystemException|LoaderException $exception) {
+        } catch (SystemException $exception) {
             $this->logger->error($exception);
             throw $exception;
         }
@@ -211,7 +199,7 @@ class EventManager implements IEventManager
                 $this->cacheService->end($list);
                 return $list;
             } else {
-                throw new SystemException("Ошибка создания кэша " . self::REGISTRATION_FIELDS_CACHE_PATH);
+                throw new SystemException(Loc::getMessage("ROBOT_CORE_EVENTS_CACHE", ["#PATH#" => self::REGISTRATION_FIELDS_CACHE_PATH]));
             }
         } catch (RobotException $exception) {
             $this->cacheService->abortTag();
@@ -234,36 +222,17 @@ class EventManager implements IEventManager
     public function searchAutocompleteValues(AutocompleteSearch $autocompleteSearch): SearchResultCollection
     {
         try {
-            if ($this->cacheService->init(self::COUNTRIES_CACHE_KEY, self::COUNTRIES_CACHE_PATH, cacheParams: [$autocompleteSearch])) {
-                /** @var SearchResultCollection $searchResult */
-                $searchResult = $this->cacheService->getData();
-                return $searchResult;
-            } elseif ($this->cacheService->start()) {
-                $this->cacheService->startTag(self::COUNTRIES_CACHE_KEY);
-
-                if (empty($autocompleteSearch->id)) {
-                    throw new RobotException(Loc::getMessage("ROBOT_CORE_EVENT_SEARCH_ERROR_ID"));
-                }
-                $entityName = $this->eventRepository->getFieldValueEntityById($autocompleteSearch->id);
-                if (empty($entityName)) {
-                    throw new RobotException(Loc::getMessage("ROBOT_CORE_EVENT_ERROR_SEARCH_ENTITY"));
-                }
-                $searchResult = Event::mapSearchResultArrayToModelList($this->eventRepository->searchAutocompleteValues($autocompleteSearch->value, $entityName));
-
-                $this->cacheService->registerTag(Constants::COUNTRIES_TAG_CACHE);
-                $this->cacheService->endTag();
-                $this->cacheService->end($searchResult);
-                return $searchResult;
-            } else {
-                throw new SystemException("Ошибка создания кэша " . self::COUNTRIES_CACHE_PATH);
+            if (empty($autocompleteSearch->id)) {
+                throw new RobotException(Loc::getMessage("ROBOT_CORE_EVENT_SEARCH_ERROR_ID"));
             }
+            $entityName = $this->eventRepository->getFieldValueEntityById($autocompleteSearch->id);
+            if (empty($entityName)) {
+                throw new RobotException(Loc::getMessage("ROBOT_CORE_EVENT_ERROR_SEARCH_ENTITY"));
+            }
+            return Event::mapSearchResultArrayToModelList($this->eventRepository->searchAutocompleteValues($autocompleteSearch->value, $entityName));
         } catch (RobotException $exception) {
-            $this->cacheService->abortTag();
-            $this->cacheService->abort();
             throw $exception;
         } catch (SystemException $exception) {
-            $this->cacheService->abortTag();
-            $this->cacheService->abort();
             $this->logger->error($exception);
             throw $exception;
         }

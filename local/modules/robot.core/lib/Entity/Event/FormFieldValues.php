@@ -9,10 +9,13 @@ Loc::loadMessages(__FILE__);
 
 final class FormFieldValues
 {
+    /** @var int */
     private int $id;
 
+    /** @var string */
     private string $code;
 
+    /** @var string */
     private string $name;
 
     /**

@@ -24,7 +24,6 @@ class HighloadBlocksEventHandler
         try {
             $cacheService = ServiceLocator::getInstance()->get(ICacheService::class);
             $cacheService->clearTag(Constants::REGISTRATION_FIELD_TAG_CACHE);
-            $cacheService->clearTag(Constants::COUNTRIES_TAG_CACHE);
         } catch (SystemException|NotFoundExceptionInterface $exception) {
             $logger->error($exception);
         }

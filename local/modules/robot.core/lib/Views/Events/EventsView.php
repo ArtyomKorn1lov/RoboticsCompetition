@@ -35,7 +35,7 @@ class EventsView
             return false;
         } catch (SystemException $exception) {
             LoggerFactory::build()->error($exception);
-            ShowError("Произошла внутренняя ошибка");
+            ShowError(Loc::getMessage("ROBOT_CORE_EVENTS_ERROR"));
             return false;
         }
     }
@@ -56,7 +56,7 @@ class EventsView
             return false;
         } catch (SystemException $exception) {
             LoggerFactory::build()->error($exception);
-            ShowError("Произошла внутренняя ошибка");
+            ShowError(Loc::getMessage("ROBOT_CORE_EVENTS_ERROR"));
             return false;
         }
     }
@@ -76,7 +76,7 @@ class EventsView
             return false;
         } catch (SystemException|NotFoundExceptionInterface $exception) {
             LoggerFactory::build()->error($exception);
-            ShowError("Произошла внутренняя ошибка");
+            ShowError(Loc::getMessage("ROBOT_CORE_EVENTS_ERROR"));
             return false;
         }
     }
@@ -101,7 +101,7 @@ class EventsView
             return false;
         } catch (SystemException|NotFoundExceptionInterface $exception) {
             LoggerFactory::build()->error($exception);
-            ShowError("Произошла внутренняя ошибка");
+            ShowError(Loc::getMessage("ROBOT_CORE_EVENTS_ERROR"));
             return false;
         }
     }
@@ -117,7 +117,7 @@ class EventsView
             $fields = $eventManager->getRegistrationFields();
 
             if (empty($fields) || $fields->count() <= 0) {
-                throw new RobotException("Ошибка получения полей формы");
+                throw new RobotException(Loc::getMessage("ROBOT_CORE_REGISTRATION_FIELDS_ERROR"));
             }
 
             return $fields;
@@ -126,7 +126,7 @@ class EventsView
             return false;
         } catch (SystemException|NotFoundExceptionInterface $exception) {
             LoggerFactory::build()->error($exception);
-            ShowError("Произошла внутренняя ошибка");
+            ShowError(Loc::getMessage("ROBOT_CORE_EVENTS_ERROR"));
             return false;
         }
     }
