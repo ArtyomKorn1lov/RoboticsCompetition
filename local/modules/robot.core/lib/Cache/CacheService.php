@@ -21,7 +21,7 @@ use Robot\Core\Constants;
 class CacheService implements ICacheService
 {
     /** @var int время жизни кэша по умолчанию */
-    public const DEFAULT_CACHE_TTL = 36000000;
+    public const DEFAULT_CACHE_TTL = 3600000;
     private const MODULE_CACHE_PATH = 'robot.core/';
     /** @var int путь к папке кэша */
     private const DEFAULT_CACHE_PATH = 'cache';

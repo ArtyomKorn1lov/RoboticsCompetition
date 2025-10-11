@@ -19,6 +19,10 @@ Frontend на основе фреймворка vue 3, представляет 
 - `npx webpack-cli --mode development` - сборка extention в режиме *dev*
 - `npx webpack-cli` - сборка extention в режиме *prod*
 
+## Команды для сборки всех extention (в текущей папке):
+- `sh build.sh dev` - сборка всех extention в режиме *dev*
+- `sh build.sh` - сборка всех extention в режиме *prod*
+
 ## Структура проекта
 - `/core` - подключение ядра vue, и других связанных плагинов
 - `/ui` - ui-компоненты из внешних библиотек
