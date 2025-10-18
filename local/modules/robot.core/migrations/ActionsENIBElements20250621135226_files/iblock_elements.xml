@@ -32,7 +32,7 @@
   <value>85e773cd-7e54-440f-b448-de553e504bd7</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>Regional festival on robotics in PGTU|1|regional-festival-on-robotics-in-pgtu</value>
+  <value section_depth_level="1" section_code="regional-festival-on-robotics-in-pgtu">Regional festival on robotics in PGTU</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
 </item>
@@ -68,7 +68,7 @@
   <value>0ebdfdb2-5104-47c1-a81c-66b1e7ac03c3</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>Regional festival on robotics in PGTU|1|regional-festival-on-robotics-in-pgtu</value>
+  <value section_depth_level="1" section_code="regional-festival-on-robotics-in-pgtu">Regional festival on robotics in PGTU</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
 </item>
@@ -104,7 +104,7 @@
   <value>d76543dc-6f9c-427b-b0f1-df46fa39837d</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>Regional festival on robotics in PGTU|1|regional-festival-on-robotics-in-pgtu</value>
+  <value section_depth_level="1" section_code="regional-festival-on-robotics-in-pgtu">Regional festival on robotics in PGTU</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
 </item>
@@ -140,7 +140,7 @@
   <value>0426ea31-f93b-4809-98aa-5d422dbfbbc4</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>Regional festival on robotics in PGTU|1|regional-festival-on-robotics-in-pgtu</value>
+  <value section_depth_level="1" section_code="regional-festival-on-robotics-in-pgtu">Regional festival on robotics in PGTU</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
 </item>
@@ -176,7 +176,7 @@
   <value>54bfd9dd-6ef9-4465-af3c-09f488f64559</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>Regional festival on robotics in PGTU|1|regional-festival-on-robotics-in-pgtu</value>
+  <value section_depth_level="1" section_code="regional-festival-on-robotics-in-pgtu">Regional festival on robotics in PGTU</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
 </item>

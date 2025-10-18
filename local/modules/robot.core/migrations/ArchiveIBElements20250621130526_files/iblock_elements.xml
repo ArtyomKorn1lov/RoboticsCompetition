@@ -32,7 +32,7 @@
   <value>51db5958-bcfc-42b7-a16a-5a38f7da75d4</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>2024 год|1|2024-god</value>
+  <value section_depth_level="1" section_code="2024-god">2024 год</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
  <property name="PHOTO">
@@ -96,7 +96,7 @@
   <value>c298744a-ec7c-4945-9017-8995768ac388</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>2024 год|1|2024-god</value>
+  <value section_depth_level="1" section_code="2024-god">2024 год</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
  <property name="PHOTO">
@@ -144,7 +144,7 @@
   <value>34f32699-5e4b-4848-a23d-602c81107148</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>2024 год|1|2024-god</value>
+  <value section_depth_level="1" section_code="2024-god">2024 год</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
  <property name="PHOTO">
@@ -192,7 +192,7 @@
   <value>32bcee84-2582-4078-b04d-8e858692e5fc</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>2024 год|1|2024-god</value>
+  <value section_depth_level="1" section_code="2024-god">2024 год</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
  <property name="PHOTO">
@@ -234,7 +234,7 @@
   <value>fe9ee932-95be-43a5-9a4a-012d9539ba0f</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>2023 год|1|2023-god</value>
+  <value section_depth_level="1" section_code="2023-god">2023 год</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
  <property name="PHOTO"/>
@@ -276,7 +276,7 @@
   <value>21d7ed7c-4d19-40ac-b838-7ae500adfd2e</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>2023 год|1|2023-god</value>
+  <value section_depth_level="1" section_code="2023-god">2023 год</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
  <property name="PHOTO"/>
