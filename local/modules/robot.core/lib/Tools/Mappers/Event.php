@@ -2,7 +2,6 @@
 
 namespace Robot\Core\Tools\Mappers;
 
-use Bitrix\Main\ArgumentException;
 use Bitrix\Main\ObjectException;
 use Bitrix\Main\Type\DateTime;
 
@@ -19,6 +18,7 @@ use Robot\Core\DTO\Event\FormFieldValues;
 use Robot\Core\DTO\Event\FormFieldValuesCollection;
 use Robot\Core\DTO\Event\SearchResult;
 use Robot\Core\DTO\Event\SearchResultCollection;
+use Robot\Core\Exceptions\RobotException;
 
 class Event
 {
@@ -59,7 +59,7 @@ class Event
     /**
      * @param array $data
      * @return FormFieldValuesCollectionEntity
-     * @throws ArgumentException
+     * @throws RobotException
      */
     public static function mapFormFieldValuesArrayToEntityList(array $data): FormFieldValuesCollectionEntity
     {

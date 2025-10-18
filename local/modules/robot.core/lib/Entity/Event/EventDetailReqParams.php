@@ -2,8 +2,8 @@
 
 namespace Robot\Core\Entity\Event;
 
-use Bitrix\Main\ArgumentException;
 use Bitrix\Main\Localization\Loc;
+use Robot\Core\Exceptions\RobotException;
 
 final class EventDetailReqParams
 {
@@ -21,7 +21,7 @@ final class EventDetailReqParams
      * @param int $iblockId
      * @param int $id
      * @param bool $active
-     * @throws ArgumentException
+     * @throws RobotException
      */
     public function __construct(
         string $iblockType,
@@ -31,7 +31,7 @@ final class EventDetailReqParams
     )
     {
         if (empty($iblockType) || empty($iblockId)) {
-            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_ARGUMENT_EXCEPTION"));
+            throw new RobotException(Loc::getMessage("ROBOT_CORE_ARGUMENT_EXCEPTION"));
         }
         $this->iblockType = $iblockType;
         $this->iblockId = $iblockId;

@@ -3,23 +3,26 @@
 namespace Robot\Core\Entity\Event;
 
 use Bitrix\Main\Localization\Loc;
-use Bitrix\Main\ArgumentException;
+use Robot\Core\Exceptions\RobotException;
 
 Loc::loadMessages(__FILE__);
 
 final class FormFieldValues
 {
+    /** @var int */
     private int $id;
 
+    /** @var string */
     private string $code;
 
+    /** @var string */
     private string $name;
 
     /**
      * @param int $id
      * @param string $code
      * @param string $name
-     * @throws ArgumentException
+     * @throws RobotException
      */
     public function __construct(
         int $id,
@@ -28,7 +31,7 @@ final class FormFieldValues
     )
     {
         if (!$this->validateValues($id, $code, $name)) {
-            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_ARGUMENT_EXCEPTION"));
+            throw new RobotException(Loc::getMessage("ROBOT_CORE_ARGUMENT_EXCEPTION"));
         }
 
         $this->id = $id;

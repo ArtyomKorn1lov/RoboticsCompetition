@@ -15,8 +15,8 @@
     "node": ">=20.11.0",
     "npm": ">=10.2.4"
   },
-  "author": "Robot",
-  "license": "ISC",
+  "author": "ArtyomKorn1lov",
+  "license": "MIT",
   "devDependencies": {
     "browser-sync": "^3.0.3",
     "del": "^8.0.0",

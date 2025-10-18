@@ -22,17 +22,18 @@ $currentUrl = $APPLICATION->GetCurPage().'?mid='.urlencode($mid).'&amp;lang='.LA
 $request = Context::getCurrent()->getRequest();
 
 $optionList = array(
-    Constants::DEFAULT_RECIPIENT_EMAIL_OPTION_CODE
+    Constants::DEFAULT_RECIPIENT_EMAIL_OPTION_CODE,
+    Constants::CACHE_TTL_OPTION_CODE
 );
 
 if ($request->getRequestMethod() === "POST" && check_bitrix_sessid() && !empty($request->getPost('robot_core_update')) && $request->getPost('robot_core_update') === 'Y') {
     foreach ($optionList as $option) {
-        if (!empty($_POST[$option]))
+        if (!empty($_POST[$option]) || (is_numeric($_POST[$option]) && $_POST[$option] >= 0))
         {
             Option::set('robot.core', $option, $request->getPost($option));
         }
-        LocalRedirect($currentUrl);
     }
+    LocalRedirect($currentUrl);
 }
 
 $options = [];
@@ -61,6 +62,16 @@ $tabControl->Begin();
             <td>
                 <label>
                     <input style="width: 40%" type="text" name="<?=Constants::DEFAULT_RECIPIENT_EMAIL_OPTION_CODE?>" value="<?= $options[Constants::DEFAULT_RECIPIENT_EMAIL_OPTION_CODE] ?>" />
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 40%">
+                <?=Loc::getMessage("ROBOT_CORE_CACHE_TTL_TITLE")?>
+            </td>
+            <td>
+                <label>
+                    <input style="width: 40%" type="number" min="0" name="<?=Constants::CACHE_TTL_OPTION_CODE?>" value="<?= $options[Constants::CACHE_TTL_OPTION_CODE] ?>" />
                 </label>
             </td>
         </tr>

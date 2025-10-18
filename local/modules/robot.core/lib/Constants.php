@@ -26,7 +26,7 @@ class Constants
     public const PARTNERS_EN_IBLOCK_CODE = "partners_en";
 
     /** @var string Url страницы регистрации */
-    public const REGISTRATION_URL = SITE_DIR."register/";
+    public const REGISTRATION_URL = SITE_DIR . "register/";
 
     /** @var string Код ИБ Видеоуроки */
     public const VIDEO_LESSONS_IBLOCK_CODE = "video-lessons";
@@ -93,4 +93,19 @@ class Constants
 
     /** @var string код настройки - email получателя по умолчанию */
     public const DEFAULT_RECIPIENT_EMAIL_OPTION_CODE = "robot_core_default_recipient_email";
+
+    /** @var string код настройки - время жизни кэша модуля */
+    public const CACHE_TTL_OPTION_CODE = "robot_core_cache_ttl";
+
+    /** @var string тег для кэша списка полей для формы регистрации */
+    public const REGISTRATION_FIELD_TAG_CACHE = "robot_core_registration_fields_cache";
+
+    /** @var string тег для кэша контактная информация в шапке сайта */
+    public const SITE_SETTINGS_HEADER_TAG_CACHE = "robot_core_site_settings_header_cache";
+
+    /** @var string тег для кэша контактная информация в подвале сайта */
+    public const SITE_SETTINGS_FOOTER_TAG_CACHE = "robot_core_site_settings_footer_cache";
+
+    /** @var string тег для кэша контактная информация на стр. контакты */
+    public const SITE_SETTINGS_CONTACTS_TAG_CACHE = "robot_core_site_settings_contacts_cache";
 }

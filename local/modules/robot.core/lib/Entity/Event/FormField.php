@@ -11,6 +11,7 @@ use Bitrix\Main\LoaderException;
 
 use Robot\Core\Base\HighloadBlocks;
 use Robot\Core\Constants;
+use Robot\Core\Exceptions\RobotException;
 use Robot\Core\Tools\Mappers\Event;
 
 Loc::loadMessages(__FILE__);
@@ -52,6 +53,7 @@ final class FormField extends HighloadBlocks
      * @throws ObjectPropertyException
      * @throws SystemException
      * @throws LoaderException
+     * @throws RobotException
      */
     public function __construct(
         int $id,
@@ -65,7 +67,7 @@ final class FormField extends HighloadBlocks
     )
     {
         if (!$this->validateValues($id, $code, $type)) {
-            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_ARGUMENT_EXCEPTION"));
+            throw new RobotException(Loc::getMessage("ROBOT_CORE_ARGUMENT_EXCEPTION"));
         }
         $this->values = new FormFieldValuesCollection();
 
@@ -159,6 +161,7 @@ final class FormField extends HighloadBlocks
      * @throws ObjectPropertyException
      * @throws SystemException
      * @throws LoaderException
+     * @throws RobotException
      */
     protected function setEntityValues(string $entityName, bool $isInit): void
     {

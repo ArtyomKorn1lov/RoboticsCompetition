@@ -2,8 +2,8 @@
 
 namespace Robot\Core\Entity\Action;
 
-use Bitrix\Main\ArgumentException;
 use Bitrix\Main\Localization\Loc;
+use Robot\Core\Exceptions\RobotException;
 
 Loc::loadMessages(__FILE__);
 
@@ -31,7 +31,7 @@ final class ActionSectionsReqParams
      * @param int $eventId
      * @param bool $active
      * @param string $sort
-     * @throws ArgumentException
+     * @throws RobotException
      */
     public function __construct(
         string $iblockType,
@@ -42,7 +42,7 @@ final class ActionSectionsReqParams
     )
     {
         if (empty($iblockType) || empty($iblockId)) {
-            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_ARGUMENT_EXCEPTION"));
+            throw new RobotException(Loc::getMessage("ROBOT_CORE_ARGUMENT_EXCEPTION"));
         }
         $this->iblockType = $iblockType;
         $this->iblockId = $iblockId;

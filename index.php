@@ -63,8 +63,6 @@ $APPLICATION->IncludeComponent(
     "robot:template.component",
     "actions",
     Array(
-        "CACHE_TIME" => "36000000",
-        "CACHE_TYPE" => "A",
         "MODULES_CODES" => array("robot.core","")
     )
 );?>

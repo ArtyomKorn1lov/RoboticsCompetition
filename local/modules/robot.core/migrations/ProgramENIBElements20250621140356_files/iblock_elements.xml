@@ -30,7 +30,7 @@
   <value>b786ce4f-8254-482c-b7da-35d7c5060269</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>Competition program for 2026|1|competition-program-for-2026</value>
+  <value section_depth_level="1" section_code="competition-program-for-2026">Competition program for 2026</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
  <property name="LOCATION">
@@ -73,7 +73,7 @@
   <value>1d358073-f7f3-4f43-b7e9-75dd3622585d</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>Competition program for 2026|1|competition-program-for-2026</value>
+  <value section_depth_level="1" section_code="competition-program-for-2026">Competition program for 2026</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
  <property name="LOCATION">
@@ -116,7 +116,7 @@
   <value>d8981dcf-e3ad-4ca9-aef5-79b5cd836a36</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>Competition program for 2026|1|competition-program-for-2026</value>
+  <value section_depth_level="1" section_code="competition-program-for-2026">Competition program for 2026</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
  <property name="LOCATION">
@@ -159,7 +159,7 @@
   <value>069e23a2-c322-4ab4-b7d5-f234c65d8903</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>Competition program for 2026|1|competition-program-for-2026</value>
+  <value section_depth_level="1" section_code="competition-program-for-2026">Competition program for 2026</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
  <property name="LOCATION">
@@ -202,7 +202,7 @@
   <value>4ea2f9fe-4763-4f8f-bd7d-913f0b396bbc</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>Competition program for 2026|1|competition-program-for-2026</value>
+  <value section_depth_level="1" section_code="competition-program-for-2026">Competition program for 2026</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
  <property name="LOCATION">
@@ -245,7 +245,7 @@
   <value>9c11f147-025c-4b2b-bb0d-c64f60494c89</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>Competition program for 2026|1|competition-program-for-2026</value>
+  <value section_depth_level="1" section_code="competition-program-for-2026">Competition program for 2026</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
  <property name="LOCATION">
@@ -288,7 +288,7 @@
   <value>3e8162ec-8a9b-4738-b703-076fc2f524a5</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>Competition program for 2026|1|competition-program-for-2026</value>
+  <value section_depth_level="1" section_code="competition-program-for-2026">Competition program for 2026</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
  <property name="LOCATION">

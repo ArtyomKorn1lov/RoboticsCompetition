@@ -4,24 +4,24 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "290499b15fed171c62f0422dd3f8cc1f",
+    "content-hash": "1d1c9bdde27e9663f18e2f58aaec4a52",
     "packages": [
         {
             "name": "andreyryabin/sprint.migration",
-            "version": "5.0.2",
+            "version": "5.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/andreyryabin/sprint.migration.git",
-                "reference": "ce03248d386b653681f07d8420d38ec2bc5467b0"
+                "reference": "e863ad43d5deae68ce4c58cb1e08267eb5fb090b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/andreyryabin/sprint.migration/zipball/ce03248d386b653681f07d8420d38ec2bc5467b0",
-                "reference": "ce03248d386b653681f07d8420d38ec2bc5467b0",
+                "url": "https://api.github.com/repos/andreyryabin/sprint.migration/zipball/e863ad43d5deae68ce4c58cb1e08267eb5fb090b",
+                "reference": "e863ad43d5deae68ce4c58cb1e08267eb5fb090b",
                 "shasum": ""
             },
             "require": {
-                "composer/installers": "~1",
+                "composer/installers": "^1.0|^2.0",
                 "ext-json": "*",
                 "ext-xmlreader": "*",
                 "ext-xmlwriter": "*",
@@ -50,9 +50,9 @@
             ],
             "support": {
                 "issues": "https://github.com/andreyryabin/sprint.migration/issues",
-                "source": "https://github.com/andreyryabin/sprint.migration/tree/5.0.2"
+                "source": "https://github.com/andreyryabin/sprint.migration/tree/5.4.1"
             },
-            "time": "2025-05-02T22:26:08+00:00"
+            "time": "2025-07-21T09:41:58+00:00"
         },
         {
             "name": "composer/installers",
@@ -209,12 +209,12 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.1"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

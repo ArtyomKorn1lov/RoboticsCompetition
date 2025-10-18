@@ -2,8 +2,7 @@
 
 namespace Robot\Core\Views\SiteSettings;
 
-use Bitrix\Main\ArgumentException;
-use Bitrix\Main\ObjectPropertyException;
+use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\SystemException;
 use Bitrix\Main\DI\ServiceLocator;
 
@@ -12,8 +11,12 @@ use Psr\Container\NotFoundExceptionInterface;
 use Robot\Core\DTO\SiteSettings\SiteSettingsContacts;
 use Robot\Core\DTO\SiteSettings\SiteSettingsFooter;
 use Robot\Core\DTO\SiteSettings\SiteSettingsHeader;
+use Robot\Core\Exceptions\RobotException;
+use Robot\Core\Logger\LoggerFactory;
 use Robot\Core\Services\SiteSettings\ISiteSettingsManager;
 use Robot\Core\Tools\Mappers\SiteSettings;
+
+Loc::loadMessages(__FILE__);
 
 class SiteSettingsView
 {
@@ -28,8 +31,12 @@ class SiteSettingsView
             /** @var ISiteSettingsManager $siteSettingsManager */
             $siteSettingsManager = ServiceLocator::getInstance()->get(ISiteSettingsManager::class);
             return $siteSettingsManager->getSiteSettingsEdit($siteId);
-        } catch (SystemException|NotFoundExceptionInterface $exception) {
+        } catch (RobotException $exception) {
             ShowError($exception->getMessage());
+            return false;
+        } catch (SystemException|NotFoundExceptionInterface $exception) {
+            LoggerFactory::build()->error($exception);
+            ShowError(Loc::getMessage("SITE_SETTINGS_ERROR"));
             return false;
         }
     }
@@ -43,8 +50,12 @@ class SiteSettingsView
             /** @var ISiteSettingsManager $siteSettingsManager */
             $siteSettingsManager = ServiceLocator::getInstance()->get(ISiteSettingsManager::class);
             return $siteSettingsManager->getSettingsHeader();
-        } catch (SystemException|NotFoundExceptionInterface $exception) {
+        } catch (RobotException $exception) {
             ShowError($exception->getMessage());
+            return false;
+        } catch (SystemException|NotFoundExceptionInterface $exception) {
+            LoggerFactory::build()->error($exception);
+            ShowError(Loc::getMessage("SITE_SETTINGS_ERROR"));
             return false;
         }
     }
@@ -58,8 +69,12 @@ class SiteSettingsView
             /** @var ISiteSettingsManager $siteSettingsManager */
             $siteSettingsManager = ServiceLocator::getInstance()->get(ISiteSettingsManager::class);
             return $siteSettingsManager->getSettingsFooter();
-        } catch (SystemException|NotFoundExceptionInterface $exception) {
+        } catch (RobotException $exception) {
             ShowError($exception->getMessage());
+            return false;
+        } catch (SystemException|NotFoundExceptionInterface $exception) {
+            LoggerFactory::build()->error($exception);
+            ShowError(Loc::getMessage("SITE_SETTINGS_ERROR"));
             return false;
         }
     }
@@ -73,8 +88,12 @@ class SiteSettingsView
             /** @var ISiteSettingsManager $siteSettingsManager */
             $siteSettingsManager = ServiceLocator::getInstance()->get(ISiteSettingsManager::class);
             return $siteSettingsManager->getSettingContacts();
-        } catch (SystemException|NotFoundExceptionInterface $exception) {
+        } catch (RobotException $exception) {
             ShowError($exception->getMessage());
+            return false;
+        } catch (SystemException|NotFoundExceptionInterface $exception) {
+            LoggerFactory::build()->error($exception);
+            ShowError(Loc::getMessage("SITE_SETTINGS_ERROR"));
             return false;
         }
     }
@@ -96,7 +115,10 @@ class SiteSettingsView
             $siteSettingsManager = ServiceLocator::getInstance()->get(ISiteSettingsManager::class);
             $siteSettingsManager->saveSiteSettings(SiteSettings::mapArraySiteSettingsUpdateToModel($id, $arSiteSettings), $siteId);
             return true;
+        } catch (RobotException $exception) {
+            return $exception->getMessage();
         } catch (SystemException|NotFoundExceptionInterface $exception) {
+            LoggerFactory::build()->error($exception);
             return $exception->getMessage();
         }
     }
@@ -111,8 +133,12 @@ class SiteSettingsView
             /** @var ISiteSettingsManager $siteSettingsManager */
             $siteSettingsManager = ServiceLocator::getInstance()->get(ISiteSettingsManager::class);
             return $siteSettingsManager->getSiteIdByLang($lang);
-        } catch (SystemException|ArgumentException|ObjectPropertyException|NotFoundExceptionInterface $exception) {
+        } catch (RobotException $exception) {
             ShowError($exception->getMessage());
+            return false;
+        } catch (SystemException|NotFoundExceptionInterface $exception) {
+            LoggerFactory::build()->error($exception);
+            ShowError(Loc::getMessage("SITE_SETTINGS_ERROR"));
             return false;
         }
     }

@@ -8,6 +8,8 @@ use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\LoaderException;
+use Robot\Core\Exceptions\RobotException;
+use Robot\Core\Logger\LoggerFactory;
 use Robot\Core\Tools\Modules\Manager;
 use Robot\Core\Constants;
 
@@ -36,15 +38,17 @@ class Helper
         try {
             Manager::requireModules(static::MODULES_CODES);
             if (empty($code)) {
-                throw new SystemException(Loc::getMessage("ROBOT_CORE_EMPTY_CODE"));
+                throw new RobotException(Loc::getMessage("ROBOT_CORE_EMPTY_CODE"));
             }
             $result = IblockTable::getRow(static::prepareRequestParams($code));
             if (empty($result)) {
                 return false;
             }
             return $result["ID"];
+        } catch (RobotException $exception) {
+            return false;
         } catch (SystemException|LoaderException $exception) {
-            AddMessage2Log($exception->getMessage(), "robot.core");
+            LoggerFactory::build()->error($exception);
             return false;
         }
     }

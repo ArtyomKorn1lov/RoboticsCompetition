@@ -4,3 +4,4 @@ $MESS["ROBOT_CORE_EVENT_REGISTRATION_FIELDS_ERROR"] = "Error getting form fields
 $MESS["ROBOT_CORE_EVENT_SEARCH_ERROR_ID"] = "No search field id specified";
 $MESS["ROBOT_CORE_EVENT_ERROR_SEARCH_ENTITY"] = "Entity with field values not found";
 $MESS["ROBOT_CORE_EVENTS_GET_EMPTY"] = "There is no active event";
+$MESS["ROBOT_CORE_EVENTS_CACHE"] = "Error creating cache #PATH#";

@@ -1,37 +1,41 @@
 <template>
   <div class="b-section b-section_pb b-section_last b-archive">
 
-    <div class="b-section__top">
-      <h2 class="h5 b-section__title b-archive__subtitle" v-text="loc.MEDIA_ITEMS_PHOTO_TITLE" />
-    </div>
-    <div class="b-materials b-materials_mb">
-      <a
-          v-for="(item, index) in photos"
-          :key="index"
-          @click="openPopup(item)"
-          class="b-materials__img-wrap"
-          href="javascript:void(0)"
-      >
-        <img v-if="item.url" class="b-materials__img" :src="item.url" :alt="item.name">
-      </a>
-    </div>
+    <template v-if="photos && photos.length > 0">
+      <div class="b-section__top">
+        <h2 class="h5 b-section__title b-archive__subtitle" v-text="loc.MEDIA_ITEMS_PHOTO_TITLE" />
+      </div>
+      <div class="b-materials b-materials_mb">
+        <a
+            v-for="(item, index) in photos"
+            :key="index"
+            @click="openPopup(item)"
+            class="b-materials__img-wrap"
+            href="javascript:void(0)"
+        >
+          <img v-if="item.url" class="b-materials__img" :src="item.url" :alt="item.name">
+        </a>
+      </div>
+    </template>
 
-    <div class="b-section__top">
-      <h2 class="h5 b-section__title b-archive__subtitle" v-text="loc.MEDIA_ITEMS_VIDEO_TITLE" />
-    </div>
-    <div class="b-materials b-materials_video">
-      <a
-          v-for="(item, index) in videos"
-          :key="index"
-          @click="openPopup(item)"
-          class="b-materials__video-wrap"
-          href="javascript:void(0)"
-      >
-        <img v-if="item.preview" class="b-materials__video" :src="item.preview" :alt="item.name">
-        <div class="b-materials__video-icon" v-html="TemplateHelper.getIcon('play')">
-        </div>
-      </a>
-    </div>
+    <template v-if="videos && videos.length > 0">
+      <div class="b-section__top">
+        <h2 class="h5 b-section__title b-archive__subtitle" v-text="loc.MEDIA_ITEMS_VIDEO_TITLE" />
+      </div>
+      <div class="b-materials b-materials_video">
+        <a
+            v-for="(item, index) in videos"
+            :key="index"
+            @click="openPopup(item)"
+            class="b-materials__video-wrap"
+            href="javascript:void(0)"
+        >
+          <img v-if="item.preview" class="b-materials__video" :src="item.preview" :alt="item.name">
+          <div class="b-materials__video-icon" v-html="TemplateHelper.getIcon('play')">
+          </div>
+        </a>
+      </div>
+    </template>
 
     <MediaPopup
         :toggle="toggle"

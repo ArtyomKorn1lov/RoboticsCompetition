@@ -19,6 +19,7 @@ use Robot\Core\Entity\Event\FormField;
 use Robot\Core\Entity\Event\FormFieldCollection;
 use Robot\Core\Entity\Event\RegisterForm;
 use Robot\Core\Entity\Event\RegistrationFieldsTable;
+use Robot\Core\Exceptions\RobotException;
 use Robot\Core\Tools\IBlocks\Helper;
 
 class EventRepository extends HighloadBlocks implements IEventRepository
@@ -62,10 +63,11 @@ class EventRepository extends HighloadBlocks implements IEventRepository
      */
     public function getLastElementId(): int
     {
+        $iblockId = Helper::getIBlock(Constants::REGISTRATION_REQUEST_IBLOCK_CODE);
         $rsObject = CIBlockElement::GetList(
             arOrder: ["ID" => "DESC"],
             arFilter: [
-                "IBLOCK_ID" => Helper::getIBlock(Constants::REGISTRATION_REQUEST_IBLOCK_CODE),
+                "IBLOCK_ID" => $iblockId,
                 "IBLOCK_TYPE" => Constants::FEEDBACK_IBLOCK_TYPE,
             ],
             arNavStartParams: ["nTopCount" => 1],
@@ -88,6 +90,7 @@ class EventRepository extends HighloadBlocks implements IEventRepository
      * @throws ObjectException
      * @throws ObjectPropertyException
      * @throws SystemException
+     * @throws RobotException
      */
     public function getRegistrationFields(bool $isInit = true): FormFieldCollection
     {
@@ -172,7 +175,7 @@ class EventRepository extends HighloadBlocks implements IEventRepository
     /**
      * @param EventDetailReqParams $entity
      * @return array
-     * @throws ArgumentException
+     * @throws RobotException
      */
     public function getEventById(EventDetailReqParams $entity): array
     {
@@ -185,7 +188,7 @@ class EventRepository extends HighloadBlocks implements IEventRepository
 
         $item = $rsObject->fetch();
         if (!$item) {
-            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_EVENTS_GET_EMPTY"));
+            throw new RobotException(Loc::getMessage("ROBOT_CORE_EVENTS_GET_EMPTY"));
         }
 
         return $item;

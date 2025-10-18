@@ -32,7 +32,7 @@
   <value>3e57e39b-2feb-41c9-b8ce-c7f3c544b115</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>2024 year|1|2024-year</value>
+  <value section_depth_level="1" section_code="2024-year">2024 year</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
  <property name="PHOTO">
@@ -89,7 +89,7 @@
   <value>04b760e5-e2da-47da-82c6-92240ca6ee82</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>2024 year|1|2024-year</value>
+  <value section_depth_level="1" section_code="2024-year">2024 year</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
  <property name="PHOTO">
@@ -145,7 +145,7 @@
   <value>76dd694b-45aa-4645-8b81-30a0d2344c0e</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>2023 year|1|2023-year</value>
+  <value section_depth_level="1" section_code="2023-year">2023 year</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
  <property name="PHOTO">

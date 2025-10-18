@@ -14,6 +14,5 @@ $arComponentParameters = [
             "TYPE" => "STRING",
             "MULTIPLE" => "Y"
         ],
-        "CACHE_TIME" => ["DEFAULT" => 36000000],
     ],
 ];

@@ -32,7 +32,7 @@
   <value>a85b82cc-1f8d-44cc-8180-61bd762273f9</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>Региональный фестиваль по робототехнике в ПГТУ|1|sorevnovaniya-2026</value>
+  <value section_depth_level="1" section_code="sorevnovaniya-2026">Региональный фестиваль по робототехнике в ПГТУ</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
 </item>
@@ -68,7 +68,7 @@
   <value>b331088e-cea7-4284-a5d2-8cb1a5bee3ce</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>Региональный фестиваль по робототехнике в ПГТУ|1|sorevnovaniya-2026</value>
+  <value section_depth_level="1" section_code="sorevnovaniya-2026">Региональный фестиваль по робототехнике в ПГТУ</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
 </item>
@@ -104,7 +104,7 @@
   <value>d9446e06-49f9-49ac-a929-99ac81472cc3</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>Региональный фестиваль по робототехнике в ПГТУ|1|sorevnovaniya-2026</value>
+  <value section_depth_level="1" section_code="sorevnovaniya-2026">Региональный фестиваль по робототехнике в ПГТУ</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
 </item>
@@ -140,7 +140,7 @@
   <value>7bfbf212-c548-4a2f-bc23-56d47d949def</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>Региональный фестиваль по робототехнике в ПГТУ|1|sorevnovaniya-2026</value>
+  <value section_depth_level="1" section_code="sorevnovaniya-2026">Региональный фестиваль по робототехнике в ПГТУ</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
 </item>
@@ -176,7 +176,7 @@
   <value>d6399762-c082-429b-9f58-258c4a40a10c</value>
  </field>
  <field name="IBLOCK_SECTION">
-  <value>Региональный фестиваль по робототехнике в ПГТУ|1|sorevnovaniya-2026</value>
+  <value section_depth_level="1" section_code="sorevnovaniya-2026">Региональный фестиваль по робототехнике в ПГТУ</value>
  </field>
  <field name="IPROPERTY_TEMPLATES"/>
 </item>

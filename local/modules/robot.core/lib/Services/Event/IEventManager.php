@@ -15,6 +15,11 @@ interface IEventManager
     public function getActiveEvent(): ActiveEvent;
 
     /**
+     * @return ActiveEvent
+     */
+    public function getActiveEventElement(): ActiveEvent;
+
+    /**
      * @param DateTime $date
      * @return bool
      */

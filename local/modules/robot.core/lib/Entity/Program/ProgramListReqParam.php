@@ -2,9 +2,9 @@
 
 namespace Robot\Core\Entity\Program;
 
-use Bitrix\Main\ArgumentException;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Type\DateTime;
+use Robot\Core\Exceptions\RobotException;
 
 Loc::loadMessages(__FILE__);
 
@@ -20,7 +20,7 @@ final class ProgramListReqParam
     private string $sort;
     /** @var int[] Список id разделов для выборки */
     private array $sectionsIds;
-    /** @var string Дата проведения события */
+    /** @var string Даты проведения события */
     private string $requestStartDate;
     private string $requestEndDate;
 
@@ -35,7 +35,7 @@ final class ProgramListReqParam
      * @param DateTime $date
      * @param bool $active
      * @param string $sort
-     * @throws ArgumentException
+     * @throws RobotException
      */
     public function __construct(
         string $iblockType,
@@ -47,7 +47,7 @@ final class ProgramListReqParam
     )
     {
         if (empty($iblockType) || empty($iblockId) || empty($sectionsIds) || empty($date)) {
-            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_ARGUMENT_EXCEPTION"));
+            throw new RobotException(Loc::getMessage("ROBOT_CORE_ARGUMENT_EXCEPTION"));
         }
         $this->iblockType = $iblockType;
         $this->iblockId = $iblockId;

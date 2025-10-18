@@ -2,10 +2,10 @@
 
 namespace Robot\Core\Entity\Program;
 
-use Bitrix\Main\ArgumentException;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ObjectException;
 use Bitrix\Main\Type\DateTime;
+use Robot\Core\Exceptions\RobotException;
 
 final class DateUnit
 {
@@ -32,15 +32,15 @@ final class DateUnit
 
     /**
      * @param string $date
-     * @throws ArgumentException
      * @throws ObjectException
+     * @throws RobotException
      */
     public function __construct(
         string $date
     )
     {
         if (empty($date)) {
-            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_ARGUMENT_EXCEPTION"));
+            throw new RobotException(Loc::getMessage("ROBOT_CORE_ARGUMENT_EXCEPTION"));
         }
 
         $this->date = new DateTime($this->cutTimeOption($date));
@@ -66,14 +66,14 @@ final class DateUnit
     /**
      * @param string $date
      * @return string
-     * @throws ArgumentException
+     * @throws RobotException
      */
     protected function cutTimeOption(string $date): string
     {
         $arData = explode(" ", $date);
 
         if (empty($arData[0])) {
-            throw new ArgumentException(Loc::getMessage("ROBOT_CORE_DATES_EMPTY_EXCEPTION"));
+            throw new RobotException(Loc::getMessage("ROBOT_CORE_DATES_EMPTY_EXCEPTION"));
         }
 
         return $arData[0] . " 00:00:00";

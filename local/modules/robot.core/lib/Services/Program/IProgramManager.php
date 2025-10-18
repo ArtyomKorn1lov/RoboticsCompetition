@@ -19,5 +19,5 @@ interface IProgramManager
      * @param array|bool $sectionIds
      * @return ProgramCollection
      */
-    public function getProgramByDate(DateTime $date, array|bool $sectionIds): ProgramCollection;
+    public function getProgramList(DateTime $date, array|bool $sectionIds): ProgramCollection;
 }

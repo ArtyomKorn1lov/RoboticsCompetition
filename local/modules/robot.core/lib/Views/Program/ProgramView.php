@@ -10,6 +10,8 @@ use Bitrix\Main\DI\ServiceLocator;
 
 use Psr\Container\NotFoundExceptionInterface;
 
+use Robot\Core\Exceptions\RobotException;
+use Robot\Core\Logger\LoggerFactory;
 use Robot\Core\Services\Program\IProgramManager;
 use Robot\Core\Views\Events\EventsView;
 use Robot\Core\DTO\Program\ProgramItems;
@@ -27,14 +29,18 @@ class ProgramView
         try {
             $eventId = EventsView::getActiveEventId();
             if (!$eventId) {
-                throw new ArgumentException(Loc::getMessage("ROBOT_CORE_PROGRAM_INVALID_EVENT_ID"));
+                throw new RobotException(Loc::getMessage("ROBOT_CORE_PROGRAM_INVALID_EVENT_ID"));
             }
 
             /** @var IProgramManager $programManager */
             $programManager = ServiceLocator::getInstance()->get(IProgramManager::class);
             return $programManager->getProgram($eventId);
-        } catch (SystemException|ArgumentException|ObjectException|NotFoundExceptionInterface $exception) {
+        } catch (RobotException $exception) {
             ShowError($exception->getMessage());
+            return false;
+        } catch (SystemException|NotFoundExceptionInterface $exception) {
+            LoggerFactory::build()->error($exception);
+            ShowError(Loc::getMessage("ROBOT_CORE_PROGRAM_ERROR"));
             return false;
         }
     }
